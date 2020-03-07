@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
-        guard (scene as? UIWindowScene) != nil else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let vc = AuthorizationViewController()
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 }

@@ -1,0 +1,73 @@
+//
+//  CustomTextField.swift
+//  TheMovieDatabase
+//
+//  Created by Рыжков Артем on 07.03.2020.
+//  Copyright © 2020 Рыжков Артем. All rights reserved.
+//
+
+import UIKit
+
+class CustomTextField: UITextField {
+    
+    var rightViewWidth: CGFloat {
+        guard let view = rightView else { return 0 }
+        return view.bounds.width
+    }
+    
+    var textPaddingRight: CGFloat {
+        guard let view = rightView else { return 14 }
+        return view.bounds.width + 20
+    }
+    
+    enum CustomTextFieldConstraints {
+        static let borderWidth: CGFloat = 2.0
+        static let cornerRadius: CGFloat = 8.0
+        static let textPadding: CGFloat = 14
+        static let rightViewRightPadding: CGFloat = 14
+        static let rightViewTopPadding: CGFloat = 12
+        static let rightViewBottomPadding: CGFloat = 12
+        static let rightViewWidth: CGFloat = 36
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = CustomTextFieldConstraints.cornerRadius
+        layer.borderWidth = CustomTextFieldConstraints.borderWidth
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        let padding = CustomTextFieldConstraints.textPadding
+        return bounds.inset(by: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: textPaddingRight))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return self.textRect(forBounds: bounds)
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        let bottomPadding = CustomTextFieldConstraints.rightViewBottomPadding
+        let topPadding = CustomTextFieldConstraints.rightViewTopPadding
+        let rightPadding = CustomTextFieldConstraints.rightViewRightPadding
+        return bounds.inset(by: UIEdgeInsets(
+            top: topPadding,
+            left: layer.bounds.width - CustomTextFieldConstraints.rightViewWidth,
+            bottom: bottomPadding,
+            right: rightPadding))
+    }
+
+    func setupPlaceholderColor(_ color: UIColor) {
+        guard let text = placeholder else { return }
+        attributedPlaceholder = NSAttributedString(
+        string: text,
+        attributes: [NSAttributedString.Key.foregroundColor: color])
+    }
+    
+    func setupBorderColor(_ color: UIColor) {
+        layer.borderColor = color.cgColor
+    }
+}
