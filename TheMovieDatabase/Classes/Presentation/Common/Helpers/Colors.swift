@@ -18,4 +18,5 @@ enum Colors {
     static let purpure = UIColor(named: "Purpure")!
     static let red = UIColor(named: "Red")!
     static let yellow = UIColor(named: "Yellow")!
+    static let tabBarBackground = UIColor(named: "TabBar_bg")!
 }
