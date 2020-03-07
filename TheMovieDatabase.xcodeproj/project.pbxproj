@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6497012488F7126D2500AE48 /* Pods_TheMovieDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41505FB3D8214E06604D98CD /* Pods_TheMovieDatabase.framework */; };
 		92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6324115C7000619672 /* AppDelegate.swift */; };
 		92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6524115C7000619672 /* SceneDelegate.swift */; };
-		92CFFF6824115C7000619672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6724115C7000619672 /* ViewController.swift */; };
-		92CFFF6B24115C7000619672 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6924115C7000619672 /* Main.storyboard */; };
 		92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6C24115C7400619672 /* Assets.xcassets */; };
 		92CFFF7024115C7400619672 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6E24115C7400619672 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -23,8 +21,6 @@
 		92CFFF6024115C7000619672 /* TheMovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFFF6324115C7000619672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CFFF6524115C7000619672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92CFFF6724115C7000619672 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		92CFFF6A24115C7000619672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92CFFF6C24115C7400619672 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92CFFF6F24115C7400619672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92CFFF7124115C7400619672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +38,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9250EBA32413D6C900AC30DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9250EBA42413D6D400AC30DB /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9250EBA42413D6D400AC30DB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				92CFFF6C24115C7400619672 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		9250EBA52413D78E00AC30DB /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9250EBA62413D7CC00AC30DB /* Common */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9250EBA62413D7CC00AC30DB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				92CFFF6E24115C7400619672 /* LaunchScreen.storyboard */,
+				92CFFF6324115C7000619672 /* AppDelegate.swift */,
+				92CFFF6524115C7000619672 /* SceneDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9250EBA72413DA2D00AC30DB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9250EBA32413D6C900AC30DB /* Resources */,
+				9250EBA52413D78E00AC30DB /* Presentation */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		9250EBA82413DA4D00AC30DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92CFFF7124115C7400619672 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		92CFFF5724115C7000619672 = {
 			isa = PBXGroup;
 			children = (
@@ -63,13 +110,8 @@
 		92CFFF6224115C7000619672 /* TheMovieDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				92CFFF6324115C7000619672 /* AppDelegate.swift */,
-				92CFFF6524115C7000619672 /* SceneDelegate.swift */,
-				92CFFF6724115C7000619672 /* ViewController.swift */,
-				92CFFF6924115C7000619672 /* Main.storyboard */,
-				92CFFF6C24115C7400619672 /* Assets.xcassets */,
-				92CFFF6E24115C7400619672 /* LaunchScreen.storyboard */,
-				92CFFF7124115C7400619672 /* Info.plist */,
+				9250EBA72413DA2D00AC30DB /* Classes */,
+				9250EBA82413DA4D00AC30DB /* Supporting Files */,
 			);
 			path = TheMovieDatabase;
 			sourceTree = "<group>";
@@ -80,7 +122,6 @@
 				8F7461F3F3A47551AA9DAE2F /* Pods-TheMovieDatabase.debug.xcconfig */,
 				014994672CA64F37260E87E4 /* Pods-TheMovieDatabase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -155,7 +196,6 @@
 			files = (
 				92CFFF7024115C7400619672 /* LaunchScreen.storyboard in Resources */,
 				92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */,
-				92CFFF6B24115C7000619672 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +265,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CFFF6824115C7000619672 /* ViewController.swift in Sources */,
 				92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */,
 				92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */,
 			);
@@ -234,14 +273,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		92CFFF6924115C7000619672 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				92CFFF6A24115C7000619672 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		92CFFF6E24115C7400619672 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
