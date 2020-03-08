@@ -12,6 +12,7 @@ class AuthorizationViewController: UIViewController {
     @IBOutlet weak var loginTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let visibilityButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         button.setBackgroundImage(Images.visibility, for: .normal)
@@ -19,8 +20,21 @@ class AuthorizationViewController: UIViewController {
         return button
     }()
     
+    let authService: Authorization
+    
+    init(authService: Authorization = ServiceLayer.shared.authService) {
+        self.authService = authService
+        super.init(nibName: "AuthorizationViewController", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
+        activityIndicator.color = Colors.light
         setupLoginTextField()
         setupPasswordTextField()
     }
@@ -52,6 +66,25 @@ class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        toggleIndicator()
+        guard let login = loginTextField.text,
+            let password = passwordTextField.text else { return }
+        authService.authorizeWithUser(login: login, password: password) { [weak self] result in
+            guard let self = self else { return }
+            print(result)
+            self.toggleIndicator()
+        }
+    }
+    
+    private func toggleIndicator() {
+        let isHidden = activityIndicator.isHidden
+        if isHidden {
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+        } else {
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
     }
     
     @IBAction func loginEditingDidBegin(_ sender: CustomTextField) {
@@ -66,5 +99,4 @@ class AuthorizationViewController: UIViewController {
     @IBAction func passwordEditingDidEnd(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.darkBlue)
     }
-    
 }

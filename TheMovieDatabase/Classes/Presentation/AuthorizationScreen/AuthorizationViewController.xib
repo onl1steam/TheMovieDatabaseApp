@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthorizationViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="gFZ-to-Rsp" id="Ldi-iR-Rp9"/>
                 <outlet property="errorLabel" destination="Gic-Ru-lLF" id="spo-zY-OFm"/>
                 <outlet property="loginTextField" destination="8PD-68-11f" id="wKx-Y7-Yzt"/>
                 <outlet property="passwordTextField" destination="EPi-ES-yo3" id="WO9-9e-4nb"/>
@@ -87,6 +88,9 @@
                     <color key="textColor" name="Red"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gFZ-to-Rsp">
+                    <rect key="frame" x="177.5" y="398" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" name="bg_black"/>
             <constraints>
@@ -97,8 +101,10 @@
                 <constraint firstItem="EPi-ES-yo3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ei3-H8-zf5"/>
                 <constraint firstItem="8bo-OS-RWo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="G5s-lm-2CB"/>
                 <constraint firstItem="X44-5a-iSa" firstAttribute="top" secondItem="8bo-OS-RWo" secondAttribute="bottom" constant="25" id="H6t-Xn-Ciq"/>
+                <constraint firstItem="gFZ-to-Rsp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b6f-Rn-UWe"/>
                 <constraint firstItem="X44-5a-iSa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cgw-i3-U1e"/>
                 <constraint firstItem="EPi-ES-yo3" firstAttribute="top" secondItem="8PD-68-11f" secondAttribute="bottom" constant="24" id="fKh-F7-fyE"/>
+                <constraint firstItem="gFZ-to-Rsp" firstAttribute="top" secondItem="EPi-ES-yo3" secondAttribute="bottom" constant="50" id="i5O-sw-M1R"/>
                 <constraint firstItem="8PD-68-11f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="q6n-l1-ngQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vf3-uc-das" secondAttribute="bottom" constant="27" id="sZY-zV-X4E"/>
                 <constraint firstItem="vf3-uc-das" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="23" id="thl-n5-77K"/>

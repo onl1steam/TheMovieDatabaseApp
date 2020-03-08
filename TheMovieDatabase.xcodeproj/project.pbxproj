@@ -27,6 +27,12 @@
 		92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6C24115C7400619672 /* Assets.xcassets */; };
 		92CFFF7024115C7400619672 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6E24115C7400619672 /* LaunchScreen.storyboard */; };
 		92D111FC241523B60087D910 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D111FB241523B60087D910 /* CustomSearchBar.swift */; };
+		92D1120224153F900087D910 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1120124153F900087D910 /* ServiceLayer.swift */; };
+		92D1120524153FF60087D910 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1120424153FF60087D910 /* AuthService.swift */; };
+		92D1120A241550200087D910 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11209241550200087D910 /* AuthResponse.swift */; };
+		92D11210241579BF0087D910 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1120F241579BF0087D910 /* SessionResponse.swift */; };
+		92D1121224157A0F0087D910 /* AuthRequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121124157A0F0087D910 /* AuthRequestConfig.swift */; };
+		92D1121424157B310087D910 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121324157B310087D910 /* AuthRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +60,12 @@
 		92CFFF6F24115C7400619672 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92CFFF7124115C7400619672 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D111FB241523B60087D910 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		92D1120124153F900087D910 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		92D1120424153FF60087D910 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		92D11209241550200087D910 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		92D1120F241579BF0087D910 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
+		92D1121124157A0F0087D910 /* AuthRequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestConfig.swift; sourceTree = "<group>"; };
+		92D1121324157B310087D910 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,9 @@
 		9250EBA72413DA2D00AC30DB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				92D1120E241578A40087D910 /* Model */,
+				92D1120B241578020087D910 /* Client */,
+				92D111FE24153F6C0087D910 /* Business Logic */,
 				9250EBA32413D6C900AC30DB /* Resources */,
 				9250EBA52413D78E00AC30DB /* Presentation */,
 			);
@@ -231,6 +246,65 @@
 				9250EBD0241478BC00AC30DB /* UIImageViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		92D111FE24153F6C0087D910 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				92D1120024153F810087D910 /* Common */,
+				92D111FF24153F7C0087D910 /* Services */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		92D111FF24153F7C0087D910 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				92D1120424153FF60087D910 /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		92D1120024153F810087D910 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				92D1120124153F900087D910 /* ServiceLayer.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		92D1120B241578020087D910 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				92D1120D241578140087D910 /* Request */,
+				92D1120C2415780B0087D910 /* Config */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		92D1120C2415780B0087D910 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				92D1121124157A0F0087D910 /* AuthRequestConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		92D1120D241578140087D910 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				92D1121324157B310087D910 /* AuthRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		92D1120E241578A40087D910 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92D11209241550200087D910 /* AuthResponse.swift */,
+				92D1120F241579BF0087D910 /* SessionResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B494D6F13CF65D49888B3939 /* Pods */ = {
@@ -387,11 +461,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9250EBBB2414048E00AC30DB /* Images.swift in Sources */,
+				92D1121224157A0F0087D910 /* AuthRequestConfig.swift in Sources */,
 				92D111FC241523B60087D910 /* CustomSearchBar.swift in Sources */,
 				9250EBAC2413DE2D00AC30DB /* AuthorizationViewController.swift in Sources */,
 				9250EBD1241478BC00AC30DB /* UIImageViewExtension.swift in Sources */,
 				92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */,
+				92D11210241579BF0087D910 /* SessionResponse.swift in Sources */,
 				9250EBB92413FCA400AC30DB /* CustomTextField.swift in Sources */,
+				92D1120A241550200087D910 /* AuthResponse.swift in Sources */,
+				92D1120524153FF60087D910 /* AuthService.swift in Sources */,
 				9250EBB22413F2CD00AC30DB /* RoundedButton.swift in Sources */,
 				9250EBBE24144E0400AC30DB /* TabBarViewController.swift in Sources */,
 				9250EBC124144E9000AC30DB /* MoviesViewController.swift in Sources */,
@@ -399,6 +477,8 @@
 				9250EBC524144E9F00AC30DB /* FavoritesViewController.swift in Sources */,
 				92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */,
 				9250EBC924144EB800AC30DB /* AccountViewController.swift in Sources */,
+				92D1120224153F900087D910 /* ServiceLayer.swift in Sources */,
+				92D1121424157B310087D910 /* AuthRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
