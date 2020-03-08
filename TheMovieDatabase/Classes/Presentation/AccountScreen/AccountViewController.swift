@@ -9,8 +9,9 @@
 import UIKit
 
 class AccountViewController: UIViewController {
-
+    @IBOutlet weak var avatarImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        avatarImageView.makeRounded()
     }
 }

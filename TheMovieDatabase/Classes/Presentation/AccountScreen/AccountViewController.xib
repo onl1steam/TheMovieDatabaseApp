@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
+                <outlet property="avatarImageView" destination="Ljt-nO-9e5" id="YaY-Lh-4OY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,12 +19,72 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VitaliyBelov420@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcs-c5-CJg">
+                    <rect key="frame" x="86.5" y="327" width="202" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" name="Gray"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Ljt-nO-9e5">
+                    <rect key="frame" x="123.5" y="124" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="3Ti-eF-qDs"/>
+                        <constraint firstAttribute="width" constant="128" id="7Zb-WA-5BI"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXE-af-Tvs" customClass="RoundedButton" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="24" y="587" width="328" height="56"/>
+                    <color key="backgroundColor" name="Dark_blue_button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="A2q-df-YP2"/>
+                        <constraint firstAttribute="width" constant="328" id="qZk-iO-v0t"/>
+                    </constraints>
+                    <state key="normal" title="Выйти">
+                        <color key="titleColor" name="Purpure"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виталий Белов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mT-NG-1YK">
+                    <rect key="frame" x="79" y="279" width="217" height="39"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <color key="textColor" name="Light"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" name="bg_black"/>
+            <constraints>
+                <constraint firstItem="8mT-NG-1YK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2Hi-UY-FxK"/>
+                <constraint firstItem="8mT-NG-1YK" firstAttribute="top" secondItem="Ljt-nO-9e5" secondAttribute="bottom" constant="27" id="5cV-nd-0eK"/>
+                <constraint firstItem="gXE-af-Tvs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9Lq-HH-uxK"/>
+                <constraint firstItem="jcs-c5-CJg" firstAttribute="top" secondItem="8mT-NG-1YK" secondAttribute="bottom" constant="9" id="acG-mN-4Kd"/>
+                <constraint firstItem="Ljt-nO-9e5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bvG-Xe-cem"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gXE-af-Tvs" secondAttribute="bottom" constant="24" id="cqE-nU-slH"/>
+                <constraint firstItem="Ljt-nO-9e5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="124" id="rFL-LJ-cJG"/>
+                <constraint firstItem="jcs-c5-CJg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sdn-Ug-JVm"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="122"/>
+            <point key="canvasLocation" x="138.40000000000001" y="121.88905547226388"/>
         </view>
     </objects>
     <resources>
+        <image name="avatar" width="136" height="136"/>
+        <namedColor name="Dark_blue_button">
+            <color red="0.13699999451637268" green="0.14900000393390656" blue="0.21199999749660492" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.39599999785423279" green="0.42699998617172241" blue="0.54100000858306885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Light">
+            <color red="0.90600001811981201" green="0.92900002002716064" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Purpure">
+            <color red="0.42399999499320984" green="0.3880000114440918" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="bg_black">
             <color red="0.097999997437000275" green="0.10199999809265137" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
