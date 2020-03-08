@@ -67,12 +67,34 @@ class AuthorizationViewController: UIViewController {
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         toggleIndicator()
-        guard let login = loginTextField.text,
-            let password = passwordTextField.text else { return }
-        authService.authorizeWithUser(login: login, password: password) { [weak self] result in
-            guard let self = self else { return }
-            print(result)
+        let validationError = authService.validateUserInput(
+            login: loginTextField.text,
+            password: passwordTextField.text)
+        var userData = User()
+        switch validationError {
+        case .success(let user):
+            userData = user
+        case .failure(let error):
+            errorLabel.text = error.localizedDescription
+            errorLabel.isHidden = false
             self.toggleIndicator()
+            return
+        }
+        authService.authorizeWithUser(user: userData) { [weak self] response in
+            guard let self = self else { return }
+            self.validateResponse(response)
+            self.toggleIndicator()
+        }
+    }
+    
+    private func validateResponse(_ response: Result<String, AuthError>) {
+        switch response {
+        case .success(let sessionId):
+            errorLabel.isHidden = true
+            print(sessionId)
+        case .failure(let error):
+            errorLabel.text = error.localizedDescription
+            errorLabel.isHidden = false
         }
     }
     

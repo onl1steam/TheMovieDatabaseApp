@@ -82,8 +82,8 @@
                         <action selector="passwordEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="I8I-e4-sbu"/>
                     </connections>
                 </textField>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
-                    <rect key="frame" x="24" y="372" width="39.5" height="19.5"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
+                    <rect key="frame" x="24" y="372" width="61" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" name="Red"/>
                     <nil key="highlightedColor"/>

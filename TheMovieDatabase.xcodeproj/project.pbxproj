@@ -33,6 +33,8 @@
 		92D11210241579BF0087D910 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1120F241579BF0087D910 /* SessionResponse.swift */; };
 		92D1121224157A0F0087D910 /* AuthRequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121124157A0F0087D910 /* AuthRequestConfig.swift */; };
 		92D1121424157B310087D910 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121324157B310087D910 /* AuthRequest.swift */; };
+		92D112162415ADD10087D910 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112152415ADD10087D910 /* User.swift */; };
+		92D112192415AF1F0087D910 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112182415AF1F0087D910 /* AuthError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		92D1120F241579BF0087D910 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
 		92D1121124157A0F0087D910 /* AuthRequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestConfig.swift; sourceTree = "<group>"; };
 		92D1121324157B310087D910 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		92D112152415ADD10087D910 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		92D112182415AF1F0087D910 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +255,7 @@
 		92D111FE24153F6C0087D910 /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				92D112172415AF0F0087D910 /* Helper */,
 				92D1120024153F810087D910 /* Common */,
 				92D111FF24153F7C0087D910 /* Services */,
 			);
@@ -303,8 +308,17 @@
 			children = (
 				92D11209241550200087D910 /* AuthResponse.swift */,
 				92D1120F241579BF0087D910 /* SessionResponse.swift */,
+				92D112152415ADD10087D910 /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92D112172415AF0F0087D910 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				92D112182415AF1F0087D910 /* AuthError.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		B494D6F13CF65D49888B3939 /* Pods */ = {
@@ -466,8 +480,10 @@
 				9250EBAC2413DE2D00AC30DB /* AuthorizationViewController.swift in Sources */,
 				9250EBD1241478BC00AC30DB /* UIImageViewExtension.swift in Sources */,
 				92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */,
+				92D112192415AF1F0087D910 /* AuthError.swift in Sources */,
 				92D11210241579BF0087D910 /* SessionResponse.swift in Sources */,
 				9250EBB92413FCA400AC30DB /* CustomTextField.swift in Sources */,
+				92D112162415ADD10087D910 /* User.swift in Sources */,
 				92D1120A241550200087D910 /* AuthResponse.swift in Sources */,
 				92D1120524153FF60087D910 /* AuthService.swift in Sources */,
 				9250EBB22413F2CD00AC30DB /* RoundedButton.swift in Sources */,

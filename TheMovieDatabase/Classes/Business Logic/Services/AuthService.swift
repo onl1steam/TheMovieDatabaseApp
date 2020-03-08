@@ -9,18 +9,25 @@
 import Foundation
 
 protocol Authorization {
-    func authorizeWithUser(login: String, password: String, _ completion: @escaping (Result<String, Error>) -> Void)
+    func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void)
+    func validateUserInput(login: String?, password: String?) -> Result<User, AuthError>
 }
 
 class AuthService: Authorization {
-    
     var authClient: AuthClient
     
     init(authClient: AuthClient = AuthRequest()) {
         self.authClient = authClient
     }
     
-    func authorizeWithUser(login: String, password: String, _ completion: @escaping (Result<String, Error>) -> Void) {
-        authClient.authorizeWithUser(login: login, password: password, completion)
+    func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void) {
+        authClient.authorizeWithUser(user: user, completion)
+    }
+    
+    func validateUserInput(login: String?, password: String?) -> Result<User, AuthError> {
+        guard let login = login, let password = password else { return .failure(.blankFields) }
+        guard login != "", password != "" else { return .failure(.blankFields) }
+        let user = User(login: login, password: password)
+        return .success(user)
     }
 }
