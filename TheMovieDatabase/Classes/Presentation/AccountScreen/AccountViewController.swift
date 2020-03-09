@@ -34,6 +34,6 @@ class AccountViewController: UIViewController {
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
         sessionService.deleteSession()
-        present(AuthorizationViewController(), animated: true, completion: nil)
+        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
     }
 }

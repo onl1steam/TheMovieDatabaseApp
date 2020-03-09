@@ -12,6 +12,7 @@ enum AuthError: Error {
     case blankFields
     case invalidInput
     case unknownError
+    case invalidPasswordLength
 }
 
 extension AuthError: LocalizedError {
@@ -23,6 +24,8 @@ extension AuthError: LocalizedError {
             return LocalizedStrings.invalidInput
         case .unknownError:
             return LocalizedStrings.unknownError
+        case .invalidPasswordLength:
+            return LocalizedStrings.invalidPasswordLength
         }
     }
 }

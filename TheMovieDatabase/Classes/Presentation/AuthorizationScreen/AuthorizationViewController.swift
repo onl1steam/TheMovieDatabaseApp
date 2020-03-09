@@ -73,33 +73,12 @@ class AuthorizationViewController: UIViewController {
         passwordTextField.setupBorderColor(Colors.darkBlue)
     }
     
-    @objc func visibilityButtonTapped() {
-        let isPasswordHidden = passwordTextField.isSecureTextEntry
-        if isPasswordHidden {
-            visibilityButton.setBackgroundImage(Images.visibilityNone, for: .normal)
-            passwordTextField.isSecureTextEntry = !isPasswordHidden
-        } else {
-            visibilityButton.setBackgroundImage(Images.visibility, for: .normal)
-            passwordTextField.isSecureTextEntry = !isPasswordHidden
-        }
-    }
-    
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        let userData = User(login: loginTextField.text!, password: passwordTextField.text!)
-        toggleIndicator()
-        authService.authorizeWithUser(user: userData) { [weak self] response in
-            guard let self = self else { return }
-            self.validateResponse(response)
-            self.toggleIndicator()
-        }
-    }
-    
     private func validateResponse(_ response: Result<String, AuthError>) {
         switch response {
         case .success(let sessionId):
             errorLabel.isHidden = true
             sessionService.setupSessionId(sessionId: sessionId)
-            present(TabBarViewController(), animated: true, completion: nil)
+            presentInFullScreen(TabBarViewController(), animated: true, completion: nil)
         case .failure(let error):
             errorLabel.text = error.localizedDescription
             errorLabel.isHidden = false
@@ -130,16 +109,39 @@ class AuthorizationViewController: UIViewController {
     }
     
     private func checkTextFieldsState() {
-        let validationError = authService.validateUserInput(
+        authService.validateUserInput(
             login: loginTextField.text,
-            password: passwordTextField.text)
-        switch validationError {
-        case .success:
-            isTextFieldsBlank = false
-            toggleLoginButton()
-        case .failure:
-            isTextFieldsBlank = true
-            toggleLoginButton()
+            password: passwordTextField.text) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success:
+                self.isTextFieldsBlank = false
+                self.toggleLoginButton()
+            case .failure:
+                self.isTextFieldsBlank = true
+                self.toggleLoginButton()
+            }
+        }
+    }
+    
+    @objc func visibilityButtonTapped() {
+        let isPasswordHidden = passwordTextField.isSecureTextEntry
+        if isPasswordHidden {
+            visibilityButton.setBackgroundImage(Images.visibilityNone, for: .normal)
+            passwordTextField.isSecureTextEntry = !isPasswordHidden
+        } else {
+            visibilityButton.setBackgroundImage(Images.visibility, for: .normal)
+            passwordTextField.isSecureTextEntry = !isPasswordHidden
+        }
+    }
+    
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        let userData = User(login: loginTextField.text!, password: passwordTextField.text!)
+        toggleIndicator()
+        authService.authorizeWithUser(user: userData) { [weak self] response in
+            guard let self = self else { return }
+            self.validateResponse(response)
+            self.toggleIndicator()
         }
     }
     

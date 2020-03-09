@@ -14,77 +14,84 @@ class AuthServiceTests: XCTestCase {
     let authService: Authorization = ServiceLayer.shared.authService
     
     func testInputFilledFields() {
-        let response = authService.validateUserInput(login: "Foo", password: "Bar")
-        switch response {
-        case .success(let user):
-            XCTAssertEqual(user.login, "Foo")
-            XCTAssertEqual(user.password, "Bar")
-        case .failure:
-            XCTFail("Ошибка валидации: все поля заполнены")
+        authService.validateUserInput(login: "Foo", password: "Barr") { response in
+            switch response {
+            case .success(let user):
+                XCTAssertEqual(user.login, "Foo")
+                XCTAssertEqual(user.password, "Barr")
+            case .failure:
+                XCTFail("Ошибка валидации: все поля заполнены")
+            }
         }
     }
-
+    
     func testInputNilFields() {
-        let response = authService.validateUserInput(login: nil, password: nil)
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: nil, password: nil) { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
     func testInputNilLoginField() {
-        let response = authService.validateUserInput(login: nil, password: "Foo")
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: nil, password: "Foo") { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
     func testInputNilPasswordField() {
-        let response = authService.validateUserInput(login: "Foo", password: nil)
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: "Foo", password: nil) { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
     func testInputBlankFields() {
-        let response = authService.validateUserInput(login: "", password: "")
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: "", password: "") { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
     func testInputBlankLoginField() {
-        let response = authService.validateUserInput(login: "", password: "Foo")
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: "", password: "Foo") { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
     func testInputBlankPasswordField() {
-        let response = authService.validateUserInput(login: "Foo", password: "")
-        switch response {
-        case .success:
-            XCTFail("Ошибка валидации: поля не заполнены")
-        case .failure(let error):
-            XCTAssertEqual(error, AuthError.blankFields)
+        authService.validateUserInput(login: "Foo", password: "") { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: поля не заполнены")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.blankFields)
+            }
         }
     }
     
-    func testInputIncorrectData() {
+    func testInputInvalidData() {
         let user = User(login: "Foo", password: "Bar")
         authService.authorizeWithUser(user: user) { response in
             switch response {
@@ -96,7 +103,7 @@ class AuthServiceTests: XCTestCase {
         }
     }
     
-    func testInputCorrectData() {
+    func testInputValidData() {
         let user = User(login: "onl1steam", password: "Onl1sTeam")
         authService.authorizeWithUser(user: user) { response in
             switch response {
@@ -104,6 +111,17 @@ class AuthServiceTests: XCTestCase {
                 XCTAssertNotEqual(sessionId, "")
             case .failure:
                 XCTFail("Ошибка авторизации: введен верный логин или пароль")
+            }
+        }
+    }
+    
+    func testInvalidPasswordLength() {
+        authService.validateUserInput(login: "Foo", password: "Bar") { response in
+            switch response {
+            case .success:
+                XCTFail("Ошибка валидации: пароль короче 4 символов")
+            case .failure(let error):
+                XCTAssertEqual(error, AuthError.invalidPasswordLength)
             }
         }
     }

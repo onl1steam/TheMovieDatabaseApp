@@ -10,7 +10,7 @@ import Foundation
 
 protocol Authorization {
     func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void)
-    func validateUserInput(login: String?, password: String?) -> Result<User, AuthError>
+    func validateUserInput(login: String?, password: String?, _ completion: @escaping (Result<User, AuthError>) -> Void)
 }
 
 class AuthService: Authorization {
@@ -24,10 +24,22 @@ class AuthService: Authorization {
         authClient.authorizeWithUser(user: user, completion)
     }
     
-    func validateUserInput(login: String?, password: String?) -> Result<User, AuthError> {
-        guard let login = login, let password = password else { return .failure(.blankFields) }
-        guard login != "", password != "" else { return .failure(.blankFields) }
+    func validateUserInput(
+        login: String?,
+        password: String?,
+        _ completion: @escaping (Result<User, AuthError>) -> Void) {
+        guard let login = login,
+            let password = password,
+            login != "",
+            password != "" else {
+                completion(.failure(.blankFields))
+                return
+        }
+        guard password.count >= 4 else {
+            completion(.failure(.invalidPasswordLength))
+            return
+        }
         let user = User(login: login, password: password)
-        return .success(user)
+        completion(.success(user))
     }
 }
