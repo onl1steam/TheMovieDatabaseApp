@@ -12,10 +12,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthorizationViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="gFZ-to-Rsp" id="Ldi-iR-Rp9"/>
+                <outlet property="authInfoLabel" destination="X44-5a-iSa" id="DzP-FA-iev"/>
                 <outlet property="errorLabel" destination="Gic-Ru-lLF" id="spo-zY-OFm"/>
+                <outlet property="loginButton" destination="vf3-uc-das" id="GUf-6Z-uqV"/>
                 <outlet property="loginTextField" destination="8PD-68-11f" id="wKx-Y7-Yzt"/>
                 <outlet property="passwordTextField" destination="EPi-ES-yo3" id="WO9-9e-4nb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="welcomeLabel" destination="8bo-OS-RWo" id="fAU-bF-hUs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,13 +27,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добро пожаловать!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bo-OS-RWo">
-                    <rect key="frame" x="24" y="91" width="283" height="39"/>
+                    <rect key="frame" x="24" y="91" width="327" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" name="Light"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите логин и пароль, которые  вы использовали для входа" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X44-5a-iSa">
-                    <rect key="frame" x="24" y="155" width="274.5" height="41"/>
+                    <rect key="frame" x="24" y="155" width="327" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" name="Light"/>
                     <nil key="highlightedColor"/>
@@ -83,13 +86,13 @@
                     </connections>
                 </textField>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
-                    <rect key="frame" x="24" y="372" width="61" height="19.5"/>
+                    <rect key="frame" x="24" y="372" width="327" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" name="Red"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gFZ-to-Rsp">
-                    <rect key="frame" x="177.5" y="398" width="20" height="20"/>
+                    <rect key="frame" x="177.5" y="411.5" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" name="bg_black"/>
@@ -101,10 +104,13 @@
                 <constraint firstItem="EPi-ES-yo3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ei3-H8-zf5"/>
                 <constraint firstItem="8bo-OS-RWo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="G5s-lm-2CB"/>
                 <constraint firstItem="X44-5a-iSa" firstAttribute="top" secondItem="8bo-OS-RWo" secondAttribute="bottom" constant="25" id="H6t-Xn-Ciq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X44-5a-iSa" secondAttribute="trailing" constant="24" id="MZE-oO-dIy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gic-Ru-lLF" secondAttribute="trailing" constant="24" id="NCp-bo-Wlh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8bo-OS-RWo" secondAttribute="trailing" constant="24" id="ZpB-5C-5ln"/>
                 <constraint firstItem="gFZ-to-Rsp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b6f-Rn-UWe"/>
                 <constraint firstItem="X44-5a-iSa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cgw-i3-U1e"/>
                 <constraint firstItem="EPi-ES-yo3" firstAttribute="top" secondItem="8PD-68-11f" secondAttribute="bottom" constant="24" id="fKh-F7-fyE"/>
-                <constraint firstItem="gFZ-to-Rsp" firstAttribute="top" secondItem="EPi-ES-yo3" secondAttribute="bottom" constant="50" id="i5O-sw-M1R"/>
+                <constraint firstItem="gFZ-to-Rsp" firstAttribute="top" secondItem="Gic-Ru-lLF" secondAttribute="bottom" constant="20" id="kNe-W8-5ta"/>
                 <constraint firstItem="8PD-68-11f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="q6n-l1-ngQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vf3-uc-das" secondAttribute="bottom" constant="27" id="sZY-zV-X4E"/>
                 <constraint firstItem="vf3-uc-das" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="23" id="thl-n5-77K"/>

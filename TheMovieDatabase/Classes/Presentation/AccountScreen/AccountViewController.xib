@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
                 <outlet property="avatarImageView" destination="Ljt-nO-9e5" id="YaY-Lh-4OY"/>
+                <outlet property="logoutButton" destination="gXE-af-Tvs" id="L6d-7K-CQJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

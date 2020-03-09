@@ -18,11 +18,11 @@ extension AuthError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .blankFields:
-            return "Не заполнены все поля"
+            return LocalizedStrings.blankFields
         case .invalidInput:
-            return "Введен неверный логин или пароль"
+            return LocalizedStrings.invalidInput
         case .unknownError:
-            return "Что-то пошло не так, попробуйте войти позже"
+            return LocalizedStrings.unknownError
         }
     }
 }

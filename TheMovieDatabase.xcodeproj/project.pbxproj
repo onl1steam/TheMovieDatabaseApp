@@ -37,6 +37,7 @@
 		92D112192415AF1F0087D910 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112182415AF1F0087D910 /* AuthError.swift */; };
 		92D1121B2415BFB10087D910 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121A2415BFB10087D910 /* SessionService.swift */; };
 		92D112202415CA660087D910 /* DeleteSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121F2415CA660087D910 /* DeleteSessionResponse.swift */; };
+		92D112232415CC950087D910 /* LocalizationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112222415CC950087D910 /* LocalizationStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		92D112182415AF1F0087D910 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		92D1121A2415BFB10087D910 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		92D1121F2415CA660087D910 /* DeleteSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSessionResponse.swift; sourceTree = "<group>"; };
+		92D112222415CC950087D910 /* LocalizationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		9250EBA32413D6C900AC30DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92D112212415CC820087D910 /* Localization */,
 				9250EBA42413D6D400AC30DB /* Assets */,
 			);
 			path = Resources;
@@ -327,6 +330,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		92D112212415CC820087D910 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				92D112222415CC950087D910 /* LocalizationStrings.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		B494D6F13CF65D49888B3939 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +506,7 @@
 				92D1120A241550200087D910 /* AuthResponse.swift in Sources */,
 				92D1120524153FF60087D910 /* AuthService.swift in Sources */,
 				9250EBB22413F2CD00AC30DB /* RoundedButton.swift in Sources */,
+				92D112232415CC950087D910 /* LocalizationStrings.swift in Sources */,
 				9250EBBE24144E0400AC30DB /* TabBarViewController.swift in Sources */,
 				9250EBC124144E9000AC30DB /* MoviesViewController.swift in Sources */,
 				9250EBB72413FA2E00AC30DB /* Colors.swift in Sources */,

@@ -11,9 +11,9 @@ import UIKit
 class TabBarViewController: UITabBarController {
     
     enum ScreenNames {
-        static let movies = "Фильмы"
-        static let favorite = "Избранное"
-        static let account = "Профиль"
+        static let movies = LocalizedStrings.moviesTabBar
+        static let favorite = LocalizedStrings.favoriteTabBar
+        static let account = LocalizedStrings.accountTabBar
     }
 
     override func viewDidLoad() {

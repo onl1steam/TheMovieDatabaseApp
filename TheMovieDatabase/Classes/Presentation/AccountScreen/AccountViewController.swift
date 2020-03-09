@@ -11,6 +11,7 @@ import UIKit
 class AccountViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     let sessionService: Session
+    @IBOutlet weak var logoutButton: RoundedButton!
     
     init(sessionService: Session = ServiceLayer.shared.sessionService) {
         self.sessionService = sessionService
@@ -23,8 +24,14 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocalizedStrings()
         avatarImageView.makeRounded()
     }
+    
+    private func setupLocalizedStrings() {
+        logoutButton.setTitle(LocalizedStrings.logoutButtonText, for: .normal)
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         sessionService.deleteSession()
         present(AuthorizationViewController(), animated: true, completion: nil)

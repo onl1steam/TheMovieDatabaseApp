@@ -12,6 +12,9 @@ class AuthorizationViewController: UIViewController {
     @IBOutlet weak var loginTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var authInfoLabel: UILabel!
+    @IBOutlet weak var loginButton: RoundedButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let visibilityButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
@@ -37,10 +40,19 @@ class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocalizedStrings()
         activityIndicator.isHidden = true
         activityIndicator.color = Colors.light
         setupLoginTextField()
         setupPasswordTextField()
+    }
+    
+    private func setupLocalizedStrings() {
+        loginTextField.placeholder = LocalizedStrings.loginPlaceholder
+        passwordTextField.placeholder = LocalizedStrings.passwordPlaceholder
+        welcomeLabel.text = LocalizedStrings.authWelcome
+        authInfoLabel.text = LocalizedStrings.authInfo
+        loginButton.setTitle(LocalizedStrings.loginButtonText, for: .normal)
     }
     
     func setupLoginTextField() {

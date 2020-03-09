@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritesViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
+                <outlet property="blankListLabel" destination="k5Q-ms-QF1" id="Ukb-HV-Tze"/>
+                <outlet property="favoriteLabel" destination="qTu-bb-ryu" id="Oqx-wA-usc"/>
+                <outlet property="searchFilmsButton" destination="TeV-s0-eyX" id="sMr-N0-pZx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,20 +22,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Избранное" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-bb-ryu">
-                    <rect key="frame" x="24" y="91" width="161.5" height="38.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Избранное" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTu-bb-ryu">
+                    <rect key="frame" x="24" y="91" width="327" height="38.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" name="Light"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы не добавили ни одного фильма" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Q-ms-QF1">
-                    <rect key="frame" x="24" y="163.5" width="264" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы не добавили ни одного фильма" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Q-ms-QF1">
+                    <rect key="frame" x="24" y="163.5" width="327" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" name="Light"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeV-s0-eyX">
-                    <rect key="frame" x="24" y="196" width="167" height="29"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeV-s0-eyX">
+                    <rect key="frame" x="24" y="196" width="327" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Найти любимые фильмы">
                         <color key="titleColor" name="Purpure"/>
@@ -64,13 +67,16 @@
             </subviews>
             <color key="backgroundColor" name="bg_black"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TeV-s0-eyX" secondAttribute="trailing" constant="24" id="4lw-ES-wly"/>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="7R1-k6-wwG"/>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="8wg-wo-KgS"/>
                 <constraint firstItem="TeV-s0-eyX" firstAttribute="top" secondItem="k5Q-ms-QF1" secondAttribute="bottom" constant="13" id="9df-Fl-wHU"/>
                 <constraint firstItem="37q-zj-ZNh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AHI-fP-ZU2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k5Q-ms-QF1" secondAttribute="trailing" constant="24" id="I9o-NZ-Ddc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sMU-Vv-mrW" secondAttribute="trailing" constant="23" id="KNx-rJ-LQ4"/>
                 <constraint firstItem="sMU-Vv-mrW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="Vhq-0k-iIp"/>
                 <constraint firstItem="k5Q-ms-QF1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="ZEA-wL-rp4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qTu-bb-ryu" secondAttribute="trailing" constant="24" id="bjO-JF-zK7"/>
                 <constraint firstItem="37q-zj-ZNh" firstAttribute="top" secondItem="TeV-s0-eyX" secondAttribute="bottom" constant="88" id="nOO-PP-R0Y"/>
                 <constraint firstItem="sMU-Vv-mrW" firstAttribute="leading" secondItem="SYi-Uj-Yeo" secondAttribute="trailing" constant="27" id="nyg-6Q-y4n"/>
                 <constraint firstItem="TeV-s0-eyX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="pfj-sw-mN4"/>

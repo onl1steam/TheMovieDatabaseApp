@@ -9,8 +9,18 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-
+    @IBOutlet weak var favoriteLabel: UILabel!
+    @IBOutlet weak var blankListLabel: UILabel!
+    @IBOutlet weak var searchFilmsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocalizedStrings()
+    }
+    
+    private func setupLocalizedStrings() {
+        favoriteLabel.text = LocalizedStrings.favoriteLabel
+        blankListLabel.text = LocalizedStrings.blankListLabel
+        searchFilmsButton.setTitle(LocalizedStrings.searchFilmsButtonText, for: .normal)
     }
 }
