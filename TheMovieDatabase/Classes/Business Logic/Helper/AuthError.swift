@@ -10,7 +10,7 @@ import Foundation
 
 enum AuthError: Error {
     case blankFields
-    case invalidData
+    case invalidInput
     case unknownError
 }
 
@@ -19,7 +19,7 @@ extension AuthError: LocalizedError {
         switch self {
         case .blankFields:
             return "Не заполнены все поля"
-        case .invalidData:
+        case .invalidInput:
             return "Введен неверный логин или пароль"
         case .unknownError:
             return "Что-то пошло не так, попробуйте войти позже"

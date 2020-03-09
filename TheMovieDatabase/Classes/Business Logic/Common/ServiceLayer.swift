@@ -14,4 +14,5 @@ class ServiceLayer {
     private init() {}
     
     let authService: Authorization = AuthService()
+    let sessionService: Session = SessionService()
 }

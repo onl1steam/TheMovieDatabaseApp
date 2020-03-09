@@ -13,4 +13,5 @@ enum AuthRequestConfig {
     static let createTokenURLString = "https://api.themoviedb.org/3/authentication/token/new?api_key=\(apiKey)"
     static let createSessionURLString = "https://api.themoviedb.org/3/authentication/session/new?api_key=\(apiKey)"
     static let validateSessionURLString = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(apiKey)"
+    static let deleteSessionURLString = "https://api.themoviedb.org/3/authentication/session?api_key=\(apiKey)"
 }

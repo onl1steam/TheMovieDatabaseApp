@@ -21,9 +21,13 @@ class AuthorizationViewController: UIViewController {
     }()
     
     let authService: Authorization
+    let sessionService: Session
     
-    init(authService: Authorization = ServiceLayer.shared.authService) {
+    init(
+        authService: Authorization = ServiceLayer.shared.authService,
+        sessionService: Session = ServiceLayer.shared.sessionService) {
         self.authService = authService
+        self.sessionService = sessionService
         super.init(nibName: "AuthorizationViewController", bundle: nil)
     }
     
@@ -91,7 +95,8 @@ class AuthorizationViewController: UIViewController {
         switch response {
         case .success(let sessionId):
             errorLabel.isHidden = true
-            print(sessionId)
+            sessionService.setupSessionId(sessionId: sessionId)
+            present(TabBarViewController(), animated: true, completion: nil)
         case .failure(let error):
             errorLabel.text = error.localizedDescription
             errorLabel.isHidden = false

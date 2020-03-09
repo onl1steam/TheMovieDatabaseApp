@@ -48,6 +48,9 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="logoutButtonTapped:" destination="-1" eventType="touchUpInside" id="uMY-QD-5eP"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виталий Белов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mT-NG-1YK">
                     <rect key="frame" x="79" y="279" width="217" height="39"/>
