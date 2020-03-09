@@ -26,3 +26,5 @@ extension AuthError: LocalizedError {
         }
     }
 }
+
+extension AuthError: Equatable {}
