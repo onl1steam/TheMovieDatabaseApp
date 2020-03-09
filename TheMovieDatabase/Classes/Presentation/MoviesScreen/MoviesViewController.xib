@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_movies" translatesAutoresizingMaskIntoConstraints="NO" id="Qod-J3-W6D">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movies_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Qod-J3-W6D">
                     <rect key="frame" x="100" y="144" width="275" height="523"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Найдем любой фильм на ваш вкуc" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14u-yW-K77">
@@ -56,7 +56,7 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_movies" width="275" height="458"/>
+        <image name="movies_bg" width="275" height="458"/>
         <namedColor name="Light">
             <color red="0.90600001811981201" green="0.92900002002716064" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

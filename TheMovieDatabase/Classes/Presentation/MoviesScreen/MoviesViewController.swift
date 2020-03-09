@@ -16,7 +16,6 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         setupSearchBar()
         setupLocalizedStrings()
-        moviesSearchBar.configure()
     }
     
     private func setupLocalizedStrings() {
@@ -25,11 +24,6 @@ class MoviesViewController: UIViewController {
     }
     
     func setupSearchBar() {
-        let textFieldInsideUISearchBar = moviesSearchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideUISearchBar?.textColor = Colors.light
-        textFieldInsideUISearchBar?.font = textFieldInsideUISearchBar?.font?.withSize(16)
-        
-        let textFieldInsideUISearchBarLabel = textFieldInsideUISearchBar!.value(forKey: "placeholderLabel") as? UILabel
-        textFieldInsideUISearchBarLabel?.textColor = Colors.light
+        moviesSearchBar.configure()
     }
 }

@@ -38,6 +38,7 @@
 		92D1121B2415BFB10087D910 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121A2415BFB10087D910 /* SessionService.swift */; };
 		92D112202415CA660087D910 /* DeleteSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121F2415CA660087D910 /* DeleteSessionResponse.swift */; };
 		92D112232415CC950087D910 /* LocalizationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112222415CC950087D910 /* LocalizationStrings.swift */; };
+		92D11226241665FA0087D910 /* FavoritesPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		92D1121A2415BFB10087D910 /* SessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		92D1121F2415CA660087D910 /* DeleteSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSessionResponse.swift; sourceTree = "<group>"; };
 		92D112222415CC950087D910 /* LocalizationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationStrings.swift; sourceTree = "<group>"; };
+		92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 		9250EBCC241455B900AC30DB /* FavoritesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				92D11224241665D70087D910 /* Views */,
 				9250EBC324144E9F00AC30DB /* FavoritesViewController.swift */,
 				9250EBC424144E9F00AC30DB /* FavoritesViewController.xib */,
 			);
@@ -336,6 +339,14 @@
 				92D112222415CC950087D910 /* LocalizationStrings.swift */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		92D11224241665D70087D910 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B494D6F13CF65D49888B3939 /* Pods */ = {
@@ -513,6 +524,7 @@
 				9250EBC524144E9F00AC30DB /* FavoritesViewController.swift in Sources */,
 				92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */,
 				9250EBC924144EB800AC30DB /* AccountViewController.swift in Sources */,
+				92D11226241665FA0087D910 /* FavoritesPlaceholderView.swift in Sources */,
 				92D1120224153F900087D910 /* ServiceLayer.swift in Sources */,
 				92D1121424157B310087D910 /* AuthRequest.swift in Sources */,
 			);

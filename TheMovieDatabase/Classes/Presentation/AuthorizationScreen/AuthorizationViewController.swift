@@ -26,6 +26,8 @@ class AuthorizationViewController: UIViewController {
     let authService: Authorization
     let sessionService: Session
     
+    private var isTextFieldsBlank = true
+    
     init(
         authService: Authorization = ServiceLayer.shared.authService,
         sessionService: Session = ServiceLayer.shared.sessionService) {
@@ -41,6 +43,7 @@ class AuthorizationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocalizedStrings()
+        toggleLoginButton()
         activityIndicator.isHidden = true
         activityIndicator.color = Colors.light
         setupLoginTextField()
@@ -82,20 +85,8 @@ class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        let userData = User(login: loginTextField.text!, password: passwordTextField.text!)
         toggleIndicator()
-        let validationError = authService.validateUserInput(
-            login: loginTextField.text,
-            password: passwordTextField.text)
-        var userData = User()
-        switch validationError {
-        case .success(let user):
-            userData = user
-        case .failure(let error):
-            errorLabel.text = error.localizedDescription
-            errorLabel.isHidden = false
-            self.toggleIndicator()
-            return
-        }
         authService.authorizeWithUser(user: userData) { [weak self] response in
             guard let self = self else { return }
             self.validateResponse(response)
@@ -126,15 +117,52 @@ class AuthorizationViewController: UIViewController {
         }
     }
     
+    private func toggleLoginButton() {
+        if isTextFieldsBlank {
+            loginButton.backgroundColor = Colors.disabledButtonBackground
+            loginButton.setTitleColor(Colors.disabledButtonText, for: .normal)
+            loginButton.isEnabled = false
+        } else {
+            loginButton.backgroundColor = Colors.orange
+            loginButton.setTitleColor(Colors.light, for: .normal)
+            loginButton.isEnabled = true
+        }
+    }
+    
+    private func checkTextFieldsState() {
+        let validationError = authService.validateUserInput(
+            login: loginTextField.text,
+            password: passwordTextField.text)
+        switch validationError {
+        case .success:
+            isTextFieldsBlank = false
+            toggleLoginButton()
+        case .failure:
+            isTextFieldsBlank = true
+            toggleLoginButton()
+        }
+    }
+    
     @IBAction func loginEditingDidBegin(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.purpure)
     }
+    
+    @IBAction func loginTextFieldChanged(_ sender: CustomTextField) {
+        checkTextFieldsState()
+    }
+    
     @IBAction func loginEditingDidEnd(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.darkBlue)
     }
+    
     @IBAction func passwordEditingDidBegin(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.purpure)
     }
+    
+    @IBAction func passwordTextFieldChanged(_ sender: CustomTextField) {
+        checkTextFieldsState()
+    }
+    
     @IBAction func passwordEditingDidEnd(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.darkBlue)
     }

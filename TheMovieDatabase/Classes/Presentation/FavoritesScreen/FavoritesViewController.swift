@@ -10,17 +10,20 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     @IBOutlet weak var favoriteLabel: UILabel!
-    @IBOutlet weak var blankListLabel: UILabel!
-    @IBOutlet weak var searchFilmsButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocalizedStrings()
+        let placeholderView = FavoritesPlaceholderView(
+            frame: CGRect(x: 0,
+                          y: 0,
+                          width: containerView.frame.width,
+                          height: containerView.frame.height))
+        containerView.addSubview(placeholderView)
     }
     
     private func setupLocalizedStrings() {
         favoriteLabel.text = LocalizedStrings.favoriteLabel
-        blankListLabel.text = LocalizedStrings.blankListLabel
-        searchFilmsButton.setTitle(LocalizedStrings.searchFilmsButtonText, for: .normal)
     }
 }

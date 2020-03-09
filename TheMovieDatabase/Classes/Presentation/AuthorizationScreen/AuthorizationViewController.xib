@@ -69,6 +69,7 @@
                     <connections>
                         <action selector="loginEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="dtY-Mk-lD7"/>
                         <action selector="loginEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="a4v-Ex-SoY"/>
+                        <action selector="loginTextFieldChanged:" destination="-1" eventType="editingChanged" id="ux1-XZ-im3"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPi-ES-yo3" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
@@ -83,6 +84,7 @@
                     <connections>
                         <action selector="passwordEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="wlK-0B-QQp"/>
                         <action selector="passwordEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="I8I-e4-sbu"/>
+                        <action selector="passwordTextFieldChanged:" destination="-1" eventType="editingChanged" id="dAU-ov-hUe"/>
                     </connections>
                 </textField>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">

@@ -11,9 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritesViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
-                <outlet property="blankListLabel" destination="k5Q-ms-QF1" id="Ukb-HV-Tze"/>
+                <outlet property="containerView" destination="lr1-kz-fxa" id="f6p-4F-eTj"/>
                 <outlet property="favoriteLabel" destination="qTu-bb-ryu" id="Oqx-wA-usc"/>
-                <outlet property="searchFilmsButton" destination="TeV-s0-eyX" id="sMr-N0-pZx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,26 +27,6 @@
                     <color key="textColor" name="Light"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы не добавили ни одного фильма" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Q-ms-QF1">
-                    <rect key="frame" x="24" y="163.5" width="327" height="19.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" name="Light"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeV-s0-eyX">
-                    <rect key="frame" x="24" y="196" width="327" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="Найти любимые фильмы">
-                        <color key="titleColor" name="Purpure"/>
-                    </state>
-                </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorites_bg" translatesAutoresizingMaskIntoConstraints="NO" id="37q-zj-ZNh">
-                    <rect key="frame" x="63.5" y="313" width="248" height="193"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="193" id="56j-yb-nSU"/>
-                        <constraint firstAttribute="width" constant="248" id="Foe-fd-Buy"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYi-Uj-Yeo">
                     <rect key="frame" x="277" y="40" width="24" height="24"/>
                     <constraints>
@@ -64,38 +43,34 @@
                     </constraints>
                     <state key="normal" backgroundImage="list"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lr1-kz-fxa">
+                    <rect key="frame" x="0.0" y="162.5" width="375" height="504.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" name="bg_black"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TeV-s0-eyX" secondAttribute="trailing" constant="24" id="4lw-ES-wly"/>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="7R1-k6-wwG"/>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="8wg-wo-KgS"/>
-                <constraint firstItem="TeV-s0-eyX" firstAttribute="top" secondItem="k5Q-ms-QF1" secondAttribute="bottom" constant="13" id="9df-Fl-wHU"/>
-                <constraint firstItem="37q-zj-ZNh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AHI-fP-ZU2"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k5Q-ms-QF1" secondAttribute="trailing" constant="24" id="I9o-NZ-Ddc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lr1-kz-fxa" secondAttribute="trailing" id="HB0-IJ-VN3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sMU-Vv-mrW" secondAttribute="trailing" constant="23" id="KNx-rJ-LQ4"/>
+                <constraint firstItem="lr1-kz-fxa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TH7-s1-d9Y"/>
                 <constraint firstItem="sMU-Vv-mrW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="Vhq-0k-iIp"/>
-                <constraint firstItem="k5Q-ms-QF1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="ZEA-wL-rp4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qTu-bb-ryu" secondAttribute="trailing" constant="24" id="bjO-JF-zK7"/>
-                <constraint firstItem="37q-zj-ZNh" firstAttribute="top" secondItem="TeV-s0-eyX" secondAttribute="bottom" constant="88" id="nOO-PP-R0Y"/>
+                <constraint firstItem="lr1-kz-fxa" firstAttribute="top" secondItem="qTu-bb-ryu" secondAttribute="bottom" constant="33" id="j3l-Wc-zjv"/>
                 <constraint firstItem="sMU-Vv-mrW" firstAttribute="leading" secondItem="SYi-Uj-Yeo" secondAttribute="trailing" constant="27" id="nyg-6Q-y4n"/>
-                <constraint firstItem="TeV-s0-eyX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="pfj-sw-mN4"/>
-                <constraint firstItem="k5Q-ms-QF1" firstAttribute="top" secondItem="qTu-bb-ryu" secondAttribute="bottom" constant="34" id="tkM-XG-zEg"/>
                 <constraint firstItem="SYi-Uj-Yeo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="uqG-wy-QDe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lr1-kz-fxa" secondAttribute="bottom" id="xFm-pK-sWX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="122"/>
         </view>
     </objects>
     <resources>
-        <image name="favorites_bg" width="248" height="193"/>
         <image name="list" width="24" height="24"/>
         <image name="search" width="18" height="18"/>
         <namedColor name="Light">
             <color red="0.90600001811981201" green="0.92900002002716064" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Purpure">
-            <color red="0.42399999499320984" green="0.3880000114440918" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="bg_black">
             <color red="0.097999997437000275" green="0.10199999809265137" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

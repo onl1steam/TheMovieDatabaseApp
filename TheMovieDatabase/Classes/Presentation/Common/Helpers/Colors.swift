@@ -19,4 +19,6 @@ enum Colors {
     static let red = UIColor(named: "Red")!
     static let yellow = UIColor(named: "Yellow")!
     static let tabBarBackground = UIColor(named: "TabBar_bg")!
+    static let disabledButtonBackground = UIColor(named: "Dark_blue_button")!
+    static let disabledButtonText = UIColor(named: "Dark_blue_button_text")!
 }

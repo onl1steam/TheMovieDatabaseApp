@@ -14,10 +14,15 @@ class CustomSearchBar: UISearchBar {
         static let backgroundColor = Colors.tabBarBackground
         static let cornerRadius: CGFloat = 8
         static let searchImage = Images.search
+        static let clearImage = Images.clearSearchText
     }
     
     func configure() {
         if let textField = value(forKey: "searchField") as? UITextField {
+            textField.textColor = Colors.light
+            textField.font = textField.font?.withSize(16)
+            let textFieldInsideUISearchBarLabel = textField.value(forKey: "placeholderLabel") as? UILabel
+            textFieldInsideUISearchBarLabel?.textColor = Colors.light
             if let backgroundview = textField.subviews.first {
                 backgroundview.backgroundColor = CustomSearchBarConstants.backgroundColor
                 backgroundview.layer.cornerRadius = CustomSearchBarConstants.cornerRadius
@@ -25,5 +30,6 @@ class CustomSearchBar: UISearchBar {
             }
         }
         setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)
+        setImage(CustomSearchBarConstants.clearImage, for: .clear, state: .normal)
     }
 }
