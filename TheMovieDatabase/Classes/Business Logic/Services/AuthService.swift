@@ -21,7 +21,7 @@ class AuthService: Authorization {
     }
     
     func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void) {
-        authClient.authorizeWithUser(user: user, completion)
+        authClient.authorizeWithUser(user, completion)
     }
     
     func validateUserInput(

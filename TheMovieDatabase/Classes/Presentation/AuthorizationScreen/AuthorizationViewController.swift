@@ -44,18 +44,22 @@ class AuthorizationViewController: UIViewController {
         super.viewDidLoad()
         setupLocalizedStrings()
         toggleLoginButton()
-        activityIndicator.isHidden = true
-        activityIndicator.color = Colors.light
+        setupActivityIndicator()
         setupLoginTextField()
         setupPasswordTextField()
     }
     
     private func setupLocalizedStrings() {
-        loginTextField.placeholder = LocalizedStrings.loginPlaceholder
-        passwordTextField.placeholder = LocalizedStrings.passwordPlaceholder
-        welcomeLabel.text = LocalizedStrings.authWelcome
-        authInfoLabel.text = LocalizedStrings.authInfo
-        loginButton.setTitle(LocalizedStrings.loginButtonText, for: .normal)
+        loginTextField.placeholder = AuthScreenStrings.loginPlaceholder
+        passwordTextField.placeholder = AuthScreenStrings.passwordPlaceholder
+        welcomeLabel.text = AuthScreenStrings.authWelcome
+        authInfoLabel.text = AuthScreenStrings.authInfo
+        loginButton.setTitle(AuthScreenStrings.loginButtonText, for: .normal)
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.isHidden = true
+        activityIndicator.color = Colors.light
     }
     
     func setupLoginTextField() {
@@ -112,15 +116,15 @@ class AuthorizationViewController: UIViewController {
         authService.validateUserInput(
             login: loginTextField.text,
             password: passwordTextField.text) { [weak self] response in
-            guard let self = self else { return }
-            switch response {
-            case .success:
-                self.isTextFieldsBlank = false
-                self.toggleLoginButton()
-            case .failure:
-                self.isTextFieldsBlank = true
-                self.toggleLoginButton()
-            }
+                guard let self = self else { return }
+                switch response {
+                case .success:
+                    self.isTextFieldsBlank = false
+                    self.toggleLoginButton()
+                case .failure:
+                    self.isTextFieldsBlank = true
+                    self.toggleLoginButton()
+                }
         }
     }
     

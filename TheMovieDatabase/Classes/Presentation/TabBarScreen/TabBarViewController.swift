@@ -9,13 +9,6 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    
-    enum ScreenNames {
-        static let movies = LocalizedStrings.moviesTabBar
-        static let favorite = LocalizedStrings.favoriteTabBar
-        static let account = LocalizedStrings.accountTabBar
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
@@ -24,13 +17,19 @@ class TabBarViewController: UITabBarController {
     
     func setupViewControllers() {
         let filmsVC = MoviesViewController()
-        filmsVC.tabBarItem = UITabBarItem(title: ScreenNames.movies, image: Images.movie, tag: 0)
+        filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: Images.moviesTabBar, tag: 0)
         
         let favoritesVC = FavoritesViewController()
-        favoritesVC.tabBarItem = UITabBarItem(title: ScreenNames.favorite, image: Images.favorite, tag: 0)
+        favoritesVC.tabBarItem = UITabBarItem(
+            title: TabBarScreenStrings.favoriteTabBar,
+            image: Images.favoritesTabBar,
+            tag: 0)
         
         let accountVC = AccountViewController()
-        accountVC.tabBarItem = UITabBarItem(title: ScreenNames.account, image: Images.account, tag: 0)
+        accountVC.tabBarItem = UITabBarItem(
+            title: TabBarScreenStrings.accountTabBar,
+            image: Images.accountTabBar,
+            tag: 0)
         
         let tabBarList = [filmsVC, favoritesVC, accountVC]
         viewControllers = tabBarList

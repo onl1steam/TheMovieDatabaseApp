@@ -15,15 +15,15 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocalizedStrings()
-        let placeholderView = FavoritesPlaceholderView(
-            frame: CGRect(x: 0,
-                          y: 0,
-                          width: containerView.frame.width,
-                          height: containerView.frame.height))
+        let placeholderView = FavoritesPlaceholderView(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: containerView.frame.width,
+            height: containerView.frame.height))
         containerView.addSubview(placeholderView)
     }
     
     private func setupLocalizedStrings() {
-        favoriteLabel.text = LocalizedStrings.favoriteLabel
+        favoriteLabel.text = FavoritesScreenStrings.favoriteLabel
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FilmsViewController.swift
+//  MoviesViewController.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 08.03.2020.
@@ -19,8 +19,8 @@ class MoviesViewController: UIViewController {
     }
     
     private func setupLocalizedStrings() {
-        moviesLabel.text = LocalizedStrings.moviesLabel
-        moviesSearchBar.placeholder = LocalizedStrings.searchBarPlaceholder
+        moviesLabel.text = MoviesScreenStrings.moviesLabel
+        moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder
     }
     
     func setupSearchBar() {

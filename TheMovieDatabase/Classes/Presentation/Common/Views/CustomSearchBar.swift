@@ -10,9 +10,10 @@ import UIKit
 
 class CustomSearchBar: UISearchBar {
     
-    enum CustomSearchBarConstants {
+    private enum CustomSearchBarConstants {
         static let backgroundColor = Colors.tabBarBackground
         static let cornerRadius: CGFloat = 8
+        static let fontSize: CGFloat = 16
         static let searchImage = Images.search
         static let clearImage = Images.clearSearchText
     }
@@ -20,7 +21,7 @@ class CustomSearchBar: UISearchBar {
     func configure() {
         if let textField = value(forKey: "searchField") as? UITextField {
             textField.textColor = Colors.light
-            textField.font = textField.font?.withSize(16)
+            textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
             let textFieldInsideUISearchBarLabel = textField.value(forKey: "placeholderLabel") as? UILabel
             textFieldInsideUISearchBarLabel?.textColor = Colors.light
             if let backgroundview = textField.subviews.first {

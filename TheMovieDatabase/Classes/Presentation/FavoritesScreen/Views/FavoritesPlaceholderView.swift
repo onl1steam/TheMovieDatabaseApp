@@ -13,7 +13,7 @@ class FavoritesPlaceholderView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = LocalizedStrings.blankListLabel
+        label.text = FavoritesScreenStrings.blankListLabel
         label.textColor = Colors.light
         return label
     }()
@@ -21,7 +21,7 @@ class FavoritesPlaceholderView: UIView {
     let navigationButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(Colors.purpure, for: .normal)
-        button.setTitle(LocalizedStrings.searchFilmsButtonText, for: .normal)
+        button.setTitle(FavoritesScreenStrings.searchFilmsButtonText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.contentHorizontalAlignment = .left
         return button

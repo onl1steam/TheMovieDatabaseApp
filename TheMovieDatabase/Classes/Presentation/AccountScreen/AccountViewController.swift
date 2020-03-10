@@ -10,8 +10,9 @@ import UIKit
 
 class AccountViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
-    let sessionService: Session
     @IBOutlet weak var logoutButton: RoundedButton!
+    
+    let sessionService: Session
     
     init(sessionService: Session = ServiceLayer.shared.sessionService) {
         self.sessionService = sessionService
@@ -29,7 +30,7 @@ class AccountViewController: UIViewController {
     }
     
     private func setupLocalizedStrings() {
-        logoutButton.setTitle(LocalizedStrings.logoutButtonText, for: .normal)
+        logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {

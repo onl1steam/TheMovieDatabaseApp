@@ -15,7 +15,8 @@ class RoundedButton: UIButton {
             layer.borderWidth = newValue
         }
         get {
-            return layer.borderWidth
+            let borderWidth = layer.borderWidth
+            return borderWidth
         }
     }
 
@@ -24,7 +25,8 @@ class RoundedButton: UIButton {
             layer.cornerRadius = newValue
         }
         get {
-            return layer.cornerRadius
+            let cornerRadius = layer.cornerRadius
+            return cornerRadius
         }
     }
 

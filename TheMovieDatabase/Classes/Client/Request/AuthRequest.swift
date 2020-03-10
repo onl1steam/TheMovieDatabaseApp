@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 
 protocol AuthClient {
-    func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void)
+    func authorizeWithUser(_ user: User, _ completion: @escaping (Result<String, AuthError>) -> Void)
     func deleteSession(sessionId: String)
 }
 
@@ -19,7 +19,7 @@ class AuthRequest: AuthClient {
     private var validateParameters = [String: Any]()
     private var sessionParameters = [String: Any]()
     
-    func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void) {
+    func authorizeWithUser(_ user: User, _ completion: @escaping (Result<String, AuthError>) -> Void) {
         self.user = user
         getSessionToken(completion)
     }
@@ -43,14 +43,14 @@ class AuthRequest: AuthClient {
                 }
                 self.setupRequestParameters(token: responseData.requestToken)
                 if responseData.success {
-                    self.validateWithUser(completion)
+                    self.validateUserData(completion)
                 } else {
                     completion(.failure(.unknownError))
                 }
         }
     }
     
-    private func validateWithUser(_ completion: @escaping (Result<String, AuthError>) -> Void) {
+    private func validateUserData(_ completion: @escaping (Result<String, AuthError>) -> Void) {
         let requestUrlString = AuthRequestConfig.validateSessionURLString
         let request = AF.request(requestUrlString, method: .post, parameters: validateParameters)
         request.validate().responseDecodable(of: AuthResponse.self) { [weak self] response in

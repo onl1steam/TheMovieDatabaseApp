@@ -19,13 +19,13 @@ extension AuthError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .blankFields:
-            return LocalizedStrings.blankFields
+            return ErrorStrings.blankFields
         case .invalidInput:
-            return LocalizedStrings.invalidInput
+            return ErrorStrings.invalidInput
         case .unknownError:
-            return LocalizedStrings.unknownError
+            return ErrorStrings.unknownError
         case .invalidPasswordLength:
-            return LocalizedStrings.invalidPasswordLength
+            return ErrorStrings.invalidPasswordLength
         }
     }
 }

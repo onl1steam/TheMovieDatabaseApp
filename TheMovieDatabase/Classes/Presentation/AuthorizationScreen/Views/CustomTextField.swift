@@ -9,18 +9,17 @@
 import UIKit
 
 class CustomTextField: UITextField {
-    
     var rightViewWidth: CGFloat {
         guard let view = rightView else { return 0 }
         return view.bounds.width
     }
     
     var textPaddingRight: CGFloat {
-        guard let view = rightView else { return 14 }
-        return view.bounds.width + 20
+        guard let view = rightView else { return CustomTextFieldConstraints.textPadding }
+        return view.bounds.width + CustomTextFieldConstraints.rightViewPadding
     }
     
-    enum CustomTextFieldConstraints {
+    private enum CustomTextFieldConstraints {
         static let borderWidth: CGFloat = 2.0
         static let cornerRadius: CGFloat = 8.0
         static let textPadding: CGFloat = 14
@@ -28,6 +27,7 @@ class CustomTextField: UITextField {
         static let rightViewTopPadding: CGFloat = 12
         static let rightViewBottomPadding: CGFloat = 12
         static let rightViewWidth: CGFloat = 36
+        static let rightViewPadding: CGFloat = 20
     }
     
     override func layoutSubviews() {
@@ -35,7 +35,7 @@ class CustomTextField: UITextField {
         layer.cornerRadius = CustomTextFieldConstraints.cornerRadius
         layer.borderWidth = CustomTextFieldConstraints.borderWidth
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -46,7 +46,8 @@ class CustomTextField: UITextField {
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return self.textRect(forBounds: bounds)
+        let textRect = self.textRect(forBounds: bounds)
+        return textRect
     }
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
@@ -59,12 +60,12 @@ class CustomTextField: UITextField {
             bottom: bottomPadding,
             right: rightPadding))
     }
-
+    
     func setupPlaceholderColor(_ color: UIColor) {
         guard let text = placeholder else { return }
         attributedPlaceholder = NSAttributedString(
-        string: text,
-        attributes: [NSAttributedString.Key.foregroundColor: color])
+            string: text,
+            attributes: [NSAttributedString.Key.foregroundColor: color])
     }
     
     func setupBorderColor(_ color: UIColor) {
