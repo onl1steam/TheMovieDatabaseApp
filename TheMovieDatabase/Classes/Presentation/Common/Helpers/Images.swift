@@ -18,6 +18,8 @@ enum Images {
     static let moviesTabBar = UIImage(named: ImageNames.moviesTabBar)!
     static let moviesBackground = UIImage(named: ImageNames.moviesBackground)!
     
+    static let favorite = UIImage(named: ImageNames.favorite)!
+    static let favoriteFilled = UIImage(named: ImageNames.favoriteFilled)!
     static let visibilityNone = UIImage(named: ImageNames.visibilityNone)!
     static let visibility = UIImage(named: ImageNames.visibility)!
     static let clearSearchText = UIImage(named: ImageNames.clearSearchText)!
@@ -27,21 +29,23 @@ enum Images {
     static let arrowBack = UIImage(named: ImageNames.arrowBack)!
     
     private enum ImageNames {
-        static let favoritesTabBar = "favorite.png"
-        static let favoritesBackground = "favorites_bg.png"
+        static let favoritesTabBar = "favorite_tab_bar"
+        static let favoritesBackground = "favorites_bg"
         
-        static let accountTabBar = "account.png"
-        static let avatarPlaceholder = "avatar.png"
+        static let accountTabBar = "account_tab_bar"
+        static let avatarPlaceholder = "avatar"
         
-        static let moviesTabBar = "movie.png"
-        static let moviesBackground = "movies_bg.png"
+        static let moviesTabBar = "movie_tab_bar"
+        static let moviesBackground = "movies_bg"
         
-        static let visibilityNone = "visibility_none.png"
-        static let visibility = "visibility.png"
-        static let clearSearchText = "clearSearchText.png"
-        static let search = "search.png"
-        static let listButton = "list.png"
-        static let widgetsButton = "widgets.png"
-        static let arrowBack = "arrow_back.png"
+        static let favorite = "favorite"
+        static let favoriteFilled = "favorite_filled"
+        static let visibilityNone = "visibility_none"
+        static let visibility = "visibility"
+        static let clearSearchText = "clearSearchText"
+        static let search = "search"
+        static let listButton = "list"
+        static let widgetsButton = "widgets"
+        static let arrowBack = "arrow_back"
     }
 }
