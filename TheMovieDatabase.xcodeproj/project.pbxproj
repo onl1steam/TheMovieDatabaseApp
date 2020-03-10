@@ -39,6 +39,7 @@
 		92D11226241665FA0087D910 /* FavoritesPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */; };
 		92D112372416715A0087D910 /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112362416715A0087D910 /* AuthServiceTests.swift */; };
 		92D11239241683090087D910 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11238241683090087D910 /* UIViewControllerExtension.swift */; };
+		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD62416CDCA007F9182 /* ErrorStrings.swift */; };
 		92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */; };
 		92F77ADC2416CE33007F9182 /* AuthScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */; };
@@ -96,6 +97,7 @@
 		92D1122F241670CC0087D910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D112362416715A0087D910 /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
 		92D11238241683090087D910 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F77AD62416CDCA007F9182 /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
 		92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenStrings.swift; sourceTree = "<group>"; };
 		92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenStrings.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				9250EBBC2414459A00AC30DB /* Views */,
 				9250EBAA2413DE2D00AC30DB /* AuthorizationViewController.swift */,
 				9250EBAB2413DE2D00AC30DB /* AuthorizationViewController.xib */,
+				92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */,
 			);
 			path = AuthorizationScreen;
 			sourceTree = "<group>";
@@ -380,18 +383,18 @@
 		92D1122C241670CC0087D910 /* TheMovieDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				92D112352416711E0087D910 /* ServiceTests */,
+				92D112352416711E0087D910 /* ServicesTests */,
 				92D1122F241670CC0087D910 /* Info.plist */,
 			);
 			path = TheMovieDatabaseTests;
 			sourceTree = "<group>";
 		};
-		92D112352416711E0087D910 /* ServiceTests */ = {
+		92D112352416711E0087D910 /* ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
 				92D112362416715A0087D910 /* AuthServiceTests.swift */,
 			);
-			path = ServiceTests;
+			path = ServicesTests;
 			sourceTree = "<group>";
 		};
 		92F77AD42416CBD0007F9182 /* Responses */ = {
@@ -645,6 +648,7 @@
 				9250EBBE24144E0400AC30DB /* TabBarViewController.swift in Sources */,
 				92F77ADE2416CE49007F9182 /* AccountScreenStrings.swift in Sources */,
 				9250EBC124144E9000AC30DB /* MoviesViewController.swift in Sources */,
+				92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */,
 				9250EBB72413FA2E00AC30DB /* Colors.swift in Sources */,
 				92F77AE02416CE69007F9182 /* FavoritesScreenStrings.swift in Sources */,
 				9250EBC524144E9F00AC30DB /* FavoritesViewController.swift in Sources */,
