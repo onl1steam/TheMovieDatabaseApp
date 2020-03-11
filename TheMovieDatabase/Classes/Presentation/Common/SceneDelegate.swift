@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        let authVC = AuthorizationViewController()
+        let authVC = TabBarViewController()
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = authVC
         window?.makeKeyAndVisible()

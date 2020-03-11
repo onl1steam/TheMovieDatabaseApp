@@ -11,7 +11,6 @@ import UIKit
 class FavoritesViewController: UIViewController {
     @IBOutlet weak var favoriteLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +25,17 @@ class FavoritesViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationBar.barTintColor = Colors.backgroundBlack
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.view.backgroundColor = Colors.backgroundBlack
+        navigationController?.navigationBar.barTintColor = Colors.backgroundBlack
         setupBarItems()
     }
     
     func setupBarItems() {
-        let navItem = UINavigationItem()
         let listItem = UIBarButtonItem(
             image: Images.listButton,
             style: .plain,
-            target: nil,
+            target: self,
             action: #selector(changeAppearance(_:)))
         listItem.tintColor = Colors.light
         let searchItem = UIBarButtonItem(
@@ -44,15 +44,15 @@ class FavoritesViewController: UIViewController {
             target: nil,
             action: #selector(searchButtonTapped))
         searchItem.tintColor = Colors.light
-        navItem.rightBarButtonItems = [listItem, searchItem]
-        navigationBar.setItems([navItem], animated: false)
+        self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
+        
     }
     
     @objc func searchButtonTapped() {
         
     }
     
-    @objc func changeAppearance(_ sender: UIButton) {
+    @objc func changeAppearance(_ sender: UIBarButtonItem) {
         
     }
     

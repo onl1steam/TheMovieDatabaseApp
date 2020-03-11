@@ -17,7 +17,7 @@ class MoviesViewController: UIViewController {
         setupSearchBar()
         setupLocalizedStrings()
     }
-    
+
     private func setupLocalizedStrings() {
         moviesLabel.text = MoviesScreenStrings.moviesLabel
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder

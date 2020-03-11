@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let authVC = AuthorizationViewController()
+        let authVC = TabBarViewController()
         window?.rootViewController = authVC
         window?.makeKeyAndVisible()
         return true

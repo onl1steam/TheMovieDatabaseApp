@@ -19,18 +19,37 @@ class CustomSearchBar: UISearchBar {
     }
     
     func configure() {
+        setImages()
+        setupTextField()
+    }
+    
+    func setImages() {
+        setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)
+        setImage(CustomSearchBarConstants.clearImage, for: .clear, state: .normal)
+    }
+    
+    func setupTextField() {
+        if #available(iOS 13.0, *) {
+            searchTextField.backgroundColor = CustomSearchBarConstants.backgroundColor
+        }
         if let textField = value(forKey: "searchField") as? UITextField {
             textField.textColor = Colors.light
             textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
-            let textFieldInsideUISearchBarLabel = textField.value(forKey: "placeholderLabel") as? UILabel
-            textFieldInsideUISearchBarLabel?.textColor = Colors.light
+            setupTextFieldPlaceholder(textField: textField)
             if let backgroundview = textField.subviews.first {
-                backgroundview.backgroundColor = CustomSearchBarConstants.backgroundColor
-                backgroundview.layer.cornerRadius = CustomSearchBarConstants.cornerRadius
-                backgroundview.clipsToBounds = true
+                setupBackgroundView(backgroundview)
             }
         }
-        setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)
-        setImage(CustomSearchBarConstants.clearImage, for: .clear, state: .normal)
+    }
+    
+    func setupTextFieldPlaceholder(textField: UITextField) {
+        let textFieldPlaceholder = textField.value(forKey: "placeholderLabel") as? UILabel
+        textFieldPlaceholder?.textColor = Colors.light
+    }
+    
+    func setupBackgroundView(_ view: UIView) {
+        view.backgroundColor = CustomSearchBarConstants.backgroundColor
+        view.layer.cornerRadius = CustomSearchBarConstants.cornerRadius
+        view.clipsToBounds = true
     }
 }

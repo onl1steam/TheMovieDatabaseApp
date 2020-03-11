@@ -9,17 +9,25 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
         setupViewControllers()
+        setupTabBar()
+    }
+    
+    func setupTabBar() {
+        let fontSize: CGFloat = 12
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
+        UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
     }
     
     func setupViewControllers() {
         let filmsVC = MoviesViewController()
         filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: Images.moviesTabBar, tag: 0)
         
-        let favoritesVC = FavoritesViewController()
+        let favoritesVC = UINavigationController(rootViewController: FavoritesViewController())
         favoritesVC.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.favoriteTabBar,
             image: Images.favoritesTabBar,
