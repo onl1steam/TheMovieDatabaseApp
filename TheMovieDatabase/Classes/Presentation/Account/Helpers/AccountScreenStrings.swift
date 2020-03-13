@@ -9,5 +9,6 @@
 import Foundation
 
 enum AccountScreenStrings {
+    
     static let logoutButtonText = NSLocalizedString("Выйти", comment: "Logout Button Text")
 }

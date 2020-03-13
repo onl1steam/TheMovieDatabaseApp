@@ -8,18 +8,36 @@
 
 import Foundation
 
+/// Управляет текущей сессией пользователя.
 protocol Session {
+    
+    /// Удаляет текущую сессию пользователя.
     func deleteSession()
+    
+    /// Устанавливает id текущей сессии.
+    ///
+    /// - Parameters:
+    ///   - sessionId: id сессии.
     func setupSessionId(sessionId: String)
 }
 
 class SessionService: Session {
-    private var sessionId = ""
+    
+    // MARK: - Public Properties
+    
     var authClient: AuthClient
+    
+    // MARK: - Private Properties
+    
+    private var sessionId = ""
+    
+    // MARK: - Initializers
     
     init(authClient: AuthClient = AuthRequest()) {
         self.authClient = authClient
     }
+    
+    // MARK: - Session
     
     func setupSessionId(sessionId: String) {
         self.sessionId = sessionId

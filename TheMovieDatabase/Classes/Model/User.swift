@@ -9,16 +9,7 @@
 import Foundation
 
 struct User {
-    var login: String
-    var password: String
-    
-    init() {
-        login = ""
-        password = ""
-    }
-    
-    init(login: String, password: String) {
-        self.login = login
-        self.password = password
-    }
+
+    var login: String?
+    var password: String?
 }

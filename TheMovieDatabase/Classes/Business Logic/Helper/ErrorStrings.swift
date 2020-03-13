@@ -9,6 +9,7 @@
 import Foundation
 
 enum ErrorStrings {
+    
     static let blankFields = NSLocalizedString("Не заполнены все поля", comment: "Blank Fields")
     static let invalidInput = NSLocalizedString("Неверный логин или пароль", comment: "Invalid Input")
     static let unknownError = NSLocalizedString("Что-то пошло не так, попробуйте войти позже", comment: "Unknown Error")

@@ -10,6 +10,8 @@ import UIKit
 
 class CustomSearchBar: UISearchBar {
     
+    // MARK: - Types
+    
     private enum CustomSearchBarConstants {
         static let backgroundColor = Colors.tabBarBackground
         static let cornerRadius: CGFloat = 8
@@ -18,17 +20,21 @@ class CustomSearchBar: UISearchBar {
         static let clearImage = Images.clearSearchText
     }
     
+    // MARK: - Public methods
+    
     func configure() {
         setImages()
         setupTextField()
     }
     
-    func setImages() {
+    // MARK: - Private Methods
+    
+    private func setImages() {
         setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)
         setImage(CustomSearchBarConstants.clearImage, for: .clear, state: .normal)
     }
     
-    func setupTextField() {
+    private func setupTextField() {
         if #available(iOS 13.0, *) {
             searchTextField.backgroundColor = CustomSearchBarConstants.backgroundColor
         }
@@ -42,12 +48,12 @@ class CustomSearchBar: UISearchBar {
         }
     }
     
-    func setupTextFieldPlaceholder(textField: UITextField) {
+    private func setupTextFieldPlaceholder(textField: UITextField) {
         let textFieldPlaceholder = textField.value(forKey: "placeholderLabel") as? UILabel
-        textFieldPlaceholder?.textColor = Colors.light
+        textFieldPlaceholder?.textColor = Colors.placeholderText
     }
     
-    func setupBackgroundView(_ view: UIView) {
+    private func setupBackgroundView(_ view: UIView) {
         view.backgroundColor = CustomSearchBarConstants.backgroundColor
         view.layer.cornerRadius = CustomSearchBarConstants.cornerRadius
         view.clipsToBounds = true

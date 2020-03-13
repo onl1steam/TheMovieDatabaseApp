@@ -9,6 +9,7 @@
 import Foundation
 
 enum AuthRequestConfig {
+    
     static let apiKey = "591efe0e25fd45c1579562958b2364db"
     static let createTokenURLString = "https://api.themoviedb.org/3/authentication/token/new?api_key=\(apiKey)"
     static let createSessionURLString = "https://api.themoviedb.org/3/authentication/session/new?api_key=\(apiKey)"

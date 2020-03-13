@@ -9,15 +9,8 @@
 import UIKit
 
 class CustomTextField: UITextField {
-    var rightViewWidth: CGFloat {
-        guard let view = rightView else { return 0 }
-        return view.bounds.width
-    }
     
-    var textPaddingRight: CGFloat {
-        guard let view = rightView else { return CustomTextFieldConstraints.textPadding }
-        return view.bounds.width + CustomTextFieldConstraints.rightViewPadding
-    }
+    // MARK: - Types
     
     private enum CustomTextFieldConstraints {
         static let borderWidth: CGFloat = 2.0
@@ -30,14 +23,30 @@ class CustomTextField: UITextField {
         static let rightViewPadding: CGFloat = 20
     }
     
+    // MARK: - Public Properties
+    
+    var rightViewWidth: CGFloat {
+        guard let view = rightView else { return 0 }
+        return view.bounds.width
+    }
+    
+    var textPaddingRight: CGFloat {
+        guard let view = rightView else { return CustomTextFieldConstraints.textPadding }
+        return view.bounds.width + CustomTextFieldConstraints.rightViewPadding
+    }
+    
+    // MARK: - Initializers
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    // MARK: - UIView
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = CustomTextFieldConstraints.cornerRadius
         layer.borderWidth = CustomTextFieldConstraints.borderWidth
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
@@ -60,6 +69,8 @@ class CustomTextField: UITextField {
             bottom: bottomPadding,
             right: rightPadding))
     }
+    
+    // MARK: - Public methods
     
     func setupPlaceholderColor(_ color: UIColor) {
         guard let text = placeholder else { return }

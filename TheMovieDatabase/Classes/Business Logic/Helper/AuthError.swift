@@ -9,6 +9,7 @@
 import Foundation
 
 enum AuthError: Error {
+    
     case blankFields
     case invalidInput
     case unknownError
@@ -16,6 +17,7 @@ enum AuthError: Error {
 }
 
 extension AuthError: LocalizedError {
+    
     var errorDescription: String? {
         switch self {
         case .blankFields:

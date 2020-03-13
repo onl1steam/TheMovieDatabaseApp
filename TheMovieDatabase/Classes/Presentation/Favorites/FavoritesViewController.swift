@@ -9,11 +9,17 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var favoriteLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupColorScheme()
         setupLocalizedStrings()
         let placeholderView = FavoritesPlaceholderView(frame: CGRect(
             x: 0,
@@ -24,14 +30,35 @@ class FavoritesViewController: UIViewController {
         setupNavigationBar()
     }
     
-    func setupNavigationBar() {
+    // MARK: - IBAction
+    
+    @objc func searchButtonTapped() {
+        
+    }
+    
+    @objc func changeAppearance(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupColorScheme() {
+        view.backgroundColor = Colors.backgroundBlack
+        favoriteLabel.tintColor = Colors.light
+    }
+    
+    private func setupLocalizedStrings() {
+        favoriteLabel.text = FavoritesScreenStrings.favoriteLabel
+    }
+    
+    private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.view.backgroundColor = Colors.backgroundBlack
         navigationController?.navigationBar.barTintColor = Colors.backgroundBlack
         setupBarItems()
     }
     
-    func setupBarItems() {
+    private func setupBarItems() {
         let listItem = UIBarButtonItem(
             image: Images.listButton,
             style: .plain,
@@ -45,18 +72,5 @@ class FavoritesViewController: UIViewController {
             action: #selector(searchButtonTapped))
         searchItem.tintColor = Colors.light
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
-        
-    }
-    
-    @objc func searchButtonTapped() {
-        
-    }
-    
-    @objc func changeAppearance(_ sender: UIBarButtonItem) {
-        
-    }
-    
-    private func setupLocalizedStrings() {
-        favoriteLabel.text = FavoritesScreenStrings.favoriteLabel
     }
 }

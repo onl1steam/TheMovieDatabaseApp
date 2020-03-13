@@ -8,16 +8,39 @@
 
 import Foundation
 
+/// ViewModel для экрана авторизации.
 protocol AuthorizationViewModelType: class {
+    
+    /// Проверить валидность заполненных данных в поля логина и пароля при авторизации.
+    ///
+    /// - Parameters:
+    ///   - loginText: Строка из поля логина.
+    ///   - passwordText: Строка из поля пароля.
     func checkTextFieldsState(loginText: String?, passwordText: String?)
+    
+    /// Авторизовать пользователя в базе данных с введенными данными.
+    ///
+    /// - Parameters:
+    ///   - loginText: Введенный пользователем логин.
+    ///   - passwordText: Введенный пользователем пароль.
     func authorizeWithData(login: String, password: String)
-    func setupDelegate(delegate: ViewModelDelegate)
+    
+    /// Установить делегат для ViewModel.
+    ///
+    /// - Parameters:
+    ///   - delegate: Делегат типа AuthorizationViewModelDelegate.
+    func setupDelegate(delegate: AuthorizationViewModelDelegate)
 }
 
-class AuthorizationViewModel: AuthorizationViewModelType {
-    let authService: Authorization
-    let sessionService: Session
-    weak var delegate: ViewModelDelegate?
+class AuthorizationViewModel {
+    
+    // MARK: - Private Properties
+
+    private let authService: Authorization
+    private let sessionService: Session
+    private weak var delegate: AuthorizationViewModelDelegate?
+    
+    // MARK: - Initializers
     
     init(
         authService: Authorization = ServiceLayer.shared.authService,
@@ -25,6 +48,8 @@ class AuthorizationViewModel: AuthorizationViewModelType {
         self.authService = authService
         self.sessionService = sessionService
     }
+    
+    // MARK: - Private Methods
     
     private func validateResponse(_ response: Result<String, AuthError>) {
         guard let delegate = delegate else { return }
@@ -37,16 +62,22 @@ class AuthorizationViewModel: AuthorizationViewModelType {
             delegate.showError(error.localizedDescription)
         }
     }
+}
+
+// MARK: - AuthorizationViewModelType
+
+extension AuthorizationViewModel: AuthorizationViewModelType {
     
     func checkTextFieldsState(loginText: String?, passwordText: String?) {
-        authService.validateUserInput(login: loginText, password: passwordText) { [weak self] response in
+        let user = User(login: loginText, password: passwordText)
+        authService.validateUserInput(user: user) { [weak self] response in
             guard let self = self, let delegate = self.delegate else { return }
             switch response {
             case .success:
-                delegate.toggleTextFieldState(isHidden: false)
+                delegate.toggleTextFieldState(isBlank: false)
                 delegate.toggleLoginButton()
             case .failure:
-                delegate.toggleTextFieldState(isHidden: true)
+                delegate.toggleTextFieldState(isBlank: true)
                 delegate.toggleLoginButton()
             }
         }
@@ -61,7 +92,7 @@ class AuthorizationViewModel: AuthorizationViewModelType {
         }
     }
     
-    func setupDelegate(delegate: ViewModelDelegate) {
+    func setupDelegate(delegate: AuthorizationViewModelDelegate) {
         self.delegate = delegate
     }
 }

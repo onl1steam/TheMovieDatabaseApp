@@ -8,16 +8,41 @@
 
 import UIKit
 
-protocol ViewModelDelegate: class {
+/// Делегат для ViewModel экрана авторизации.
+protocol AuthorizationViewModelDelegate: class {
+    
+    /// Скрыть строку ошибки.
     func hideErrorLabel()
+    
+    /// Показать на экране авторизации ошибку.
+    ///
+    /// - Parameters:
+    ///   - error: Строка, описывающую ошибку.
     func showError(_ error: String)
+    
+    /// Переходит на следующий экран.
+    ///
+    /// - Parameters:
+    ///   - vc: Экран, на который необходимо перейти.
     func presentViewController(_ vc: UIViewController)
+    
+    /// Переключает состояние кнопки логина.
     func toggleLoginButton()
-    func toggleTextFieldState(isHidden: Bool)
+    
+    /// Передает состояние заполненности полей в ViewController
+    ///
+    /// - Parameters:
+    ///   - isBlank: Заполнены ли поля авторизации.
+    func toggleTextFieldState(isBlank: Bool)
+    
+    /// Переключить индикатор загрузки.
     func toggleIndicator()
 }
 
 class AuthorizationViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var loginTextField: CustomTextField!
     @IBOutlet weak var passwordTextField: CustomTextField!
     @IBOutlet weak var errorLabel: UILabel!
@@ -25,15 +50,22 @@ class AuthorizationViewController: UIViewController {
     @IBOutlet weak var authInfoLabel: UILabel!
     @IBOutlet weak var loginButton: RoundedButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    // MARK: - Public Properties
+    
     let visibilityButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         button.setBackgroundImage(Images.visibility, for: .normal)
         button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
         return button
     }()
+
+    // MARK: - Private Properties
     
-    let authViewModel: AuthorizationViewModelType
+    private let authViewModel: AuthorizationViewModelType
     private var isTextFieldsBlank = true
+    
+    // MARK: - Initializers
     
     init(authViewModel: AuthorizationViewModelType = AuthorizationViewModel()) {
         self.authViewModel = authViewModel
@@ -44,8 +76,11 @@ class AuthorizationViewController: UIViewController {
         fatalError("init(coder:) is not supported")
     }
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupColorScheme()
         authViewModel.setupDelegate(delegate: self)
         setupLocalizedStrings()
         toggleLoginButton()
@@ -54,33 +89,7 @@ class AuthorizationViewController: UIViewController {
         setupPasswordTextField()
     }
     
-    private func setupLocalizedStrings() {
-        loginTextField.placeholder = AuthScreenStrings.loginPlaceholder
-        passwordTextField.placeholder = AuthScreenStrings.passwordPlaceholder
-        welcomeLabel.text = AuthScreenStrings.authWelcome
-        authInfoLabel.text = AuthScreenStrings.authInfo
-        loginButton.setTitle(AuthScreenStrings.loginButtonText, for: .normal)
-    }
-    
-    func setupActivityIndicator() {
-        activityIndicator.isHidden = true
-        activityIndicator.color = Colors.light
-    }
-    
-    func setupLoginTextField() {
-        loginTextField.setupPlaceholderColor(Colors.gray)
-        loginTextField.setupBorderColor(Colors.darkBlue)
-        loginTextField.textColor = Colors.light
-    }
-    
-    func setupPasswordTextField() {
-        passwordTextField.textColor = Colors.light
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.rightView = visibilityButton
-        passwordTextField.rightViewMode = .always
-        passwordTextField.setupPlaceholderColor(Colors.gray)
-        passwordTextField.setupBorderColor(Colors.darkBlue)
-    }
+    // MARK: - IBAction
     
     @objc func visibilityButtonTapped() {
         let isPasswordHidden = passwordTextField.isSecureTextEntry
@@ -121,9 +130,51 @@ class AuthorizationViewController: UIViewController {
     @IBAction func passwordEditingDidEnd(_ sender: CustomTextField) {
         sender.setupBorderColor(Colors.darkBlue)
     }
+    
+    // MARK: - Private Methods
+    
+    private func setupColorScheme() {
+        view.backgroundColor = Colors.backgroundBlack
+        welcomeLabel.tintColor = Colors.light
+        authInfoLabel.tintColor = Colors.light
+        errorLabel.tintColor = Colors.red
+        loginButton.backgroundColor = Colors.disabledButtonBackground
+        loginButton.tintColor = Colors.disabledButtonText
+    }
+    
+    private func setupLocalizedStrings() {
+        loginTextField.placeholder = AuthScreenStrings.loginPlaceholder
+        passwordTextField.placeholder = AuthScreenStrings.passwordPlaceholder
+        welcomeLabel.text = AuthScreenStrings.authWelcome
+        authInfoLabel.text = AuthScreenStrings.authInfo
+        loginButton.setTitle(AuthScreenStrings.loginButtonText, for: .normal)
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.isHidden = true
+        activityIndicator.color = Colors.light
+    }
+    
+    private func setupLoginTextField() {
+        loginTextField.setupPlaceholderColor(Colors.gray)
+        loginTextField.setupBorderColor(Colors.darkBlue)
+        loginTextField.textColor = Colors.light
+    }
+    
+    private func setupPasswordTextField() {
+        passwordTextField.textColor = Colors.light
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.rightView = visibilityButton
+        passwordTextField.rightViewMode = .always
+        passwordTextField.setupPlaceholderColor(Colors.gray)
+        passwordTextField.setupBorderColor(Colors.darkBlue)
+    }
 }
 
-extension AuthorizationViewController: ViewModelDelegate {
+// MARK: - ViewModelDelegate
+
+extension AuthorizationViewController: AuthorizationViewModelDelegate {
+    
     func toggleIndicator() {
         let isHidden = activityIndicator.isHidden
         if isHidden {
@@ -147,8 +198,8 @@ extension AuthorizationViewController: ViewModelDelegate {
         }
     }
     
-    func toggleTextFieldState(isHidden: Bool) {
-        isTextFieldsBlank = isHidden
+    func toggleTextFieldState(isBlank: Bool) {
+        isTextFieldsBlank = isBlank
     }
     
     func hideErrorLabel() {

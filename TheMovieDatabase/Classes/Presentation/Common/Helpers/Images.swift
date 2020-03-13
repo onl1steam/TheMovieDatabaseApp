@@ -9,43 +9,23 @@
 import UIKit
 
 enum Images {
-    static let favoritesTabBar = UIImage(named: ImageNames.favoritesTabBar)!
-    static let favoritesBackground = UIImage(named: ImageNames.favoritesBackground)!
+
+    static let favoritesTabBar = #imageLiteral(resourceName: "favorite_tab_bar")
+    static let favoritesBackground = #imageLiteral(resourceName: "favorites_bg")
     
-    static let accountTabBar = UIImage(named: ImageNames.accountTabBar)!
-    static let avatarPlaceholder = UIImage(named: ImageNames.avatarPlaceholder)!
+    static let accountTabBar = #imageLiteral(resourceName: "account_tab_bar")
+    static let avatarPlaceholder = #imageLiteral(resourceName: "avatar")
     
-    static let moviesTabBar = UIImage(named: ImageNames.moviesTabBar)!
-    static let moviesBackground = UIImage(named: ImageNames.moviesBackground)!
+    static let moviesTabBar = #imageLiteral(resourceName: "movie_tab_bar")
+    static let moviesBackground = #imageLiteral(resourceName: "movies_bg")
     
-    static let favorite = UIImage(named: ImageNames.favorite)!
-    static let favoriteFilled = UIImage(named: ImageNames.favoriteFilled)!
-    static let visibilityNone = UIImage(named: ImageNames.visibilityNone)!
-    static let visibility = UIImage(named: ImageNames.visibility)!
-    static let clearSearchText = UIImage(named: ImageNames.clearSearchText)!
-    static let search = UIImage(named: ImageNames.search)!
-    static let listButton = UIImage(named: ImageNames.listButton)!
-    static let widgetsButton = UIImage(named: ImageNames.widgetsButton)!
-    static let arrowBack = UIImage(named: ImageNames.arrowBack)!
-    
-    private enum ImageNames {
-        static let favoritesTabBar = "favorite_tab_bar"
-        static let favoritesBackground = "favorites_bg"
-        
-        static let accountTabBar = "account_tab_bar"
-        static let avatarPlaceholder = "avatar"
-        
-        static let moviesTabBar = "movie_tab_bar"
-        static let moviesBackground = "movies_bg"
-        
-        static let favorite = "favorite"
-        static let favoriteFilled = "favorite_filled"
-        static let visibilityNone = "visibility_none"
-        static let visibility = "visibility"
-        static let clearSearchText = "clearSearchText"
-        static let search = "search"
-        static let listButton = "list"
-        static let widgetsButton = "widgets"
-        static let arrowBack = "arrow_back"
-    }
+    static let favorite = #imageLiteral(resourceName: "favorite")
+    static let favoriteFilled = #imageLiteral(resourceName: "favorite_filled")
+    static let visibilityNone = #imageLiteral(resourceName: "visibility_none")
+    static let visibility = #imageLiteral(resourceName: "visibility")
+    static let clearSearchText = #imageLiteral(resourceName: "clearSearchText")
+    static let search = #imageLiteral(resourceName: "search")
+    static let listButton = #imageLiteral(resourceName: "list")
+    static let widgetsButton = #imageLiteral(resourceName: "widgets")
+    static let arrowBack = #imageLiteral(resourceName: "arrow_back")
 }

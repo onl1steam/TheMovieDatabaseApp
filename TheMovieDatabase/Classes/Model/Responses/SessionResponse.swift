@@ -9,15 +9,16 @@
 import Foundation
 
 struct SessionResponse: Decodable {
+    
     var sessionId: String?
     var success: Bool?
     var statusCode: Int?
     var statusMessage: String?
     
     enum CodingKeys: String, CodingKey {
-        case sessionId = "session_id"
-        case success = "success"
-        case statusCode = "status_code"
-        case statusMessage = "status_message"
+        case sessionId
+        case success
+        case statusCode
+        case statusMessage
     }
 }

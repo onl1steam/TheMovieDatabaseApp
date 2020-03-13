@@ -9,32 +9,56 @@
 import UIKit
 
 class AccountViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var logoutButton: RoundedButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
+    // MARK: - Public Properties
     
     let sessionService: Session
     
+    // MARK: - Initializers
+    
     init(sessionService: Session = ServiceLayer.shared.sessionService) {
         self.sessionService = sessionService
-        super.init(nibName: "AccountViewController", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not supported")
     }
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
     }
     
-    private func setupLocalizedStrings() {
-        logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
-    }
+    // MARK: - IBAction
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
         sessionService.deleteSession()
         presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupColorScheme() {
+        view.backgroundColor = Colors.backgroundBlack
+        nameLabel.tintColor = Colors.light
+        emailLabel.tintColor = Colors.gray
+        logoutButton.backgroundColor = Colors.accountButtonBackground
+        logoutButton.tintColor = Colors.purpure
+    }
+    
+    private func setupLocalizedStrings() {
+        logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
     }
 }

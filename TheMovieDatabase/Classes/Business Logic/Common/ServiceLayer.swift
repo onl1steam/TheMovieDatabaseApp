@@ -9,10 +9,15 @@
 import Foundation
 
 class ServiceLayer {
-    static let shared = ServiceLayer()
     
-    private init() {}
+    // MARK: - Public Properties
+    
+    static let shared = ServiceLayer()
     
     let authService: Authorization = AuthService()
     let sessionService: Session = SessionService()
+    
+    // MARK: - Initializers
+    
+    private init() {}
 }

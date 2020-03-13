@@ -9,11 +9,15 @@
 import UIKit
 
 class FavoritesPlaceholderView: UIView {
+    
+    // MARK: - Public Properties
+    
     let placeholderLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = FavoritesScreenStrings.blankListLabel
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = Colors.light
         return label
     }()
@@ -24,6 +28,7 @@ class FavoritesPlaceholderView: UIView {
         button.setTitle(FavoritesScreenStrings.searchFilmsButtonText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.contentHorizontalAlignment = .left
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     
@@ -32,6 +37,8 @@ class FavoritesPlaceholderView: UIView {
         imageView.image = Images.favoritesBackground
         return imageView
     }()
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +51,8 @@ class FavoritesPlaceholderView: UIView {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Methods
     
     private func addSubviews() {
         addSubview(placeholderLabel)
@@ -67,9 +76,9 @@ class FavoritesPlaceholderView: UIView {
     
     private func setupPlaceholderImageViewConstraints() {
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        placeholderImageView.topAnchor.constraint(equalTo: navigationButton.topAnchor, constant: 88).isActive = true
         placeholderImageView.heightAnchor.constraint(equalToConstant: 193).isActive = true
         placeholderImageView.widthAnchor.constraint(equalToConstant: 248).isActive = true
         placeholderImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        placeholderImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }

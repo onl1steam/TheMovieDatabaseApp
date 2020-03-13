@@ -9,13 +9,14 @@
 import Foundation
 
 struct DeleteSessionResponse: Decodable {
+    
     var success: Bool?
     var statusCode: Int?
     var statusMessage: String?
 
     enum CodingKeys: String, CodingKey {
-        case success = "success"
-        case statusCode = "status_code"
-        case statusMessage = "status_message"
+        case success
+        case statusCode
+        case statusMessage
     }
 }

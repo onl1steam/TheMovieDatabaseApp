@@ -10,6 +10,8 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
@@ -17,13 +19,15 @@ class TabBarViewController: UITabBarController {
         setupTabBar()
     }
     
-    func setupTabBar() {
+    // MARK: - Private Methods
+    
+    private func setupTabBar() {
         let fontSize: CGFloat = 12
         let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
     }
     
-    func setupViewControllers() {
+    private func setupViewControllers() {
         let filmsVC = MoviesViewController()
         filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: Images.moviesTabBar, tag: 0)
         
@@ -31,19 +35,19 @@ class TabBarViewController: UITabBarController {
         favoritesVC.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.favoriteTabBar,
             image: Images.favoritesTabBar,
-            tag: 0)
+            tag: 1)
         
         let accountVC = AccountViewController()
         accountVC.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.accountTabBar,
             image: Images.accountTabBar,
-            tag: 0)
+            tag: 2)
         
         let tabBarList = [filmsVC, favoritesVC, accountVC]
         viewControllers = tabBarList
     }
     
-    func setupColorScheme() {
+    private func setupColorScheme() {
         tabBar.tintColor = Colors.orange
         tabBar.unselectedItemTintColor = Colors.light
         tabBar.isTranslucent = false

@@ -9,6 +9,7 @@
 import Foundation
 
 enum TabBarScreenStrings {
+    
     static let moviesTabBar = NSLocalizedString("Фильмы", comment: "Movies Tab Bar")
     static let accountTabBar = NSLocalizedString("Профиль", comment: "Account Tab Bar")
     static let favoriteTabBar = NSLocalizedString("Избранное", comment: "Favorite Tab Bar")

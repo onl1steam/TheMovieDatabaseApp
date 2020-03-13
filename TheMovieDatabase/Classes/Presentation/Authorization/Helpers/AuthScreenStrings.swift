@@ -9,6 +9,7 @@
 import Foundation
 
 enum AuthScreenStrings {
+    
     static let authWelcome = NSLocalizedString("Добро пожаловать!", comment: "Auth Welcome")
     static let authInfo = NSLocalizedString("Укажите логин и пароль, которые вы использовали для входа",
                                             comment: "Auth Info")

@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +17,7 @@
                 <outlet property="loginTextField" destination="8PD-68-11f" id="wKx-Y7-Yzt"/>
                 <outlet property="passwordTextField" destination="EPi-ES-yo3" id="WO9-9e-4nb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="welcomeLabel" destination="8bo-OS-RWo" id="fAU-bF-hUs"/>
+                <outlet property="welcomeLabel" destination="8bo-OS-RWo" id="5b0-YP-1e9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,24 +28,23 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добро пожаловать!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bo-OS-RWo">
                     <rect key="frame" x="24" y="91" width="327" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                    <color key="textColor" name="Light"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите логин и пароль, которые  вы использовали для входа" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X44-5a-iSa">
                     <rect key="frame" x="24" y="155" width="327" height="41"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" name="Light"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-uc-das" customClass="RoundedButton" customModule="TheMovieDatabase" customModuleProvider="target">
                     <rect key="frame" x="23" y="584" width="328" height="56"/>
-                    <color key="backgroundColor" name="Dark_blue_button"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="7M7-SK-kIc"/>
-                        <constraint firstAttribute="width" constant="328" id="XPn-p1-0lB"/>
                     </constraints>
                     <state key="normal" title="Войти">
-                        <color key="titleColor" name="Dark_blue_button_text"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -58,11 +56,10 @@
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8PD-68-11f" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
-                    <rect key="frame" x="24" y="228" width="328" height="48"/>
+                    <rect key="frame" x="24" y="228" width="327" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="cnl-6D-7B7"/>
-                        <constraint firstAttribute="width" constant="328" id="kDT-yQ-TRX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
@@ -73,10 +70,9 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPi-ES-yo3" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
-                    <rect key="frame" x="24" y="300" width="328" height="48"/>
+                    <rect key="frame" x="24" y="300" width="327" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="328" id="BKF-bT-V8e"/>
                         <constraint firstAttribute="height" constant="48" id="qGV-ZQ-MJq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -90,15 +86,18 @@
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Строка Ошибки" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
                     <rect key="frame" x="24" y="372" width="327" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" name="Red"/>
+                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gFZ-to-Rsp">
                     <rect key="frame" x="177.5" y="411.5" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
-            <color key="backgroundColor" name="bg_black"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vf3-uc-das" secondAttribute="trailing" constant="24" id="307-jr-1QP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8PD-68-11f" secondAttribute="trailing" constant="24" id="3SY-dP-ecD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EPi-ES-yo3" secondAttribute="trailing" constant="24" id="3qT-B5-oDf"/>
                 <constraint firstItem="8bo-OS-RWo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="4m1-Qj-7qD"/>
                 <constraint firstItem="Gic-Ru-lLF" firstAttribute="top" secondItem="EPi-ES-yo3" secondAttribute="bottom" constant="24" id="6cx-Qr-FZm"/>
                 <constraint firstItem="8PD-68-11f" firstAttribute="top" secondItem="X44-5a-iSa" secondAttribute="bottom" constant="32" id="8De-7i-cTA"/>
@@ -121,21 +120,4 @@
             <point key="canvasLocation" x="139" y="131"/>
         </view>
     </objects>
-    <resources>
-        <namedColor name="Dark_blue_button">
-            <color red="0.13699999451637268" green="0.14900000393390656" blue="0.21199999749660492" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Dark_blue_button_text">
-            <color red="0.39599999785423279" green="0.42699998617172241" blue="0.54100000858306885" alpha="0.3970000147819519" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Light">
-            <color red="0.90600001811981201" green="0.92900002002716064" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Red">
-            <color red="0.88200002908706665" green="0.090000003576278687" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="bg_black">
-            <color red="0.097999997437000275" green="0.10199999809265137" blue="0.14499999582767487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

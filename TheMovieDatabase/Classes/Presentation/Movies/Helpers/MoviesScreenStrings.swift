@@ -9,6 +9,7 @@
 import Foundation
 
 enum MoviesScreenStrings {
+    
     static let moviesLabel = NSLocalizedString("Найдем любой фильм на ваш вкуc", comment: "Movies Label")
     static let searchBarPlaceholder = NSLocalizedString("Поиск фильмов", comment: "SearchBar Placeholder")
 }

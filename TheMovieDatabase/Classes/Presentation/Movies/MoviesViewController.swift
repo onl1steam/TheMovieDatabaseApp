@@ -9,13 +9,26 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
     
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupColorScheme()
         setupSearchBar()
         setupLocalizedStrings()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupColorScheme() {
+        view.backgroundColor = Colors.backgroundBlack
+        moviesLabel.tintColor = Colors.light
     }
 
     private func setupLocalizedStrings() {
@@ -23,7 +36,7 @@ class MoviesViewController: UIViewController {
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder
     }
     
-    func setupSearchBar() {
+    private func setupSearchBar() {
         moviesSearchBar.configure()
     }
 }
