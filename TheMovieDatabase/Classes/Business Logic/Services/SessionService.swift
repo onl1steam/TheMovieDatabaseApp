@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TheMovieDatabaseAPI
 
 /// Управляет текущей сессией пользователя.
 protocol Session {
@@ -23,19 +24,9 @@ protocol Session {
 
 class SessionService: Session {
     
-    // MARK: - Public Properties
-    
-    var authClient: AuthClient
-    
     // MARK: - Private Properties
     
     private var sessionId = ""
-    
-    // MARK: - Initializers
-    
-    init(authClient: AuthClient = AuthRequest()) {
-        self.authClient = authClient
-    }
     
     // MARK: - Session
     
@@ -44,6 +35,6 @@ class SessionService: Session {
     }
     
     func deleteSession() {
-        authClient.deleteSession(sessionId: sessionId)
+        
     }
 }

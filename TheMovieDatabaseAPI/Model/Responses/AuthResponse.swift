@@ -10,13 +10,7 @@ import Foundation
 
 struct AuthResponse: Decodable {
     
-    var success: Bool
-    var expiresAt: String
-    var requestToken: String
-    
-    enum CodingKeys: String, CodingKey {
-        case success
-        case expiresAt
-        case requestToken
-    }
+    let success: Bool
+    let expiresAt: String
+    let requestToken: String
 }

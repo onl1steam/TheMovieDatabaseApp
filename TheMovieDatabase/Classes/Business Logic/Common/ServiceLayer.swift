@@ -14,10 +14,13 @@ class ServiceLayer {
     
     static let shared = ServiceLayer()
     
-    let authService: Authorization = AuthService()
-    let sessionService: Session = SessionService()
+    let authService: Authorization
+    let sessionService: Session
     
     // MARK: - Initializers
     
-    private init() {}
+    private init() {
+        authService = AuthService()
+        sessionService = SessionService()
+    }
 }

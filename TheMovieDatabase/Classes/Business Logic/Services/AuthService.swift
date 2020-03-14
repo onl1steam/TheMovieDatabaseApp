@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TheMovieDatabaseAPI
 
 /// Авторизация пользователя в базе данных фильмов.
 protocol Authorization {
@@ -30,20 +31,10 @@ protocol Authorization {
 
 class AuthService: Authorization {
     
-    // MARK: - Public Properties
-    
-    var authClient: AuthClient
-    
-    // MARK: - Initializers
-    
-    init(authClient: AuthClient = AuthRequest()) {
-        self.authClient = authClient
-    }
-    
     // MARK: - Authorization
     
     func authorizeWithUser(user: User, _ completion: @escaping (Result<String, AuthError>) -> Void) {
-        authClient.authorizeWithUser(user, completion)
+        
     }
     
     func validateUserInput(
