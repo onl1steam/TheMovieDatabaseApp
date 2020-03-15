@@ -15,7 +15,6 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     let baseURL: URL
     let apiKey: String
     let sessionId: String
-    let accountId: Int
     let language: String?
     let sortBy: String?
     let page: Int?
@@ -32,7 +31,6 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         self.baseURL = baseURL
         self.apiKey = apiKey
         self.sessionId = sessionId
-        self.accountId = accountId
         self.language = language
         self.sortBy = sortBy
         self.page = page
@@ -99,7 +97,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("account")
-        url.appendPathComponent("\(accountId)")
+        url.appendPathComponent("{account_id}")
         url.appendPathComponent("favorite")
         url.appendPathComponent("movies")
         return url

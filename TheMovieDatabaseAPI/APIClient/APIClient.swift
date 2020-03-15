@@ -32,13 +32,19 @@ open class APIRequest: APIClient {
             AF.request(urlRequest).response { response in
                 do {
                     let content = try endpoint.content(from: response.data, response: response.response)
-                    completionHandler(.success(content))
-                } catch let error {
-                    completionHandler(.failure(error))
+                    DispatchQueue.main.async {
+                        completionHandler(.success(content))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(error))
+                    }
                 }
             }
-        } catch let error {
-            completionHandler(.failure(error))
+        } catch {
+            DispatchQueue.main.async {
+                completionHandler(.failure(error))
+            }
         }
         return Progress()
     }

@@ -45,6 +45,7 @@ class AccountViewController: UIViewController {
             switch response {
             case .success(let info):
                 self.nameLabel.text = info.username
+                self.emailLabel.text = info.name
                 self.sessionService.setupAccountId(accountId: info.id)
             case .failure(let error):
                 print(error.localizedDescription)

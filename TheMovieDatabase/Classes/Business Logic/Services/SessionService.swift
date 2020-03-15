@@ -33,10 +33,24 @@ protocol Session {
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
     
+    /// Возвращает информацию об аккаунте.
+    ///
+    /// - Parameters:
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
     
+    /// Возвращает информацию об аккаунте.
+    ///
+    /// - Parameters:
+    ///   - query: Строка поиска фильма.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
     
+    /// Возвращает информацию об аккаунте.
+    ///
+    /// - Parameters:
+    ///   - movieId: Id фильма.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
     func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
 }
 
@@ -76,14 +90,7 @@ class SessionService: Session {
     
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
         let endpoint = AccountDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        request(endpoint: endpoint, completion)
     }
     
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
@@ -95,38 +102,17 @@ class SessionService: Session {
             language: nil,
             sortBy: nil,
             page: nil)
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        request(endpoint: endpoint, completion)
     }
     
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
         let endpoint = SearchMovieEndpoint(baseURL: baseURL, apiKey: apiKey, query: query, language: nil, page: nil)
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        request(endpoint: endpoint, completion)
     }
     
     func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
         let endpoint = MovieDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, movieId: movieId, language: nil)
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        request(endpoint: endpoint, completion)
     }
     
     func setupAccountId(accountId: Int) {
@@ -135,5 +121,16 @@ class SessionService: Session {
     
     func setupSessionId(sessionId: String) {
         self.sessionId = sessionId
+    }
+    
+    private func request<T>(endpoint: T, _ completion: @escaping (Result<T.Content, Error>) -> Void) where T: Endpoint {
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
