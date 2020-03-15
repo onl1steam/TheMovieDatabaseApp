@@ -15,6 +15,19 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
     
+    let sessionService: Session
+    
+    // MARK: - Initializers
+    
+    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+        self.sessionService = sessionService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
@@ -30,7 +43,7 @@ class MoviesViewController: UIViewController {
         view.backgroundColor = Colors.backgroundBlack
         moviesLabel.tintColor = Colors.light
     }
-
+    
     private func setupLocalizedStrings() {
         moviesLabel.text = MoviesScreenStrings.moviesLabel
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder

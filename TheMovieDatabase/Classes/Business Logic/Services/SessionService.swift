@@ -21,11 +21,23 @@ protocol Session {
     ///   - sessionId: id сессии.
     func setupSessionId(sessionId: String)
     
+    /// Устанавливает id аккаунта.
+    ///
+    /// - Parameters:
+    ///   - accountId: id аккаунта.
+    func setupAccountId(accountId: Int)
+    
     /// Возвращает информацию об аккаунте.
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
+    
+    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    
+    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    
+    func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
 }
 
 class SessionService: Session {
@@ -36,6 +48,7 @@ class SessionService: Session {
     let apiKey = "591efe0e25fd45c1579562958b2364db"
     
     private(set) var sessionId = ""
+    private(set) var accountId = 0
     let apiClient: APIClient
     
     var accountInfo: AccountResponse?
@@ -45,10 +58,6 @@ class SessionService: Session {
     }
     
     // MARK: - Session
-    
-    func setupSessionId(sessionId: String) {
-        self.sessionId = sessionId
-    }
     
     func deleteSession() {
         let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
@@ -60,6 +69,9 @@ class SessionService: Session {
                 print(error.localizedDescription)
             }
         }
+        
+        sessionId = ""
+        accountId = 0
     }
     
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
@@ -72,5 +84,56 @@ class SessionService: Session {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+        let endpoint = FavoriteMoviesEndpoint(
+            baseURL: baseURL,
+            apiKey: apiKey,
+            sessionId: sessionId,
+            accountId: accountId,
+            language: nil,
+            sortBy: nil,
+            page: nil)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+        let endpoint = SearchMovieEndpoint(baseURL: baseURL, apiKey: apiKey, query: query, language: nil, page: nil)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
+        let endpoint = MovieDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, movieId: movieId, language: nil)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func setupAccountId(accountId: Int) {
+        self.accountId = accountId
+    }
+    
+    func setupSessionId(sessionId: String) {
+        self.sessionId = sessionId
     }
 }

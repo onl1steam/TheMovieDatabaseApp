@@ -40,15 +40,15 @@ class AccountViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
+        
         sessionService.getAccountInfo { response in
             switch response {
             case .success(let info):
                 self.nameLabel.text = info.username
-                print(info.avatar.gravatar.hash)
+                self.sessionService.setupAccountId(accountId: info.id)
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            
         }
     }
     
