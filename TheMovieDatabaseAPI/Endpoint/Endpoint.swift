@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol Endpoint {
+public protocol Endpoint {
     
     associatedtype Content
     
     func makeRequest() throws -> URLRequest
     
-    func content(from: Data, response: URLResponse?) throws -> Content
+    func content(from: Data?, response: URLResponse?) throws -> Content
 }

@@ -2,9 +2,11 @@
 platform :ios, '12.0'
 
 target 'TheMovieDatabase' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  pod 'Alamofire'
-
 end
+
+target 'TheMovieDatabaseAPI' do
+  use_frameworks!
+end
+
+pod 'Alamofire'

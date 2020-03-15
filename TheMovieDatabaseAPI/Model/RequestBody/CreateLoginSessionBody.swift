@@ -1,5 +1,5 @@
 //
-//  AuthResponse.swift
+//  CreateLoginSessionBody.swift
 //  TheMovieDatabaseAPI
 //
 //  Created by Рыжков Артем on 15.03.2020.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct AuthResponse: Decodable {
+struct CreateLoginSessionBody: Encodable {
     
-    let success: Bool
-    let expiresAt: String
+    let username: String
+    let password: String
     let requestToken: String
 }
