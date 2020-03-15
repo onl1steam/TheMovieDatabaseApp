@@ -1,5 +1,5 @@
 //
-//  AccountResponse.swift
+//  DeleteSessionBody.swift
 //  TheMovieDatabaseAPI
 //
 //  Created by Рыжков Артем on 15.03.2020.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct DeleteSessionBody: Encodable {
+    
+    let sessionId: String
+}

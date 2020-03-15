@@ -26,7 +26,15 @@ class SessionService: Session {
     
     // MARK: - Private Properties
     
+    private let baseURL = URL(string: "https://api.themoviedb.org/")!
+    private let apiKey = "591efe0e25fd45c1579562958b2364db"
+    
     private var sessionId = ""
+    let apiClient: APIClient
+    
+    init(apiClient: APIClient = APIRequest()) {
+        self.apiClient = apiClient
+    }
     
     // MARK: - Session
     
@@ -35,6 +43,14 @@ class SessionService: Session {
     }
     
     func deleteSession() {
-        
+        let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
+        apiClient.request(deleteSessionEndpoint) { response in
+            switch response {
+            case .success(let isSucceed):
+                print(isSucceed)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

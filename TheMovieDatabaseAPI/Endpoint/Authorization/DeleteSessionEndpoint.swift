@@ -1,5 +1,5 @@
 //
-//  CreateSessionEndpoint.swift
+//  DeleteSessionEndpoint.swift
 //  TheMovieDatabaseAPI
 //
 //  Created by Рыжков Артем on 15.03.2020.
@@ -8,18 +8,18 @@
 
 import Foundation
 
-public class CreateSessionEndpoint: Endpoint {
+public class DeleteSessionEndpoint: Endpoint {
     
-    public typealias Content = String
+    public typealias Content = Bool
     
     let baseURL: URL
     let apiKey: String
-    let requestToken: String
+    let sessionId: String
     
-    public init(baseURL: URL, apiKey: String, requestToken: String) {
+    public init(baseURL: URL, apiKey: String, sessionId: String) {
         self.baseURL = baseURL
         self.apiKey = apiKey
-        self.requestToken = requestToken
+        self.sessionId = sessionId
     }
  
     public func makeRequest() throws -> URLRequest {
@@ -31,10 +31,10 @@ public class CreateSessionEndpoint: Endpoint {
         
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         var request = URLRequest(url: resultURL)
-        request.httpMethod = "POST"
+        request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = ["content-type": "application/json"]
         
-        let encodableData = CreateSessionBody(requestToken: requestToken)
+        let encodableData = DeleteSessionBody(sessionId: sessionId)
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         do {
@@ -48,6 +48,7 @@ public class CreateSessionEndpoint: Endpoint {
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        print(resp.statusCode)
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -62,8 +63,8 @@ public class CreateSessionEndpoint: Endpoint {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            let items = try decoder.decode(SessionResponse.self, from: data)
-            return items.sessionId
+            let items = try decoder.decode(DeleteSessionResponse.self, from: data)
+            return items.success
         } catch {
             throw NetworkError.decodingError
         }
@@ -81,7 +82,6 @@ public class CreateSessionEndpoint: Endpoint {
         url.appendPathComponent("3")
         url.appendPathComponent("authentication")
         url.appendPathComponent("session")
-        url.appendPathComponent("new")
         return url
     }
 }
