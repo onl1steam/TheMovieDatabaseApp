@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DeleteSessionResponse: Decodable {
+public struct DeleteSessionResponse: Decodable {
     
     let success: Bool
 }

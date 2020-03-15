@@ -20,17 +20,25 @@ protocol Session {
     /// - Parameters:
     ///   - sessionId: id сессии.
     func setupSessionId(sessionId: String)
+    
+    /// Возвращает информацию об аккаунте.
+    ///
+    /// - Parameters:
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
+    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
 }
 
 class SessionService: Session {
     
     // MARK: - Private Properties
     
-    private let baseURL = URL(string: "https://api.themoviedb.org/")!
-    private let apiKey = "591efe0e25fd45c1579562958b2364db"
+    let baseURL = URL(string: "https://api.themoviedb.org/")!
+    let apiKey = "591efe0e25fd45c1579562958b2364db"
     
-    private var sessionId = ""
+    private(set) var sessionId = ""
     let apiClient: APIClient
+    
+    var accountInfo: AccountResponse?
     
     init(apiClient: APIClient = APIRequest()) {
         self.apiClient = apiClient
@@ -50,6 +58,18 @@ class SessionService: Session {
                 print(isSucceed)
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
+        let endpoint = AccountDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

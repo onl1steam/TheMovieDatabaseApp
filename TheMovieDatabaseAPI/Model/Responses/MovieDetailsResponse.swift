@@ -8,21 +8,21 @@
 
 import Foundation
 
-struct MovieDetailsResponse: Decodable {
+public struct MovieDetailsResponse: Decodable {
     
-    let genres: [Genre]
-    let id: Int
-    let originalTitle: String
-    let overview: String?
-    let posterPath: String?
-    let releaseDate: String
-    let runtime: Int?
-    let title: String
-    let voteAverage: Double
-    let voteCount: Int
+    public let genres: [Genre]
+    public let id: Int
+    public let originalTitle: String
+    public let overview: String?
+    public let posterPath: String?
+    public let releaseDate: String
+    public let runtime: Int?
+    public let title: String
+    public let voteAverage: Double
+    public let voteCount: Int
     
-    struct Genre: Decodable {
-        let id: Int
-        let name: String
+    public struct Genre: Decodable {
+        public let id: Int
+        public let name: String
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SessionResponse: Decodable {
+public struct SessionResponse: Decodable {
     
     let sessionId: String
     let success: Bool

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
+import TheMovieDatabaseAPI
 import UIKit
 
 class AccountViewController: UIViewController {
@@ -39,6 +40,16 @@ class AccountViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
+        sessionService.getAccountInfo { response in
+            switch response {
+            case .success(let info):
+                self.nameLabel.text = info.username
+                print(info.avatar.gravatar.hash)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
     }
     
     // MARK: - IBAction

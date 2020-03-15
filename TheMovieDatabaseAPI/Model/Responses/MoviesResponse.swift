@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct MoviesResponse: Decodable {
+public struct MoviesResponse: Decodable {
     
-    let page: Int
-    let results: [MoviesResult]
-    let totalPages: Int
-    let totalResults: Int
+    public let page: Int
+    public let results: [MoviesResult]
+    public let totalPages: Int
+    public let totalResults: Int
     
-    struct MoviesResult: Decodable {
-        let id: Int
+    public struct MoviesResult: Decodable {
+        public let id: Int
     }
 }

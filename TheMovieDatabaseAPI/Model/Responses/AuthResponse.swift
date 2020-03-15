@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AuthResponse: Decodable {
+public struct AuthResponse: Decodable {
     
     let success: Bool
     let expiresAt: String
