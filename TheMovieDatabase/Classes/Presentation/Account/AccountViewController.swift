@@ -20,10 +20,14 @@ class AccountViewController: UIViewController {
     // MARK: - Public Properties
     
     let sessionService: Session
+    let imageService: ImageServiceType
     
     // MARK: - Initializers
     
-    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+    init(
+        sessionService: Session = ServiceLayer.shared.sessionService,
+        imageService: ImageServiceType = ServiceLayer.shared.imageService) {
+        self.imageService = imageService
         self.sessionService = sessionService
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,6 +56,7 @@ class AccountViewController: UIViewController {
     // MARK: - Private Methods
     
     private func getAccountInfo() {
+        
         sessionService.getAccountInfo { response in
             var avatarHash: String?
             switch response {
@@ -64,7 +69,7 @@ class AccountViewController: UIViewController {
                 print(error.localizedDescription)
             }
             guard let hash = avatarHash else { return }
-            self.sessionService.getAvatar(avatarPath: hash) { response in
+            self.imageService.getAvatar(avatarPath: hash) { response in
                 switch response {
                 case .success(let info):
                     guard let image = UIImage(data: info) else { return }

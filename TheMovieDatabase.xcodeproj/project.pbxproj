@@ -65,6 +65,8 @@
 		92F64D34241FA90A00693C9B /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D33241FA90A00693C9B /* ImageEndpoint.swift */; };
 		92F64D37241FF04300693C9B /* AvatarEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D36241FF04300693C9B /* AvatarEndpoint.swift */; };
 		92F64D39241FF51800693C9B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D38241FF51800693C9B /* ImageCache.swift */; };
+		92F64D3E242021D300693C9B /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D3D242021D300693C9B /* ImageService.swift */; };
+		92F64D412420236800693C9B /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D402420236800693C9B /* MoviesService.swift */; };
 		92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD62416CDCA007F9182 /* ErrorStrings.swift */; };
 		92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */; };
 		92F77ADC2416CE33007F9182 /* AuthScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */; };
@@ -175,6 +177,8 @@
 		92F64D33241FA90A00693C9B /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
 		92F64D36241FF04300693C9B /* AvatarEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEndpoint.swift; sourceTree = "<group>"; };
 		92F64D38241FF51800693C9B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		92F64D3D242021D300693C9B /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		92F64D402420236800693C9B /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		92F77AD62416CDCA007F9182 /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
 		92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenStrings.swift; sourceTree = "<group>"; };
 		92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenStrings.swift; sourceTree = "<group>"; };
@@ -517,6 +521,8 @@
 			children = (
 				92D1120424153FF60087D910 /* AuthService.swift */,
 				92D1121A2415BFB10087D910 /* SessionService.swift */,
+				92F64D3D242021D300693C9B /* ImageService.swift */,
+				92F64D402420236800693C9B /* MoviesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -963,6 +969,7 @@
 				92F77AE22416CE81007F9182 /* MoviesScreenStrings.swift in Sources */,
 				9250EBBE24144E0400AC30DB /* TabBarViewController.swift in Sources */,
 				92F77ADE2416CE49007F9182 /* AccountScreenStrings.swift in Sources */,
+				92F64D3E242021D300693C9B /* ImageService.swift in Sources */,
 				9250EBC124144E9000AC30DB /* MoviesViewController.swift in Sources */,
 				92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */,
 				9250EBB72413FA2E00AC30DB /* Colors.swift in Sources */,
@@ -972,6 +979,7 @@
 				92F77ADC2416CE33007F9182 /* AuthScreenStrings.swift in Sources */,
 				9250EBC924144EB800AC30DB /* AccountViewController.swift in Sources */,
 				92D11239241683090087D910 /* UIViewControllerExtension.swift in Sources */,
+				92F64D412420236800693C9B /* MoviesService.swift in Sources */,
 				92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */,
 				92D11226241665FA0087D910 /* FavoritesPlaceholderView.swift in Sources */,
 				92D1120224153F900087D910 /* ServiceLayer.swift in Sources */,

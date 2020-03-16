@@ -16,11 +16,15 @@ class ServiceLayer {
     
     let authService: Authorization
     let sessionService: Session
+    let imageService: ImageServiceType
+    let moviesService: MoviesServiceType
     
     // MARK: - Initializers
     
     private init() {
         authService = AuthService()
         sessionService = SessionService()
+        imageService = ImageService()
+        moviesService = MoviesService()
     }
 }

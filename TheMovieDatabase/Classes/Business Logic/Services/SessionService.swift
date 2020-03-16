@@ -38,29 +38,6 @@ protocol Session {
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
-    
-    /// Возвращает информацию об аккаунте.
-    ///
-    /// - Parameters:
-    ///   - query: Строка поиска фильма.
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
-    
-    /// Возвращает информацию об аккаунте.
-    ///
-    /// - Parameters:
-    ///   - movieId: Id фильма.
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
-    func getMovieDetails(
-        movieId: Int,
-        language: String?,
-        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
-    
-    @discardableResult
-    func getImage(posterPath: String, width: String?, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
-    
-    @discardableResult
-    func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
 }
 
 class SessionService: Session {
@@ -68,20 +45,16 @@ class SessionService: Session {
     // MARK: - Private Properties
     
     let baseUrl = NetworkConfiguration.baseURL
-    let imageBaseUrl = NetworkConfiguration.imageBaseURL
-    let avatarBaseUrl = NetworkConfiguration.avatarBaseURL
     let apiKey = NetworkConfiguration.apiKey
     
     private(set) var sessionId = ""
     private(set) var accountId = 0
     let apiClient: APIClient
-    let imageApiClient: APIClient
     
     var accountInfo: AccountResponse?
     
-    init(apiClient: APIClient = APIRequest(), imageApiClient: APIClient = APIRequestImage()) {
+    init(apiClient: APIClient = APIRequest()) {
         self.apiClient = apiClient
-        self.imageApiClient = imageApiClient
     }
     
     // MARK: - Session
@@ -115,50 +88,6 @@ class SessionService: Session {
             sortBy: nil,
             page: nil)
         request(endpoint: endpoint, completion)
-    }
-    
-    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
-        let endpoint = SearchMovieEndpoint(baseURL: baseUrl, apiKey: apiKey, query: query, language: nil, page: nil)
-        request(endpoint: endpoint, completion)
-    }
-    
-    func getMovieDetails(
-        movieId: Int,
-        language: String?,
-        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
-        let endpoint = MovieDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, movieId: movieId, language: language)
-        request(endpoint: endpoint, completion)
-    }
-    
-    @discardableResult
-    func getImage(
-        posterPath: String,
-        width: String?,
-        _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
-        let endpoint = ImageEndpoint(baseURL: imageBaseUrl, width: width, imagePath: posterPath)
-        let progress = imageApiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        return progress
-    }
-    
-    @discardableResult
-    func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
-        let endpoint = AvatarEndpoint(baseURL: avatarBaseUrl, imagePath: avatarPath)
-        let progress = imageApiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-        return progress
     }
     
     func setupAccountId(accountId: Int) {
