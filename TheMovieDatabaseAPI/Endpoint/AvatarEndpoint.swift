@@ -12,6 +12,7 @@ public struct AvatarEndpoint: Endpoint {
     
     public typealias Content = Data
     
+    let imageCache = ImageCache.shared
     let baseURL: URL
     let imagePath: String
     
@@ -41,7 +42,9 @@ public struct AvatarEndpoint: Endpoint {
                 throw NetworkError.unknownError
             }
         }
-        guard let data = from else { throw NetworkError.blankData }
+        guard let url = response?.url?.absoluteString,
+            let data = from else { throw NetworkError.blankData }
+        imageCache.cacheImage(key: url, imageData: data)
         return data
     }
     

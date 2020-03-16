@@ -13,13 +13,20 @@ open class APIRequestImage: APIClient {
     
     public init() {}
     
+    let imageCache = ImageCache.shared
+    
     @discardableResult
     public func request<T>(
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
-        
         do {
             let urlRequest = try endpoint.makeRequest()
+            
+            if let data = checkImageInCache(url: urlRequest.url?.absoluteString) as? T.Content {
+                completionHandler(.success(data))
+                return Progress()
+            }
+            
             let request = AF.request(urlRequest)
             request.response { response in
                 do {
@@ -40,5 +47,11 @@ open class APIRequestImage: APIClient {
             }
             return Progress()
         }
+    }
+    
+    private func checkImageInCache(url: String?) -> Data? {
+        guard let url = url,
+            let data = imageCache.checkImageInCache(key: url) else { return nil }
+        return data
     }
 }
