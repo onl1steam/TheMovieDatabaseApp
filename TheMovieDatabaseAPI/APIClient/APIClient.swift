@@ -8,8 +8,15 @@
 
 import Foundation
 
+/// Клиент для запроса в базу данных фильмов.
 public protocol APIClient: AnyObject {
     
+    /// Делает запрос с выбранным эндпоинтом.
+    ///
+    /// - Parameters:
+    ///   - enpoint: Эндпоинт для обработки данных и формирования запроса.
+    ///   - completionHandler: Вызывается после выполнения запроса. Возвращает ответ типа Endpoint.Content или ошибку.
+    /// - Returns: Прогресс запроса.
     @discardableResult
     func request<T>(
         _ endpoint: T,

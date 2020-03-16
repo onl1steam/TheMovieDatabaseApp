@@ -33,7 +33,7 @@ protocol Session {
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
     
-    /// Возвращает информацию об аккаунте.
+    /// Возвращает список избранных фильмов пользователя.
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
@@ -42,16 +42,18 @@ protocol Session {
 
 class SessionService: Session {
     
-    // MARK: - Private Properties
+    // MARK: - Public Properties
     
     let baseUrl = NetworkConfiguration.baseURL
     let apiKey = NetworkConfiguration.apiKey
+    let apiClient: APIClient
+    
+    // MARK: - Private Properties
     
     private(set) var sessionId = ""
     private(set) var accountId = 0
-    let apiClient: APIClient
     
-    var accountInfo: AccountResponse?
+    // MARK: - Initializers
     
     init(apiClient: APIClient = APIRequest()) {
         self.apiClient = apiClient
@@ -97,6 +99,8 @@ class SessionService: Session {
     func setupSessionId(sessionId: String) {
         self.sessionId = sessionId
     }
+    
+    // MARK: - Private Methods
     
     private func request<T>(endpoint: T, _ completion: @escaping (Result<T.Content, Error>) -> Void) where T: Endpoint {
         apiClient.request(endpoint) { response in

@@ -11,14 +11,14 @@ import TheMovieDatabaseAPI
 
 protocol MoviesServiceType {
     
-    /// Возвращает информацию об аккаунте.
+    /// Находит фильмы по поисковой строке.
     ///
     /// - Parameters:
     ///   - query: Строка поиска фильма.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
     
-    /// Возвращает информацию об аккаунте.
+    /// Возвращает подробную информацию о фильмо.
     ///
     /// - Parameters:
     ///   - movieId: Id фильма.
@@ -31,13 +31,19 @@ protocol MoviesServiceType {
 
 class MoviesService: MoviesServiceType {
     
+    // MARK: - Public Properties
+    
     let baseUrl = NetworkConfiguration.baseURL
     let apiKey = NetworkConfiguration.apiKey
     let apiClient: APIClient
     
+    // MARK: - Initializers
+    
     init(apiClient: APIClient = APIRequest()) {
         self.apiClient = apiClient
     }
+    
+    // MARK: - MoviesServiceType
     
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
         let endpoint = SearchMovieEndpoint(baseURL: baseUrl, apiKey: apiKey, query: query, language: nil, page: nil)
@@ -51,6 +57,8 @@ class MoviesService: MoviesServiceType {
         let endpoint = MovieDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, movieId: movieId, language: language)
         request(endpoint: endpoint, completion)
     }
+    
+    // MARK: - Private Methods
     
     private func request<T>(endpoint: T, _ completion: @escaping (Result<T.Content, Error>) -> Void) where T: Endpoint {
         apiClient.request(endpoint) { response in

@@ -8,14 +8,21 @@
 
 import Foundation
 
+/// Эндпоинт для получения детальной информации о фильме.
 public class MovieDetailsEndpoint: Endpoint {
+    
+    // MARK: - Types
 
     public typealias Content = MovieDetailsResponse
+    
+    // MARK: - Public Properties
     
     let baseURL: URL
     let apiKey: String
     let movieId: Int
     let language: String?
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String, movieId: Int, language: String?) {
         self.baseURL = baseURL
@@ -23,6 +30,8 @@ public class MovieDetailsEndpoint: Endpoint {
         self.movieId = movieId
         self.language = language
     }
+    
+    // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
@@ -60,7 +69,9 @@ public class MovieDetailsEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()
         let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
         if let lang = language {
@@ -71,7 +82,7 @@ public class MovieDetailsEndpoint: Endpoint {
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("movie")

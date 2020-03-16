@@ -8,20 +8,29 @@
 
 import Foundation
 
+/// Эндпоинт для получения изображения постера фильма.
 public struct ImageEndpoint: Endpoint {
     
+    // MARK: - Types
+    
     public typealias Content = Data
+    
+    // MARK: - Public Properties
     
     let imageCache = ImageCache.shared
     let baseURL: URL
     let width: String?
     let imagePath: String
     
+    // MARK: - Initializers
+    
     public init(baseURL: URL, width: String?, imagePath: String) {
         self.baseURL = baseURL
         self.width = width
         self.imagePath = imagePath
     }
+    
+    // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
         let url = makeURLPath()
@@ -50,7 +59,9 @@ public struct ImageEndpoint: Endpoint {
         return data
     }
     
-    func makeURLPath() -> URL {
+    // MARK: - Private Methods
+    
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("t")
         url.appendPathComponent("p")

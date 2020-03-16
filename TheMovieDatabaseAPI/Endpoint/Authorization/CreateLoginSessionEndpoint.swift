@@ -8,15 +8,22 @@
 
 import Foundation
 
+/// Эндпоинт для валидации и создания сессии с логином и паролем.
 public class CreateLoginSessionEndpoint: Endpoint {
     
+    // MARK: - Types
+    
     public typealias Content = String
+    
+    // MARK: - Public Properties
     
     let baseURL: URL
     let apiKey: String
     let username: String
     let password: String
     let requestToken: String
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String, username: String, password: String, requestToken: String) {
         self.baseURL = baseURL
@@ -25,6 +32,8 @@ public class CreateLoginSessionEndpoint: Endpoint {
         self.password = password
         self.requestToken = requestToken
     }
+    
+    // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
@@ -74,14 +83,16 @@ public class CreateLoginSessionEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         let query = URLQueryItem(name: "api_key", value: apiKey)
         var queryItems = [URLQueryItem]()
         queryItems.append(query)
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("authentication")

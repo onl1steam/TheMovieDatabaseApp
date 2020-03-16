@@ -9,11 +9,18 @@
 import Alamofire
 import Foundation
 
+/// Запрос на полученние изображений из базы данных фильмов.
 open class APIRequestImage: APIClient {
     
-    public init() {}
+    // MARK: - Public Properties
     
     let imageCache = ImageCache.shared
+
+    // MARK: - Initializers
+    
+     public init() {}
+    
+    // MARK: - APIClient
     
     @discardableResult
     public func request<T>(
@@ -48,6 +55,8 @@ open class APIRequestImage: APIClient {
             return Progress()
         }
     }
+    
+    // MARK: - Private Methods
     
     private func checkImageInCache(url: String?) -> Data? {
         guard let url = url,

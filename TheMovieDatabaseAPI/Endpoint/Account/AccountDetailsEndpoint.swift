@@ -8,19 +8,28 @@
 
 import Foundation
 
+/// Эндпоинт для получения детальной информации об аккаунте.
 public struct AccountDetailsEndpoint: Endpoint {
     
+    // MARK: - Types
+    
     public typealias Content = AccountResponse
+    
+    // MARK: - Public Properties
     
     let baseURL: URL
     let apiKey: String
     let sessionId: String
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String, sessionId: String) {
         self.baseURL = baseURL
         self.apiKey = apiKey
         self.sessionId = sessionId
     }
+    
+    // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
@@ -57,7 +66,9 @@ public struct AccountDetailsEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
         let sessionIdQuery = URLQueryItem(name: "session_id", value: sessionId)
         var queryItems = [URLQueryItem]()
@@ -66,7 +77,7 @@ public struct AccountDetailsEndpoint: Endpoint {
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("account")

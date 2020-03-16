@@ -15,6 +15,8 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
     
+    // MARK: - Public Properties
+    
     let sessionService: Session
     
     // MARK: - Initializers

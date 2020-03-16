@@ -9,9 +9,14 @@
 import Alamofire
 import Foundation
 
+/// Запрос на полученние данных из базы данных фильмов.
 open class APIRequest: APIClient {
     
+    // MARK: - Initializers
+    
     public init() {}
+    
+    // MARK: - APIClient
     
     @discardableResult
     public func request<T>(

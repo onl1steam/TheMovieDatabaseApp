@@ -8,18 +8,27 @@
 
 import Foundation
 
+/// Эндпоинт для получения аватара пользователя.
 public struct AvatarEndpoint: Endpoint {
     
-    public typealias Content = Data
+    // MARK: - Types
     
+    public typealias Content = Data
+
+    // MARK: - Public Properties
+
     let imageCache = ImageCache.shared
     let baseURL: URL
     let imagePath: String
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, imagePath: String) {
         self.baseURL = baseURL
         self.imagePath = imagePath
     }
+    
+    // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
         let url = makeURLPath()
@@ -48,7 +57,9 @@ public struct AvatarEndpoint: Endpoint {
         return data
     }
     
-    func makeURLPath() -> URL {
+    // MARK: - Private Methods
+    
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("avatar")
         url.appendPathComponent(imagePath)

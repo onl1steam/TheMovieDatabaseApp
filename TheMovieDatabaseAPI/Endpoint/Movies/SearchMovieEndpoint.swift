@@ -8,15 +8,22 @@
 
 import Foundation
 
+/// Эндпоинт для поиска фильмов.
 public struct SearchMovieEndpoint: Endpoint {
     
+    // MARK: - Types
+    
     public typealias Content = MoviesResponse
+    
+    // MARK: - Public Properties
     
     let baseURL: URL
     let apiKey: String
     let query: String
     let language: String?
     let page: Int?
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String, query: String, language: String?, page: Int?) {
         self.baseURL = baseURL
@@ -25,6 +32,8 @@ public struct SearchMovieEndpoint: Endpoint {
         self.language = language
         self.page = page
     }
+    
+    // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
@@ -61,7 +70,9 @@ public struct SearchMovieEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()
         let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
         let searchQuery = URLQueryItem(name: "query", value: query)
@@ -78,7 +89,7 @@ public struct SearchMovieEndpoint: Endpoint {
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("search")

@@ -15,6 +15,8 @@ class FavoritesViewController: UIViewController {
     @IBOutlet weak var favoriteLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    // MARK: - Public Properties
+    
     let sessionService: Session
     
     // MARK: - Initializers

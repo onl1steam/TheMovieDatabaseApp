@@ -31,12 +31,15 @@ protocol Authorization {
 
 class AuthService: Authorization {
     
-    // MARK: - Public properties
+    // MARK: - Public Properties
     
     let apiClient: APIClient
     let baseURL = NetworkConfiguration.baseURL
     let apiKey = NetworkConfiguration.apiKey
-    var requestToken = ""
+    
+    // MARK: - Private Properties
+    
+    private var requestToken = ""
     
     // MARK: - Initializers
     
@@ -58,7 +61,27 @@ class AuthService: Authorization {
             }
         }
     }
-        
+    
+    func validateUserInput(
+        user: User,
+        _ completion: @escaping (Result<User, AuthError>) -> Void) {
+        guard let login = user.login,
+            let password = user.password,
+            login != "",
+            password != "" else {
+                completion(.failure(.blankFields))
+                return
+        }
+        guard password.count >= 4 else {
+            completion(.failure(.invalidPasswordLength))
+            return
+        }
+        let user = User(login: login, password: password)
+        completion(.success(user))
+    }
+    
+    // MARK: - Private Methods
+    
     private func createLoginSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
             baseURL: baseURL,
@@ -91,23 +114,5 @@ class AuthService: Authorization {
                 completion(.failure(error))
             }
         }
-    }
-    
-    func validateUserInput(
-        user: User,
-        _ completion: @escaping (Result<User, AuthError>) -> Void) {
-        guard let login = user.login,
-            let password = user.password,
-            login != "",
-            password != "" else {
-                completion(.failure(.blankFields))
-                return
-        }
-        guard password.count >= 4 else {
-            completion(.failure(.invalidPasswordLength))
-            return
-        }
-        let user = User(login: login, password: password)
-        completion(.success(user))
     }
 }

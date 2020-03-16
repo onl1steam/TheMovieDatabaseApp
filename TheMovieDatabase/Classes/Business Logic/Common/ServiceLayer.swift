@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Предоставляет все сервисы слоя бизнес логики.
 class ServiceLayer {
     
     // MARK: - Public Properties

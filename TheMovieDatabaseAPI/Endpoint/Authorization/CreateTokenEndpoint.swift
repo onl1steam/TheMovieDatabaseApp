@@ -8,18 +8,27 @@
 
 import Foundation
 
+/// Эндпоинт для создания токена сессии.
 public struct CreateTokenEndpoint: Endpoint {
+    
+    // MARK: - Types
     
     public typealias Content = String
     
+    // MARK: - Public Properties
+    
     let baseURL: URL
     let apiKey: String
+    
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String) {
         self.baseURL = baseURL
         self.apiKey = apiKey
     }
- 
+    
+    // MARK: - Endpoint
+    
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
         let url = makeURLPath()
@@ -55,14 +64,16 @@ public struct CreateTokenEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         let query = URLQueryItem(name: "api_key", value: apiKey)
         var queryItems = [URLQueryItem]()
         queryItems.append(query)
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("authentication")

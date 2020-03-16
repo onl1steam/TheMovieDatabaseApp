@@ -8,19 +8,28 @@
 
 import Foundation
 
+/// Эндпоинт для удаления сессии.
 public class DeleteSessionEndpoint: Endpoint {
     
+    // MARK: - Types
+    
     public typealias Content = Bool
+    
+    // MARK: - Public Properties
     
     let baseURL: URL
     let apiKey: String
     let sessionId: String
+
+    // MARK: - Initializers
     
     public init(baseURL: URL, apiKey: String, sessionId: String) {
         self.baseURL = baseURL
         self.apiKey = apiKey
         self.sessionId = sessionId
     }
+    
+    // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
@@ -69,14 +78,16 @@ public class DeleteSessionEndpoint: Endpoint {
         }
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    // MARK: - Private Methods
+    
+    private func makeQueryItems() -> [URLQueryItem] {
         let query = URLQueryItem(name: "api_key", value: apiKey)
         var queryItems = [URLQueryItem]()
         queryItems.append(query)
         return queryItems
     }
     
-    func makeURLPath() -> URL {
+    private func makeURLPath() -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("authentication")

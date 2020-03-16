@@ -81,6 +81,8 @@ class AccountViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Methods
+    
     private func setupColorScheme() {
         view.backgroundColor = Colors.backgroundBlack
         nameLabel.tintColor = Colors.light
