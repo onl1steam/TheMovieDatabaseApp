@@ -6,7 +6,6 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Alamofire
 import Foundation
 
 public protocol APIClient: AnyObject {
@@ -16,36 +15,4 @@ public protocol APIClient: AnyObject {
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void
     ) -> Progress where T: Endpoint
-}
-
-open class APIRequest: APIClient {
-    
-    public init() {}
-    
-    @discardableResult
-    public func request<T>(
-        _ endpoint: T,
-        completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
-        
-        do {
-            let urlRequest = try endpoint.makeRequest()
-            AF.request(urlRequest).response { response in
-                do {
-                    let content = try endpoint.content(from: response.data, response: response.response)
-                    DispatchQueue.main.async {
-                        completionHandler(.success(content))
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(error))
-                    }
-                }
-            }
-        } catch {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
-        }
-        return Progress()
-    }
 }

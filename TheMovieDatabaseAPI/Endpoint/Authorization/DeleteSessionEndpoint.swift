@@ -48,7 +48,6 @@ public class DeleteSessionEndpoint: Endpoint {
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
-        print(resp.statusCode)
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:

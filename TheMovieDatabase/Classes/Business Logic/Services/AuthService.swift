@@ -34,8 +34,8 @@ class AuthService: Authorization {
     // MARK: - Public properties
     
     let apiClient: APIClient
-    let baseURL = URL(string: "https://api.themoviedb.org/")!
-    let apiKey = "591efe0e25fd45c1579562958b2364db"
+    let baseURL = NetworkConfiguration.baseURL
+    let apiKey = NetworkConfiguration.apiKey
     var requestToken = ""
     
     // MARK: - Initializers

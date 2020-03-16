@@ -6,7 +6,6 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import TheMovieDatabaseAPI
 import UIKit
 
 class AccountViewController: UIViewController {
@@ -40,7 +39,19 @@ class AccountViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
-        
+        getAccountInfo()
+    }
+    
+    // MARK: - IBAction
+    
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        sessionService.deleteSession()
+        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getAccountInfo() {
         sessionService.getAccountInfo { response in
             switch response {
             case .success(let info):
@@ -52,15 +63,6 @@ class AccountViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - IBAction
-    
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        sessionService.deleteSession()
-        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
-    }
-    
-    // MARK: - Private Methods
     
     private func setupColorScheme() {
         view.backgroundColor = Colors.backgroundBlack

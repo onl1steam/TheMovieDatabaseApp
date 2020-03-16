@@ -51,24 +51,33 @@ protocol Session {
     /// - Parameters:
     ///   - movieId: Id фильма.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
-    func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
+    func getMovieDetails(
+        movieId: Int,
+        language: String?,
+        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
+    
+    @discardableResult
+    func getImage(posterPath: String, width: String?, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
 }
 
 class SessionService: Session {
     
     // MARK: - Private Properties
     
-    let baseURL = URL(string: "https://api.themoviedb.org/")!
-    let apiKey = "591efe0e25fd45c1579562958b2364db"
+    let baseURL = NetworkConfiguration.baseURL
+    let imageBaseUrl = NetworkConfiguration.imageBaseURL
+    let apiKey = NetworkConfiguration.apiKey
     
     private(set) var sessionId = ""
     private(set) var accountId = 0
     let apiClient: APIClient
+    let imageApiClient: APIClient
     
     var accountInfo: AccountResponse?
     
-    init(apiClient: APIClient = APIRequest()) {
+    init(apiClient: APIClient = APIRequest(), imageApiClient: APIClient = APIRequestImage()) {
         self.apiClient = apiClient
+        self.imageApiClient = imageApiClient
     }
     
     // MARK: - Session
@@ -82,10 +91,9 @@ class SessionService: Session {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            self.sessionId = ""
+            self.accountId = 0
         }
-        
-        sessionId = ""
-        accountId = 0
     }
     
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
@@ -110,9 +118,29 @@ class SessionService: Session {
         request(endpoint: endpoint, completion)
     }
     
-    func getMovieDetails(movieId: Int, _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
-        let endpoint = MovieDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, movieId: movieId, language: nil)
+    func getMovieDetails(
+        movieId: Int,
+        language: String?,
+        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
+        let endpoint = MovieDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, movieId: movieId, language: language)
         request(endpoint: endpoint, completion)
+    }
+    
+    @discardableResult
+    func getImage(
+        posterPath: String,
+        width: String?,
+        _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+        let endpoint = ImageEndpoint(baseURL: imageBaseUrl, width: width, imagePath: posterPath)
+        let progress = imageApiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                completion(.success(details))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return progress
     }
     
     func setupAccountId(accountId: Int) {

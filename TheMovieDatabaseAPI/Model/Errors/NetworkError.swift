@@ -21,7 +21,7 @@ public enum NetworkError: Error {
 
 extension NetworkError: LocalizedError {
     
-    var localizedDescription: String {
+    public var errorDescription: String? {
         switch self {
         case .badURL:
             return NSLocalizedString("Неверно задан URL запроса.", comment: "Unauthorized error")
@@ -40,3 +40,5 @@ extension NetworkError: LocalizedError {
         }
     }
 }
+
+extension NetworkError: Equatable {}
