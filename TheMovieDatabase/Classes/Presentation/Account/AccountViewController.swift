@@ -53,13 +53,25 @@ class AccountViewController: UIViewController {
     
     private func getAccountInfo() {
         sessionService.getAccountInfo { response in
+            var avatarHash: String?
             switch response {
             case .success(let info):
                 self.nameLabel.text = info.username
                 self.emailLabel.text = info.name
+                avatarHash = info.avatar.gravatar.hash
                 self.sessionService.setupAccountId(accountId: info.id)
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+            guard let hash = avatarHash else { return }
+            self.sessionService.getAvatar(avatarPath: hash) { response in
+                switch response {
+                case .success(let info):
+                    guard let image = UIImage(data: info) else { return }
+                    self.avatarImageView.image = image
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }

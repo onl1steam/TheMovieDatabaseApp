@@ -11,7 +11,6 @@ import Foundation
 enum AuthError: Error {
     
     case blankFields
-    case invalidInput
     case unknownError
     case invalidPasswordLength
 }
@@ -22,8 +21,6 @@ extension AuthError: LocalizedError {
         switch self {
         case .blankFields:
             return ErrorStrings.blankFields
-        case .invalidInput:
-            return ErrorStrings.invalidInput
         case .unknownError:
             return ErrorStrings.unknownError
         case .invalidPasswordLength:
