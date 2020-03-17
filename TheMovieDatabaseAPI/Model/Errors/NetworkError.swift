@@ -27,7 +27,7 @@ extension NetworkError: LocalizedError {
         case .badURL:
             return NSLocalizedString("Неверно задан URL запроса.", comment: "Unauthorized error")
         case .unauthorized:
-            return NSLocalizedString("Неверный логин или пароль.", comment: "Unauthorized error")
+            return NSLocalizedString("Произошла ошибка при авторизации.", comment: "Unauthorized error")
         case .notFound:
             return NSLocalizedString("Запрашиваемый ресурс не найден.", comment: "Page not found error")
         case .unknownError:

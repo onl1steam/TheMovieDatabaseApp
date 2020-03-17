@@ -50,8 +50,8 @@ class SessionService: Session {
     
     // MARK: - Private Properties
     
-    private(set) var sessionId = ""
-    private(set) var accountId = 0
+    private(set) var sessionId: String?
+    private(set) var accountId: Int?
     
     // MARK: - Initializers
     
@@ -62,6 +62,7 @@ class SessionService: Session {
     // MARK: - Session
     
     func deleteSession() {
+        guard let sessionId = sessionId else { return }
         let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { response in
             switch response {
@@ -70,17 +71,19 @@ class SessionService: Session {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            self.sessionId = ""
-            self.accountId = 0
+            self.sessionId = nil
+            self.accountId = nil
         }
     }
     
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
+        guard let sessionId = sessionId else { return }
         let endpoint = AccountDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
         request(endpoint: endpoint, completion)
     }
     
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+        guard let sessionId = sessionId, let accountId = accountId else { return }
         let endpoint = FavoriteMoviesEndpoint(
             baseURL: baseUrl,
             apiKey: apiKey,
