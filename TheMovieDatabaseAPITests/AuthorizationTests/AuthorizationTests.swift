@@ -13,9 +13,9 @@ class AuthorizationTests: XCTestCase {
     
     // MARK: - Properties
     
-    let baseURL = URL(string: "https://api.themoviedb.org/")!
-    let apiKey = "591efe0e25fd45c1579562958b2364db"
-    let apiClient: APIClient = APIRequest()
+    let baseURL = NetworkSettings.baseURL
+    let apiKey = NetworkSettings.apiKey
+    let apiClient = NetworkSettings.apiClient
     
     // MARK: - Tests
     
@@ -37,8 +37,8 @@ class AuthorizationTests: XCTestCase {
     func testCreatingLoginSession() {
         let expectation = self.expectation(description: "Валидация сессии")
         let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
-        
-        apiClient.request(createTokenEndpoint) { response in
+        apiClient.request(createTokenEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let content):
                 self.createLoginSessionTest(requestToken: content, expectation: expectation)
@@ -46,15 +46,14 @@ class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        
         waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testCreatingSession() {
         let expectation = self.expectation(description: "Создание сессии")
         let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
-        
-        apiClient.request(createTokenEndpoint) { response in
+        apiClient.request(createTokenEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let content):
                 self.createLoginSession(requestToken: content, expectation: expectation)
@@ -62,11 +61,10 @@ class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        
         waitForExpectations(timeout: 10, handler: nil)
     }
     
-    // MARK: - Functions
+    // MARK: - Methods
     
     func createLoginSessionTest(requestToken: String, expectation: XCTestExpectation) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
@@ -93,7 +91,8 @@ class AuthorizationTests: XCTestCase {
             username: "onl1steam",
             password: "Onl1sTeam",
             requestToken: requestToken)
-        apiClient.request(createLoginSessionEndpoint) { response in
+        apiClient.request(createLoginSessionEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let content):
                 self.createSessionTest(requestToken: content, expectation: expectation)

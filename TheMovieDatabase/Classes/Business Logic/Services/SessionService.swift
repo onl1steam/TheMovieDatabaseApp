@@ -64,7 +64,8 @@ class SessionService: Session {
     func deleteSession() {
         guard let sessionId = sessionId else { return }
         let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
-        apiClient.request(deleteSessionEndpoint) { response in
+        apiClient.request(deleteSessionEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let isSucceed):
                 print(isSucceed)
@@ -83,12 +84,11 @@ class SessionService: Session {
     }
     
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
-        guard let sessionId = sessionId, let accountId = accountId else { return }
+        guard let sessionId = sessionId else { return }
         let endpoint = FavoriteMoviesEndpoint(
             baseURL: baseUrl,
             apiKey: apiKey,
             sessionId: sessionId,
-            accountId: accountId,
             language: nil,
             sortBy: nil,
             page: nil)

@@ -18,7 +18,7 @@ open class APIRequestImage: APIClient {
 
     // MARK: - Initializers
     
-     public init() {}
+    public init() {}
     
     // MARK: - APIClient
     

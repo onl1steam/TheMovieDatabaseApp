@@ -30,7 +30,6 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         baseURL: URL,
         apiKey: String,
         sessionId: String,
-        accountId: Int,
         language: String?,
         sortBy: String?,
         page: Int?) {

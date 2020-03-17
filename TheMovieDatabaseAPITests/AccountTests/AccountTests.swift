@@ -1,15 +1,15 @@
 //
-//  SessionTests.swift
+//  AccountTests.swift
 //  TheMovieDatabaseAPITests
 //
-//  Created by Рыжков Артем on 17.03.2020.
+//  Created by Рыжков Артем on 18.03.2020.
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class SessionTests: XCTestCase {
+class AccountTests: XCTestCase {
     
     // MARK: - Properties
     
@@ -19,21 +19,21 @@ class SessionTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testDeletingSession() {
+    func testGettingAccountDetails() {
         let expectation = self.expectation(description: "Удаление сессии")
-        createSession(expectation: expectation, deleteSessionTest)
+        createSession(expectation: expectation, getAccountDetailsTest)
         waitForExpectations(timeout: 10, handler: nil)
     }
     
      // MARK: - Methods
     
-    func deleteSessionTest(expectation: XCTestExpectation, sessionId: String) {
-        let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
-        apiClient.request(deleteSessionEndpoint) { response in
+    func getAccountDetailsTest(expectation: XCTestExpectation, sessionId: String) {
+        let accountDetailsEndpoint = AccountDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
+        apiClient.request(accountDetailsEndpoint) { response in
             expectation.fulfill()
             switch response {
-            case .success(let isSucceed):
-                XCTAssert(isSucceed)
+            case .success(let content):
+                XCTAssertEqual(content.username, "onl1steam")
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

@@ -51,7 +51,8 @@ class AuthService: Authorization {
     
     func authorizeWithUser(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
         let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
-        apiClient.request(createTokenEndpoint) { response in
+        apiClient.request(createTokenEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let content):
                 self.requestToken = content
@@ -90,7 +91,8 @@ class AuthService: Authorization {
             password: user.password!,
             requestToken: requestToken)
         
-        apiClient.request(createLoginSessionEndpoint) { response in
+        apiClient.request(createLoginSessionEndpoint) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success:
                 self.createSession(user: user, completion)
