@@ -295,12 +295,11 @@
 		92163E65241C3E39008F8CE5 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
+				92F64D422420F58900693C9B /* Images */,
 				9214AF69241EE1F400796C3B /* Movies */,
 				9214AF66241E715400796C3B /* Account */,
 				9214AF4E241E513D00796C3B /* Authorization */,
 				92163E6A241C3FCD008F8CE5 /* Endpoint.swift */,
-				92F64D33241FA90A00693C9B /* ImageEndpoint.swift */,
-				92F64D36241FF04300693C9B /* AvatarEndpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -576,6 +575,15 @@
 				92D112362416715A0087D910 /* AuthServiceTests.swift */,
 			);
 			path = ServicesTests;
+			sourceTree = "<group>";
+		};
+		92F64D422420F58900693C9B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				92F64D33241FA90A00693C9B /* ImageEndpoint.swift */,
+				92F64D36241FF04300693C9B /* AvatarEndpoint.swift */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		92F77AD42416CBD0007F9182 /* Responses */ = {

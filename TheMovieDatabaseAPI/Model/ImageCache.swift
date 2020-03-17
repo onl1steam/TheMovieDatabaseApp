@@ -10,11 +10,19 @@ import Foundation
 
 class ImageCache {
     
+    // MARK: - Public Properties
+    
     static let shared = ImageCache()
+    
+    // MARK: - Private Properties
+    
+    private let imageCache = NSCache<NSString, NSData>()
+    
+    // MARK: - Initializers
     
     private init() {}
     
-    private let imageCache = NSCache<NSString, NSData>()
+    // MARK: - Public methods
     
     func checkImageInCache(key: String) -> Data? {
         let imageKey = NSString(string: key)
