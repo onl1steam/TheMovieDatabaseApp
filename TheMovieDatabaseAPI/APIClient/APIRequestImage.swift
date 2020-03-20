@@ -38,6 +38,7 @@ public final class APIRequestImage: APIClient {
             request.response { response in
                 do {
                     let content = try endpoint.content(from: response.data, response: response.response)
+                    self.saveImageInCache(url: urlRequest.url?.absoluteString, data: response.data)
                     DispatchQueue.main.async {
                         completionHandler(.success(content))
                     }
@@ -64,8 +65,8 @@ public final class APIRequestImage: APIClient {
         return data
     }
     
-    private func saveImageInCache(url: String?, data: Data) {
-        guard let url = url else { return }
+    private func saveImageInCache(url: String?, data: Data?) {
+        guard let url = url, let data = data else { return }
         imageCache.cacheImage(key: url, imageData: data)
     }
     
