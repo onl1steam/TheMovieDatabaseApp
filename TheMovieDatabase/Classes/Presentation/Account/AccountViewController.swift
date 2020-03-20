@@ -43,7 +43,7 @@ class AccountViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
-        getAccountInfo()
+        loadAccountInfo()
     }
     
     // MARK: - IBAction
@@ -55,7 +55,7 @@ class AccountViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func getAccountInfo() {
+    private func loadAccountInfo() {
         
         sessionService.getAccountInfo { response in
             var avatarHash: String?

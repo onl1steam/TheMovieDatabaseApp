@@ -18,6 +18,7 @@ public enum NetworkError: Error {
     case encodingError
     case blankData
     case invalidImage
+    case noHTTPResponse
 }
 
 extension NetworkError: LocalizedError {
@@ -40,6 +41,8 @@ extension NetworkError: LocalizedError {
             return NSLocalizedString("Запрос не вернул данных.", comment: "Blank data error")
         case .invalidImage:
             return NSLocalizedString("Неверный формат изображения.", comment: "Blank data error")
+        case .noHTTPResponse:
+            return NSLocalizedString("Ответ не является HTTP ответом.", comment: "No HTTP Response error")
         }
     }
 }

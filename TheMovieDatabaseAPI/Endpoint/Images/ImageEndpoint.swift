@@ -17,7 +17,6 @@ public struct ImageEndpoint: Endpoint {
     
     // MARK: - Public Properties
     
-    let imageCache = ImageCache.shared
     let baseURL: URL
     let width: String?
     let imagePath: String
@@ -42,7 +41,7 @@ public struct ImageEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -53,9 +52,7 @@ public struct ImageEndpoint: Endpoint {
                 throw NetworkError.unknownError
             }
         }
-        guard let url = response?.url?.absoluteString,
-            let data = from else { throw NetworkError.blankData }
-        imageCache.cacheImage(key: url, imageData: data)
+        guard let data = from else { throw NetworkError.blankData }
         return data
     }
     

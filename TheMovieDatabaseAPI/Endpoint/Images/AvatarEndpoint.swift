@@ -16,8 +16,7 @@ public struct AvatarEndpoint: Endpoint {
     public typealias Content = Data
 
     // MARK: - Public Properties
-
-    let imageCache = ImageCache.shared
+    
     let baseURL: URL
     let imagePath: String
     
@@ -40,7 +39,7 @@ public struct AvatarEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -51,9 +50,7 @@ public struct AvatarEndpoint: Endpoint {
                 throw NetworkError.unknownError
             }
         }
-        guard let url = response?.url?.absoluteString,
-            let data = from else { throw NetworkError.blankData }
-        imageCache.cacheImage(key: url, imageData: data)
+        guard let data = from else { throw NetworkError.blankData }
         return data
     }
     

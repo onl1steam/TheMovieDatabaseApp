@@ -84,11 +84,15 @@ class AuthService: Authorization {
     // MARK: - Private Methods
     
     private func createLoginSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
+        guard let username = user.login, let password = user.password else {
+            completion(.failure(AuthError.blankFields))
+            return
+        }
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
             baseURL: baseURL,
             apiKey: apiKey,
-            username: user.login!,
-            password: user.password!,
+            username: username,
+            password: password,
             requestToken: requestToken)
         
         apiClient.request(createLoginSessionEndpoint) { [weak self] response in
@@ -108,13 +112,6 @@ class AuthService: Authorization {
             apiKey: apiKey,
             requestToken: requestToken)
         
-        apiClient.request(createSession) { response in
-            switch response {
-            case .success(let sessionId):
-                completion(.success(sessionId))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        apiClient.request(createSession, completionHandler: completion)
     }
 }

@@ -18,7 +18,7 @@ protocol ImageServiceType {
     ///   - width: Ширина изображения в формате "w500". Если не указать, по умолчанию ставится значение "original".
     ///   - completion: Вызывается после выполнения функции. Возвращает ответом изображение в типе Data или ошибку.
     @discardableResult
-    func getImage(posterPath: String, width: String?, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
+    func image(posterPath: String, width: String?, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
     
     /// Загружает аватар пользователя.
     ///
@@ -29,7 +29,7 @@ protocol ImageServiceType {
     func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
 }
 
-class ImageService: ImageServiceType {
+final class ImageService: ImageServiceType {
     
     // MARK: - Public Properties
     
@@ -46,7 +46,7 @@ class ImageService: ImageServiceType {
     // MARK: - ImageServiceType
     
     @discardableResult
-    func getImage(
+    func image(
         posterPath: String,
         width: String?,
         _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {

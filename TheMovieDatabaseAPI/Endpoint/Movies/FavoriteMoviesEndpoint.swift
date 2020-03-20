@@ -20,6 +20,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     let baseURL: URL
     let apiKey: String
     let sessionId: String
+    let accountId: Int?
     let language: String?
     let sortBy: String?
     let page: Int?
@@ -30,6 +31,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         baseURL: URL,
         apiKey: String,
         sessionId: String,
+        accountId: Int?,
         language: String?,
         sortBy: String?,
         page: Int?) {
@@ -37,6 +39,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         self.baseURL = baseURL
         self.apiKey = apiKey
         self.sessionId = sessionId
+        self.accountId = accountId
         self.language = language
         self.sortBy = sortBy
         self.page = page
@@ -57,7 +60,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -75,7 +78,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
             let item = try decoder.decode(MoviesResponse.self, from: data)
             return item
         } catch {
-            throw NetworkError.decodingError
+            throw error
         }
     }
     
@@ -107,7 +110,11 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("account")
-        url.appendPathComponent("{account_id}")
+        if let accId = accountId {
+            url.appendPathComponent("\(accId)")
+        } else {
+            url.appendPathComponent("{account_id}")
+        }
         url.appendPathComponent("favorite")
         url.appendPathComponent("movies")
         return url

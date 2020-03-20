@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 
 /// Запрос на полученние данных из базы данных фильмов.
-open class APIRequest: APIClient {
+public final class APIRequest: APIClient {
     
     // MARK: - Initializers
     
@@ -25,7 +25,8 @@ open class APIRequest: APIClient {
         
         do {
             let urlRequest = try endpoint.makeRequest()
-            AF.request(urlRequest).response { response in
+            let request = AF.request(urlRequest)
+            request.response { response in
                 do {
                     let content = try endpoint.content(from: response.data, response: response.response)
                     DispatchQueue.main.async {

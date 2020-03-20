@@ -48,7 +48,7 @@ public struct SearchMovieEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -66,7 +66,7 @@ public struct SearchMovieEndpoint: Endpoint {
             let item = try decoder.decode(MoviesResponse.self, from: data)
             return item
         } catch {
-            throw NetworkError.decodingError
+            throw error
         }
     }
     

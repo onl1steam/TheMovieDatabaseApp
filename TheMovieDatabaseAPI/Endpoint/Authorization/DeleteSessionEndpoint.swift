@@ -56,7 +56,7 @@ public class DeleteSessionEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -74,16 +74,16 @@ public class DeleteSessionEndpoint: Endpoint {
             let items = try decoder.decode(DeleteSessionResponse.self, from: data)
             return items.success
         } catch {
-            throw NetworkError.decodingError
+            throw error
         }
     }
     
     // MARK: - Private Methods
     
     private func makeQueryItems() -> [URLQueryItem] {
-        let query = URLQueryItem(name: "api_key", value: apiKey)
-        var queryItems = [URLQueryItem]()
-        queryItems.append(query)
+        let queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey)
+        ]
         return queryItems
     }
     

@@ -10,17 +10,9 @@ import Foundation
 
 class ImageCache {
     
-    // MARK: - Public Properties
-    
-    static let shared = ImageCache()
-    
     // MARK: - Private Properties
     
     private let imageCache = NSCache<NSString, NSData>()
-    
-    // MARK: - Initializers
-    
-    private init() {}
     
     // MARK: - Public methods
     

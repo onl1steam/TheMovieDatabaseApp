@@ -30,7 +30,7 @@ public struct AccountDetailsEndpoint: Endpoint {
     }
     
     // MARK: - Endpoint
- 
+    
     public func makeRequest() throws -> URLRequest {
         let queryItems = makeQueryItems()
         let url = makeURLPath()
@@ -44,7 +44,7 @@ public struct AccountDetailsEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.unknownError }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -62,18 +62,17 @@ public struct AccountDetailsEndpoint: Endpoint {
             let item = try decoder.decode(AccountResponse.self, from: data)
             return item
         } catch {
-            throw NetworkError.decodingError
+            throw error
         }
     }
     
     // MARK: - Private Methods
     
     private func makeQueryItems() -> [URLQueryItem] {
-        let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
-        let sessionIdQuery = URLQueryItem(name: "session_id", value: sessionId)
-        var queryItems = [URLQueryItem]()
-        queryItems.append(apiKeyQuery)
-        queryItems.append(sessionIdQuery)
+        let queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "session_id", value: sessionId)
+        ]
         return queryItems
     }
     

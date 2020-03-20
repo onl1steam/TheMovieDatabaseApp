@@ -80,19 +80,23 @@ class SessionService: Session {
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let endpoint = AccountDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
-        request(endpoint: endpoint, completion)
+        apiClient.request(endpoint, completionHandler: completion)
     }
     
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
-        guard let sessionId = sessionId else { return }
+        guard let sessionId = sessionId else {
+            completion(.failure(AuthError.noSessionId))
+            return
+        }
         let endpoint = FavoriteMoviesEndpoint(
             baseURL: baseUrl,
             apiKey: apiKey,
             sessionId: sessionId,
+            accountId: accountId,
             language: nil,
             sortBy: nil,
             page: nil)
-        request(endpoint: endpoint, completion)
+        apiClient.request(endpoint, completionHandler: completion)
     }
     
     func setupAccountId(accountId: Int) {
@@ -101,18 +105,5 @@ class SessionService: Session {
     
     func setupSessionId(sessionId: String) {
         self.sessionId = sessionId
-    }
-    
-    // MARK: - Private Methods
-    
-    private func request<T>(endpoint: T, _ completion: @escaping (Result<T.Content, Error>) -> Void) where T: Endpoint {
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
     }
 }

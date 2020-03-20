@@ -15,4 +15,5 @@ enum ErrorStrings {
     static let invalidPasswordLength = NSLocalizedString(
         "Минимальная длина пароля должна быть 4 символа",
         comment: "Invalid Password Length")
+    static let noSessionId = NSLocalizedString("Отсутствует id сессии", comment: "No Session Id")
 }
