@@ -21,9 +21,9 @@ protocol AuthorizationType {
 
 class Authorization: AuthorizationType {
     
-    let baseURL = URL(string: "https://api.themoviedb.org/")!
-    let apiKey = "591efe0e25fd45c1579562958b2364db"
-    let apiClient: APIClient = APIRequest()
+    let baseURL = NetworkSettings.baseURL
+    let apiKey = NetworkSettings.apiKey
+    let apiClient: APIClient = NetworkSettings.apiClient
     
     func authorize(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)

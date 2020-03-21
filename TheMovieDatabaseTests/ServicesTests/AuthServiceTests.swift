@@ -9,7 +9,7 @@
 @testable import TheMovieDatabase
 import XCTest
 
-class AuthServiceTests: XCTestCase {
+final class AuthServiceTests: XCTestCase {
     
     let authService: Authorization = ServiceLayer.shared.authService
     

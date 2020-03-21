@@ -29,7 +29,7 @@ protocol MoviesServiceType {
         _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
 }
 
-class MoviesService: MoviesServiceType {
+final class MoviesService: MoviesServiceType {
     
     // MARK: - Public Properties
     
@@ -39,35 +39,22 @@ class MoviesService: MoviesServiceType {
     
     // MARK: - Initializers
     
-    init(apiClient: APIClient = APIRequest()) {
+    init(apiClient: APIClient) {
         self.apiClient = apiClient
     }
     
     // MARK: - MoviesServiceType
     
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
-        let endpoint = SearchMovieEndpoint(baseURL: baseUrl, apiKey: apiKey, query: query, language: nil, page: nil)
-        request(endpoint: endpoint, completion)
+        let endpoint = SearchMovieEndpoint(query: query, language: nil, page: nil)
+        apiClient.request(endpoint, completionHandler: completion)
     }
     
     func getMovieDetails(
         movieId: Int,
         language: String?,
         _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
-        let endpoint = MovieDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, movieId: movieId, language: language)
-        request(endpoint: endpoint, completion)
-    }
-    
-    // MARK: - Private Methods
-    
-    private func request<T>(endpoint: T, _ completion: @escaping (Result<T.Content, Error>) -> Void) where T: Endpoint {
-        apiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        let endpoint = MovieDetailsEndpoint(movieId: movieId, language: language)
+        apiClient.request(endpoint, completionHandler: completion)
     }
 }

@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class MoviesListTests: XCTestCase {
+final class MoviesListTests: XCTestCase {
     
     // MARK: - Properties
     
@@ -19,25 +19,26 @@ class MoviesListTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testGettingFavoriteMovies() {
+    func testLoadingFavoriteMovies() {
         let expectation = self.expectation(description: "Получаем список избранных фильмов")
-        createSession(expectation: expectation, getFavoriteMoviesTest)
-        waitForExpectations(timeout: 10, handler: nil)
+        createSession(expectation: expectation, loadFavoriteMoviesTest)
+        waitForExpectations(timeout: 40, handler: nil)
     }
     
     func testSearchingMovies() {
         let expectation = self.expectation(description: "Получаем список фильмов по введенной строке")
         createSession(expectation: expectation, searchMoviesTest)
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 40, handler: nil)
     }
     
      // MARK: - Methods
     
-    func getFavoriteMoviesTest(expectation: XCTestExpectation, sessionId: String) {
+    func loadFavoriteMoviesTest(expectation: XCTestExpectation, sessionId: String) {
         let favoriteMoviesEndpoint = FavoriteMoviesEndpoint(
             baseURL: baseURL,
             apiKey: apiKey,
             sessionId: sessionId,
+            accountId: nil,
             language: nil,
             sortBy: nil,
             page: nil)

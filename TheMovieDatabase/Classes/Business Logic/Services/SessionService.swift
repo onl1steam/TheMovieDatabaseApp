@@ -40,7 +40,7 @@ protocol Session {
     func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
 }
 
-class SessionService: Session {
+final class SessionService: Session {
     
     // MARK: - Public Properties
     
@@ -55,7 +55,7 @@ class SessionService: Session {
     
     // MARK: - Initializers
     
-    init(apiClient: APIClient = APIRequest()) {
+    init(apiClient: APIClient) {
         self.apiClient = apiClient
     }
     
@@ -63,7 +63,7 @@ class SessionService: Session {
     
     func deleteSession() {
         guard let sessionId = sessionId else { return }
-        let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
+        let deleteSessionEndpoint = DeleteSessionEndpoint(sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -79,7 +79,7 @@ class SessionService: Session {
     
     func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
-        let endpoint = AccountDetailsEndpoint(baseURL: baseUrl, apiKey: apiKey, sessionId: sessionId)
+        let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
         apiClient.request(endpoint, completionHandler: completion)
     }
     
@@ -89,8 +89,6 @@ class SessionService: Session {
             return
         }
         let endpoint = FavoriteMoviesEndpoint(
-            baseURL: baseUrl,
-            apiKey: apiKey,
             sessionId: sessionId,
             accountId: accountId,
             language: nil,

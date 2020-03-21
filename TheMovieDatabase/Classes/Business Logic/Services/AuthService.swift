@@ -29,7 +29,7 @@ protocol Authorization {
     func validateUserInput(user: User, _ completion: @escaping (Result<User, AuthError>) -> Void)
 }
 
-class AuthService: Authorization {
+final class AuthService: Authorization {
     
     // MARK: - Public Properties
     
@@ -43,14 +43,14 @@ class AuthService: Authorization {
     
     // MARK: - Initializers
     
-    init(apiClient: APIClient = APIRequest()) {
+    init(apiClient: APIClient) {
         self.apiClient = apiClient
     }
     
     // MARK: - Authorization
     
     func authorizeWithUser(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
-        let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
+        let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -89,8 +89,6 @@ class AuthService: Authorization {
             return
         }
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
             username: username,
             password: password,
             requestToken: requestToken)
@@ -107,11 +105,7 @@ class AuthService: Authorization {
     }
     
     private func createSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
-        let createSession = CreateSessionEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
-            requestToken: requestToken)
-        
+        let createSession = CreateSessionEndpoint(requestToken: requestToken)
         apiClient.request(createSession, completionHandler: completion)
     }
 }

@@ -39,7 +39,7 @@ final class ImageService: ImageServiceType {
     
     // MARK: - Initializers
     
-    init(imageApiClient: APIClient = APIRequestImage()) {
+    init(imageApiClient: APIClient) {
         self.imageApiClient = imageApiClient
     }
     
@@ -50,29 +50,15 @@ final class ImageService: ImageServiceType {
         posterPath: String,
         width: String?,
         _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
-        let endpoint = ImageEndpoint(baseURL: imageBaseUrl, width: width, imagePath: posterPath)
-        let progress = imageApiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        let endpoint = ImageEndpoint(width: width, imagePath: posterPath)
+        let progress = imageApiClient.request(endpoint, completionHandler: completion)
         return progress
     }
     
     @discardableResult
     func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
-        let endpoint = AvatarEndpoint(baseURL: avatarBaseUrl, imagePath: avatarPath)
-        let progress = imageApiClient.request(endpoint) { response in
-            switch response {
-            case .success(let details):
-                completion(.success(details))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        let endpoint = AvatarEndpoint(imagePath: avatarPath)
+        let progress = imageApiClient.request(endpoint, completionHandler: completion)
         return progress
     }
 }

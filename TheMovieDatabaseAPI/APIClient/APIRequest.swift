@@ -12,9 +12,16 @@ import Foundation
 /// Запрос на полученние данных из базы данных фильмов.
 public final class APIRequest: APIClient {
     
+    // MARK: - Public Properties
+    
+    let session = Session(configuration: .ephemeral)
+    let configuration: Configuration
+    
     // MARK: - Initializers
     
-    public init() {}
+    public init(configuration: Configuration) {
+        self.configuration = configuration
+    }
     
     // MARK: - APIClient
     
@@ -22,26 +29,24 @@ public final class APIRequest: APIClient {
     public func request<T>(
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
-        
         do {
-            let urlRequest = try endpoint.makeRequest()
-            let request = AF.request(urlRequest)
-            request.response { response in
-                do {
+            var customEndpoint = endpoint
+            customEndpoint.configuration = configuration
+            let urlRequest = try customEndpoint.makeRequest()
+            
+            let request = session.request(urlRequest)
+            request.response(queue: .main) { response in
+                let result = Result { () -> T.Content in
                     let content = try endpoint.content(from: response.data, response: response.response)
-                    DispatchQueue.main.async {
-                        completionHandler(.success(content))
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(error))
-                    }
+                    return content
                 }
+                completionHandler(result)
             }
+            let progress = Progress()
+            progress.cancellationHandler = { request.cancel() }
+            return progress
         } catch {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
+            completionHandler(.failure(error))
         }
         return Progress()
     }

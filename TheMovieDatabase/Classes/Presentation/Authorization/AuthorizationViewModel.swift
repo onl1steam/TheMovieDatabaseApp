@@ -32,7 +32,7 @@ protocol AuthorizationViewModelType: class {
     func setupDelegate(delegate: AuthorizationViewModelDelegate)
 }
 
-class AuthorizationViewModel {
+final class AuthorizationViewModel {
     
     // MARK: - Private Properties
 

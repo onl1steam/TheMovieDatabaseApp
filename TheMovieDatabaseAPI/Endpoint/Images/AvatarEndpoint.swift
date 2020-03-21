@@ -16,21 +16,23 @@ public struct AvatarEndpoint: Endpoint {
     public typealias Content = Data
 
     // MARK: - Public Properties
-    
-    let baseURL: URL
+
     let imagePath: String
+    
+    public var configuration: Configuration?
     
     // MARK: - Initializers
     
-    public init(baseURL: URL, imagePath: String) {
-        self.baseURL = baseURL
+    public init(imagePath: String) {
         self.imagePath = imagePath
     }
     
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        let url = makeURLPath()
+        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        
+        let url = makeURLPath(baseURL: configuration.baseAvatarURL)
         let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
@@ -39,7 +41,7 @@ public struct AvatarEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -56,7 +58,7 @@ public struct AvatarEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeURLPath() -> URL {
+    private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL
         url.appendPathComponent("avatar")
         url.appendPathComponent(imagePath)

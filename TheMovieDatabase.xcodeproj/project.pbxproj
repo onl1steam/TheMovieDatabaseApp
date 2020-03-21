@@ -74,6 +74,7 @@
 		92F64D5824217A2200693C9B /* NetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D5724217A2200693C9B /* NetworkSettings.swift */; };
 		92F64D5B24217C4400693C9B /* MoviesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D5A24217C4400693C9B /* MoviesListTests.swift */; };
 		92F64D5D24217EB500693C9B /* MovieDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D5C24217EB500693C9B /* MovieDetailsTests.swift */; };
+		92F64D6324262B1C00693C9B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D6224262B1C00693C9B /* Configuration.swift */; };
 		92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD62416CDCA007F9182 /* ErrorStrings.swift */; };
 		92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */; };
 		92F77ADC2416CE33007F9182 /* AuthScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */; };
@@ -193,6 +194,7 @@
 		92F64D5724217A2200693C9B /* NetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettings.swift; sourceTree = "<group>"; };
 		92F64D5A24217C4400693C9B /* MoviesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListTests.swift; sourceTree = "<group>"; };
 		92F64D5C24217EB500693C9B /* MovieDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsTests.swift; sourceTree = "<group>"; };
+		92F64D6224262B1C00693C9B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		92F77AD62416CDCA007F9182 /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
 		92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenStrings.swift; sourceTree = "<group>"; };
 		92F77ADB2416CE33007F9182 /* AuthScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenStrings.swift; sourceTree = "<group>"; };
@@ -300,9 +302,7 @@
 		92163E55241C1A71008F8CE5 /* TheMovieDatabaseAPITests */ = {
 			isa = PBXGroup;
 			children = (
-				92F64D4724215B0A00693C9B /* AuthorizationTests */,
-				92F64D54242178BB00693C9B /* AccountTests */,
-				92F64D5924217B0B00693C9B /* MoviesTests */,
+				92F64D5E24261D1C00693C9B /* IntegrationTests */,
 				92F64D532421705100693C9B /* Models */,
 				92163E58241C1A71008F8CE5 /* Info.plist */,
 			);
@@ -328,6 +328,7 @@
 				9214AF45241E50DE00796C3B /* Errors */,
 				92F77AD42416CBD0007F9182 /* Responses */,
 				92F64D38241FF51800693C9B /* ImageCache.swift */,
+				92F64D6224262B1C00693C9B /* Configuration.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -637,6 +638,16 @@
 				92F64D5C24217EB500693C9B /* MovieDetailsTests.swift */,
 			);
 			path = MoviesTests;
+			sourceTree = "<group>";
+		};
+		92F64D5E24261D1C00693C9B /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				92F64D5924217B0B00693C9B /* MoviesTests */,
+				92F64D54242178BB00693C9B /* AccountTests */,
+				92F64D4724215B0A00693C9B /* AuthorizationTests */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		92F77AD42416CBD0007F9182 /* Responses */ = {
@@ -994,6 +1005,7 @@
 				9214AF5B241E688000796C3B /* DeleteSessionEndpoint.swift in Sources */,
 				9214AF6B241EE20A00796C3B /* FavoriteMoviesEndpoint.swift in Sources */,
 				9214AF61241E696B00796C3B /* AccountResponse.swift in Sources */,
+				92F64D6324262B1C00693C9B /* Configuration.swift in Sources */,
 				9214AF6F241EEC8600796C3B /* MovieDetailsEndpoint.swift in Sources */,
 				9214AF5F241E695300796C3B /* DeleteSessionResponse.swift in Sources */,
 				92F64D34241FA90A00693C9B /* ImageEndpoint.swift in Sources */,

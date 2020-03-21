@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class AuthorizationTests: XCTestCase {
+final class AuthorizationTests: XCTestCase {
     
     // MARK: - Properties
     
@@ -19,7 +19,7 @@ class AuthorizationTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testGettingToken() {
+    func testLoadingToken() {
         let expectation = self.expectation(description: "Получение токена")
         let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
         apiClient.request(createTokenEndpoint) { response in

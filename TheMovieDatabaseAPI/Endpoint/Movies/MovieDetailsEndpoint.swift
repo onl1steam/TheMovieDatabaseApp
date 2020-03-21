@@ -17,16 +17,14 @@ public class MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Public Properties
     
-    let baseURL: URL
-    let apiKey: String
     let movieId: Int
     let language: String?
     
+    public var configuration: Configuration?
+    
     // MARK: - Initializers
     
-    public init(baseURL: URL, apiKey: String, movieId: Int, language: String?) {
-        self.baseURL = baseURL
-        self.apiKey = apiKey
+    public init(movieId: Int, language: String?) {
         self.movieId = movieId
         self.language = language
     }
@@ -34,8 +32,10 @@ public class MovieDetailsEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        let queryItems = makeQueryItems()
-        let url = makeURLPath()
+        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        
+        let url = makeURLPath(baseURL: configuration.baseURL)
+        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
         
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems
@@ -46,7 +46,7 @@ public class MovieDetailsEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -71,7 +71,7 @@ public class MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems() -> [URLQueryItem] {
+    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()
         let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
         if let lang = language {
@@ -82,7 +82,7 @@ public class MovieDetailsEndpoint: Endpoint {
         return queryItems
     }
     
-    private func makeURLPath() -> URL {
+    private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("movie")

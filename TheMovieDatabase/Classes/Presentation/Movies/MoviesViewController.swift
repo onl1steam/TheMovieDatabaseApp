@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet
     

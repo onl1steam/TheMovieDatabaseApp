@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomSearchBar: UISearchBar {
+final class CustomSearchBar: UISearchBar {
     
     // MARK: - Types
     

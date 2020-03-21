@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesPlaceholderView: UIView {
+final class FavoritesPlaceholderView: UIView {
     
     // MARK: - Public Properties
     

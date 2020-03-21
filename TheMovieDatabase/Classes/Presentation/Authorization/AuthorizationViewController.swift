@@ -39,7 +39,7 @@ protocol AuthorizationViewModelDelegate: class {
     func toggleIndicator()
 }
 
-class AuthorizationViewController: UIViewController {
+final class AuthorizationViewController: UIViewController {
     
     // MARK: - IBOutlet
     

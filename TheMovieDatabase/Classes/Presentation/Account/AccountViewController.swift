@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+final class AccountViewController: UIViewController {
     
     // MARK: - IBOutlet
     
@@ -16,6 +16,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var logoutButton: RoundedButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     
     // MARK: - Public Properties
     
@@ -44,6 +45,7 @@ class AccountViewController: UIViewController {
         setupLocalizedStrings()
         avatarImageView.makeRounded()
         loadAccountInfo()
+        errorLabel.isHidden = true
     }
     
     // MARK: - IBAction
@@ -57,7 +59,8 @@ class AccountViewController: UIViewController {
     
     private func loadAccountInfo() {
         
-        sessionService.getAccountInfo { response in
+        sessionService.getAccountInfo { [weak self] response in
+            guard let self = self else { return }
             var avatarHash: String?
             switch response {
             case .success(let info):
@@ -66,16 +69,18 @@ class AccountViewController: UIViewController {
                 avatarHash = info.avatar.gravatar.hash
                 self.sessionService.setupAccountId(accountId: info.id)
             case .failure(let error):
-                print(error.localizedDescription)
+                self.showError(message: error.localizedDescription)
             }
             guard let hash = avatarHash else { return }
-            self.imageService.getAvatar(avatarPath: hash) { response in
+            self.imageService.getAvatar(avatarPath: hash) { [weak self] response in
+                guard let self = self else { return }
                 switch response {
                 case .success(let info):
                     guard let image = UIImage(data: info) else { return }
                     self.avatarImageView.image = image
+                    self.errorLabel.isHidden = true
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.showError(message: error.localizedDescription)
                 }
             }
         }
@@ -89,9 +94,15 @@ class AccountViewController: UIViewController {
         emailLabel.tintColor = Colors.gray
         logoutButton.backgroundColor = Colors.accountButtonBackground
         logoutButton.tintColor = Colors.purpure
+        errorLabel.tintColor = Colors.red
     }
     
     private func setupLocalizedStrings() {
         logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
+    }
+    
+    private func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
     }
 }

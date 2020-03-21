@@ -17,23 +17,23 @@ public struct AccountDetailsEndpoint: Endpoint {
     
     // MARK: - Public Properties
     
-    let baseURL: URL
-    let apiKey: String
     let sessionId: String
+    
+    public var configuration: Configuration?
     
     // MARK: - Initializers
     
-    public init(baseURL: URL, apiKey: String, sessionId: String) {
-        self.baseURL = baseURL
-        self.apiKey = apiKey
+    public init(sessionId: String) {
         self.sessionId = sessionId
     }
     
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        let queryItems = makeQueryItems()
-        let url = makeURLPath()
+        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        
+        let url = makeURLPath(baseURL: configuration.baseURL)
+        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
         
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems
@@ -44,7 +44,7 @@ public struct AccountDetailsEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -68,7 +68,7 @@ public struct AccountDetailsEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems() -> [URLQueryItem] {
+    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
         let queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
             URLQueryItem(name: "session_id", value: sessionId)
@@ -76,7 +76,7 @@ public struct AccountDetailsEndpoint: Endpoint {
         return queryItems
     }
     
-    private func makeURLPath() -> URL {
+    private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("account")

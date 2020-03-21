@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class AccountTests: XCTestCase {
+final class AccountTests: XCTestCase {
     
     // MARK: - Properties
     
@@ -19,15 +19,15 @@ class AccountTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testGettingAccountDetails() {
+    func testLoadingAccountDetails() {
         let expectation = self.expectation(description: "Удаление сессии")
-        createSession(expectation: expectation, getAccountDetailsTest)
-        waitForExpectations(timeout: 10, handler: nil)
+        createSession(expectation: expectation, loadAccountDetailsTest)
+        waitForExpectations(timeout: 40, handler: nil)
     }
     
      // MARK: - Methods
     
-    func getAccountDetailsTest(expectation: XCTestExpectation, sessionId: String) {
+    func loadAccountDetailsTest(expectation: XCTestExpectation, sessionId: String) {
         let accountDetailsEndpoint = AccountDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
         apiClient.request(accountDetailsEndpoint) { response in
             expectation.fulfill()

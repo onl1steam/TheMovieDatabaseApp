@@ -14,12 +14,15 @@ public final class APIRequestImage: APIClient {
     
     // MARK: - Public Properties
     
+    let session = Session(configuration: .ephemeral)
     let imageCache = ImageCache()
-
+    let configuration: Configuration
+    
     // MARK: - Initializers
     
-    public init() {}
-    
+    public init(configuration: Configuration) {
+        self.configuration = configuration
+    }
     // MARK: - APIClient
     
     @discardableResult
@@ -27,32 +30,27 @@ public final class APIRequestImage: APIClient {
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
         do {
-            let urlRequest = try endpoint.makeRequest()
+            var customEndpoint = endpoint
+            customEndpoint.configuration = configuration
+            let urlRequest = try customEndpoint.makeRequest()
             
             if let data = checkImageInCache(url: urlRequest.url?.absoluteString) as? T.Content {
                 completionHandler(.success(data))
                 return Progress()
             }
             
-            let request = AF.request(urlRequest)
-            request.response { response in
-                do {
+            let request = session.request(urlRequest)
+            request.response(queue: .main) { [weak self] response in
+                let result = Result { () -> T.Content in
                     let content = try endpoint.content(from: response.data, response: response.response)
-                    self.saveImageInCache(url: urlRequest.url?.absoluteString, data: response.data)
-                    DispatchQueue.main.async {
-                        completionHandler(.success(content))
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completionHandler(.failure(error))
-                    }
+                    self?.saveImageInCache(url: urlRequest.url?.absoluteString, data: response.data)
+                    return content
                 }
+                completionHandler(result)
             }
             return request.downloadProgress
         } catch {
-            DispatchQueue.main.async {
-                completionHandler(.failure(error))
-            }
+            completionHandler(.failure(error))
             return Progress()
         }
     }

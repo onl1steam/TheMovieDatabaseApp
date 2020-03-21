@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class SessionTests: XCTestCase {
+final class SessionTests: XCTestCase {
     
     // MARK: - Properties
     
@@ -22,7 +22,7 @@ class SessionTests: XCTestCase {
     func testDeletingSession() {
         let expectation = self.expectation(description: "Удаление сессии")
         createSession(expectation: expectation, deleteSessionTest)
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 40, handler: nil)
     }
     
      // MARK: - Methods

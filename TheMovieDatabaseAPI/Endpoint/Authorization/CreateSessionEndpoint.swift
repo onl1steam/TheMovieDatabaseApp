@@ -17,23 +17,23 @@ public class CreateSessionEndpoint: Endpoint {
     
     // MARK: - Public Properties
     
-    let baseURL: URL
-    let apiKey: String
     let requestToken: String
+    
+    public var configuration: Configuration?
     
     // MARK: - Initializers
     
-    public init(baseURL: URL, apiKey: String, requestToken: String) {
-        self.baseURL = baseURL
-        self.apiKey = apiKey
+    public init(requestToken: String) {
         self.requestToken = requestToken
     }
     
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        let queryItems = makeQueryItems()
-        let url = makeURLPath()
+        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        
+        let url = makeURLPath(baseURL: configuration.baseURL)
+        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
         
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems
@@ -56,7 +56,7 @@ public class CreateSessionEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.noHTTPResponse }
+        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
         guard (200...300).contains(resp.statusCode) else {
             switch resp.statusCode {
             case 401:
@@ -80,14 +80,14 @@ public class CreateSessionEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems() -> [URLQueryItem] {
+    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
         let queryItems = [
             URLQueryItem(name: "api_key", value: apiKey)
         ]
         return queryItems
     }
     
-    private func makeURLPath() -> URL {
+    private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL
         url.appendPathComponent("3")
         url.appendPathComponent("authentication")
