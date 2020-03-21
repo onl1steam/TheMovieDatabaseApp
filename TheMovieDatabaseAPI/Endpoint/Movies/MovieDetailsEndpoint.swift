@@ -46,27 +46,9 @@ public class MovieDetailsEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
-        guard (200...300).contains(resp.statusCode) else {
-            switch resp.statusCode {
-            case 401:
-                throw NetworkError.unauthorized
-            case 404:
-                throw NetworkError.notFound
-            default:
-                throw NetworkError.unknownError
-            }
-        }
-        
-        guard let data = from else { throw NetworkError.blankData }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let item = try decoder.decode(MovieDetailsResponse.self, from: data)
-            return item
-        } catch {
-            throw error
-        }
+        try EndpointDefaultMethods.checkErrors(data: from, response: response)
+        let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: Content.self)
+        return data
     }
     
     // MARK: - Private Methods

@@ -31,6 +31,7 @@
 		92163E5C241C1A71008F8CE5 /* TheMovieDatabaseAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92163E47241C1A71008F8CE5 /* TheMovieDatabaseAPI.framework */; };
 		92163E69241C3F63008F8CE5 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92163E68241C3F63008F8CE5 /* APIClient.swift */; };
 		92163E6B241C3FCD008F8CE5 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92163E6A241C3FCD008F8CE5 /* Endpoint.swift */; };
+		921FFD9524263D0B00810B87 /* EndpointDefaultMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FFD9424263D0B00810B87 /* EndpointDefaultMethods.swift */; };
 		9250EBAC2413DE2D00AC30DB /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250EBAA2413DE2D00AC30DB /* AuthorizationViewController.swift */; };
 		9250EBAD2413DE2D00AC30DB /* AuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9250EBAB2413DE2D00AC30DB /* AuthorizationViewController.xib */; };
 		9250EBB22413F2CD00AC30DB /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250EBB12413F2CD00AC30DB /* RoundedButton.swift */; };
@@ -146,6 +147,7 @@
 		92163E58241C1A71008F8CE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92163E68241C3F63008F8CE5 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		92163E6A241C3FCD008F8CE5 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		921FFD9424263D0B00810B87 /* EndpointDefaultMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDefaultMethods.swift; sourceTree = "<group>"; };
 		9250EBAA2413DE2D00AC30DB /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		9250EBAB2413DE2D00AC30DB /* AuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizationViewController.xib; sourceTree = "<group>"; };
 		9250EBB12413F2CD00AC30DB /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				9214AF66241E715400796C3B /* Account */,
 				9214AF4E241E513D00796C3B /* Authorization */,
 				92163E6A241C3FCD008F8CE5 /* Endpoint.swift */,
+				921FFD9424263D0B00810B87 /* EndpointDefaultMethods.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				92F64D34241FA90A00693C9B /* ImageEndpoint.swift in Sources */,
 				9214AF57241E51E300796C3B /* AuthResponse.swift in Sources */,
 				92163E69241C3F63008F8CE5 /* APIClient.swift in Sources */,
+				921FFD9524263D0B00810B87 /* EndpointDefaultMethods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

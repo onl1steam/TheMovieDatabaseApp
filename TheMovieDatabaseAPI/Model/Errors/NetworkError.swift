@@ -14,6 +14,7 @@ public enum NetworkError: Error {
     case unauthorized
     case notFound
     case unknownError
+    case invalidApiKey
     case decodingError
     case encodingError
     case blankData
@@ -34,6 +35,8 @@ extension NetworkError: LocalizedError {
             return NSLocalizedString("Запрашиваемый ресурс не найден.", comment: "Page not found error")
         case .unknownError:
             return NSLocalizedString("Неизвестная ошибка, попробуйте позже.", comment: "Unknown error")
+        case .invalidApiKey:
+            return NSLocalizedString("Введен неверный API key.", comment: "Unknown error")
         case .decodingError:
             return NSLocalizedString("Возвращен неверный формат данных.", comment: "Decoding error")
         case .encodingError:

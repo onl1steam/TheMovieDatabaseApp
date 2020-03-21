@@ -41,17 +41,7 @@ public struct AvatarEndpoint: Endpoint {
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
-        guard (200...300).contains(resp.statusCode) else {
-            switch resp.statusCode {
-            case 401:
-                throw NetworkError.unauthorized
-            case 404:
-                throw NetworkError.notFound
-            default:
-                throw NetworkError.unknownError
-            }
-        }
+        try EndpointDefaultMethods.checkErrors(data: from, response: response)
         guard let data = from else { throw NetworkError.blankData }
         return data
     }

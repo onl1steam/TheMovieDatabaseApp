@@ -37,45 +37,22 @@ public class CreateSessionEndpoint: Endpoint {
         
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems
-        
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        
         var request = URLRequest(url: resultURL)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = ["content-type": "application/json"]
         
         let encodableData = CreateSessionBody(requestToken: requestToken)
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        do {
-            let data = try encoder.encode(encodableData)
-            request.httpBody = data
-        } catch {
-            throw NetworkError.encodingError
-        }
+        let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
+        request.httpBody = data
         return request
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
-        guard (200...300).contains(resp.statusCode) else {
-            switch resp.statusCode {
-            case 401:
-                throw NetworkError.unauthorized
-            case 404:
-                throw NetworkError.notFound
-            default:
-                throw NetworkError.unknownError
-            }
-        }
-        guard let data = from else { throw NetworkError.blankData }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let items = try decoder.decode(SessionResponse.self, from: data)
-            return items.sessionId
-        } catch {
-            throw error
-        }
+        try EndpointDefaultMethods.checkErrors(data: from, response: response)
+        let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: SessionResponse.self)
+        return data.sessionId
     }
     
     // MARK: - Private Methods

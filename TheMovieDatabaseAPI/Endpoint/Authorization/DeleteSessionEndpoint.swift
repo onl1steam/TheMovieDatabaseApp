@@ -34,48 +34,25 @@ public class DeleteSessionEndpoint: Endpoint {
         
         let url = makeURLPath(baseURL: configuration.baseURL)
         let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-        
+    
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = queryItems
-        
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        
         var request = URLRequest(url: resultURL)
         request.httpMethod = "DELETE"
         request.allHTTPHeaderFields = ["content-type": "application/json"]
         
         let encodableData = DeleteSessionBody(sessionId: sessionId)
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        do {
-            let data = try encoder.encode(encodableData)
-            request.httpBody = data
-        } catch {
-            throw NetworkError.encodingError
-        }
+        let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
+        request.httpBody = data
         return request
     }
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
-        guard let resp = response as? HTTPURLResponse else { throw NetworkError.notHTTPResponse }
-        guard (200...300).contains(resp.statusCode) else {
-            switch resp.statusCode {
-            case 401:
-                throw NetworkError.unauthorized
-            case 404:
-                throw NetworkError.notFound
-            default:
-                throw NetworkError.unknownError
-            }
-        }
-        guard let data = from else { throw NetworkError.blankData }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        do {
-            let items = try decoder.decode(DeleteSessionResponse.self, from: data)
-            return items.success
-        } catch {
-            throw error
-        }
+        try EndpointDefaultMethods.checkErrors(data: from, response: response)
+        let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: DeleteSessionResponse.self)
+        return data.success
     }
     
     // MARK: - Private Methods
