@@ -56,12 +56,22 @@
 		92D112192415AF1F0087D910 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112182415AF1F0087D910 /* AuthError.swift */; };
 		92D1121B2415BFB10087D910 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1121A2415BFB10087D910 /* SessionService.swift */; };
 		92D11226241665FA0087D910 /* FavoritesPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */; };
-		92D112372416715A0087D910 /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112362416715A0087D910 /* AuthServiceTests.swift */; };
+		92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D112362416715A0087D910 /* ValidationServiceTests.swift */; };
 		92D11239241683090087D910 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D11238241683090087D910 /* UIViewControllerExtension.swift */; };
 		92E5CA882428F28400DD587D /* AccountDetailsEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA872428F28400DD587D /* AccountDetailsEndpointTests.swift */; };
 		92E5CA8B2429021000DD587D /* FavoriteMoviesEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA8A2429021000DD587D /* FavoriteMoviesEndpointTests.swift */; };
 		92E5CA8D24290B2000DD587D /* SearchMoviesEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA8C24290B2000DD587D /* SearchMoviesEndpointTests.swift */; };
 		92E5CA8F24290B3F00DD587D /* MovieDetailsEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA8E24290B3F00DD587D /* MovieDetailsEndpointTests.swift */; };
+		92E5CA932429130E00DD587D /* ImageEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA922429130E00DD587D /* ImageEndpointTests.swift */; };
+		92E5CA952429131E00DD587D /* AvatarEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA942429131E00DD587D /* AvatarEndpointTests.swift */; };
+		92E5CA98242934EB00DD587D /* CreateTokenEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA97242934EB00DD587D /* CreateTokenEndpointTests.swift */; };
+		92E5CA9A242934FE00DD587D /* CreateLoginSessionEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA99242934FE00DD587D /* CreateLoginSessionEndpointTests.swift */; };
+		92E5CA9C2429351100DD587D /* CreateSessionEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA9B2429351100DD587D /* CreateSessionEndpointTests.swift */; };
+		92E5CA9E2429352300DD587D /* DeleteSessionEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA9D2429352300DD587D /* DeleteSessionEndpointTests.swift */; };
+		92E5CAA02429595700DD587D /* HttpMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CA9F2429595700DD587D /* HttpMethods.swift */; };
+		92E5CAA324295D9B00DD587D /* AvatarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA224295D9B00DD587D /* AvatarTests.swift */; };
+		92E5CAA624295FEF00DD587D /* PosterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA524295FEF00DD587D /* PosterTests.swift */; };
+		92E5CAA8242967FE00DD587D /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA7242967FE00DD587D /* ValidationService.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -180,12 +190,22 @@
 		92D11225241665FA0087D910 /* FavoritesPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPlaceholderView.swift; sourceTree = "<group>"; };
 		92D1122B241670CC0087D910 /* TheMovieDatabaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheMovieDatabaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D1122F241670CC0087D910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92D112362416715A0087D910 /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
+		92D112362416715A0087D910 /* ValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceTests.swift; sourceTree = "<group>"; };
 		92D11238241683090087D910 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		92E5CA872428F28400DD587D /* AccountDetailsEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsEndpointTests.swift; sourceTree = "<group>"; };
 		92E5CA8A2429021000DD587D /* FavoriteMoviesEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesEndpointTests.swift; sourceTree = "<group>"; };
 		92E5CA8C24290B2000DD587D /* SearchMoviesEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesEndpointTests.swift; sourceTree = "<group>"; };
 		92E5CA8E24290B3F00DD587D /* MovieDetailsEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA922429130E00DD587D /* ImageEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA942429131E00DD587D /* AvatarEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA97242934EB00DD587D /* CreateTokenEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTokenEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA99242934FE00DD587D /* CreateLoginSessionEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLoginSessionEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA9B2429351100DD587D /* CreateSessionEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA9D2429352300DD587D /* DeleteSessionEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSessionEndpointTests.swift; sourceTree = "<group>"; };
+		92E5CA9F2429595700DD587D /* HttpMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethods.swift; sourceTree = "<group>"; };
+		92E5CAA224295D9B00DD587D /* AvatarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTests.swift; sourceTree = "<group>"; };
+		92E5CAA524295FEF00DD587D /* PosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTests.swift; sourceTree = "<group>"; };
+		92E5CAA7242967FE00DD587D /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -341,6 +361,7 @@
 				92F77AD42416CBD0007F9182 /* Responses */,
 				92F64D38241FF51800693C9B /* ImageCache.swift */,
 				92F64D6224262B1C00693C9B /* Configuration.swift */,
+				92E5CA9F2429595700DD587D /* HttpMethods.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -552,6 +573,7 @@
 				92D1121A2415BFB10087D910 /* SessionService.swift */,
 				92F64D3D242021D300693C9B /* ImageService.swift */,
 				92F64D402420236800693C9B /* MoviesService.swift */,
+				92E5CAA7242967FE00DD587D /* ValidationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -593,23 +615,25 @@
 		92D1122C241670CC0087D910 /* TheMovieDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				92D112352416711E0087D910 /* ServicesTests */,
+				92E5CAA92429692D00DD587D /* Business Logic */,
 				92D1122F241670CC0087D910 /* Info.plist */,
 			);
 			path = TheMovieDatabaseTests;
 			sourceTree = "<group>";
 		};
-		92D112352416711E0087D910 /* ServicesTests */ = {
+		92D112352416711E0087D910 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				92D112362416715A0087D910 /* AuthServiceTests.swift */,
+				92D112362416715A0087D910 /* ValidationServiceTests.swift */,
 			);
-			path = ServicesTests;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		92E5CA852428F24300DD587D /* EndpointTests */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CA96242934C900DD587D /* Authorization */,
+				92E5CA90242912ED00DD587D /* Images */,
 				92E5CA89242901F200DD587D /* Movies */,
 				92E5CA862428F24A00DD587D /* Account */,
 			);
@@ -632,6 +656,43 @@
 				92E5CA8E24290B3F00DD587D /* MovieDetailsEndpointTests.swift */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		92E5CA90242912ED00DD587D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CA922429130E00DD587D /* ImageEndpointTests.swift */,
+				92E5CA942429131E00DD587D /* AvatarEndpointTests.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		92E5CA96242934C900DD587D /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CA97242934EB00DD587D /* CreateTokenEndpointTests.swift */,
+				92E5CA99242934FE00DD587D /* CreateLoginSessionEndpointTests.swift */,
+				92E5CA9B2429351100DD587D /* CreateSessionEndpointTests.swift */,
+				92E5CA9D2429352300DD587D /* DeleteSessionEndpointTests.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		92E5CAA124295D4900DD587D /* ImagesTests */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CAA224295D9B00DD587D /* AvatarTests.swift */,
+				92E5CAA524295FEF00DD587D /* PosterTests.swift */,
+			);
+			path = ImagesTests;
+			sourceTree = "<group>";
+		};
+		92E5CAA92429692D00DD587D /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				92D112352416711E0087D910 /* Services */,
+			);
+			path = "Business Logic";
 			sourceTree = "<group>";
 		};
 		92F64D422420F58900693C9B /* Images */ = {
@@ -682,6 +743,7 @@
 		92F64D5E24261D1C00693C9B /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CAA124295D4900DD587D /* ImagesTests */,
 				92F64D5924217B0B00693C9B /* MoviesTests */,
 				92F64D54242178BB00693C9B /* AccountTests */,
 				92F64D4724215B0A00693C9B /* AuthorizationTests */,
@@ -1040,6 +1102,7 @@
 				9214AF5D241E689B00796C3B /* DeleteSessionBody.swift in Sources */,
 				9214AF48241E510200796C3B /* NetworkError.swift in Sources */,
 				9214AF51241E515900796C3B /* CreateTokenEndpoint.swift in Sources */,
+				92E5CAA02429595700DD587D /* HttpMethods.swift in Sources */,
 				9214AF65241E69A000796C3B /* MovieDetailsResponse.swift in Sources */,
 				9214AF5B241E688000796C3B /* DeleteSessionEndpoint.swift in Sources */,
 				9214AF6B241EE20A00796C3B /* FavoriteMoviesEndpoint.swift in Sources */,
@@ -1062,12 +1125,20 @@
 				92E5CA8B2429021000DD587D /* FavoriteMoviesEndpointTests.swift in Sources */,
 				92F64D4924215B2100693C9B /* AuthorizationTests.swift in Sources */,
 				92F64D5B24217C4400693C9B /* MoviesListTests.swift in Sources */,
+				92E5CA9E2429352300DD587D /* DeleteSessionEndpointTests.swift in Sources */,
+				92E5CA9C2429351100DD587D /* CreateSessionEndpointTests.swift in Sources */,
 				92E5CA8F24290B3F00DD587D /* MovieDetailsEndpointTests.swift in Sources */,
+				92E5CA9A242934FE00DD587D /* CreateLoginSessionEndpointTests.swift in Sources */,
 				92F64D5D24217EB500693C9B /* MovieDetailsTests.swift in Sources */,
+				92E5CAA324295D9B00DD587D /* AvatarTests.swift in Sources */,
 				92F64D4B2421623B00693C9B /* Authorization.swift in Sources */,
+				92E5CA952429131E00DD587D /* AvatarEndpointTests.swift in Sources */,
 				92F64D4D2421666C00693C9B /* SessionInfoModel.swift in Sources */,
 				92E5CA882428F28400DD587D /* AccountDetailsEndpointTests.swift in Sources */,
+				92E5CA932429130E00DD587D /* ImageEndpointTests.swift in Sources */,
 				92F64D56242178F200693C9B /* AccountTests.swift in Sources */,
+				92E5CAA624295FEF00DD587D /* PosterTests.swift in Sources */,
+				92E5CA98242934EB00DD587D /* CreateTokenEndpointTests.swift in Sources */,
 				92E5CA8D24290B2000DD587D /* SearchMoviesEndpointTests.swift in Sources */,
 				92F64D5824217A2200693C9B /* NetworkSettings.swift in Sources */,
 			);
@@ -1081,6 +1152,7 @@
 				92D111FC241523B60087D910 /* CustomSearchBar.swift in Sources */,
 				9250EBAC2413DE2D00AC30DB /* AuthorizationViewController.swift in Sources */,
 				9250EBD1241478BC00AC30DB /* UIImageViewExtension.swift in Sources */,
+				92E5CAA8242967FE00DD587D /* ValidationService.swift in Sources */,
 				92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */,
 				92D1121B2415BFB10087D910 /* SessionService.swift in Sources */,
 				92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */,
@@ -1114,7 +1186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92D112372416715A0087D910 /* AuthServiceTests.swift in Sources */,
+				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

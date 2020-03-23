@@ -19,7 +19,7 @@ enum NetworkSettings {
     static let configuration = Configuration(
         baseURL: baseURL,
         basePosterURL: imageBaseURL,
-        baseAvatarURL: imageBaseURL,
+        baseAvatarURL: avatarBaseURL,
         apiKey: apiKey)
     
     static let apiClient: APIClient = APIRequest(configuration: configuration)

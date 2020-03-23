@@ -28,7 +28,7 @@ class SearchMoviesEndpointTests: XCTestCase {
             primaryReleaseYear: nil)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url!.absoluteString, expectedUrl)
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
         
     }
     
@@ -44,6 +44,6 @@ class SearchMoviesEndpointTests: XCTestCase {
             primaryReleaseYear: 2020)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url!.absoluteString, expectedUrl)
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
 }

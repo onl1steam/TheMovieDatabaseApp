@@ -40,7 +40,7 @@ public struct CreateSessionEndpoint: Endpoint {
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
-        request.httpMethod = "POST"
+        request.httpMethod = HttpMethods.POST.rawValue
         request.allHTTPHeaderFields = ["content-type": "application/json"]
         
         let encodableData = CreateSessionBody(requestToken: requestToken)

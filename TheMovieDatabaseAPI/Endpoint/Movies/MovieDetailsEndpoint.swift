@@ -41,7 +41,8 @@ public struct MovieDetailsEndpoint: Endpoint {
         urlComponents?.queryItems = queryItems
         
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
-        let request = URLRequest(url: resultURL)
+        var request = URLRequest(url: resultURL)
+        request.httpMethod = HttpMethods.GET.rawValue
         return request
     }
     

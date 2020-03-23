@@ -1,5 +1,5 @@
 //
-//  AuthServiceTests.swift
+//  ValidationServiceTests.swift
 //  TheMovieDatabaseTests
 //
 //  Created by Рыжков Артем on 09.03.2020.
@@ -9,13 +9,13 @@
 @testable import TheMovieDatabase
 import XCTest
 
-final class AuthServiceTests: XCTestCase {
+final class ValidationServiceTests: XCTestCase {
     
-    let authService: Authorization = ServiceLayer.shared.authService
+    let validationService: Validation = ServiceLayer.shared.validationService
     
     func testInputFilledFields() {
         let user = User(login: "Foo", password: "Barr")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success(let user):
                 XCTAssertEqual(user.login, "Foo")
@@ -28,7 +28,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputNilFields() {
         let user = User(login: nil, password: nil)
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -40,7 +40,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputNilLoginField() {
         let user = User(login: nil, password: "Foo")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -52,7 +52,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputNilPasswordField() {
         let user = User(login: "Foo", password: nil)
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -64,7 +64,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputBlankFields() {
         let user = User(login: "", password: "")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -76,7 +76,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputBlankLoginField() {
         let user = User(login: "", password: "Foo")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -88,7 +88,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInputBlankPasswordField() {
         let user = User(login: "Foo", password: "")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: поля не заполнены")
@@ -100,7 +100,7 @@ final class AuthServiceTests: XCTestCase {
     
     func testInvalidPasswordLength() {
         let user = User(login: "Foo", password: "Bar")
-        authService.validateUserInput(user: user) { response in
+        validationService.validateUserInput(user: user) { response in
             switch response {
             case .success:
                 XCTFail("Ошибка валидации: пароль короче 4 символов")

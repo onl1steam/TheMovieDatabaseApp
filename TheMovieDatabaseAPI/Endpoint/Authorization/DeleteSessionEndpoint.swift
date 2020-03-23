@@ -40,12 +40,13 @@ public struct DeleteSessionEndpoint: Endpoint {
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
-        request.httpMethod = "DELETE"
-        request.allHTTPHeaderFields = ["content-type": "application/json"]
-        
         let encodableData = DeleteSessionBody(sessionId: sessionId)
         let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
+        
+        request.httpMethod = HttpMethods.DELETE.rawValue
         request.httpBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         return request
     }
     

@@ -44,11 +44,11 @@ public struct CreateLoginSessionEndpoint: Endpoint {
         guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = ["content-type": "application/json"]
-        
         let encodableData = CreateLoginSessionBody(username: username, password: password, requestToken: requestToken)
         let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
+        
+        request.httpMethod = HttpMethods.POST.rawValue
+        request.allHTTPHeaderFields = ["content-type": "application/json"]
         request.httpBody = data
         return request
     }

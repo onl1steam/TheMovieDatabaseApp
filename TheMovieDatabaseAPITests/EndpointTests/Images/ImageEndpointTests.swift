@@ -1,5 +1,5 @@
 //
-//  MovieDetailsEndpointTests.swift
+//  ImageEndpointTests.swift
 //  TheMovieDatabaseAPITests
 //
 //  Created by Рыжков Артем on 23.03.2020.
@@ -9,25 +9,21 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class MovieDetailsEndpointTests: XCTestCase {
+class ImageEndpointTests: XCTestCase {
     
-    let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
-    
-    let emptyAccountIdQuery = "%7Baccount_id%7D"
+    let posterPath = "/Foo.jpg"
     
     func testMakeRequestWithEmptyFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/movie/1?api_key=\(apiKey)"
-        var endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
+        let expectedUrl = "https://image.tmdb.org/t/p/original\(posterPath)"
+        var endpoint = ImageEndpoint(width: nil, imagePath: posterPath)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
-        
     }
     
     func testMakeRequestWithFilledFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/movie/1?api_key=\(apiKey)&language=ru"
-        var endpoint = MovieDetailsEndpoint(movieId: 1, language: "ru")
+        let expectedUrl = "https://image.tmdb.org/t/p/w500\(posterPath)"
+        var endpoint = ImageEndpoint(width: "w500", imagePath: posterPath)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)

@@ -25,6 +25,7 @@ final class ServiceLayer {
     let sessionService: Session
     let imageService: ImageServiceType
     let moviesService: MoviesServiceType
+    let validationService: Validation = ValidationService()
     
     // MARK: - Initializers
     

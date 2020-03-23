@@ -1,5 +1,5 @@
 //
-//  AccountDetailsEndpointTests.swift
+//  AvatarEndpointTests.swift
 //  TheMovieDatabaseAPITests
 //
 //  Created by Рыжков Артем on 23.03.2020.
@@ -9,14 +9,13 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class AccountDetailsEndpointTests: XCTestCase {
+class AvatarEndpointTests: XCTestCase {
     
-    let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
-
+    let avatarHash = "Foo"
+    
     func testMakeRequest() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(sessionId)"
-        var endpoint = AccountDetailsEndpoint(sessionId: sessionId)
+        let expectedUrl = "https://www.gravatar.com/avatar/\(avatarHash)"
+        var endpoint = AvatarEndpoint(imagePath: avatarHash)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)

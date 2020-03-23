@@ -22,7 +22,7 @@ class FavoriteMoviesEndpointTests: XCTestCase {
             FavoriteMoviesEndpoint(sessionId: sessionId, accountId: nil, language: nil, sortBy: nil, page: nil)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url!.absoluteString, expectedUrl)
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
         
     }
     
@@ -32,10 +32,10 @@ class FavoriteMoviesEndpointTests: XCTestCase {
             sessionId: sessionId,
             accountId: 1,
             language: "ru",
-            sortBy: "created_at.asc",
+            sortBy: .createdAtAsc,
             page: 1)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url!.absoluteString, expectedUrl)
+        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
 }

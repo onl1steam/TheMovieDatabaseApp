@@ -37,6 +37,7 @@ final class AuthorizationViewModel {
     // MARK: - Private Properties
 
     private let authService: Authorization
+    private let validationService: Validation
     private let sessionService: Session
     private weak var delegate: AuthorizationViewModelDelegate?
     
@@ -44,9 +45,11 @@ final class AuthorizationViewModel {
     
     init(
         authService: Authorization = ServiceLayer.shared.authService,
-        sessionService: Session = ServiceLayer.shared.sessionService) {
+        sessionService: Session = ServiceLayer.shared.sessionService,
+        validationService: Validation = ServiceLayer.shared.validationService) {
         self.authService = authService
         self.sessionService = sessionService
+        self.validationService = validationService
     }
     
     // MARK: - Private Methods
@@ -70,7 +73,7 @@ extension AuthorizationViewModel: AuthorizationViewModelType {
     
     func checkTextFieldsState(loginText: String?, passwordText: String?) {
         let user = User(login: loginText, password: passwordText)
-        authService.validateUserInput(user: user) { [weak self] response in
+        validationService.validateUserInput(user: user) { [weak self] response in
             guard let self = self, let delegate = self.delegate else { return }
             switch response {
             case .success:
