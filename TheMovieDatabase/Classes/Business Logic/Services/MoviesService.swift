@@ -46,7 +46,14 @@ final class MoviesService: MoviesServiceType {
     // MARK: - MoviesServiceType
     
     func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
-        let endpoint = SearchMovieEndpoint(query: query, language: nil, page: nil)
+        let endpoint = SearchMovieEndpoint(
+            query: query,
+            language: nil,
+            page: nil,
+            includeAdult: nil,
+            region: nil,
+            year: nil,
+            primaryReleaseYear: nil)
         apiClient.request(endpoint, completionHandler: completion)
     }
     

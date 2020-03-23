@@ -9,7 +9,7 @@
 import Foundation
 
 /// Эндпоинт для создания сессии.
-public class CreateSessionEndpoint: Endpoint {
+public struct CreateSessionEndpoint: Endpoint {
     
     // MARK: - Types
     

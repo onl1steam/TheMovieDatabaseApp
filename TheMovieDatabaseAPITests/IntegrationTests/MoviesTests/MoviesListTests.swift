@@ -22,21 +22,19 @@ final class MoviesListTests: XCTestCase {
     func testLoadingFavoriteMovies() {
         let expectation = self.expectation(description: "Получаем список избранных фильмов")
         createSession(expectation: expectation, loadFavoriteMoviesTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
     func testSearchingMovies() {
         let expectation = self.expectation(description: "Получаем список фильмов по введенной строке")
         createSession(expectation: expectation, searchMoviesTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
      // MARK: - Methods
     
     func loadFavoriteMoviesTest(expectation: XCTestExpectation, sessionId: String) {
         let favoriteMoviesEndpoint = FavoriteMoviesEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
             sessionId: sessionId,
             accountId: nil,
             language: nil,
@@ -55,11 +53,13 @@ final class MoviesListTests: XCTestCase {
     
     func searchMoviesTest(expectation: XCTestExpectation, sessionId: String) {
         let searchMoviesEndpoint = SearchMovieEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
             query: "Звёздные войны",
             language: nil,
-            page: nil)
+            page: nil,
+            includeAdult: nil,
+            region: nil,
+            year: nil,
+            primaryReleaseYear: nil)
         apiClient.request(searchMoviesEndpoint) { response in
             expectation.fulfill()
             switch response {

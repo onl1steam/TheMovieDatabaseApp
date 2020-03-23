@@ -22,13 +22,13 @@ final class SessionTests: XCTestCase {
     func testDeletingSession() {
         let expectation = self.expectation(description: "Удаление сессии")
         createSession(expectation: expectation, deleteSessionTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
      // MARK: - Methods
     
     func deleteSessionTest(expectation: XCTestExpectation, sessionId: String) {
-        let deleteSessionEndpoint = DeleteSessionEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
+        let deleteSessionEndpoint = DeleteSessionEndpoint(sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { response in
             expectation.fulfill()
             switch response {

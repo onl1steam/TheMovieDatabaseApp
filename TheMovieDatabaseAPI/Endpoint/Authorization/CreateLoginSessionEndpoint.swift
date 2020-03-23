@@ -9,7 +9,7 @@
 import Foundation
 
 /// Эндпоинт для валидации и создания сессии с логином и паролем.
-public class CreateLoginSessionEndpoint: Endpoint {
+public struct CreateLoginSessionEndpoint: Endpoint {
     
     // MARK: - Types
     

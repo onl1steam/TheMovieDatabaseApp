@@ -20,15 +20,30 @@ public struct SearchMovieEndpoint: Endpoint {
     let query: String
     let language: String?
     let page: Int?
+    let includeAdult: Bool?
+    let region: String?
+    let year: Int?
+    let primaryReleaseYear: Int?
     
     public var configuration: Configuration?
     
     // MARK: - Initializers
     
-    public init(query: String, language: String?, page: Int?) {
+    public init(
+        query: String,
+        language: String?,
+        page: Int?,
+        includeAdult: Bool?,
+        region: String?,
+        year: Int?,
+        primaryReleaseYear: Int?) {
         self.query = query
         self.language = language
         self.page = page
+        self.includeAdult = includeAdult
+        self.region = region
+        self.year = year
+        self.primaryReleaseYear = primaryReleaseYear
     }
     
     // MARK: - Endpoint
@@ -56,19 +71,28 @@ public struct SearchMovieEndpoint: Endpoint {
     // MARK: - Private Methods
     
     private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        var queryItems = [URLQueryItem]()
-        let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
-        let searchQuery = URLQueryItem(name: "query", value: query)
+        var queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "query", value: query)
+        ]
         if let lang = language {
-            let langQuery = URLQueryItem(name: "language", value: lang)
-            queryItems.append(langQuery)
+            queryItems.append(URLQueryItem(name: "language", value: lang))
         }
         if let page = page {
-            let pageQuery = URLQueryItem(name: "page", value: "\(page)")
-            queryItems.append(pageQuery)
+            queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
         }
-        queryItems.append(searchQuery)
-        queryItems.append(apiKeyQuery)
+        if let includeAdult = includeAdult {
+            queryItems.append(URLQueryItem(name: "include_adult", value: "\(includeAdult)"))
+        }
+        if let region = region {
+            queryItems.append(URLQueryItem(name: "region", value: "\(region)"))
+        }
+        if let year = year {
+            queryItems.append(URLQueryItem(name: "year", value: "\(year)"))
+        }
+        if let primaryReleaseYear = primaryReleaseYear {
+            queryItems.append(URLQueryItem(name: "primary_release_year", value: "\(primaryReleaseYear)"))
+        }
         return queryItems
     }
     

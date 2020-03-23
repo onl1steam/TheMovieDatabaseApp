@@ -16,7 +16,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     public typealias Content = MoviesResponse
     
     // MARK: - Public Properties
-
+    
     let sessionId: String
     let accountId: Int?
     let language: String?
@@ -65,9 +65,9 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     // MARK: - Private Methods
     
     private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        var queryItems = [URLQueryItem]()
-        let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
-        let sessionIdQuery = URLQueryItem(name: "session_id", value: sessionId)
+        var queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "session_id", value: sessionId)]
         
         if let lang = language {
             let langQuery = URLQueryItem(name: "language", value: lang)
@@ -81,8 +81,6 @@ public struct FavoriteMoviesEndpoint: Endpoint {
             let pageQuery = URLQueryItem(name: "page", value: "\(page)")
             queryItems.append(pageQuery)
         }
-        queryItems.append(apiKeyQuery)
-        queryItems.append(sessionIdQuery)
         return queryItems
     }
     

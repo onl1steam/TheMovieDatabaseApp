@@ -22,13 +22,13 @@ final class AccountTests: XCTestCase {
     func testLoadingAccountDetails() {
         let expectation = self.expectation(description: "Удаление сессии")
         createSession(expectation: expectation, loadAccountDetailsTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
      // MARK: - Methods
     
     func loadAccountDetailsTest(expectation: XCTestExpectation, sessionId: String) {
-        let accountDetailsEndpoint = AccountDetailsEndpoint(baseURL: baseURL, apiKey: apiKey, sessionId: sessionId)
+        let accountDetailsEndpoint = AccountDetailsEndpoint(sessionId: sessionId)
         apiClient.request(accountDetailsEndpoint) { response in
             expectation.fulfill()
             switch response {

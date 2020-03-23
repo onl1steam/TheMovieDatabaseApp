@@ -24,40 +24,36 @@ final class MovieDetailsTests: XCTestCase {
     
     func testLoadingFavoriteMoviesId() {
         let expectation = self.expectation(description: "Получаем информацию о фильме")
-        createSession(expectation: expectation, getFavoriteMoviesIdTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        createSession(expectation: expectation, loadFavoriteMoviesIdTest)
+        wait(for: [expectation], timeout: 40.0)
     }
     
     func testLoadingFavoriteMoviesTitle() {
         let expectation = self.expectation(description: "Получаем информацию о фильме")
         createSession(expectation: expectation, loadFavoriteMoviesTitleTest)
-        waitForExpectations(timeout: 40, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
      // MARK: - Methods
     
-    func getFavoriteMoviesIdTest(expectation: XCTestExpectation, sessionId: String) {
+    func loadFavoriteMoviesIdTest(expectation: XCTestExpectation, sessionId: String) {
         let movieDetailsEndpoint = MovieDetailsEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
             movieId: movieId,
-            language: "ru")
+            language: nil)
         apiClient.request(movieDetailsEndpoint) { [weak self] response in
             guard let self = self else { return }
-            expectation.fulfill()
             switch response {
             case .success(let content):
                 XCTAssertEqual(self.movieId, content.id)
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
+            expectation.fulfill()
         }
     }
     
     func loadFavoriteMoviesTitleTest(expectation: XCTestExpectation, sessionId: String) {
         let movieDetailsEndpoint = MovieDetailsEndpoint(
-            baseURL: baseURL,
-            apiKey: apiKey,
             movieId: movieId,
             language: "ru")
         apiClient.request(movieDetailsEndpoint) { response in

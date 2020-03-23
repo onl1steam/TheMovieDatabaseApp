@@ -9,7 +9,7 @@
 import Foundation
 
 /// Эндпоинт для удаления сессии.
-public class DeleteSessionEndpoint: Endpoint {
+public struct DeleteSessionEndpoint: Endpoint {
     
     // MARK: - Types
     

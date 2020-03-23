@@ -26,7 +26,7 @@ class Authorization: AuthorizationType {
     let apiClient: APIClient = NetworkSettings.apiClient
     
     func authorize(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
-        let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
+        let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { response in
             switch response {
             case .success(let content):
@@ -39,8 +39,6 @@ class Authorization: AuthorizationType {
     
     private func validateSession(token: String, _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
-            baseURL: self.baseURL,
-            apiKey: self.apiKey,
             username: "onl1steam",
             password: "Onl1sTeam",
             requestToken: token)
@@ -55,7 +53,7 @@ class Authorization: AuthorizationType {
     }
     
     private func getSessionId(token: String, _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
-        let createSession = CreateSessionEndpoint(baseURL: baseURL, apiKey: apiKey, requestToken: token)
+        let createSession = CreateSessionEndpoint(requestToken: token)
         apiClient.request(createSession) { response in
             switch response {
             case .success(let content):

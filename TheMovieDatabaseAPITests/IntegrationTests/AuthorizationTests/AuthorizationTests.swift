@@ -21,7 +21,7 @@ final class AuthorizationTests: XCTestCase {
     
     func testLoadingToken() {
         let expectation = self.expectation(description: "Получение токена")
-        let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
+        let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { response in
             expectation.fulfill()
             switch response {
@@ -31,12 +31,12 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
     func testCreatingLoginSession() {
         let expectation = self.expectation(description: "Валидация сессии")
-        let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
+        let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -46,12 +46,12 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
     func testCreatingSession() {
         let expectation = self.expectation(description: "Создание сессии")
-        let createTokenEndpoint = CreateTokenEndpoint(baseURL: baseURL, apiKey: apiKey)
+        let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -61,15 +61,13 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10, handler: nil)
+        wait(for: [expectation], timeout: 40.0)
     }
     
     // MARK: - Methods
     
     func createLoginSessionTest(requestToken: String, expectation: XCTestExpectation) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
-            baseURL: self.baseURL,
-            apiKey: self.apiKey,
             username: "onl1steam",
             password: "Onl1sTeam",
             requestToken: requestToken)
@@ -86,8 +84,6 @@ final class AuthorizationTests: XCTestCase {
     
     func createLoginSession(requestToken: String, expectation: XCTestExpectation) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
-            baseURL: self.baseURL,
-            apiKey: self.apiKey,
             username: "onl1steam",
             password: "Onl1sTeam",
             requestToken: requestToken)
@@ -103,7 +99,7 @@ final class AuthorizationTests: XCTestCase {
     }
     
     func createSessionTest(requestToken: String, expectation: XCTestExpectation) {
-        let createSession = CreateSessionEndpoint(baseURL: baseURL, apiKey: apiKey, requestToken: requestToken)
+        let createSession = CreateSessionEndpoint(requestToken: requestToken)
         apiClient.request(createSession) { response in
             expectation.fulfill()
             switch response {

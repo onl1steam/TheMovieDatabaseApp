@@ -9,7 +9,7 @@
 import Foundation
 
 /// Эндпоинт для получения детальной информации о фильме.
-public class MovieDetailsEndpoint: Endpoint {
+public struct MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Types
 
@@ -54,13 +54,13 @@ public class MovieDetailsEndpoint: Endpoint {
     // MARK: - Private Methods
     
     private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        var queryItems = [URLQueryItem]()
-        let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
+        var queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey)
+        ]
         if let lang = language {
             let langQuery = URLQueryItem(name: "language", value: lang)
             queryItems.append(langQuery)
         }
-        queryItems.append(apiKeyQuery)
         return queryItems
     }
     
