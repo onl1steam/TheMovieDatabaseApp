@@ -15,28 +15,29 @@ final class MovieDetailsTests: XCTestCase {
     
     // Id фильма "Джокер"
     let movieId = 475557
+    var apiClient: APIClient!
+    var sessionId: String!
     
-    let baseURL = NetworkSettings.baseURL
-    let apiKey = NetworkSettings.apiKey
-    let apiClient = NetworkSettings.apiClient
+    override func setUp() {
+        super.setUp()
+        let exp = expectation(description: "Авторизация")
+        apiClient = NetworkSettings.apiClient
+        createSession { [weak self] response in
+            switch response {
+            case .success(let sessionInfo):
+                self?.sessionId = sessionInfo.sessionId
+            case .failure(let error):
+                XCTFail("Ошибка авторизации: \(error.localizedDescription)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5)
+    }
     
     // MARK: - Tests
     
     func testLoadingFavoriteMoviesId() {
         let expectation = self.expectation(description: "Получаем информацию о фильме")
-        createSession(expectation: expectation, loadFavoriteMoviesIdTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-    func testLoadingFavoriteMoviesTitle() {
-        let expectation = self.expectation(description: "Получаем информацию о фильме")
-        createSession(expectation: expectation, loadFavoriteMoviesTitleTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-     // MARK: - Methods
-    
-    func loadFavoriteMoviesIdTest(expectation: XCTestExpectation, sessionId: String) {
         let movieDetailsEndpoint = MovieDetailsEndpoint(
             movieId: movieId,
             language: nil)
@@ -50,9 +51,11 @@ final class MovieDetailsTests: XCTestCase {
             }
             expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 40.0)
     }
     
-    func loadFavoriteMoviesTitleTest(expectation: XCTestExpectation, sessionId: String) {
+    func testLoadingFavoriteMoviesTitle() {
+        let expectation = self.expectation(description: "Получаем информацию о фильме")
         let movieDetailsEndpoint = MovieDetailsEndpoint(
             movieId: movieId,
             language: "ru")
@@ -65,20 +68,13 @@ final class MovieDetailsTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
+        wait(for: [expectation], timeout: 40.0)
     }
     
-    func createSession(
-        expectation: XCTestExpectation,
-        _ completion: @escaping (_ expectation: XCTestExpectation, _ sessionId: String) -> Void) {
-        
+    // MARK: - Methods
+    
+    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let authorization: AuthorizationType = Authorization()
-        authorization.authorize { response in
-            switch response {
-            case .success(let content):
-                completion(expectation, content.sessionId)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
+        authorization.authorize(completion)
     }
 }

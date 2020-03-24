@@ -13,27 +13,29 @@ final class MoviesListTests: XCTestCase {
     
     // MARK: - Properties
     
-    let baseURL = NetworkSettings.baseURL
-    let apiKey = NetworkSettings.apiKey
-    let apiClient = NetworkSettings.apiClient
+    var apiClient: APIClient!
+    var sessionId: String!
+    
+    override func setUp() {
+        super.setUp()
+        let exp = expectation(description: "Авторизация")
+        apiClient = NetworkSettings.apiClient
+        createSession { [weak self] response in
+            switch response {
+            case .success(let sessionInfo):
+                self?.sessionId = sessionInfo.sessionId
+            case .failure(let error):
+                XCTFail("Ошибка авторизации: \(error.localizedDescription)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5)
+    }
     
     // MARK: - Tests
     
     func testLoadingFavoriteMovies() {
         let expectation = self.expectation(description: "Получаем список избранных фильмов")
-        createSession(expectation: expectation, loadFavoriteMoviesTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-    func testSearchingMovies() {
-        let expectation = self.expectation(description: "Получаем список фильмов по введенной строке")
-        createSession(expectation: expectation, searchMoviesTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-     // MARK: - Methods
-    
-    func loadFavoriteMoviesTest(expectation: XCTestExpectation, sessionId: String) {
         let favoriteMoviesEndpoint = FavoriteMoviesEndpoint(
             sessionId: sessionId,
             accountId: nil,
@@ -49,9 +51,11 @@ final class MoviesListTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
+        wait(for: [expectation], timeout: 5.0)
     }
     
-    func searchMoviesTest(expectation: XCTestExpectation, sessionId: String) {
+    func testSearchingMovies() {
+        let expectation = self.expectation(description: "Получаем список фильмов по введенной строке")
         let searchMoviesEndpoint = SearchMovieEndpoint(
             query: "Звёздные войны",
             language: nil,
@@ -69,20 +73,13 @@ final class MoviesListTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
+        wait(for: [expectation], timeout: 5.0)
     }
     
-    func createSession(
-        expectation: XCTestExpectation,
-        _ completion: @escaping (_ expectation: XCTestExpectation, _ sessionId: String) -> Void) {
-        
+     // MARK: - Methods
+    
+    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let authorization: AuthorizationType = Authorization()
-        authorization.authorize { response in
-            switch response {
-            case .success(let content):
-                completion(expectation, content.sessionId)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
+        authorization.authorize(completion)
     }
 }

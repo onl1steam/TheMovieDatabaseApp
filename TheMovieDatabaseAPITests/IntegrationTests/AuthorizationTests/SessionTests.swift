@@ -13,21 +13,29 @@ final class SessionTests: XCTestCase {
     
     // MARK: - Properties
     
-    let baseURL = NetworkSettings.baseURL
-    let apiKey = NetworkSettings.apiKey
-    let apiClient = NetworkSettings.apiClient
+    var apiClient: APIClient!
+    var sessionId: String!
+    
+    override func setUp() {
+        super.setUp()
+        let exp = expectation(description: "Авторизация")
+        apiClient = NetworkSettings.apiClient
+        createSession { [weak self] response in
+            switch response {
+            case .success(let sessionInfo):
+                self?.sessionId = sessionInfo.sessionId
+            case .failure(let error):
+                XCTFail("Ошибка авторизации: \(error.localizedDescription)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5)
+    }
     
     // MARK: - Tests
     
     func testDeletingSession() {
         let expectation = self.expectation(description: "Удаление сессии")
-        createSession(expectation: expectation, deleteSessionTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-     // MARK: - Methods
-    
-    func deleteSessionTest(expectation: XCTestExpectation, sessionId: String) {
         let deleteSessionEndpoint = DeleteSessionEndpoint(sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { response in
             expectation.fulfill()
@@ -38,20 +46,13 @@ final class SessionTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
+        wait(for: [expectation], timeout: 5)
     }
     
-    func createSession(
-        expectation: XCTestExpectation,
-        _ completion: @escaping (_ expectation: XCTestExpectation, _ sessionId: String) -> Void) {
-        
+     // MARK: - Methods
+    
+    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let authorization: AuthorizationType = Authorization()
-        authorization.authorize { response in
-            switch response {
-            case .success(let content):
-                completion(expectation, content.sessionId)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
+        authorization.authorize(completion)
     }
 }

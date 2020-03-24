@@ -37,7 +37,11 @@ protocol Session {
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func favoriteMovies(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    func favoriteMovies(
+        language: String?,
+        sortBy: FavoriteMoviesEndpoint.Filter?,
+        page: Int?,
+        _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
 }
 
 final class SessionService: Session {
@@ -83,7 +87,12 @@ final class SessionService: Session {
         apiClient.request(endpoint, completionHandler: completion)
     }
     
-    func favoriteMovies(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    func favoriteMovies(
+        language: String?,
+        sortBy: FavoriteMoviesEndpoint.Filter?,
+        page: Int?,
+        _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+        
         guard let sessionId = sessionId else {
             completion(.failure(AuthError.noSessionId))
             return
@@ -91,9 +100,9 @@ final class SessionService: Session {
         let endpoint = FavoriteMoviesEndpoint(
             sessionId: sessionId,
             accountId: accountId,
-            language: nil,
-            sortBy: nil,
-            page: nil)
+            language: language,
+            sortBy: sortBy,
+            page: page)
         apiClient.request(endpoint, completionHandler: completion)
     }
     

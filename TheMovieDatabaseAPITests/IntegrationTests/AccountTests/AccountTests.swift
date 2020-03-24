@@ -13,45 +13,46 @@ final class AccountTests: XCTestCase {
     
     // MARK: - Properties
     
-    let baseURL = NetworkSettings.baseURL
-    let apiKey = NetworkSettings.apiKey
-    let apiClient = NetworkSettings.apiClient
+    var apiClient: APIClient!
+    var sessionId: String!
+    
+    override func setUp() {
+        super.setUp()
+        let exp = expectation(description: "Авторизация")
+        apiClient = NetworkSettings.apiClient
+        createSession { [weak self] response in
+            switch response {
+            case .success(let sessionInfo):
+                self?.sessionId = sessionInfo.sessionId
+            case .failure(let error):
+                XCTFail("Ошибка авторизации: \(error.localizedDescription)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5)
+    }
     
     // MARK: - Tests
     
     func testLoadingAccountDetails() {
-        let expectation = self.expectation(description: "Удаление сессии")
-        createSession(expectation: expectation, loadAccountDetailsTest)
-        wait(for: [expectation], timeout: 40.0)
-    }
-    
-     // MARK: - Methods
-    
-    func loadAccountDetailsTest(expectation: XCTestExpectation, sessionId: String) {
+        let exp = expectation(description: "Получение информации об аккаунте")
         let accountDetailsEndpoint = AccountDetailsEndpoint(sessionId: sessionId)
         apiClient.request(accountDetailsEndpoint) { response in
-            expectation.fulfill()
             switch response {
             case .success(let content):
                 XCTAssertEqual(content.username, "onl1steam")
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 5)
     }
     
-    func createSession(
-        expectation: XCTestExpectation,
-        _ completion: @escaping (_ expectation: XCTestExpectation, _ sessionId: String) -> Void) {
-        
+     // MARK: - Methods
+    
+    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let authorization: AuthorizationType = Authorization()
-        authorization.authorize { response in
-            switch response {
-            case .success(let content):
-                completion(expectation, content.sessionId)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
+        authorization.authorize(completion)
     }
 }

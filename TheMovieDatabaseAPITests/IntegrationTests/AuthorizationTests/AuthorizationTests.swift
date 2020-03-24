@@ -31,7 +31,7 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        wait(for: [expectation], timeout: 40.0)
+        wait(for: [expectation], timeout: 5)
     }
     
     func testCreatingLoginSession() {
@@ -46,7 +46,7 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        wait(for: [expectation], timeout: 40.0)
+        wait(for: [expectation], timeout: 5)
     }
     
     func testCreatingSession() {
@@ -61,7 +61,7 @@ final class AuthorizationTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        wait(for: [expectation], timeout: 40.0)
+        wait(for: [expectation], timeout: 5)
     }
     
     // MARK: - Methods
