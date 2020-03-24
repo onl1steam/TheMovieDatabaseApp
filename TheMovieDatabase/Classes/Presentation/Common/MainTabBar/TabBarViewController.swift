@@ -17,9 +17,15 @@ final class TabBarViewController: UITabBarController {
         setupColorScheme()
         setupViewControllers()
         setupTabBar()
+        setupAccessability()
     }
     
     // MARK: - Private Methods
+    
+    private func setupAccessability() {
+        tabBar.isAccessibilityElement = true
+        tabBar.accessibilityIdentifier = "tabBar"
+    }
     
     private func setupTabBar() {
         let fontSize: CGFloat = 12

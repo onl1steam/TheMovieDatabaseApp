@@ -27,12 +27,14 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добро пожаловать!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bo-OS-RWo">
                     <rect key="frame" x="24" y="91" width="327" height="39"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_welcomeLabel"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите логин и пароль, которые  вы использовали для входа" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X44-5a-iSa">
                     <rect key="frame" x="24" y="155" width="327" height="41"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_infoLabel"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -40,6 +42,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-uc-das" customClass="RoundedButton" customModule="TheMovieDatabase" customModuleProvider="target">
                     <rect key="frame" x="23" y="584" width="328" height="56"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_login"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="7M7-SK-kIc"/>
                     </constraints>
@@ -58,6 +61,7 @@
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8PD-68-11f" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
                     <rect key="frame" x="24" y="228" width="327" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_login"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="cnl-6D-7B7"/>
                     </constraints>
@@ -72,6 +76,7 @@
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPi-ES-yo3" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
                     <rect key="frame" x="24" y="300" width="327" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_password"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="qGV-ZQ-MJq"/>
                     </constraints>
@@ -85,6 +90,7 @@
                 </textField>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Строка Ошибки" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
                     <rect key="frame" x="24" y="372" width="327" height="19.5"/>
+                    <accessibility key="accessibilityConfiguration" identifier="auth_error"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>

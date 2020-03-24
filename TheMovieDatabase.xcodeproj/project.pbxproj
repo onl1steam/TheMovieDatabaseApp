@@ -76,6 +76,8 @@
 		92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAAD242A53DD00DD587D /* ImageServiceTests.swift */; };
 		92E5CAB2242A8A9000DD587D /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAB1242A8A9000DD587D /* AuthServiceTests.swift */; };
 		92E5CAB5242A8EB100DD587D /* SessionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAB4242A8EB100DD587D /* SessionServiceTests.swift */; };
+		92E5CAB8242ACB4200DD587D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAB7242ACB4200DD587D /* UIViewExtension.swift */; };
+		92E5CABA242ACB7900DD587D /* ViewControllerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAB9242ACB7900DD587D /* ViewControllerTestCase.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -214,6 +216,8 @@
 		92E5CAAD242A53DD00DD587D /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		92E5CAB1242A8A9000DD587D /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
 		92E5CAB4242A8EB100DD587D /* SessionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionServiceTests.swift; sourceTree = "<group>"; };
+		92E5CAB7242ACB4200DD587D /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		92E5CAB9242ACB7900DD587D /* ViewControllerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTestCase.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -623,6 +627,7 @@
 		92D1122C241670CC0087D910 /* TheMovieDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CAB6242ACB1B00DD587D /* Helpers */,
 				92E5CAAA242A2F3A00DD587D /* Mocks */,
 				92E5CAA92429692D00DD587D /* Business Logic */,
 				92D1122F241670CC0087D910 /* Info.plist */,
@@ -713,6 +718,15 @@
 			children = (
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		92E5CAB6242ACB1B00DD587D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CAB7242ACB4200DD587D /* UIViewExtension.swift */,
+				92E5CAB9242ACB7900DD587D /* ViewControllerTestCase.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		92F64D422420F58900693C9B /* Images */ = {
@@ -1206,8 +1220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E5CAB8242ACB4200DD587D /* UIViewExtension.swift in Sources */,
 				92E5CAB5242A8EB100DD587D /* SessionServiceTests.swift in Sources */,
 				92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */,
+				92E5CABA242ACB7900DD587D /* ViewControllerTestCase.swift in Sources */,
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 				92E5CAB2242A8A9000DD587D /* AuthServiceTests.swift in Sources */,

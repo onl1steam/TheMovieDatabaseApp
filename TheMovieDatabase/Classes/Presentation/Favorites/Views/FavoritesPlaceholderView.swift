@@ -46,6 +46,7 @@ final class FavoritesPlaceholderView: UIView {
         setupPlaceholderLabelConstraints()
         setupNavigationButtonConstraints()
         setupPlaceholderImageViewConstraints()
+        setupAccessability()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -58,6 +59,20 @@ final class FavoritesPlaceholderView: UIView {
         addSubview(placeholderLabel)
         addSubview(placeholderImageView)
         addSubview(navigationButton)
+    }
+    
+    private func setupAccessability() {
+        isAccessibilityElement = true
+        accessibilityIdentifier = "favorites_placeholder"
+        
+        placeholderLabel.isAccessibilityElement = true
+        placeholderLabel.accessibilityIdentifier = "favorites_placeholder_label"
+        
+        navigationButton.isAccessibilityElement = true
+        navigationButton.accessibilityIdentifier = "favorites_placeholder_navigation"
+        
+        placeholderImageView.isAccessibilityElement = true
+        placeholderImageView.accessibilityIdentifier = "favorites_placeholder_imageView"
     }
     
     private func setupPlaceholderLabelConstraints() {
