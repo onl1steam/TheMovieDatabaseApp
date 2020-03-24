@@ -65,6 +65,17 @@ class SessionServiceTests: XCTestCase {
         }
     }
     
+    func testDeletingSession() {
+        sessionService.deleteSession { response in
+            switch response {
+            case .success(let isSucceed):
+                XCTAssert(isSucceed)
+            case .failure(let error):
+                XCTFail("Ошибка: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func createSession(_ completion: @escaping (Result<String, Error>) -> Void) {
         let user = User(login: "onl1steam", password: "Onl1sTeam")
         authService.authorizeWithUser(user: user, completion)

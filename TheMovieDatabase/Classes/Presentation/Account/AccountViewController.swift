@@ -51,7 +51,14 @@ final class AccountViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        sessionService.deleteSession()
+        sessionService.deleteSession { [weak self] response in
+            switch response {
+            case .success(let isSucceed):
+                print(isSucceed)
+            case .failure(let error):
+                self?.showError(message: error.localizedDescription)
+            }
+        }
         presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
     }
     

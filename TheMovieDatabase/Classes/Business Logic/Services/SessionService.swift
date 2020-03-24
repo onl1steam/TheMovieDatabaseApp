@@ -13,7 +13,9 @@ import TheMovieDatabaseAPI
 protocol Session {
     
     /// Удаляет текущую сессию пользователя.
-    func deleteSession()
+    /// - Parameters:
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
+    func deleteSession(_ completion: @escaping (Result<Bool, Error>) -> Void)
     
     /// Устанавливает id текущей сессии.
     ///
@@ -65,16 +67,16 @@ final class SessionService: Session {
     
     // MARK: - Session
     
-    func deleteSession() {
+    func deleteSession(_ completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let deleteSessionEndpoint = DeleteSessionEndpoint(sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let isSucceed):
-                print(isSucceed)
+                completion(.success(isSucceed))
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
             self.sessionId = nil
             self.accountId = nil
