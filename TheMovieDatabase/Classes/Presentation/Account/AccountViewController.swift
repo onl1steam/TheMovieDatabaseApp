@@ -59,7 +59,7 @@ final class AccountViewController: UIViewController {
     
     private func loadAccountInfo() {
         
-        sessionService.getAccountInfo { [weak self] response in
+        sessionService.accountInfo { [weak self] response in
             guard let self = self else { return }
             var avatarHash: String?
             switch response {
@@ -72,7 +72,7 @@ final class AccountViewController: UIViewController {
                 self.showError(message: error.localizedDescription)
             }
             guard let hash = avatarHash else { return }
-            self.imageService.getAvatar(avatarPath: hash) { [weak self] response in
+            self.imageService.avatar(avatarPath: hash) { [weak self] response in
                 guard let self = self else { return }
                 switch response {
                 case .success(let info):

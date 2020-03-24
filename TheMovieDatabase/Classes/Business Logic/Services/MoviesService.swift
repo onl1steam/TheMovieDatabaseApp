@@ -16,14 +16,14 @@ protocol MoviesServiceType {
     /// - Parameters:
     ///   - query: Строка поиска фильма.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    func searchMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
     
     /// Возвращает подробную информацию о фильмо.
     ///
     /// - Parameters:
     ///   - movieId: Id фильма.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
-    func getMovieDetails(
+    func movieDetails(
         movieId: Int,
         language: String?,
         _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
@@ -45,7 +45,7 @@ final class MoviesService: MoviesServiceType {
     
     // MARK: - MoviesServiceType
     
-    func findMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    func searchMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
         let endpoint = SearchMovieEndpoint(
             query: query,
             language: nil,
@@ -57,7 +57,7 @@ final class MoviesService: MoviesServiceType {
         apiClient.request(endpoint, completionHandler: completion)
     }
     
-    func getMovieDetails(
+    func movieDetails(
         movieId: Int,
         language: String?,
         _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {

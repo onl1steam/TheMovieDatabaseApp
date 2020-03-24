@@ -31,13 +31,13 @@ protocol Session {
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
-    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
+    func accountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
     
     /// Возвращает список избранных фильмов пользователя.
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    func favoriteMovies(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
 }
 
 final class SessionService: Session {
@@ -77,13 +77,13 @@ final class SessionService: Session {
         }
     }
     
-    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
+    func accountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
         apiClient.request(endpoint, completionHandler: completion)
     }
     
-    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    func favoriteMovies(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
         guard let sessionId = sessionId else {
             completion(.failure(AuthError.noSessionId))
             return

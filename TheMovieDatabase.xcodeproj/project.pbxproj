@@ -72,6 +72,8 @@
 		92E5CAA324295D9B00DD587D /* AvatarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA224295D9B00DD587D /* AvatarTests.swift */; };
 		92E5CAA624295FEF00DD587D /* PosterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA524295FEF00DD587D /* PosterTests.swift */; };
 		92E5CAA8242967FE00DD587D /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAA7242967FE00DD587D /* ValidationService.swift */; };
+		92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAAB242A4CEE00DD587D /* MoviesServiceTests.swift */; };
+		92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAAD242A53DD00DD587D /* ImageServiceTests.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -206,6 +208,8 @@
 		92E5CAA224295D9B00DD587D /* AvatarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTests.swift; sourceTree = "<group>"; };
 		92E5CAA524295FEF00DD587D /* PosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTests.swift; sourceTree = "<group>"; };
 		92E5CAA7242967FE00DD587D /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		92E5CAAB242A4CEE00DD587D /* MoviesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesServiceTests.swift; sourceTree = "<group>"; };
+		92E5CAAD242A53DD00DD587D /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -615,6 +619,7 @@
 		92D1122C241670CC0087D910 /* TheMovieDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CAAA242A2F3A00DD587D /* Mocks */,
 				92E5CAA92429692D00DD587D /* Business Logic */,
 				92D1122F241670CC0087D910 /* Info.plist */,
 			);
@@ -625,6 +630,8 @@
 			isa = PBXGroup;
 			children = (
 				92D112362416715A0087D910 /* ValidationServiceTests.swift */,
+				92E5CAAB242A4CEE00DD587D /* MoviesServiceTests.swift */,
+				92E5CAAD242A53DD00DD587D /* ImageServiceTests.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -693,6 +700,13 @@
 				92D112352416711E0087D910 /* Services */,
 			);
 			path = "Business Logic";
+			sourceTree = "<group>";
+		};
+		92E5CAAA242A2F3A00DD587D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		92F64D422420F58900693C9B /* Images */ = {
@@ -1186,7 +1200,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */,
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
+				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

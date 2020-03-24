@@ -11,7 +11,12 @@ import XCTest
 
 final class ValidationServiceTests: XCTestCase {
     
-    let validationService: Validation = ServiceLayer.shared.validationService
+    var validationService: Validation!
+    
+    override func setUp() {
+        super.setUp()
+        validationService = ServiceLayer.shared.validationService
+    }
     
     func testInputFilledFields() {
         let user = User(login: "Foo", password: "Barr")
