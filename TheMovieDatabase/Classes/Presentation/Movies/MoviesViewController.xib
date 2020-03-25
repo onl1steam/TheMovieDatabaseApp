@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesViewController" customModule="TheMovieDatabase" customModuleProvider="target">
             <connections>
+                <outlet property="moviesBackground" destination="Qod-J3-W6D" id="TwT-4Y-uNA"/>
                 <outlet property="moviesLabel" destination="14u-yW-K77" id="Io4-pI-6P2"/>
                 <outlet property="moviesSearchBar" destination="JeH-8h-yUX" id="bAV-VA-UUd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

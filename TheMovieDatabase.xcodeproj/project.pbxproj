@@ -84,6 +84,9 @@
 		92E5CAC6242AD7C300DD587D /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAC5242AD7C300DD587D /* AccountDetails.swift */; };
 		92E5CAC8242ADAB800DD587D /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAC7242ADAB800DD587D /* MovieList.swift */; };
 		92E5CACA242ADAD200DD587D /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAC9242ADAD200DD587D /* MovieDetails.swift */; };
+		92E5CACD242AE7E900DD587D /* FavoritesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CACC242AE7E900DD587D /* FavoritesViewControllerTests.swift */; };
+		92E5CAD0242AEB3800DD587D /* MoviesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CACF242AEB3800DD587D /* MoviesViewControllerTests.swift */; };
+		92E5CAD3242AEEB900DD587D /* TabBarViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAD2242AEEB900DD587D /* TabBarViewControllerTests.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -230,6 +233,9 @@
 		92E5CAC5242AD7C300DD587D /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
 		92E5CAC7242ADAB800DD587D /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
 		92E5CAC9242ADAD200DD587D /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
+		92E5CACC242AE7E900DD587D /* FavoritesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControllerTests.swift; sourceTree = "<group>"; };
+		92E5CACF242AEB3800DD587D /* MoviesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewControllerTests.swift; sourceTree = "<group>"; };
+		92E5CAD2242AEEB900DD587D /* TabBarViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerTests.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -748,6 +754,10 @@
 		92E5CABB242AD22700DD587D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CAD1242AEEA100DD587D /* Common */,
+				92E5CAD4242AF0A800DD587D /* Authorization */,
+				92E5CACE242AEB1F00DD587D /* Movies */,
+				92E5CACB242AE7D000DD587D /* Favorites */,
 				92E5CABC242AD25200DD587D /* Account */,
 			);
 			path = Presentation;
@@ -769,6 +779,37 @@
 				92E5CAC9242ADAD200DD587D /* MovieDetails.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		92E5CACB242AE7D000DD587D /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CACC242AE7E900DD587D /* FavoritesViewControllerTests.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		92E5CACE242AEB1F00DD587D /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CACF242AEB3800DD587D /* MoviesViewControllerTests.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		92E5CAD1242AEEA100DD587D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CAD2242AEEB900DD587D /* TabBarViewControllerTests.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		92E5CAD4242AF0A800DD587D /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 		92F64D422420F58900693C9B /* Images */ = {
@@ -1271,10 +1312,13 @@
 				92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */,
 				92E5CABA242ACB7900DD587D /* ViewControllerTestCase.swift in Sources */,
 				92E5CABE242AD26300DD587D /* AccountViewControllerTests.swift in Sources */,
+				92E5CACD242AE7E900DD587D /* FavoritesViewControllerTests.swift in Sources */,
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 				92E5CAC2242AD5B900DD587D /* SessionServiceMock.swift in Sources */,
 				92E5CAB2242A8A9000DD587D /* AuthServiceTests.swift in Sources */,
+				92E5CAD0242AEB3800DD587D /* MoviesViewControllerTests.swift in Sources */,
+				92E5CAD3242AEEB900DD587D /* TabBarViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

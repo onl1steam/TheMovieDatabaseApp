@@ -12,6 +12,7 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
+    @IBOutlet weak var moviesBackground: UIImageView!
     @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
     

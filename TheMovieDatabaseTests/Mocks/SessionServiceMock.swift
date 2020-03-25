@@ -47,12 +47,11 @@ final class SessionServiceMock: Session {
         page: Int?,
         _ completion: @escaping (Result<MovieList, Error>) -> Void) {
         
-        let result = MovieList.MoviesResult(id: 1)
         let movieList = MovieList(
             page: 1,
-            results: [result],
+            results: [],
             totalPages: 1,
-            totalResults: 1)
+            totalResults: 0)
         completion(.success(movieList))
     }
    
