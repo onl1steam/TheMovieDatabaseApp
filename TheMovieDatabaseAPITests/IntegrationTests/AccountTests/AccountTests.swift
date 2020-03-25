@@ -20,7 +20,7 @@ final class AccountTests: XCTestCase {
         super.setUp()
         let exp = expectation(description: "Авторизация")
         apiClient = NetworkSettings.apiClient
-        createSession { [weak self] response in
+        Authorization.authorize { [weak self] response in
             switch response {
             case .success(let sessionInfo):
                 self?.sessionId = sessionInfo.sessionId
@@ -47,12 +47,5 @@ final class AccountTests: XCTestCase {
             exp.fulfill()
         }
         wait(for: [exp], timeout: 5)
-    }
-    
-     // MARK: - Methods
-    
-    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
-        let authorization: AuthorizationType = Authorization()
-        authorization.authorize(completion)
     }
 }

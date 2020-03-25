@@ -6,26 +6,28 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Foundation
-import TheMovieDatabaseAPI
+@testable import TheMovieDatabaseAPI
+import XCTest
 
-/// Авторизирует в базе данных, используется в части setup теста.
-protocol AuthorizationType {
+class Authorization: XCTestCase {
     
-    /// Авторизация в базе данных
-    ///
-    /// - Parameters:
-    ///     - completion: Вызывается после окончания функции. Возвращает токен и id сессии при успехе или ошибку.
-    func authorize(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void)
-}
-
-class Authorization: AuthorizationType {
+    static let baseURL = NetworkSettings.baseURL
+    static let apiKey = NetworkSettings.apiKey
+    static let apiClient: APIClient = NetworkSettings.apiClient
     
-    let baseURL = NetworkSettings.baseURL
-    let apiKey = NetworkSettings.apiKey
-    let apiClient: APIClient = NetworkSettings.apiClient
+    static var sessionId: String?
+    static var requestToken: String?
     
-    func authorize(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
+    static func authorize(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
+        if let requestToken = Authorization.requestToken,
+            let sessionId = Authorization.sessionId {
+            completion(.success(SessionInfoModel(requestToken: requestToken, sessionId: sessionId)))
+        } else {
+            createToken(completion)
+        }
+    }
+    
+    private static func createToken(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let createTokenEndpoint = CreateTokenEndpoint()
         apiClient.request(createTokenEndpoint) { response in
             switch response {
@@ -37,7 +39,9 @@ class Authorization: AuthorizationType {
         }
     }
     
-    private func validateSession(token: String, _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
+    private static func validateSession(
+        token: String,
+        _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let createLoginSessionEndpoint = CreateLoginSessionEndpoint(
             username: "onl1steam",
             password: "Onl1sTeam",
@@ -52,7 +56,7 @@ class Authorization: AuthorizationType {
         }
     }
     
-    private func getSessionId(token: String, _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
+    private static func getSessionId(token: String, _ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
         let createSession = CreateSessionEndpoint(requestToken: token)
         apiClient.request(createSession) { response in
             switch response {

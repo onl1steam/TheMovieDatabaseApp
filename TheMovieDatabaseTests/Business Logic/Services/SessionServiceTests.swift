@@ -11,16 +11,14 @@ import XCTest
 
 final class SessionServiceTests: XCTestCase {
     
-    var authService: Authorization!
     var sessionService: Session!
     
     override func setUp() {
         super.setUp()
-        authService = ServiceLayer.shared.authService
         sessionService = ServiceLayer.shared.sessionService
         
         let exp = expectation(description: "Авторизация")
-        createSession { [weak self] response in
+        AuthorizationModel.authorize { [weak self] response in
             switch response {
             case .success(let sessionId):
                 self?.sessionService.setupSessionId(sessionId: sessionId)
@@ -74,10 +72,5 @@ final class SessionServiceTests: XCTestCase {
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
         }
-    }
-    
-    func createSession(_ completion: @escaping (Result<String, Error>) -> Void) {
-        let user = User(login: "onl1steam", password: "Onl1sTeam")
-        authService.authorizeWithUser(user: user, completion)
     }
 }

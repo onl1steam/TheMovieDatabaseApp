@@ -20,7 +20,7 @@ final class MoviesListTests: XCTestCase {
         super.setUp()
         let exp = expectation(description: "Авторизация")
         apiClient = NetworkSettings.apiClient
-        createSession { [weak self] response in
+        Authorization.authorize { [weak self] response in
             switch response {
             case .success(let sessionInfo):
                 self?.sessionId = sessionInfo.sessionId
@@ -74,12 +74,5 @@ final class MoviesListTests: XCTestCase {
             }
         }
         wait(for: [expectation], timeout: 5.0)
-    }
-    
-     // MARK: - Methods
-    
-    func createSession(_ completion: @escaping (Result<SessionInfoModel, Error>) -> Void) {
-        let authorization: AuthorizationType = Authorization()
-        authorization.authorize(completion)
     }
 }

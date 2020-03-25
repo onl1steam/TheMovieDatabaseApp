@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TheMovieDatabaseAPI
+@testable import TheMovieDatabaseAPI
 
 enum NetworkSettings {
     
