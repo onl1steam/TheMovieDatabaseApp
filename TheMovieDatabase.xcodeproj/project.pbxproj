@@ -94,6 +94,7 @@
 		92E5CADE242B079C00DD587D /* AuthServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CADD242B079C00DD587D /* AuthServiceMock.swift */; };
 		92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */; };
 		92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */; };
+		92E5CAE6242B111700DD587D /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE5242B111700DD587D /* ImageCacheTests.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -250,6 +251,7 @@
 		92E5CADD242B079C00DD587D /* AuthServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonViewTests.swift; sourceTree = "<group>"; };
+		92E5CAE5242B111700DD587D /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				92F64D5E24261D1C00693C9B /* IntegrationTests */,
 				92F64D532421705100693C9B /* Models */,
 				92163E58241C1A71008F8CE5 /* Info.plist */,
+				92E5CAE5242B111700DD587D /* ImageCacheTests.swift */,
 			);
 			path = TheMovieDatabaseAPITests;
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92F64D502421683D00693C9B /* SessionTests.swift in Sources */,
+				92E5CAE6242B111700DD587D /* ImageCacheTests.swift in Sources */,
 				92E5CA8B2429021000DD587D /* FavoriteMoviesEndpointTests.swift in Sources */,
 				92F64D4924215B2100693C9B /* AuthorizationTests.swift in Sources */,
 				92F64D5B24217C4400693C9B /* MoviesListTests.swift in Sources */,
