@@ -59,11 +59,12 @@ final class AuthorizationViewController: UIViewController {
         button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    let authViewModel: AuthorizationViewModelType
 
     // MARK: - Private Properties
     
-    private let authViewModel: AuthorizationViewModelType
-    private var isTextFieldsBlank = true
+    private(set) var isTextFieldsBlank = true
     
     // MARK: - Initializers
     

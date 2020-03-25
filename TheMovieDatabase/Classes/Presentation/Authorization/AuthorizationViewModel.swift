@@ -34,11 +34,14 @@ protocol AuthorizationViewModelType: class {
 
 final class AuthorizationViewModel {
     
+    // MARK: - Public Properties
+    
+    let authService: Authorization
+    let validationService: Validation
+    let sessionService: Session
+    
     // MARK: - Private Properties
-
-    private let authService: Authorization
-    private let validationService: Validation
-    private let sessionService: Session
+    
     private weak var delegate: AuthorizationViewModelDelegate?
     
     // MARK: - Initializers

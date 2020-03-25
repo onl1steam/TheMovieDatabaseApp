@@ -33,7 +33,7 @@ final class AccountViewControllerTests: ViewControllerTestCase {
     }
     
     func testDeletingAccountSessionWithError() {
-        viewController.logoutButtonTapped(self)
+        viewController.logout()
         XCTAssertEqual(viewController.errorLabel.text, "Не удалось деавторизоваться.")
     }
     

@@ -40,7 +40,8 @@ struct AccountDetails {
     
     init(
         avatar: AccountDetails.Avatar,
-        id: Int, iso6391: String,
+        id: Int,
+        iso6391: String,
         iso31661: String,
         name: String,
         includeAdult: Bool,
