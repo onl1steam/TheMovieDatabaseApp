@@ -11,7 +11,11 @@ import XCTest
 
 class ImageEndpointTests: XCTestCase {
     
+    // MARK: - Public Propertries
+    
     let posterPath = "/Foo.jpg"
+    
+    // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
         let expectedUrl = "https://image.tmdb.org/t/p/original\(posterPath)"

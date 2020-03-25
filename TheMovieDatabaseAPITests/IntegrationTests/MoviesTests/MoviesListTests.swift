@@ -11,10 +11,12 @@ import XCTest
 
 final class MoviesListTests: XCTestCase {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     var apiClient: APIClient!
     var sessionId: String!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()

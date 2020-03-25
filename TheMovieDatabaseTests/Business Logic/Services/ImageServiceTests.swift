@@ -11,12 +11,18 @@ import XCTest
 
 final class ImageServiceTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     var imageService: ImageServiceType!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         imageService = ServiceLayer.shared.imageService
     }
+    
+    // MARK: - Tests
     
     func testLoadAvatar() {
         let exp = expectation(description: "Загрузка аватара пользователя")

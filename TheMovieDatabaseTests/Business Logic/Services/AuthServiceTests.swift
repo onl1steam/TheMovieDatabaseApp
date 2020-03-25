@@ -11,12 +11,18 @@ import XCTest
 
 final class AuthServiceTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     var authService: Authorization!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         authService = ServiceLayer.shared.authService
     }
+    
+    // MARK: - Tests
     
     func testAuthorizationWithLogin() {
         let exp = expectation(description: "Авторизация пользователя")

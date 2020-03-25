@@ -10,14 +10,20 @@
 import XCTest
 
 final class MoviesViewControllerTests: ViewControllerTestCase {
+    
+    // MARK: - Public Properties
 
     var viewController: MoviesViewController { rootViewController as! MoviesViewController }
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         let moviesVC = MoviesViewController(sessionService: SessionServiceMock())
         rootViewController = moviesVC
     }
+    
+    // MARK: - Tests
     
     func testAppearanceAtStart() {
         XCTAssertEqual(viewController.moviesLabel.text, "Найдем любой фильм на ваш вкуc")

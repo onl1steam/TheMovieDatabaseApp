@@ -11,7 +11,7 @@ import XCTest
 
 class PosterTests: XCTestCase {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     let baseURL = NetworkSettings.baseURL
     let apiKey = NetworkSettings.apiKey

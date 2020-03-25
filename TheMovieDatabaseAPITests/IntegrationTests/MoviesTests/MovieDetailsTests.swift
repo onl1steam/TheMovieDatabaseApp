@@ -11,12 +11,14 @@ import XCTest
 
 final class MovieDetailsTests: XCTestCase {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     // Id фильма "Джокер"
     let movieId = 475557
     var apiClient: APIClient!
     var sessionId: String!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()

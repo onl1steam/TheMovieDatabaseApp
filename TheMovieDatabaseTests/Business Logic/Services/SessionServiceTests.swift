@@ -11,7 +11,11 @@ import XCTest
 
 final class SessionServiceTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     var sessionService: Session!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
@@ -29,6 +33,8 @@ final class SessionServiceTests: XCTestCase {
         }
         wait(for: [exp], timeout: 5)
     }
+    
+    // MARK: - Tests
     
     func testLoadingAccountInfo() {
         sessionService.accountInfo { response in

@@ -11,10 +11,14 @@ import XCTest
 
 class MovieDetailsEndpointTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     let sessionId = "1"
     let apiKey = NetworkSettings.apiKey
     
     let emptyAccountIdQuery = "%7Baccount_id%7D"
+    
+    // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
         let expectedUrl = "https://api.themoviedb.org/3/movie/1?api_key=\(apiKey)"

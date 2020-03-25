@@ -11,7 +11,11 @@ import XCTest
 
 class DeleteSessionEndpointTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     let apiKey = NetworkSettings.apiKey
+    
+    // MARK: - Tests
     
     func testMakeRequestUrl() throws {
         let expectedUrl = "https://api.themoviedb.org/3/authentication/session?api_key=\(apiKey)"

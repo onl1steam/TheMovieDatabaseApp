@@ -11,7 +11,11 @@ import XCTest
 
 final class AuthorizationViewControllerTests: ViewControllerTestCase {
     
+    // MARK: - Public Properties
+    
     var viewController: AuthorizationViewController { rootViewController as! AuthorizationViewController }
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
@@ -20,6 +24,8 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
         authViewModel.setupDelegate(delegate: authVC)
         rootViewController = authVC
     }
+    
+    // MARK: - Tests
     
     func testInterfaceItemsLabels() {
         XCTAssertEqual(viewController.authInfoLabel.text, "Укажите логин и пароль, которые вы использовали для входа")
@@ -61,5 +67,40 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     func testTogglingTextFieldState() {
         viewController.toggleTextFieldState(isBlank: true)
         XCTAssert(viewController.isTextFieldsBlank)
-    } 
+    }
+    
+    func testTapLoginButton() {
+        viewController.loginButtonTapped(self)
+        XCTAssert(!viewController.loginButton.isEnabled)
+    }
+    
+    func testBeginLoginEditing() {
+        viewController.loginEditingDidBegin(viewController.loginTextField)
+        XCTAssertEqual(viewController.loginTextField.layer.borderColor, Colors.purpure.cgColor)
+    }
+    
+    func testEndLoginEditing() {
+        viewController.loginEditingDidEnd(viewController.loginTextField)
+        XCTAssertEqual(viewController.loginTextField.layer.borderColor, Colors.darkBlue.cgColor)
+    }
+    
+    func testLoginTextFieldChanging() {
+        viewController.loginTextFieldChanged(viewController.loginTextField)
+        XCTAssert(!viewController.loginButton.isEnabled)
+    }
+    
+    func testBeginPasswordEditing() {
+        viewController.passwordEditingDidBegin(viewController.passwordTextField)
+        XCTAssertEqual(viewController.passwordTextField.layer.borderColor, Colors.purpure.cgColor)
+    }
+    
+    func testPasswordTextFieldChanging() {
+        viewController.passwordTextFieldChanged(viewController.passwordTextField)
+        XCTAssert(!viewController.loginButton.isEnabled)
+    }
+    
+    func testEndPasswordEditing() {
+        viewController.passwordEditingDidEnd(viewController.passwordTextField)
+        XCTAssertEqual(viewController.passwordTextField.layer.borderColor, Colors.darkBlue.cgColor)
+    }
 }

@@ -11,15 +11,21 @@ import XCTest
 
 final class MoviesServiceTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     // Id фильма "Джокер"
     let movieId = 475557
     
     var moviesService: MoviesServiceType!
     
+    // MARK: - setUp
+    
     override func setUp() {
         super.setUp()
         moviesService = ServiceLayer.shared.moviesService
     }
+    
+    // MARK: - Tests
     
     func testSearchMovies() {
         let exp = expectation(description: "Загрузка фильмов с результатом")

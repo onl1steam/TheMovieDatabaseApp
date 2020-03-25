@@ -11,7 +11,11 @@ import XCTest
 
 final class AccountViewControllerTests: ViewControllerTestCase {
     
+    // MARK: - Public Properties
+    
     var viewController: AccountViewController { rootViewController as! AccountViewController }
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
@@ -20,6 +24,8 @@ final class AccountViewControllerTests: ViewControllerTestCase {
             imageService: ImageServiceMock())
         rootViewController = accountVC
     }
+    
+    // MARK: - Tests
     
     func testLoadingAccountAvatar() {
         viewController.loadAccountInfo()

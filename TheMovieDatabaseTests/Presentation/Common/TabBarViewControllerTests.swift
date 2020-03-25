@@ -10,14 +10,20 @@
 import XCTest
 
 final class TabBarViewControllerTests: ViewControllerTestCase {
+    
+    // MARK: - Public Properties
 
     var viewController: TabBarViewController { rootViewController as! TabBarViewController }
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         let tabBarVC = TabBarViewController()
         rootViewController = tabBarVC
     }
+    
+    // MARK: - Tests
     
     func testTabBarItemsCount() {
         XCTAssertNotNil(viewController.tabBar.items)

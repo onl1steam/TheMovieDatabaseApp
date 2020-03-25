@@ -10,13 +10,19 @@
 import XCTest
 
 class RoundedButtonViewTests: XCTestCase {
+    
+    // MARK: - Public Properties
 
     var roundedButton: RoundedButton!
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         roundedButton = RoundedButton()
     }
+    
+    // MARK: - Tests
     
     func testSetupBorderWidth() {
         let borderWidth: CGFloat = 2.0

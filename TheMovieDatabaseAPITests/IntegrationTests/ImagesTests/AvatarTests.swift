@@ -13,7 +13,7 @@ import XCTest
 
 final class AvatarTests: XCTestCase {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     let baseURL = NetworkSettings.baseURL
     let apiKey = NetworkSettings.apiKey

@@ -11,8 +11,12 @@ import XCTest
 
 class AccountDetailsEndpointTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     let sessionId = "1"
     let apiKey = NetworkSettings.apiKey
+    
+    // MARK: - Tests
 
     func testMakeRequest() throws {
         let expectedUrl = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(sessionId)"

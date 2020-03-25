@@ -10,15 +10,21 @@
 import XCTest
 
 final class FavoritesViewControllerTests: ViewControllerTestCase {
+    
+    // MARK: - Public Properties
 
     var viewController: FavoritesViewController { rootViewController as! FavoritesViewController }
     var placeholderView: FavoritesPlaceholderView? { subview(with: "favorites_placeholder") }
+    
+    // MARK: - setUp
     
     override func setUp() {
         super.setUp()
         let favoritesVC = FavoritesViewController(sessionService: SessionServiceMock())
         rootViewController = favoritesVC
     }
+    
+    // MARK: - Tests
     
     func testPlaceholderAtStart() {
         XCTAssertEqual(placeholderView?.placeholderLabel.text, "Вы не добавили ни одного фильма")

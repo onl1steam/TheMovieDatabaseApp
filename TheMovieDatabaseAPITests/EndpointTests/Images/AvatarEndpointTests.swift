@@ -11,7 +11,11 @@ import XCTest
 
 class AvatarEndpointTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     let avatarHash = "Foo"
+    
+    // MARK: - Tests
     
     func testMakeRequest() throws {
         let expectedUrl = "https://www.gravatar.com/avatar/\(avatarHash)"

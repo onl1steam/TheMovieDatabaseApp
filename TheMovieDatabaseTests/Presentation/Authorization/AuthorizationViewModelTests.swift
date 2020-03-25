@@ -10,8 +10,12 @@ import XCTest
 
 final class AuthorizationViewModelTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     var authViewModel: AuthorizationViewModel!
     var authVCMock: AuthorizationViewControllerMock!
+    
+    // MARK: - setUp
 
     override func setUp() {
         super.setUp()
@@ -22,6 +26,8 @@ final class AuthorizationViewModelTests: XCTestCase {
         authVCMock = AuthorizationViewControllerMock()
         authViewModel.setupDelegate(delegate: authVCMock)
     }
+    
+    // MARK: - Tests
     
     func testChangingErrorLabelState() {
         authVCMock.errorLabel.isHidden = false

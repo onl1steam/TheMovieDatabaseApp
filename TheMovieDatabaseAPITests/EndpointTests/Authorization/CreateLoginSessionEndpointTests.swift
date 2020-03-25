@@ -11,7 +11,11 @@ import XCTest
 
 class CreateLoginSessionEndpointTests: XCTestCase {
     
+    // MARK: - Public Properties
+    
     let apiKey = NetworkSettings.apiKey
+    
+    // MARK: - Tests
     
     func testMakeRequestUrl() throws {
         let expectedUrl = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(apiKey)"
