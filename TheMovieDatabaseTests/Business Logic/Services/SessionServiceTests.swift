@@ -9,7 +9,7 @@
 @testable import TheMovieDatabase
 import XCTest
 
-class SessionServiceTests: XCTestCase {
+final class SessionServiceTests: XCTestCase {
     
     var authService: Authorization!
     var sessionService: Session!
@@ -55,7 +55,7 @@ class SessionServiceTests: XCTestCase {
     }
     
     func testLoadingFavoriteMoviesWithFilledData() {
-        sessionService.favoriteMovies(language: "ru", sortBy: .createdAtAsc, page: 1) { response in
+        sessionService.favoriteMovies(language: "ru", sortBy: "created_at.asc", page: 1) { response in
             switch response {
             case .success(let moviesResponse):
                 XCTAssert(moviesResponse.totalResults > 0)

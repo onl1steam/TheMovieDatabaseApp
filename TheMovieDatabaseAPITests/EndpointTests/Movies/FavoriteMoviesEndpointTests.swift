@@ -32,7 +32,7 @@ class FavoriteMoviesEndpointTests: XCTestCase {
             sessionId: sessionId,
             accountId: 1,
             language: "ru",
-            sortBy: .createdAtAsc,
+            sortBy: "created_at.asc",
             page: 1)
         endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()

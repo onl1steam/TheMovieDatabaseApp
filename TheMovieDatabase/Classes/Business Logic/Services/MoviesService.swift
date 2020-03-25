@@ -16,7 +16,7 @@ protocol MoviesServiceType {
     /// - Parameters:
     ///   - query: Строка поиска фильма.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func searchMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    func searchMovies(query: String, _ completion: @escaping (Result<MovieList, Error>) -> Void)
     
     /// Возвращает подробную информацию о фильмо.
     ///
@@ -26,7 +26,7 @@ protocol MoviesServiceType {
     func movieDetails(
         movieId: Int,
         language: String?,
-        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void)
+        _ completion: @escaping (Result<MovieDetails, Error>) -> Void)
 }
 
 final class MoviesService: MoviesServiceType {
@@ -45,7 +45,7 @@ final class MoviesService: MoviesServiceType {
     
     // MARK: - MoviesServiceType
     
-    func searchMovies(query: String, _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    func searchMovies(query: String, _ completion: @escaping (Result<MovieList, Error>) -> Void) {
         let endpoint = SearchMovieEndpoint(
             query: query,
             language: nil,
@@ -54,14 +54,30 @@ final class MoviesService: MoviesServiceType {
             region: nil,
             year: nil,
             primaryReleaseYear: nil)
-        apiClient.request(endpoint, completionHandler: completion)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let moviesResponse):
+                let moviesList = MovieList(moviesResponse: moviesResponse)
+                completion(.success(moviesList))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func movieDetails(
         movieId: Int,
         language: String?,
-        _ completion: @escaping (Result<MovieDetailsResponse, Error>) -> Void) {
+        _ completion: @escaping (Result<MovieDetails, Error>) -> Void) {
         let endpoint = MovieDetailsEndpoint(movieId: movieId, language: language)
-        apiClient.request(endpoint, completionHandler: completion)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let movieDetailsResponse):
+                let movieDetails = MovieDetails(movieDetailsResponse: movieDetailsResponse)
+                completion(.success(movieDetails))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

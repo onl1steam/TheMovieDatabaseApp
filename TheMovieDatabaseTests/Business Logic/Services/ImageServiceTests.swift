@@ -9,7 +9,7 @@
 @testable import TheMovieDatabase
 import XCTest
 
-class ImageServiceTests: XCTestCase {
+final class ImageServiceTests: XCTestCase {
     
     var imageService: ImageServiceType!
     

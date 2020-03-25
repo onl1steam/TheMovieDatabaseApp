@@ -15,17 +15,12 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     
     public typealias Content = MoviesResponse
     
-    public enum Filter: String {
-        case createdAtAsc = "created_at.asc"
-        case createdAtDesc = "created_at.desc"
-    }
-    
     // MARK: - Public Properties
     
     let sessionId: String
     let accountId: Int?
     let language: String?
-    let sortBy: Filter?
+    let sortBy: String?
     let page: Int?
     
     public var configuration: Configuration?
@@ -36,7 +31,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
         sessionId: String,
         accountId: Int?,
         language: String?,
-        sortBy: Filter?,
+        sortBy: String?,
         page: Int?) {
         
         self.sessionId = sessionId
@@ -80,7 +75,7 @@ public struct FavoriteMoviesEndpoint: Endpoint {
             queryItems.append(langQuery)
         }
         if let sortBy = sortBy {
-            let sortQuery = URLQueryItem(name: "sort_by", value: sortBy.rawValue)
+            let sortQuery = URLQueryItem(name: "sort_by", value: sortBy)
             queryItems.append(sortQuery)
         }
         if let page = page {

@@ -51,7 +51,7 @@ final class MovieDetailsTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 40.0)
+        wait(for: [expectation], timeout: 5)
     }
     
     func testLoadingFavoriteMoviesTitle() {

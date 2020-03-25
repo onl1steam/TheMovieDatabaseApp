@@ -32,8 +32,8 @@ protocol Session {
     /// Возвращает информацию об аккаунте.
     ///
     /// - Parameters:
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
-    func accountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountDetails или ошибку.
+    func accountInfo(_ completion: @escaping (Result<AccountDetails, Error>) -> Void)
     
     /// Возвращает список избранных фильмов пользователя.
     ///
@@ -41,9 +41,9 @@ protocol Session {
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func favoriteMovies(
         language: String?,
-        sortBy: FavoriteMoviesEndpoint.Filter?,
+        sortBy: String?,
         page: Int?,
-        _ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+        _ completion: @escaping (Result<MovieList, Error>) -> Void)
 }
 
 final class SessionService: Session {
@@ -83,17 +83,25 @@ final class SessionService: Session {
         }
     }
     
-    func accountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
+    func accountInfo(_ completion: @escaping (Result<AccountDetails, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
-        apiClient.request(endpoint, completionHandler: completion)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                let accountDetails = AccountDetails(accountResponse: details)
+                completion(.success(accountDetails))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func favoriteMovies(
         language: String?,
-        sortBy: FavoriteMoviesEndpoint.Filter?,
+        sortBy: String?,
         page: Int?,
-        _ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+        _ completion: @escaping (Result<MovieList, Error>) -> Void) {
         
         guard let sessionId = sessionId else {
             completion(.failure(AuthError.noSessionId))
@@ -105,7 +113,15 @@ final class SessionService: Session {
             language: language,
             sortBy: sortBy,
             page: page)
-        apiClient.request(endpoint, completionHandler: completion)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let moviesResponse):
+                let moviesList = MovieList(moviesResponse: moviesResponse)
+                completion(.success(moviesList))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func setupAccountId(accountId: Int) {
