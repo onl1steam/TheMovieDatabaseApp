@@ -73,8 +73,8 @@ final class SessionService: Session {
         apiClient.request(deleteSessionEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
-            case .success(let isSucceed):
-                completion(.success(isSucceed))
+            case .success(let deleteSessionResponse):
+                completion(.success(deleteSessionResponse.success))
             case .failure(let error):
                 completion(.failure(error))
             }

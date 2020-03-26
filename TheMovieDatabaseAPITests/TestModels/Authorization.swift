@@ -32,7 +32,7 @@ class Authorization: XCTestCase {
         apiClient.request(createTokenEndpoint) { response in
             switch response {
             case .success(let content):
-                self.validateSession(token: content, completion)
+                self.validateSession(token: content.requestToken, completion)
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -49,7 +49,7 @@ class Authorization: XCTestCase {
         apiClient.request(createLoginSessionEndpoint) { response in
             switch response {
             case .success(let content):
-                self.getSessionId(token: content, completion)
+                self.getSessionId(token: content.requestToken, completion)
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -61,7 +61,7 @@ class Authorization: XCTestCase {
         apiClient.request(createSession) { response in
             switch response {
             case .success(let content):
-                let model = SessionInfoModel(requestToken: token, sessionId: content)
+                let model = SessionInfoModel(requestToken: token, sessionId: content.sessionId)
                 completion(.success(model))
             case .failure(let error):
                 completion(.failure(error))

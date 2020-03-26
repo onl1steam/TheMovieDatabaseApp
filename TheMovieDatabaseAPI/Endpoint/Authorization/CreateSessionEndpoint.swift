@@ -13,7 +13,7 @@ public struct CreateSessionEndpoint: Endpoint {
     
     // MARK: - Types
     
-    public typealias Content = String
+    public typealias Content = SessionResponse
     
     // MARK: - Public Properties
     
@@ -52,7 +52,7 @@ public struct CreateSessionEndpoint: Endpoint {
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         try EndpointDefaultMethods.checkErrors(data: from, response: response)
         let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: SessionResponse.self)
-        return data.sessionId
+        return data
     }
     
     // MARK: - Private Methods

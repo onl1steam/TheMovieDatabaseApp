@@ -25,4 +25,11 @@ class AccountDetailsEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = AccountDetailsEndpoint(sessionId: sessionId)
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertGet(request: request)
+    }
 }

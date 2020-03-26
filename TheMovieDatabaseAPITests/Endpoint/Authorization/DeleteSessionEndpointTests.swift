@@ -36,4 +36,11 @@ class DeleteSessionEndpointTests: XCTestCase {
         let encodedBody = try encoder.encode(body)
         XCTAssertEqual(request.httpBody, encodedBody)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = DeleteSessionEndpoint(sessionId: "Foo")
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertDelete(request: request)
+    }
 }

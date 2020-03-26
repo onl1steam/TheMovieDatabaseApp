@@ -50,4 +50,18 @@ class SearchMoviesEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = SearchMovieEndpoint(
+            query: "Foo",
+            language: "ru",
+            page: 1,
+            includeAdult: false,
+            region: "RU",
+            year: 2020,
+            primaryReleaseYear: 2020)
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertGet(request: request)
+    }
 }

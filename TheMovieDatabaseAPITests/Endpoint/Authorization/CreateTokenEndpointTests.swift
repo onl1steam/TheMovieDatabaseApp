@@ -24,4 +24,11 @@ class CreateTokenEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = CreateTokenEndpoint()
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertGet(request: request)
+    }
 }

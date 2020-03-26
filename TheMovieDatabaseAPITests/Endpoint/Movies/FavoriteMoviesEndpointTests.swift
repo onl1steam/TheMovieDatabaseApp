@@ -42,4 +42,16 @@ class FavoriteMoviesEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         XCTAssertEqual(request.url?.absoluteString, expectedUrl)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = FavoriteMoviesEndpoint(
+            sessionId: sessionId,
+            accountId: 1,
+            language: "ru",
+            sortBy: "created_at.asc",
+            page: 1)
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertGet(request: request)
+    }
 }

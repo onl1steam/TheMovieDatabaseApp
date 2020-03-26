@@ -13,7 +13,7 @@ public struct DeleteSessionEndpoint: Endpoint {
     
     // MARK: - Types
     
-    public typealias Content = Bool
+    public typealias Content = DeleteSessionResponse
     
     // MARK: - Public Properties
     
@@ -53,7 +53,7 @@ public struct DeleteSessionEndpoint: Endpoint {
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         try EndpointDefaultMethods.checkErrors(data: from, response: response)
         let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: DeleteSessionResponse.self)
-        return data.success
+        return data
     }
     
     // MARK: - Private Methods

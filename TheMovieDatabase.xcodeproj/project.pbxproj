@@ -95,6 +95,8 @@
 		92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */; };
 		92E5CAE6242B111700DD587D /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE5242B111700DD587D /* ImageCacheTests.swift */; };
 		92E5CAE8242B1ADC00DD587D /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE7242B1ADC00DD587D /* AuthorizationModel.swift */; };
+		92E5CB03242CF1A500DD587D /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */; };
+		92E5CB08242CF61C00DD587D /* HttpResponseStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -251,6 +253,8 @@
 		92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonViewTests.swift; sourceTree = "<group>"; };
 		92E5CAE5242B111700DD587D /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		92E5CAE7242B1ADC00DD587D /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
+		92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
+		92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStub.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -849,6 +853,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		92E5CB04242CF57600DD587D /* ResponseStubs */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */,
+			);
+			path = ResponseStubs;
+			sourceTree = "<group>";
+		};
 		92F64D422420F58900693C9B /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,9 +873,11 @@
 		92F64D532421705100693C9B /* TestModels */ = {
 			isa = PBXGroup;
 			children = (
+				92E5CB04242CF57600DD587D /* ResponseStubs */,
 				92F64D4C2421666C00693C9B /* SessionInfoModel.swift */,
 				92F64D4A2421623B00693C9B /* Authorization.swift */,
 				92F64D5724217A2200693C9B /* NetworkSettings.swift */,
+				92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */,
 			);
 			path = TestModels;
 			sourceTree = "<group>";
@@ -1294,6 +1308,7 @@
 				92E5CA8B2429021000DD587D /* FavoriteMoviesEndpointTests.swift in Sources */,
 				92E5CA9E2429352300DD587D /* DeleteSessionEndpointTests.swift in Sources */,
 				92E5CA9C2429351100DD587D /* CreateSessionEndpointTests.swift in Sources */,
+				92E5CB08242CF61C00DD587D /* HttpResponseStub.swift in Sources */,
 				92E5CA8F24290B3F00DD587D /* MovieDetailsEndpointTests.swift in Sources */,
 				92E5CA9A242934FE00DD587D /* CreateLoginSessionEndpointTests.swift in Sources */,
 				92F64D4B2421623B00693C9B /* Authorization.swift in Sources */,
@@ -1303,6 +1318,7 @@
 				92E5CA932429130E00DD587D /* ImageEndpointTests.swift in Sources */,
 				92E5CA98242934EB00DD587D /* CreateTokenEndpointTests.swift in Sources */,
 				92E5CA8D24290B2000DD587D /* SearchMoviesEndpointTests.swift in Sources */,
+				92E5CB03242CF1A500DD587D /* XCTestCaseExtension.swift in Sources */,
 				92F64D5824217A2200693C9B /* NetworkSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

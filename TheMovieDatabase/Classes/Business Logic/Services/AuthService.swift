@@ -47,7 +47,7 @@ final class AuthService: Authorization {
             guard let self = self else { return }
             switch response {
             case .success(let content):
-                self.requestToken = content
+                self.requestToken = content.requestToken
                 self.createLoginSession(user: user, completion)
             case .failure(let error):
                 completion(.failure(error))
@@ -80,6 +80,13 @@ final class AuthService: Authorization {
     
     private func createSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
         let createSession = CreateSessionEndpoint(requestToken: requestToken)
-        apiClient.request(createSession, completionHandler: completion)
+        apiClient.request(createSession) { response in
+            switch response {
+            case .success(let sessionResponse):
+                completion(.success(sessionResponse.sessionId))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

@@ -36,4 +36,11 @@ class CreateLoginSessionEndpointTests: XCTestCase {
         let encodedBody = try encoder.encode(body)
         XCTAssertEqual(request.httpBody, encodedBody)
     }
+    
+    func testRequestParameters() throws {
+        var endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
+        endpoint.configuration = NetworkSettings.configuration
+        let request = try endpoint.makeRequest()
+        assertPost(request: request)
+    }
 }
