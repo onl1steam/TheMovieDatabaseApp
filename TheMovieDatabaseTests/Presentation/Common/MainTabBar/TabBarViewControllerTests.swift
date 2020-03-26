@@ -27,7 +27,7 @@ final class TabBarViewControllerTests: ViewControllerTestCase {
     
     func testTabBarItemsCount() {
         XCTAssertNotNil(viewController.tabBar.items)
-        XCTAssertNotNil(viewController.tabBar.items!.count == 3)
+        XCTAssertEqual(viewController.tabBar.items?.count, 3)
     }
     
     func testTabBarItemsLabel() {

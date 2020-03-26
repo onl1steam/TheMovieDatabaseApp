@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class ImageEndpointTests: XCTestCase {
+final class ImageEndpointTests: XCTestCase {
     
     // MARK: - Public Propertries
     

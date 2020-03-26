@@ -9,11 +9,11 @@
 @testable import TheMovieDatabase
 import XCTest
 
-class RoundedButtonViewTests: XCTestCase {
+final class RoundedButtonViewTests: XCTestCase {
     
     // MARK: - Public Properties
 
-    var roundedButton: RoundedButton!
+    private var roundedButton: RoundedButton!
     
     // MARK: - setUp
     
