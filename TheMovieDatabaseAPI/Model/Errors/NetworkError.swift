@@ -36,7 +36,7 @@ extension NetworkError: LocalizedError {
         case .unknownError:
             return NSLocalizedString("Неизвестная ошибка, попробуйте позже.", comment: "Unknown error")
         case .invalidApiKey:
-            return NSLocalizedString("Введен неверный API key.", comment: "Unknown error")
+            return NSLocalizedString("Введен неверный API ключ.", comment: "Unknown error")
         case .decodingError:
             return NSLocalizedString("Возвращен неверный формат данных.", comment: "Decoding error")
         case .encodingError:

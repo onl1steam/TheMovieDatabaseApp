@@ -43,4 +43,39 @@ class DeleteSessionEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         assertDelete(request: request)
     }
+    
+    func testParseContent() throws {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        guard let data = ResponseStub.stub(name: "CreateSession") else {
+            XCTFail("Невалидный JSON файл")
+            return
+        }
+        
+        let endpoint = DeleteSessionEndpoint(sessionId: "")
+        let result = try endpoint.content(from: data, response: response)
+        
+        XCTAssert(result.success)
+    }
+    
+    func testParseContentWithError() {
+        let response = HTTPURLResponse.stub(statusCode: 404)
+        let data: Data? = nil
+        
+        let endpoint = DeleteSessionEndpoint(sessionId: "")
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithEmptyData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = DeleteSessionEndpoint(sessionId: "")
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
+    }
 }

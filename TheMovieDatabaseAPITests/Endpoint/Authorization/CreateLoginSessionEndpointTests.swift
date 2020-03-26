@@ -43,4 +43,40 @@ class CreateLoginSessionEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         assertPost(request: request)
     }
+    
+    func testParseContent() throws {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        guard let data = ResponseStub.stub(name: "CreateRequestToken") else {
+            XCTFail("Невалидный JSON файл")
+            return
+        }
+        
+        let endpoint = CreateLoginSessionEndpoint(username: "", password: "", requestToken: "")
+        let result = try endpoint.content(from: data, response: response)
+        
+        XCTAssertEqual(result.requestToken, "eeb383164e77813cf5f3fb5eda42ac59048dadd3")
+        XCTAssert(result.success)
+    }
+    
+    func testParseContentWithError() {
+        let response = HTTPURLResponse.stub(statusCode: 404)
+        let data: Data? = nil
+        
+        let endpoint = CreateLoginSessionEndpoint(username: "", password: "", requestToken: "")
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithEmptyData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = CreateLoginSessionEndpoint(username: "", password: "", requestToken: "")
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
+    }
 }
