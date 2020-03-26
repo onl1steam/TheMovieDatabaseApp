@@ -44,9 +44,22 @@ final class ImageEndpointTests: XCTestCase {
         XCTAssertNoThrow(try endpoint.content(from: data, response: response), "Парсинг данных")
     }
     
-    func testParseContentWithError() throws {
+    func testParseContentWithError() {
         let response = HTTPURLResponse.stub(statusCode: 404)
         let data = Data()
+        
+        let endpoint = ImageEndpoint(width: "", imagePath: "")
+        
+        XCTAssertThrowsError(
+            try endpoint.content(from: data, response: response)) { error in
+                
+                XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithBlankData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
         
         let endpoint = ImageEndpoint(width: "", imagePath: "")
         
@@ -54,7 +67,7 @@ final class ImageEndpointTests: XCTestCase {
             try endpoint.content(from: data, response: response),
             "Парсинг данных с ошибкой") { error in
                 
-                XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
         }
     }
     

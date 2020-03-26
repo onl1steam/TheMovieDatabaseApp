@@ -9,7 +9,7 @@
 @testable import TheMovieDatabaseAPI
 import XCTest
 
-class Authorization: XCTestCase {
+final class Authorization: XCTestCase {
     
     static let baseURL = NetworkSettings.baseURL
     static let apiKey = NetworkSettings.apiKey

@@ -50,10 +50,23 @@ class AvatarEndpointTests: XCTestCase {
         let endpoint = AvatarEndpoint(imagePath: "")
         
         XCTAssertThrowsError(
+            try endpoint.content(from: data, response: response)) { error in
+                
+                XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithBlankData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = AvatarEndpoint(imagePath: "")
+        
+        XCTAssertThrowsError(
             try endpoint.content(from: data, response: response),
             "Парсинг данных с ошибкой") { error in
                 
-                XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+                XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
         }
     }
 }

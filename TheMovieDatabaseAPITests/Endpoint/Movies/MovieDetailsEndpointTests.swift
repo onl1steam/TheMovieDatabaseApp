@@ -43,4 +43,40 @@ class MovieDetailsEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         assertGet(request: request)
     }
+    
+    func testParseContent() throws {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        guard let data = ResponseStub.stub(name: "MovieDetails") else {
+            XCTFail("Невалидный JSON файл")
+            return
+        }
+        
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
+        let result = try endpoint.content(from: data, response: response)
+        
+        XCTAssertEqual(result.id, 1892)
+        XCTAssertEqual(result.title, "Звёздные войны: Эпизод VI – Возвращение Джедая")
+    }
+    
+    func testParseContentWithError() {
+        let response = HTTPURLResponse.stub(statusCode: 404)
+        let data: Data? = nil
+        
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithEmptyData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
+    }
 }

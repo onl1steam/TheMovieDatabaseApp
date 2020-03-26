@@ -54,4 +54,40 @@ class FavoriteMoviesEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         assertGet(request: request)
     }
+    
+    func testParseContent() throws {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        guard let data = ResponseStub.stub(name: "FavoriteMovies") else {
+            XCTFail("Невалидный JSON файл")
+            return
+        }
+        
+        let endpoint = FavoriteMoviesEndpoint(sessionId: "", accountId: nil, language: nil, sortBy: nil, page: nil)
+        let result = try endpoint.content(from: data, response: response)
+        
+        XCTAssertEqual(result.totalResults, 2)
+        XCTAssertEqual(result.page, 1)
+    }
+    
+    func testParseContentWithError() {
+        let response = HTTPURLResponse.stub(statusCode: 404)
+        let data: Data? = nil
+        
+        let endpoint = FavoriteMoviesEndpoint(sessionId: "", accountId: nil, language: nil, sortBy: nil, page: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithEmptyData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = FavoriteMoviesEndpoint(sessionId: "", accountId: nil, language: nil, sortBy: nil, page: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
+    }
 }

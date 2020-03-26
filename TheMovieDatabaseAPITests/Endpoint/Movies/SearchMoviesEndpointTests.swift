@@ -64,4 +64,61 @@ class SearchMoviesEndpointTests: XCTestCase {
         let request = try endpoint.makeRequest()
         assertGet(request: request)
     }
+    
+    func testParseContent() throws {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        guard let data = ResponseStub.stub(name: "SearchMovies") else {
+            XCTFail("Невалидный JSON файл")
+            return
+        }
+        
+        let endpoint = SearchMovieEndpoint(
+            query: "",
+            language: nil,
+            page: nil,
+            includeAdult: nil,
+            region: nil,
+            year: nil,
+            primaryReleaseYear: nil)
+        let result = try endpoint.content(from: data, response: response)
+        
+        XCTAssertEqual(result.totalResults, 2)
+        XCTAssertEqual(result.page, 1)
+    }
+    
+    func testParseContentWithError() {
+        let response = HTTPURLResponse.stub(statusCode: 404)
+        let data: Data? = nil
+        
+        let endpoint = SearchMovieEndpoint(
+            query: "",
+            language: nil,
+            page: nil,
+            includeAdult: nil,
+            region: nil,
+            year: nil,
+            primaryReleaseYear: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        }
+    }
+    
+    func testParseContentWithEmptyData() {
+        let response = HTTPURLResponse.stub(statusCode: 200)
+        let data: Data? = nil
+        
+        let endpoint = SearchMovieEndpoint(
+            query: "",
+            language: nil,
+            page: nil,
+            includeAdult: nil,
+            region: nil,
+            year: nil,
+            primaryReleaseYear: nil)
+        
+        XCTAssertThrowsError(try endpoint.content(from: data, response: response)) { error in
+            XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
+    }
 }
