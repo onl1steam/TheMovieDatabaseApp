@@ -105,6 +105,8 @@
 		92E5CB37242D10F400DD587D /* DeleteSession.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB2F242D10F400DD587D /* DeleteSession.json */; };
 		92E5CB38242D10F400DD587D /* CreateSession.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB30242D10F400DD587D /* CreateSession.json */; };
 		92E5CB3A242D10F400DD587D /* AccountDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB32242D10F400DD587D /* AccountDetails.json */; };
+		92E5CB3C242D7E2700DD587D /* APIRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */; };
+		92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3E242E04C900DD587D /* APIClientStub.swift */; };
 		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
@@ -271,6 +273,8 @@
 		92E5CB2F242D10F400DD587D /* DeleteSession.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeleteSession.json; sourceTree = "<group>"; };
 		92E5CB30242D10F400DD587D /* CreateSession.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSession.json; sourceTree = "<group>"; };
 		92E5CB32242D10F400DD587D /* AccountDetails.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccountDetails.json; sourceTree = "<group>"; };
+		92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestAdapter.swift; sourceTree = "<group>"; };
+		92E5CB3E242E04C900DD587D /* APIClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientStub.swift; sourceTree = "<group>"; };
 		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				92F64D38241FF51800693C9B /* ImageCache.swift */,
 				92F64D6224262B1C00693C9B /* Configuration.swift */,
 				92E5CA9F2429595700DD587D /* HttpMethods.swift */,
+				92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				92E5CAA92429692D00DD587D /* Business Logic */,
 				92E5CABB242AD22700DD587D /* Presentation */,
 				92E5CAB6242ACB1B00DD587D /* Helpers */,
+				92E5CB3D242E04AB00DD587D /* Stubs */,
 				92E5CAAA242A2F3A00DD587D /* Mocks */,
 				92D1122F241670CC0087D910 /* Info.plist */,
 			);
@@ -888,6 +894,14 @@
 			children = (
 				92E5CB0B242D095600DD587D /* JSONStubs */,
 				92E5CB1A242D0D6800DD587D /* ResponseStub.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		92E5CB3D242E04AB00DD587D /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				92E5CB3E242E04C900DD587D /* APIClientStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -1336,6 +1350,7 @@
 				9214AF57241E51E300796C3B /* AuthResponse.swift in Sources */,
 				92163E69241C3F63008F8CE5 /* APIClient.swift in Sources */,
 				921FFD9524263D0B00810B87 /* EndpointDefaultMethods.swift in Sources */,
+				92E5CB3C242D7E2700DD587D /* APIRequestAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1423,6 +1438,7 @@
 				92E5CAE8242B1ADC00DD587D /* AuthorizationModel.swift in Sources */,
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 				92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */,
+				92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */,
 				92E5CADC242B02C500DD587D /* AuthorizationViewControllerMock.swift in Sources */,
 				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 				92E5CAC2242AD5B900DD587D /* SessionServiceMock.swift in Sources */,

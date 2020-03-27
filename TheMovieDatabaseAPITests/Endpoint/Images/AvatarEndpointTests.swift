@@ -18,16 +18,15 @@ class AvatarEndpointTests: XCTestCase {
     // MARK: - Tests
     
     func testMakeRequest() throws {
-        let expectedUrl = "https://www.gravatar.com/avatar/\(avatarHash)"
-        var endpoint = AvatarEndpoint(imagePath: avatarHash)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = AvatarEndpoint(imagePath: avatarHash)
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "avatar/\(avatarHash)")
     }
     
     func testRequestParameters() throws {
-        var endpoint = AvatarEndpoint(imagePath: avatarHash)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = AvatarEndpoint(imagePath: avatarHash)
         
         let request = try endpoint.makeRequest()
         

@@ -14,44 +14,46 @@ class FavoriteMoviesEndpointTests: XCTestCase {
     // MARK: - Public Properties
     
     let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
-    
-    let emptyAccountIdQuery = "%7Baccount_id%7D"
+    let emptyAccountIdQuery = "%257Baccount_id%257D"
     
     // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/account/\(emptyAccountIdQuery)/favorite/movies?api_key=\(apiKey)&session_id=\(sessionId)"
-        var endpoint =
+        let endpoint =
             FavoriteMoviesEndpoint(sessionId: sessionId, accountId: nil, language: nil, sortBy: nil, page: nil)
-        endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(
+            request.url?.absoluteString,
+            "3/account/\(emptyAccountIdQuery)/favorite/movies?session_id=\(sessionId)")
         
     }
     
     func testMakeRequestWithFilledFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/account/1/favorite/movies?api_key=\(apiKey)&session_id=\(sessionId)&language=ru&sort_by=created_at.asc&page=1"
-        var endpoint = FavoriteMoviesEndpoint(
+        let endpoint = FavoriteMoviesEndpoint(
             sessionId: sessionId,
             accountId: 1,
             language: "ru",
             sortBy: "created_at.asc",
             page: 1)
-        endpoint.configuration = NetworkSettings.configuration
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(
+            request.url?.absoluteString,
+            "3/account/1/favorite/movies?session_id=\(sessionId)&language=ru&sort_by=created_at.asc&page=1")
     }
     
     func testRequestParameters() throws {
-        var endpoint = FavoriteMoviesEndpoint(
+        let endpoint = FavoriteMoviesEndpoint(
             sessionId: sessionId,
             accountId: 1,
             language: "ru",
             sortBy: "created_at.asc",
             page: 1)
-        endpoint.configuration = NetworkSettings.configuration
+        
         let request = try endpoint.makeRequest()
+        
         assertGet(request: request)
     }
     

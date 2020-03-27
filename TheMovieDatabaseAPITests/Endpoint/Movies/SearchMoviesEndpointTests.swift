@@ -14,15 +14,12 @@ class SearchMoviesEndpointTests: XCTestCase {
     // MARK: - Public Propetries
     
     let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
-    
     let emptyAccountIdQuery = "%7Baccount_id%7D"
     
     // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=Foo"
-        var endpoint = SearchMovieEndpoint(
+        let endpoint = SearchMovieEndpoint(
             query: "Foo",
             language: nil,
             page: nil,
@@ -30,15 +27,15 @@ class SearchMoviesEndpointTests: XCTestCase {
             region: nil,
             year: nil,
             primaryReleaseYear: nil)
-        endpoint.configuration = NetworkSettings.configuration
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/search/movie?query=Foo")
         
     }
     
     func testMakeRequestWithFilledFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=Foo&language=ru&page=1&include_adult=false&region=RU&year=2020&primary_release_year=2020"
-        var endpoint = SearchMovieEndpoint(
+        let endpoint = SearchMovieEndpoint(
             query: "Foo",
             language: "ru",
             page: 1,
@@ -46,13 +43,17 @@ class SearchMoviesEndpointTests: XCTestCase {
             region: "RU",
             year: 2020,
             primaryReleaseYear: 2020)
-        endpoint.configuration = NetworkSettings.configuration
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(
+            request.url?.absoluteString,
+            "3/search/movie?query=Foo&language=ru&page=1&include_adult=false" +
+            "&region=RU&year=2020&primary_release_year=2020")
     }
     
     func testRequestParameters() throws {
-        var endpoint = SearchMovieEndpoint(
+        let endpoint = SearchMovieEndpoint(
             query: "Foo",
             language: "ru",
             page: 1,
@@ -60,7 +61,6 @@ class SearchMoviesEndpointTests: XCTestCase {
             region: "RU",
             year: 2020,
             primaryReleaseYear: 2020)
-        endpoint.configuration = NetworkSettings.configuration
         let request = try endpoint.makeRequest()
         assertGet(request: request)
     }

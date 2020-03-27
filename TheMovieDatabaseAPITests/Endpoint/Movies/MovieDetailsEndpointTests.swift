@@ -14,32 +14,28 @@ class MovieDetailsEndpointTests: XCTestCase {
     // MARK: - Public Properties
     
     let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
-    
     let emptyAccountIdQuery = "%7Baccount_id%7D"
     
     // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/movie/1?api_key=\(apiKey)"
-        var endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
-        endpoint.configuration = NetworkSettings.configuration
-        let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: nil)
         
+        let request = try endpoint.makeRequest()
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/movie/1?")
     }
     
     func testMakeRequestWithFilledFields() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/movie/1?api_key=\(apiKey)&language=ru"
-        var endpoint = MovieDetailsEndpoint(movieId: 1, language: "ru")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: "ru")
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/movie/1?language=ru")
     }
     
     func testRequestParameters() throws {
-        var endpoint = MovieDetailsEndpoint(movieId: 1, language: "ru")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = MovieDetailsEndpoint(movieId: 1, language: "ru")
         let request = try endpoint.makeRequest()
         assertGet(request: request)
     }

@@ -18,8 +18,6 @@ public struct DeleteSessionEndpoint: Endpoint {
     // MARK: - Public Properties
     
     let sessionId: String
-    
-    public var configuration: Configuration?
 
     // MARK: - Initializers
     
@@ -30,23 +28,20 @@ public struct DeleteSessionEndpoint: Endpoint {
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-    
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
         let encodableData = DeleteSessionBody(sessionId: sessionId)
         let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
         
         request.httpMethod = HttpMethods.DELETE.rawValue
+        request.allHTTPHeaderFields = ["content-type": "application/json"]
         request.httpBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         return request
     }
     
@@ -57,13 +52,6 @@ public struct DeleteSessionEndpoint: Endpoint {
     }
     
     // MARK: - Private Methods
-    
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
-        return queryItems
-    }
     
     private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL

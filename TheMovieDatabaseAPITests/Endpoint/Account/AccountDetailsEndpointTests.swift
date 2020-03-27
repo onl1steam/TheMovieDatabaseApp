@@ -19,17 +19,18 @@ class AccountDetailsEndpointTests: XCTestCase {
     // MARK: - Tests
 
     func testMakeRequest() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/account?api_key=\(apiKey)&session_id=\(sessionId)"
-        var endpoint = AccountDetailsEndpoint(sessionId: sessionId)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/account?session_id=\(sessionId)")
     }
     
     func testRequestParameters() throws {
-        var endpoint = AccountDetailsEndpoint(sessionId: sessionId)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
+        
         let request = try endpoint.makeRequest()
+        
         assertGet(request: request)
     }
     

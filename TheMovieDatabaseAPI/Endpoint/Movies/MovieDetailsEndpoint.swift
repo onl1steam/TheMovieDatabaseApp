@@ -20,8 +20,6 @@ public struct MovieDetailsEndpoint: Endpoint {
     let movieId: Int
     let language: String?
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(movieId: Int, language: String?) {
@@ -32,15 +30,14 @@ public struct MovieDetailsEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        urlComponents.queryItems = makeQueryItems()
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         var request = URLRequest(url: resultURL)
         request.httpMethod = HttpMethods.GET.rawValue
         return request
@@ -54,13 +51,10 @@ public struct MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        var queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
+    private func makeQueryItems() -> [URLQueryItem] {
+        var queryItems = [URLQueryItem]()
         if let lang = language {
-            let langQuery = URLQueryItem(name: "language", value: lang)
-            queryItems.append(langQuery)
+            queryItems.append(URLQueryItem(name: "language", value: lang))
         }
         return queryItems
     }

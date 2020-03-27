@@ -16,13 +16,14 @@ public final class APIRequestImage: APIClient {
     
     let session = Session(configuration: .ephemeral)
     let imageCache = ImageCache()
-    let configuration: Configuration
+   let requestAdapter: APIRequestAdapter
     
     // MARK: - Initializers
     
     public init(configuration: Configuration) {
-        self.configuration = configuration
+        self.requestAdapter = APIRequestAdapter(configuration: configuration)
     }
+    
     // MARK: - APIClient
     
     @discardableResult
@@ -30,16 +31,24 @@ public final class APIRequestImage: APIClient {
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
         do {
-            var customEndpoint = endpoint
-            customEndpoint.configuration = configuration
-            let urlRequest = try customEndpoint.makeRequest()
+            let urlRequest = try endpoint.makeRequest()
             
-            if let data = checkImageInCache(url: urlRequest.url?.absoluteString) as? T.Content {
+            var resultUrlRequest = urlRequest
+            requestAdapter.adapt(urlRequest, for: session) { response in
+                switch response {
+                case .success(let request):
+                    resultUrlRequest = request
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+            }
+            
+            if let data = checkImageInCache(url: resultUrlRequest.url?.absoluteString) as? T.Content {
                 completionHandler(.success(data))
                 return Progress()
             }
             
-            let request = session.request(urlRequest)
+            let request = session.request(resultUrlRequest)
             request.response(queue: .main) { [weak self] response in
                 let result = Result { () -> T.Content in
                     let content = try endpoint.content(from: response.data, response: response.response)

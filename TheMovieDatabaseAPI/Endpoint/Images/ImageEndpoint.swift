@@ -20,8 +20,6 @@ public struct ImageEndpoint: Endpoint {
     let width: String?
     let imagePath: String
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(width: String?, imagePath: String) {
@@ -32,14 +30,14 @@ public struct ImageEndpoint: Endpoint {
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        let urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.basePosterURL)
-        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let resultURL = makeURLPath(baseURL: componentsUrl)
         
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         var request = URLRequest(url: resultURL)
         request.httpMethod = HttpMethods.GET.rawValue
+        
         return request
     }
     

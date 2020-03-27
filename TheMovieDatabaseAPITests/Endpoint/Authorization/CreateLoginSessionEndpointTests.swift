@@ -11,36 +11,33 @@ import XCTest
 
 class CreateLoginSessionEndpointTests: XCTestCase {
     
-    // MARK: - Public Properties
-    
-    let apiKey = NetworkSettings.apiKey
-    
     // MARK: - Tests
     
     func testMakeRequestUrl() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(apiKey)"
-        var endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/authentication/token/validate_with_login")
     }
     
     func testMakeRequestBody() throws {
-        var endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
-        endpoint.configuration = NetworkSettings.configuration
-        let request = try endpoint.makeRequest()
-        
+        let endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
         let body = CreateLoginSessionBody(username: "Foo", password: "Bar", requestToken: "Baz")
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         let encodedBody = try encoder.encode(body)
+        
+        let request = try endpoint.makeRequest()
+        
         XCTAssertEqual(request.httpBody, encodedBody)
     }
     
     func testRequestParameters() throws {
-        var endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateLoginSessionEndpoint(username: "Foo", password: "Bar", requestToken: "Baz")
+        
         let request = try endpoint.makeRequest()
+        
         assertPost(request: request)
     }
     
@@ -50,7 +47,7 @@ class CreateLoginSessionEndpointTests: XCTestCase {
             XCTFail("Невалидный JSON файл")
             return
         }
-        
+
         let endpoint = CreateLoginSessionEndpoint(username: "", password: "", requestToken: "")
         let result = try endpoint.content(from: data, response: response)
         

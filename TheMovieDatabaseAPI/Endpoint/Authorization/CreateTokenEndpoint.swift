@@ -15,10 +15,6 @@ public struct CreateTokenEndpoint: Endpoint {
     
     public typealias Content = AuthResponse
     
-    // MARK: - Public Properties
-    
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init() {}
@@ -26,14 +22,12 @@ public struct CreateTokenEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-        
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
         request.httpMethod = HttpMethods.GET.rawValue
@@ -47,13 +41,6 @@ public struct CreateTokenEndpoint: Endpoint {
     }
     
     // MARK: - Private Methods
-    
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
-        return queryItems
-    }
     
     private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL

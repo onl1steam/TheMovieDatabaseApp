@@ -11,35 +11,30 @@ import XCTest
 
 class CreateSessionEndpointTests: XCTestCase {
     
-    // MARK: - Public Properties
-    
-    let apiKey = NetworkSettings.apiKey
-    
     // MARK: - Tests
     
     func testMakeRequestUrl() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/authentication/session/new?api_key=\(apiKey)"
-        var endpoint = CreateSessionEndpoint(requestToken: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateSessionEndpoint(requestToken: "Foo")
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/authentication/session/new")
     }
     
     func testMakeRequestBody() throws {
-        var endpoint = CreateSessionEndpoint(requestToken: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
-        let request = try endpoint.makeRequest()
-        
+        let endpoint = CreateSessionEndpoint(requestToken: "Foo")
         let body = CreateSessionBody(requestToken: "Foo")
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         let encodedBody = try encoder.encode(body)
+        
+        let request = try endpoint.makeRequest()
+        
         XCTAssertEqual(request.httpBody, encodedBody)
     }
     
     func testRequestParameters() throws {
-        var endpoint = CreateSessionEndpoint(requestToken: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateSessionEndpoint(requestToken: "Foo")
         let request = try endpoint.makeRequest()
         assertPost(request: request)
     }

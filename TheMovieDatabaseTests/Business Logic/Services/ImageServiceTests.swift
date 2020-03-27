@@ -7,6 +7,7 @@
 //
 
 @testable import TheMovieDatabase
+@testable import TheMovieDatabaseAPI
 import XCTest
 
 final class ImageServiceTests: XCTestCase {
@@ -15,17 +16,21 @@ final class ImageServiceTests: XCTestCase {
     
     var imageService: ImageServiceType!
     
+    var response: Data!
+    
     // MARK: - setUp
     
     override func setUp() {
         super.setUp()
-        imageService = ServiceLayer.shared.imageService
+        response = Data()
     }
     
     // MARK: - Tests
     
     func testLoadAvatar() {
-        let exp = expectation(description: "Загрузка аватара пользователя")
+        let apiClient = APIClientStub(responseStub: response, errorStub: nil)
+        imageService = ImageService(imageApiClient: apiClient)
+        
         imageService.avatar(avatarPath: "fd1768eb661e05f867255daf52f80413") { response in
             switch response {
             case .success(let data):
@@ -33,13 +38,13 @@ final class ImageServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
     
     func testLoadMoviePoster() {
-        let exp = expectation(description: "Загрузка постера фильма")
+        let apiClient = APIClientStub(responseStub: response, errorStub: nil)
+        imageService = ImageService(imageApiClient: apiClient)
+        
         imageService.image(posterPath: "aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg", width: nil) { response in
             switch response {
             case .success(let data):
@@ -47,13 +52,13 @@ final class ImageServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
     
     func testLoadMoviePosterWithInvalidPath() {
-        let exp = expectation(description: "Загрузка постера фильма")
+        let apiClient = APIClientStub(responseStub: nil, errorStub: NetworkError.notFound)
+        imageService = ImageService(imageApiClient: apiClient)
+        
         imageService.image(posterPath: "test", width: nil) { response in
             switch response {
             case .success:
@@ -61,8 +66,6 @@ final class ImageServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertEqual(error.localizedDescription, "Запрашиваемый ресурс не найден.")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 @testable import TheMovieDatabase
+@testable import TheMovieDatabaseAPI
 import XCTest
 
 final class SessionServiceTests: XCTestCase {
@@ -15,32 +16,41 @@ final class SessionServiceTests: XCTestCase {
     
     var sessionService: Session!
     
+    var accountResponse: AccountResponse!
+    var moviesResponse: MoviesResponse!
+    var deleteSessionResponse: DeleteSessionResponse!
+    
     // MARK: - setUp
     
     override func setUp() {
         super.setUp()
-        sessionService = ServiceLayer.shared.sessionService
         
-        let exp = expectation(description: "Авторизация")
-        AuthorizationModel.authorize { [weak self] response in
-            switch response {
-            case .success(let sessionId):
-                self?.sessionService.setupSessionId(sessionId: sessionId)
-            case .failure(let error):
-                XCTFail("Ошибка авторизации: \(error.localizedDescription)")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5)
+        let gravatar = AccountResponse.Gravatar(hash: "test")
+        let avatar = AccountResponse.Avatar(gravatar: gravatar)
+        accountResponse = AccountResponse(
+            avatar: avatar,
+            id: 1,
+            iso6391: "ru",
+            iso31661: "ru",
+            name: "Foo",
+            includeAdult: true,
+            username: "Bar")
+        
+        moviesResponse = MoviesResponse(page: 1, results: [], totalPages: 1, totalResults: 5)
+        
+        deleteSessionResponse = DeleteSessionResponse(success: true)
     }
     
     // MARK: - Tests
     
     func testLoadingAccountInfo() {
+        let apiClient = APIClientStub(responseStub: accountResponse, errorStub: nil)
+        sessionService = SessionService(apiClient: apiClient)
+        
         sessionService.accountInfo { response in
             switch response {
             case .success(let accountResponse):
-                XCTAssertEqual(accountResponse.username, "onl1steam")
+                XCTAssertEqual(accountResponse.username, "Bar")
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
@@ -48,6 +58,10 @@ final class SessionServiceTests: XCTestCase {
     }
     
     func testLoadingFavoriteMoviesWithEmptyData() {
+        let apiClient = APIClientStub(responseStub: moviesResponse, errorStub: nil)
+        sessionService = SessionService(apiClient: apiClient)
+        sessionService.setupSessionId(sessionId: "Foo")
+        
         sessionService.favoriteMovies(language: nil, sortBy: nil, page: nil) { response in
             switch response {
             case .success(let moviesResponse):
@@ -59,6 +73,10 @@ final class SessionServiceTests: XCTestCase {
     }
     
     func testLoadingFavoriteMoviesWithFilledData() {
+        let apiClient = APIClientStub(responseStub: moviesResponse, errorStub: nil)
+        sessionService = SessionService(apiClient: apiClient)
+        sessionService.setupSessionId(sessionId: "Foo")
+        
         sessionService.favoriteMovies(language: "ru", sortBy: "created_at.asc", page: 1) { response in
             switch response {
             case .success(let moviesResponse):
@@ -70,6 +88,9 @@ final class SessionServiceTests: XCTestCase {
     }
     
     func testDeletingSession() {
+        let apiClient = APIClientStub(responseStub: deleteSessionResponse, errorStub: nil)
+        sessionService = SessionService(apiClient: apiClient)
+        
         sessionService.deleteSession { response in
             switch response {
             case .success(let isSucceed):

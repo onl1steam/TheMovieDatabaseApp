@@ -7,56 +7,71 @@
 //
 
 @testable import TheMovieDatabase
+@testable import TheMovieDatabaseAPI
 import XCTest
 
 final class MoviesServiceTests: XCTestCase {
     
     // MARK: - Public Properties
     
-    // Id фильма "Джокер"
-    let movieId = 475557
+    var moviesService: MoviesService!
     
-    var moviesService: MoviesServiceType!
+    var moviesListResponse: MoviesResponse!
+    var movieDetailsResponse: MovieDetailsResponse!
     
     // MARK: - setUp
     
     override func setUp() {
         super.setUp()
-        moviesService = ServiceLayer.shared.moviesService
+        
+        moviesListResponse = MoviesResponse(page: 1, results: [], totalPages: 1, totalResults: 5)
+        movieDetailsResponse = MovieDetailsResponse(
+            genres: [],
+            id: 1,
+            originalTitle: "Joker",
+            overview: nil,
+            posterPath: nil,
+            releaseDate: "Foo",
+            runtime: 100,
+            title: "Джокер",
+            voteAverage: 5,
+            voteCount: 100)
     }
     
     // MARK: - Tests
     
     func testSearchMovies() {
-        let exp = expectation(description: "Загрузка фильмов с результатом")
+        let apiClient = APIClientStub(responseStub: moviesListResponse, errorStub: nil)
+        moviesService = MoviesService(apiClient: apiClient)
+        
         moviesService.searchMovies(query: "Звёздные войны") { response in
             switch response {
             case .success(let movies):
-                XCTAssert(movies.totalResults != 0)
+                XCTAssert(movies.totalResults > 0)
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
     
     func testSearchMoviesWithEmptyResult() {
-        let exp = expectation(description: "Загрузка фильмов без результата")
+        let apiClient = APIClientStub(responseStub: moviesListResponse, errorStub: nil)
+        moviesService = MoviesService(apiClient: apiClient)
+        
         moviesService.searchMovies(query: "TestTestTest") { response in
             switch response {
             case .success(let movies):
-                XCTAssert(movies.totalResults == 0)
+                XCTAssert(movies.results.isEmpty)
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
     
     func testSearchMoviesWithEmptySearchField() {
-        let exp = expectation(description: "Загрузка фильмов с пустой строкой поиска")
+        let apiClient = APIClientStub(responseStub: nil, errorStub: NetworkError.unknownError)
+        moviesService = MoviesService(apiClient: apiClient)
+        
         moviesService.searchMovies(query: "") { response in
             switch response {
             case .success:
@@ -64,50 +79,21 @@ final class MoviesServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertEqual(error.localizedDescription, "Неизвестная ошибка, попробуйте позже.")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
     }
     
     func testSearchForMovieDetails() {
-        let exp = expectation(description: "Загрузка подробностей фильма на русском")
-        moviesService.movieDetails(movieId: movieId, language: "ru") { response in
+        let apiClient = APIClientStub(responseStub: movieDetailsResponse, errorStub: nil)
+        moviesService = MoviesService(apiClient: apiClient)
+        
+        moviesService.movieDetails(movieId: 1, language: "ru") { response in
             switch response {
             case .success(let movieDetails):
                 XCTAssertEqual(movieDetails.title, "Джокер")
+                XCTAssertEqual(movieDetails.id, 1)
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 5)
-    }
-    
-    func testSearchForMovieDetailsWithoutLanguage() {
-        let exp = expectation(description: "Загрузка подробностей фильма без указания языка")
-        moviesService.movieDetails(movieId: movieId, language: nil) { response in
-            switch response {
-            case .success(let movieDetails):
-                XCTAssertEqual(movieDetails.title, "Joker")
-            case .failure(let error):
-                XCTFail("Ошибка: \(error.localizedDescription)")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5)
-    }
-    
-    func testSearchForMovieDetailsWithInvalidId() {
-        let exp = expectation(description: "Загрузка подробностей фильма с невалидным id")
-        moviesService.movieDetails(movieId: 0, language: nil) { response in
-            switch response {
-            case .success:
-                XCTFail("Фильма с id 0 не должно существовать")
-            case .failure(let error):
-                XCTAssertEqual(error.localizedDescription, "Запрашиваемый ресурс не найден.")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5)
     }
 }

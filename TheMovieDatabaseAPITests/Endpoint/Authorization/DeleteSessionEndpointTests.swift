@@ -11,23 +11,18 @@ import XCTest
 
 class DeleteSessionEndpointTests: XCTestCase {
     
-    // MARK: - Public Properties
-    
-    let apiKey = NetworkSettings.apiKey
-    
     // MARK: - Tests
     
     func testMakeRequestUrl() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/authentication/session?api_key=\(apiKey)"
-        var endpoint = DeleteSessionEndpoint(sessionId: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = DeleteSessionEndpoint(sessionId: "Foo")
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/authentication/session")
     }
     
     func testMakeRequestBody() throws {
-        var endpoint = DeleteSessionEndpoint(sessionId: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = DeleteSessionEndpoint(sessionId: "Foo")
         let request = try endpoint.makeRequest()
         
         let body = DeleteSessionBody(sessionId: "Foo")
@@ -38,9 +33,10 @@ class DeleteSessionEndpointTests: XCTestCase {
     }
     
     func testRequestParameters() throws {
-        var endpoint = DeleteSessionEndpoint(sessionId: "Foo")
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = DeleteSessionEndpoint(sessionId: "Foo")
+        
         let request = try endpoint.makeRequest()
+        
         assertDelete(request: request)
     }
     

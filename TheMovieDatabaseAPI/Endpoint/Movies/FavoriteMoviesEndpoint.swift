@@ -23,8 +23,6 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     let sortBy: String?
     let page: Int?
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(
@@ -44,14 +42,14 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        urlComponents.queryItems = makeQueryItems()
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
         var request = URLRequest(url: resultURL)
         request.httpMethod = HttpMethods.GET.rawValue
         return request
@@ -65,22 +63,17 @@ public struct FavoriteMoviesEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        var queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "session_id", value: sessionId)]
+    private func makeQueryItems() -> [URLQueryItem] {
+        var queryItems = [URLQueryItem(name: "session_id", value: sessionId)]
         
         if let lang = language {
-            let langQuery = URLQueryItem(name: "language", value: lang)
-            queryItems.append(langQuery)
+            queryItems.append(URLQueryItem(name: "language", value: lang))
         }
         if let sortBy = sortBy {
-            let sortQuery = URLQueryItem(name: "sort_by", value: sortBy)
-            queryItems.append(sortQuery)
+            queryItems.append(URLQueryItem(name: "sort_by", value: sortBy))
         }
         if let page = page {
-            let pageQuery = URLQueryItem(name: "page", value: "\(page)")
-            queryItems.append(pageQuery)
+            queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
         }
         return queryItems
     }

@@ -11,24 +11,21 @@ import XCTest
 
 class CreateTokenEndpointTests: XCTestCase {
     
-    // MARK: - Public Properties
-    
-    let apiKey = NetworkSettings.apiKey
-    
     // MARK: - Tests
     
     func testMakeRequest() throws {
-        let expectedUrl = "https://api.themoviedb.org/3/authentication/token/new?api_key=\(apiKey)"
-        var endpoint = CreateTokenEndpoint()
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateTokenEndpoint()
+        
         let request = try endpoint.makeRequest()
-        XCTAssertEqual(request.url?.absoluteString, expectedUrl)
+        
+        XCTAssertEqual(request.url?.absoluteString, "3/authentication/token/new")
     }
     
     func testRequestParameters() throws {
-        var endpoint = CreateTokenEndpoint()
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = CreateTokenEndpoint()
+        
         let request = try endpoint.makeRequest()
+        
         assertGet(request: request)
     }
     

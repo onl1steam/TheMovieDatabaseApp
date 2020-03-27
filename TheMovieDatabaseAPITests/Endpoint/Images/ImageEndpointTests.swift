@@ -18,21 +18,19 @@ final class ImageEndpointTests: XCTestCase {
     // MARK: - Tests
     
     func testMakeRequestWithEmptyFields() throws {
-        var endpoint = ImageEndpoint(width: nil, imagePath: posterPath)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = ImageEndpoint(width: nil, imagePath: posterPath)
 
         let request = try endpoint.makeRequest()
         
-        XCTAssertEqual(request.url?.absoluteString, "https://image.tmdb.org/t/p/original\(posterPath)")
+        XCTAssertEqual(request.url?.absoluteString, "t/p/original\(posterPath)")
     }
     
     func testMakeRequestWithFilledFields() throws {
-        var endpoint = ImageEndpoint(width: "w500", imagePath: posterPath)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = ImageEndpoint(width: "w500", imagePath: posterPath)
         
         let request = try endpoint.makeRequest()
         
-        XCTAssertEqual(request.url?.absoluteString, "https://image.tmdb.org/t/p/w500\(posterPath)")
+        XCTAssertEqual(request.url?.absoluteString, "t/p/w500\(posterPath)")
     }
     
     func testParseContent() {
@@ -72,8 +70,7 @@ final class ImageEndpointTests: XCTestCase {
     }
     
     func testRequestParameters() throws {
-        var endpoint = ImageEndpoint(width: "w500", imagePath: posterPath)
-        endpoint.configuration = NetworkSettings.configuration
+        let endpoint = ImageEndpoint(width: "w500", imagePath: posterPath)
         
         let request = try endpoint.makeRequest()
         

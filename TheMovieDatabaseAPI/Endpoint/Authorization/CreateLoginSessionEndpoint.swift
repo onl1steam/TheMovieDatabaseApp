@@ -21,8 +21,6 @@ public struct CreateLoginSessionEndpoint: Endpoint {
     let password: String
     let requestToken: String
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(username: String, password: String, requestToken: String) {
@@ -34,14 +32,12 @@ public struct CreateLoginSessionEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-        
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
         let encodableData = CreateLoginSessionBody(username: username, password: password, requestToken: requestToken)
@@ -60,13 +56,6 @@ public struct CreateLoginSessionEndpoint: Endpoint {
     }
     
     // MARK: - Private Methods
-    
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
-        return queryItems
-    }
     
     private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL
