@@ -87,9 +87,6 @@
 		92E5CAD0242AEB3800DD587D /* MoviesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CACF242AEB3800DD587D /* MoviesViewControllerTests.swift */; };
 		92E5CAD3242AEEB900DD587D /* TabBarViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAD2242AEEB900DD587D /* TabBarViewControllerTests.swift */; };
 		92E5CAD6242AF2BB00DD587D /* AuthorizationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAD5242AF2BB00DD587D /* AuthorizationViewControllerTests.swift */; };
-		92E5CAD8242AFD7F00DD587D /* AuthorizationViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAD7242AFD7F00DD587D /* AuthorizationViewModelMock.swift */; };
-		92E5CADA242B028000DD587D /* AuthorizationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAD9242B028000DD587D /* AuthorizationViewModelTests.swift */; };
-		92E5CADC242B02C500DD587D /* AuthorizationViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CADB242B02C500DD587D /* AuthorizationViewControllerMock.swift */; };
 		92E5CADE242B079C00DD587D /* AuthServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CADD242B079C00DD587D /* AuthServiceMock.swift */; };
 		92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */; };
 		92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */; };
@@ -107,7 +104,6 @@
 		92E5CB3A242D10F400DD587D /* AccountDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB32242D10F400DD587D /* AccountDetails.json */; };
 		92E5CB3C242D7E2700DD587D /* APIRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */; };
 		92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3E242E04C900DD587D /* APIClientStub.swift */; };
-		92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
 		92F64D32241FA6E000693C9B /* APIRequestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D31241FA6E000693C9B /* APIRequestImage.swift */; };
@@ -252,9 +248,6 @@
 		92E5CACF242AEB3800DD587D /* MoviesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewControllerTests.swift; sourceTree = "<group>"; };
 		92E5CAD2242AEEB900DD587D /* TabBarViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerTests.swift; sourceTree = "<group>"; };
 		92E5CAD5242AF2BB00DD587D /* AuthorizationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewControllerTests.swift; sourceTree = "<group>"; };
-		92E5CAD7242AFD7F00DD587D /* AuthorizationViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModelMock.swift; sourceTree = "<group>"; };
-		92E5CAD9242B028000DD587D /* AuthorizationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModelTests.swift; sourceTree = "<group>"; };
-		92E5CADB242B02C500DD587D /* AuthorizationViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewControllerMock.swift; sourceTree = "<group>"; };
 		92E5CADD242B079C00DD587D /* AuthServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonViewTests.swift; sourceTree = "<group>"; };
@@ -272,7 +265,6 @@
 		92E5CB32242D10F400DD587D /* AccountDetails.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccountDetails.json; sourceTree = "<group>"; };
 		92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestAdapter.swift; sourceTree = "<group>"; };
 		92E5CB3E242E04C900DD587D /* APIClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientStub.swift; sourceTree = "<group>"; };
-		92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		92F64D2F241FA61000693C9B /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -506,7 +498,6 @@
 				9250EBBC2414459A00AC30DB /* Views */,
 				9250EBAA2413DE2D00AC30DB /* AuthorizationViewController.swift */,
 				9250EBAB2413DE2D00AC30DB /* AuthorizationViewController.xib */,
-				92F5430C241749A80020BB4E /* AuthorizationViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -752,8 +743,6 @@
 			children = (
 				92E5CABF242AD5A700DD587D /* ImageServiceMock.swift */,
 				92E5CAC1242AD5B900DD587D /* SessionServiceMock.swift */,
-				92E5CAD7242AFD7F00DD587D /* AuthorizationViewModelMock.swift */,
-				92E5CADB242B02C500DD587D /* AuthorizationViewControllerMock.swift */,
 				92E5CADD242B079C00DD587D /* AuthServiceMock.swift */,
 				92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */,
 			);
@@ -829,7 +818,6 @@
 			children = (
 				92E5CAE2242B0C5300DD587D /* Views */,
 				92E5CAD5242AF2BB00DD587D /* AuthorizationViewControllerTests.swift */,
-				92E5CAD9242B028000DD587D /* AuthorizationViewModelTests.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -1391,7 +1379,6 @@
 				92F77ADE2416CE49007F9182 /* AccountScreenStrings.swift in Sources */,
 				92F64D3E242021D300693C9B /* ImageService.swift in Sources */,
 				9250EBC124144E9000AC30DB /* MoviesViewController.swift in Sources */,
-				92F5430D241749A80020BB4E /* AuthorizationViewModel.swift in Sources */,
 				9250EBB72413FA2E00AC30DB /* Colors.swift in Sources */,
 				92F77AE02416CE69007F9182 /* FavoritesScreenStrings.swift in Sources */,
 				9250EBC524144E9F00AC30DB /* FavoritesViewController.swift in Sources */,
@@ -1411,11 +1398,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92E5CAD8242AFD7F00DD587D /* AuthorizationViewModelMock.swift in Sources */,
 				92E5CAC0242AD5A700DD587D /* ImageServiceMock.swift in Sources */,
 				92E5CAB8242ACB4200DD587D /* UIViewExtension.swift in Sources */,
 				92E5CAB5242A8EB100DD587D /* SessionServiceTests.swift in Sources */,
-				92E5CADA242B028000DD587D /* AuthorizationViewModelTests.swift in Sources */,
 				92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */,
 				92E5CAD6242AF2BB00DD587D /* AuthorizationViewControllerTests.swift in Sources */,
 				92E5CABA242ACB7900DD587D /* ViewControllerTestCase.swift in Sources */,
@@ -1427,7 +1412,6 @@
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 				92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */,
 				92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */,
-				92E5CADC242B02C500DD587D /* AuthorizationViewControllerMock.swift in Sources */,
 				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 				92E5CAC2242AD5B900DD587D /* SessionServiceMock.swift in Sources */,
 				92E5CAB2242A8A9000DD587D /* AuthServiceTests.swift in Sources */,

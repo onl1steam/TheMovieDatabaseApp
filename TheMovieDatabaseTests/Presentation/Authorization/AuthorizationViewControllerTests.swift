@@ -19,9 +19,10 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        let authViewModel = AuthorizationViewModelMock()
-        let authVC = AuthorizationViewController(authViewModel: authViewModel)
-        authViewModel.setupDelegate(delegate: authVC)
+        let authVC = AuthorizationViewController(
+            validationService: ServiceLayer.shared.validationService,
+            authService: AuthServiceMock(),
+            sessionService: SessionServiceMock())
         rootViewController = authVC
     }
     
@@ -45,20 +46,19 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     func testToggleIndicator() {
         viewController.toggleIndicator()
         XCTAssert(!viewController.activityIndicator.isHidden)
-        viewController.authViewModel.authorizeWithData(login: "Foo", password: "Barr")
+        viewController.authorizeWithData(login: "Foo", password: "Barr")
         XCTAssert(viewController.activityIndicator.isHidden)
     }
     
     func testLoginButtonDisabled() {
-        viewController.authViewModel.checkTextFieldsState(loginText: nil, passwordText: nil)
+        viewController.checkTextFieldsState(loginText: nil, passwordText: nil)
         XCTAssert(!viewController.loginButton.isEnabled)
         XCTAssertEqual(viewController.loginButton.backgroundColor, Colors.disabledButtonBackground)
         XCTAssertEqual(viewController.loginButton.titleColor(for: .normal), Colors.disabledButtonText)
     }
     
     func testLoginButtonEnabled() {
-        viewController.toggleTextFieldState(isBlank: false)
-        viewController.toggleLoginButton()
+        viewController.toggleLoginButton(isTextFieldsBlank: false)
         XCTAssert(viewController.loginButton.isEnabled)
         XCTAssertEqual(viewController.loginButton.backgroundColor, Colors.orange)
         XCTAssertEqual(viewController.loginButton.titleColor(for: .normal), Colors.light)
@@ -67,16 +67,6 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     func testShowingError() {
         viewController.showError("Foo")
         XCTAssertEqual(viewController.errorLabel.text, "Foo")
-    }
-    
-    func testHidingErrorLabel() {
-        viewController.hideErrorLabel()
-        XCTAssert(viewController.errorLabel.isHidden)
-    }
-    
-    func testTogglingTextFieldState() {
-        viewController.toggleTextFieldState(isBlank: true)
-        XCTAssert(viewController.isTextFieldsBlank)
     }
     
     func testTapLoginButton() {
@@ -112,5 +102,16 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     func testEndPasswordEditing() {
         viewController.passwordEditingDidEnd(viewController.passwordTextField)
         XCTAssertEqual(viewController.passwordTextField.layer.borderColor, Colors.darkBlue.cgColor)
+    }
+    
+    func testChangingErrorLabelState() {
+        viewController.errorLabel.isHidden = false
+        viewController.authorizeWithData(login: "Foo", password: "Bar")
+        XCTAssert(viewController.errorLabel.isHidden)
+    }
+    
+    func testChangingErrorLabelStates() {
+        viewController.checkTextFieldsState(loginText: nil, passwordText: nil)
+        XCTAssert(!viewController.loginButton.isEnabled)
     }
 }

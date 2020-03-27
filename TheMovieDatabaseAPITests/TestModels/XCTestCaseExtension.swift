@@ -24,5 +24,4 @@ extension XCTestCase {
         XCTAssertEqual(request.httpMethod, "DELETE")
         XCTAssertNotNil(request.httpBody)
     }
-    
 }
