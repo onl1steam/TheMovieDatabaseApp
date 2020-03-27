@@ -55,9 +55,7 @@ final class AuthService: Authorization {
         }
     }
     
-    // MARK: - Private Methods
-    
-    private func createLoginSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func createLoginSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let username = user.login, let password = user.password else {
             completion(.failure(AuthError.blankFields))
             return
@@ -78,7 +76,7 @@ final class AuthService: Authorization {
         }
     }
     
-    private func createSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func createSession(user: User, _ completion: @escaping (Result<String, Error>) -> Void) {
         let createSession = CreateSessionEndpoint(requestToken: requestToken)
         apiClient.request(createSession) { response in
             switch response {

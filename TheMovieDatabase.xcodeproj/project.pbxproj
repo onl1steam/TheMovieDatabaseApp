@@ -116,9 +116,6 @@
 		92F64D39241FF51800693C9B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D38241FF51800693C9B /* ImageCache.swift */; };
 		92F64D3E242021D300693C9B /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D3D242021D300693C9B /* ImageService.swift */; };
 		92F64D412420236800693C9B /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D402420236800693C9B /* MoviesService.swift */; };
-		92F64D4B2421623B00693C9B /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D4A2421623B00693C9B /* Authorization.swift */; };
-		92F64D4D2421666C00693C9B /* SessionInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D4C2421666C00693C9B /* SessionInfoModel.swift */; };
-		92F64D5824217A2200693C9B /* NetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D5724217A2200693C9B /* NetworkSettings.swift */; };
 		92F64D6324262B1C00693C9B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D6224262B1C00693C9B /* Configuration.swift */; };
 		92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD62416CDCA007F9182 /* ErrorStrings.swift */; };
 		92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */; };
@@ -285,9 +282,6 @@
 		92F64D38241FF51800693C9B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		92F64D3D242021D300693C9B /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		92F64D402420236800693C9B /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
-		92F64D4A2421623B00693C9B /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
-		92F64D4C2421666C00693C9B /* SessionInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInfoModel.swift; sourceTree = "<group>"; };
-		92F64D5724217A2200693C9B /* NetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettings.swift; sourceTree = "<group>"; };
 		92F64D6224262B1C00693C9B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		92F77AD62416CDCA007F9182 /* ErrorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStrings.swift; sourceTree = "<group>"; };
 		92F77AD82416CDD7007F9182 /* TabBarScreenStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenStrings.swift; sourceTree = "<group>"; };
@@ -920,9 +914,6 @@
 			children = (
 				92E5CB1C242D0EEB00DD587D /* Stubs */,
 				92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */,
-				92F64D4C2421666C00693C9B /* SessionInfoModel.swift */,
-				92F64D4A2421623B00693C9B /* Authorization.swift */,
-				92F64D5724217A2200693C9B /* NetworkSettings.swift */,
 				92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */,
 			);
 			path = TestModels;
@@ -1365,16 +1356,13 @@
 				92E5CB08242CF61C00DD587D /* HttpResponseStub.swift in Sources */,
 				92E5CA8F24290B3F00DD587D /* MovieDetailsEndpointTests.swift in Sources */,
 				92E5CA9A242934FE00DD587D /* CreateLoginSessionEndpointTests.swift in Sources */,
-				92F64D4B2421623B00693C9B /* Authorization.swift in Sources */,
 				92E5CA952429131E00DD587D /* AvatarEndpointTests.swift in Sources */,
-				92F64D4D2421666C00693C9B /* SessionInfoModel.swift in Sources */,
 				92E5CA882428F28400DD587D /* AccountDetailsEndpointTests.swift in Sources */,
 				92E5CA932429130E00DD587D /* ImageEndpointTests.swift in Sources */,
 				92E5CA98242934EB00DD587D /* CreateTokenEndpointTests.swift in Sources */,
 				92E5CB1B242D0D6800DD587D /* ResponseStub.swift in Sources */,
 				92E5CA8D24290B2000DD587D /* SearchMoviesEndpointTests.swift in Sources */,
 				92E5CB03242CF1A500DD587D /* XCTestCaseExtension.swift in Sources */,
-				92F64D5824217A2200693C9B /* NetworkSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

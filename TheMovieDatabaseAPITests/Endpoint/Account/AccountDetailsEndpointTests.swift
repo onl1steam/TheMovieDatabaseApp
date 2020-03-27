@@ -14,7 +14,6 @@ class AccountDetailsEndpointTests: XCTestCase {
     // MARK: - Public Properties
     
     let sessionId = "1"
-    let apiKey = NetworkSettings.apiKey
     
     // MARK: - Tests
 
