@@ -103,7 +103,8 @@
 		92E5CB38242D10F400DD587D /* CreateSession.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB30242D10F400DD587D /* CreateSession.json */; };
 		92E5CB3A242D10F400DD587D /* AccountDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = 92E5CB32242D10F400DD587D /* AccountDetails.json */; };
 		92E5CB3C242D7E2700DD587D /* APIRequestAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */; };
-		92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB3E242E04C900DD587D /* APIClientStub.swift */; };
+		92E5CB41242F8E2500DD587D /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB40242F8E2400DD587D /* MockAPIClient.swift */; };
+		92E5CB43242F9BD800DD587D /* APIRequestAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB42242F9BD800DD587D /* APIRequestAdapterTests.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
 		92F64D32241FA6E000693C9B /* APIRequestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D31241FA6E000693C9B /* APIRequestImage.swift */; };
@@ -264,7 +265,8 @@
 		92E5CB30242D10F400DD587D /* CreateSession.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateSession.json; sourceTree = "<group>"; };
 		92E5CB32242D10F400DD587D /* AccountDetails.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AccountDetails.json; sourceTree = "<group>"; };
 		92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestAdapter.swift; sourceTree = "<group>"; };
-		92E5CB3E242E04C900DD587D /* APIClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientStub.swift; sourceTree = "<group>"; };
+		92E5CB40242F8E2400DD587D /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		92E5CB42242F9BD800DD587D /* APIRequestAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestAdapterTests.swift; sourceTree = "<group>"; };
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		92F64D2F241FA61000693C9B /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
@@ -673,7 +675,6 @@
 				92E5CAA92429692D00DD587D /* Business Logic */,
 				92E5CABB242AD22700DD587D /* Presentation */,
 				92E5CAB6242ACB1B00DD587D /* Helpers */,
-				92E5CB3D242E04AB00DD587D /* Stubs */,
 				92E5CAAA242A2F3A00DD587D /* Mocks */,
 				92D1122F241670CC0087D910 /* Info.plist */,
 			);
@@ -745,6 +746,7 @@
 				92E5CAC1242AD5B900DD587D /* SessionServiceMock.swift */,
 				92E5CADD242B079C00DD587D /* AuthServiceMock.swift */,
 				92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */,
+				92E5CB40242F8E2400DD587D /* MockAPIClient.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -853,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				92E5CAE5242B111700DD587D /* ImageCacheTests.swift */,
+				92E5CB42242F9BD800DD587D /* APIRequestAdapterTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -876,14 +879,6 @@
 			children = (
 				92E5CB0B242D095600DD587D /* JSONStubs */,
 				92E5CB1A242D0D6800DD587D /* ResponseStub.swift */,
-			);
-			path = Stubs;
-			sourceTree = "<group>";
-		};
-		92E5CB3D242E04AB00DD587D /* Stubs */ = {
-			isa = PBXGroup;
-			children = (
-				92E5CB3E242E04C900DD587D /* APIClientStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -1351,6 +1346,7 @@
 				92E5CB1B242D0D6800DD587D /* ResponseStub.swift in Sources */,
 				92E5CA8D24290B2000DD587D /* SearchMoviesEndpointTests.swift in Sources */,
 				92E5CB03242CF1A500DD587D /* XCTestCaseExtension.swift in Sources */,
+				92E5CB43242F9BD800DD587D /* APIRequestAdapterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,11 +1403,11 @@
 				92E5CABE242AD26300DD587D /* AccountViewControllerTests.swift in Sources */,
 				92E5CADE242B079C00DD587D /* AuthServiceMock.swift in Sources */,
 				92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */,
+				92E5CB41242F8E2500DD587D /* MockAPIClient.swift in Sources */,
 				92E5CACD242AE7E900DD587D /* FavoritesViewControllerTests.swift in Sources */,
 				92E5CAE8242B1ADC00DD587D /* AuthorizationModel.swift in Sources */,
 				92D112372416715A0087D910 /* ValidationServiceTests.swift in Sources */,
 				92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */,
-				92E5CB3F242E04C900DD587D /* APIClientStub.swift in Sources */,
 				92E5CAAE242A53DD00DD587D /* ImageServiceTests.swift in Sources */,
 				92E5CAC2242AD5B900DD587D /* SessionServiceMock.swift in Sources */,
 				92E5CAB2242A8A9000DD587D /* AuthServiceTests.swift in Sources */,

@@ -15,6 +15,7 @@ final class SessionServiceTests: XCTestCase {
     // MARK: - Public Properties
     
     var sessionService: Session!
+    var apiClient: MockAPIClient!
     
     var accountResponse: AccountResponse!
     var moviesResponse: MoviesResponse!
@@ -37,15 +38,17 @@ final class SessionServiceTests: XCTestCase {
             username: "Bar")
         
         moviesResponse = MoviesResponse(page: 1, results: [], totalPages: 1, totalResults: 5)
-        
         deleteSessionResponse = DeleteSessionResponse(success: true)
+        
+        apiClient = MockAPIClient()
+        sessionService = SessionService(apiClient: apiClient)
+        sessionService.setupSessionId(sessionId: "Foo")
     }
     
     // MARK: - Tests
     
     func testLoadingAccountInfo() {
-        let apiClient = APIClientStub(responseStub: accountResponse, errorStub: nil)
-        sessionService = SessionService(apiClient: apiClient)
+        let exp = expectation(description: "Загрузка профиля")
         
         sessionService.accountInfo { response in
             switch response {
@@ -54,13 +57,15 @@ final class SessionServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
+            exp.fulfill()
         }
+        
+        _ = apiClient.fulfil(AccountDetailsEndpoint.self, with: accountResponse)
+        wait(for: [exp], timeout: 5)
     }
     
     func testLoadingFavoriteMoviesWithEmptyData() {
-        let apiClient = APIClientStub(responseStub: moviesResponse, errorStub: nil)
-        sessionService = SessionService(apiClient: apiClient)
-        sessionService.setupSessionId(sessionId: "Foo")
+        let exp = expectation(description: "Загрузка изображений")
         
         sessionService.favoriteMovies(language: nil, sortBy: nil, page: nil) { response in
             switch response {
@@ -69,13 +74,15 @@ final class SessionServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
+            exp.fulfill()
         }
+        
+        _ = apiClient.fulfil(FavoriteMoviesEndpoint.self, with: moviesResponse)
+        wait(for: [exp], timeout: 5)
     }
     
     func testLoadingFavoriteMoviesWithFilledData() {
-        let apiClient = APIClientStub(responseStub: moviesResponse, errorStub: nil)
-        sessionService = SessionService(apiClient: apiClient)
-        sessionService.setupSessionId(sessionId: "Foo")
+        let exp = expectation(description: "Загрузка изображений")
         
         sessionService.favoriteMovies(language: "ru", sortBy: "created_at.asc", page: 1) { response in
             switch response {
@@ -84,12 +91,15 @@ final class SessionServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
+            exp.fulfill()
         }
+        
+        _ = apiClient.fulfil(FavoriteMoviesEndpoint.self, with: moviesResponse)
+        wait(for: [exp], timeout: 5)
     }
     
     func testDeletingSession() {
-        let apiClient = APIClientStub(responseStub: deleteSessionResponse, errorStub: nil)
-        sessionService = SessionService(apiClient: apiClient)
+        let exp = expectation(description: "Загрузка изображений")
         
         sessionService.deleteSession { response in
             switch response {
@@ -98,6 +108,10 @@ final class SessionServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }
+            exp.fulfill()
         }
+        
+        _ = apiClient.fulfil(DeleteSessionEndpoint.self, with: deleteSessionResponse)
+        wait(for: [exp], timeout: 5)
     }
 }

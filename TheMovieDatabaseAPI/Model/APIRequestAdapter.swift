@@ -22,15 +22,15 @@ final class APIRequestAdapter: RequestAdapter {
         for session: Session,
         completion: @escaping (Result<URLRequest, Error>) -> Void) {
         
-        if let url = urlRequest.url, url.absoluteString.hasPrefix("t/p/original") {
-            let requestUrl = URL(string: url.absoluteString, relativeTo: configuration.basePosterURL)!
+        if let url = urlRequest.url, url.absoluteString.hasPrefix("t/p/"),
+            let requestUrl = URL(string: url.absoluteString, relativeTo: configuration.basePosterURL) {
             let request = makeRequest(from: urlRequest, with: requestUrl)
             completion(.success(request))
             return
         }
         
-        if let url = urlRequest.url, url.absoluteString.hasPrefix("avatar") {
-            let requestUrl = URL(string: url.absoluteString, relativeTo: configuration.baseAvatarURL)!
+        if let url = urlRequest.url, url.absoluteString.hasPrefix("avatar"),
+            let requestUrl = URL(string: url.absoluteString, relativeTo: configuration.baseAvatarURL) {
             let request = makeRequest(from: urlRequest, with: requestUrl)
             completion(.success(request))
             return
@@ -46,8 +46,8 @@ final class APIRequestAdapter: RequestAdapter {
         urlComponents.queryItems = makeQueryParameters(urlComponents: urlComponents)
         
         guard let requestUrl = urlComponents.url else {
-                completion(.failure(NetworkError.badURL))
-                return
+            completion(.failure(NetworkError.badURL))
+            return
         }
         
         let request = makeRequest(from: urlRequest, with: requestUrl)
