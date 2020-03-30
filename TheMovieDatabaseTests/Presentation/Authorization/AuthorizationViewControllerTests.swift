@@ -60,8 +60,8 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     func testLoginButtonEnabled() {
         viewController.toggleLoginButton(isTextFieldsBlank: false)
         XCTAssert(viewController.loginButton.isEnabled)
-        XCTAssertEqual(viewController.loginButton.backgroundColor, Colors.orange)
-        XCTAssertEqual(viewController.loginButton.titleColor(for: .normal), Colors.light)
+        XCTAssertEqual(viewController.loginButton.backgroundColor, Colors.customOrange)
+        XCTAssertEqual(viewController.loginButton.titleColor(for: .normal), Colors.customLight)
     }
     
     func testShowingError() {
@@ -76,7 +76,7 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     
     func testBeginLoginEditing() {
         viewController.loginEditingDidBegin(viewController.loginTextField)
-        XCTAssertEqual(viewController.loginTextField.layer.borderColor, Colors.purpure.cgColor)
+        XCTAssertEqual(viewController.loginTextField.layer.borderColor, Colors.customPurpure.cgColor)
     }
     
     func testEndLoginEditing() {
@@ -91,7 +91,7 @@ final class AuthorizationViewControllerTests: ViewControllerTestCase {
     
     func testBeginPasswordEditing() {
         viewController.passwordEditingDidBegin(viewController.passwordTextField)
-        XCTAssertEqual(viewController.passwordTextField.layer.borderColor, Colors.purpure.cgColor)
+        XCTAssertEqual(viewController.passwordTextField.layer.borderColor, Colors.customPurpure.cgColor)
     }
     
     func testPasswordTextFieldChanging() {

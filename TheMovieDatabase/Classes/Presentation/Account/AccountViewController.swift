@@ -111,12 +111,12 @@ final class AccountViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        nameLabel.tintColor = Colors.light
-        emailLabel.tintColor = Colors.gray
-        logoutButton.backgroundColor = Colors.accountButtonBackground
-        logoutButton.tintColor = Colors.purpure
-        errorLabel.tintColor = Colors.red
+        view.backgroundColor = .backgroundBlack
+        nameLabel.tintColor = .customLight
+        emailLabel.tintColor = .customGray
+        logoutButton.backgroundColor = .accountButtonBackground
+        logoutButton.tintColor = .customPurpure
+        errorLabel.tintColor = .customRed
     }
     
     private func setupLocalizedStrings() {

@@ -18,13 +18,13 @@ final class FavoritesPlaceholderView: UIView {
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = FavoritesScreenStrings.blankListLabel
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = Colors.light
+        label.textColor = .customLight
         return label
     }()
     
     let navigationButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(Colors.purpure, for: .normal)
+        button.setTitleColor(.customPurpure, for: .normal)
         button.setTitle(FavoritesScreenStrings.searchFilmsButtonText, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.contentHorizontalAlignment = .left
@@ -34,7 +34,7 @@ final class FavoritesPlaceholderView: UIView {
     
     let placeholderImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Images.favoritesBackground
+        imageView.image = .favoritesBackground
         return imageView
     }()
     

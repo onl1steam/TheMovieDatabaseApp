@@ -24,7 +24,7 @@ final class AuthorizationViewController: UIViewController {
     
     let visibilityButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        button.setBackgroundImage(Images.visibility, for: .normal)
+        button.setBackgroundImage(.visibility, for: .normal)
         button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -97,12 +97,12 @@ final class AuthorizationViewController: UIViewController {
     
     func toggleLoginButton(isTextFieldsBlank: Bool) {
         if isTextFieldsBlank {
-            loginButton.backgroundColor = Colors.disabledButtonBackground
-            loginButton.setTitleColor(Colors.disabledButtonText, for: .normal)
+            loginButton.backgroundColor = .disabledButtonBackground
+            loginButton.setTitleColor(.disabledButtonText, for: .normal)
             loginButton.isEnabled = false
         } else {
-            loginButton.backgroundColor = Colors.orange
-            loginButton.setTitleColor(Colors.light, for: .normal)
+            loginButton.backgroundColor = .customOrange
+            loginButton.setTitleColor(.customLight, for: .normal)
             loginButton.isEnabled = true
         }
     }
@@ -117,10 +117,10 @@ final class AuthorizationViewController: UIViewController {
     @objc func visibilityButtonTapped() {
         let isPasswordHidden = passwordTextField.isSecureTextEntry
         if isPasswordHidden {
-            visibilityButton.setBackgroundImage(Images.visibilityNone, for: .normal)
+            visibilityButton.setBackgroundImage(.visibilityNone, for: .normal)
             passwordTextField.isSecureTextEntry = !isPasswordHidden
         } else {
-            visibilityButton.setBackgroundImage(Images.visibility, for: .normal)
+            visibilityButton.setBackgroundImage(.visibility, for: .normal)
             passwordTextField.isSecureTextEntry = !isPasswordHidden
         }
     }
@@ -131,7 +131,7 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func loginEditingDidBegin(_ sender: CustomTextField) {
-        sender.setupBorderColor(Colors.purpure)
+        sender.setupBorderColor(.customPurpure)
     }
     
     @IBAction func loginTextFieldChanged(_ sender: CustomTextField) {
@@ -139,11 +139,11 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func loginEditingDidEnd(_ sender: CustomTextField) {
-        sender.setupBorderColor(Colors.darkBlue)
+        sender.setupBorderColor(.darkBlue)
     }
     
     @IBAction func passwordEditingDidBegin(_ sender: CustomTextField) {
-        sender.setupBorderColor(Colors.purpure)
+        sender.setupBorderColor(.customPurpure)
     }
     
     @IBAction func passwordTextFieldChanged(_ sender: CustomTextField) {
@@ -151,18 +151,18 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func passwordEditingDidEnd(_ sender: CustomTextField) {
-        sender.setupBorderColor(Colors.darkBlue)
+        sender.setupBorderColor(.darkBlue)
     }
     
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        welcomeLabel.tintColor = Colors.light
-        authInfoLabel.tintColor = Colors.light
-        errorLabel.tintColor = Colors.red
-        loginButton.backgroundColor = Colors.disabledButtonBackground
-        loginButton.tintColor = Colors.disabledButtonText
+        view.backgroundColor = .backgroundBlack
+        welcomeLabel.tintColor = .customLight
+        authInfoLabel.tintColor = .customLight
+        errorLabel.tintColor = .customRed
+        loginButton.backgroundColor = .disabledButtonBackground
+        loginButton.tintColor = .disabledButtonText
     }
     
     private func setupLocalizedStrings() {
@@ -175,22 +175,22 @@ final class AuthorizationViewController: UIViewController {
     
     private func setupActivityIndicator() {
         activityIndicator.isHidden = true
-        activityIndicator.color = Colors.light
+        activityIndicator.color = .customLight
     }
     
     private func setupLoginTextField() {
-        loginTextField.setupPlaceholderColor(Colors.gray)
-        loginTextField.setupBorderColor(Colors.darkBlue)
-        loginTextField.textColor = Colors.light
+        loginTextField.setupPlaceholderColor(.customGray)
+        loginTextField.setupBorderColor(.darkBlue)
+        loginTextField.textColor = .customLight
     }
     
     private func setupPasswordTextField() {
-        passwordTextField.textColor = Colors.light
+        passwordTextField.textColor = .customLight
         passwordTextField.isSecureTextEntry = true
         passwordTextField.rightView = visibilityButton
         passwordTextField.rightViewMode = .always
-        passwordTextField.setupPlaceholderColor(Colors.gray)
-        passwordTextField.setupBorderColor(Colors.darkBlue)
+        passwordTextField.setupPlaceholderColor(.customGray)
+        passwordTextField.setupBorderColor(.darkBlue)
     }
     
     private func validateResponse(_ response: Result<String, Error>) {

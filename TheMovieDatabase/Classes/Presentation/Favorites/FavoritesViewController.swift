@@ -58,8 +58,8 @@ final class FavoritesViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        favoriteLabel.tintColor = Colors.light
+        view.backgroundColor = .backgroundBlack
+        favoriteLabel.tintColor = .customLight
     }
     
     private func setupLocalizedStrings() {
@@ -68,24 +68,24 @@ final class FavoritesViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.view.backgroundColor = Colors.backgroundBlack
-        navigationController?.navigationBar.barTintColor = Colors.backgroundBlack
+        navigationController?.view.backgroundColor = .backgroundBlack
+        navigationController?.navigationBar.barTintColor = .backgroundBlack
         setupBarItems()
     }
     
     private func setupBarItems() {
         let listItem = UIBarButtonItem(
-            image: Images.listButton,
+            image: .listButton,
             style: .plain,
             target: self,
             action: #selector(changeAppearance(_:)))
-        listItem.tintColor = Colors.light
+        listItem.tintColor = .customLight
         let searchItem = UIBarButtonItem(
-            image: Images.search,
+            image: .search,
             style: .plain,
             target: nil,
             action: #selector(searchButtonTapped))
-        searchItem.tintColor = Colors.light
+        searchItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
     }
 }

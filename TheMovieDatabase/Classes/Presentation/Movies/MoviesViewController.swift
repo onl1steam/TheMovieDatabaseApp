@@ -43,8 +43,8 @@ final class MoviesViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        moviesLabel.tintColor = Colors.light
+        view.backgroundColor = .backgroundBlack
+        moviesLabel.tintColor = .customLight
     }
     
     private func setupLocalizedStrings() {

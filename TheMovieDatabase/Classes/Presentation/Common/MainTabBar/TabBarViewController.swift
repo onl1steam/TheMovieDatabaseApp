@@ -35,18 +35,18 @@ final class TabBarViewController: UITabBarController {
     
     private func setupViewControllers() {
         let filmsVC = MoviesViewController()
-        filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: Images.moviesTabBar, tag: 0)
+        filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: .moviesTabBar, tag: 0)
         
         let favoritesVC = UINavigationController(rootViewController: FavoritesViewController())
         favoritesVC.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.favoriteTabBar,
-            image: Images.favoritesTabBar,
+            image: .favoritesTabBar,
             tag: 1)
         
         let accountVC = AccountViewController()
         accountVC.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.accountTabBar,
-            image: Images.accountTabBar,
+            image: .accountTabBar,
             tag: 2)
         
         let tabBarList = [filmsVC, favoritesVC, accountVC]
@@ -54,9 +54,9 @@ final class TabBarViewController: UITabBarController {
     }
     
     private func setupColorScheme() {
-        tabBar.tintColor = Colors.orange
-        tabBar.unselectedItemTintColor = Colors.light
+        tabBar.tintColor = .customOrange
+        tabBar.unselectedItemTintColor = .customLight
         tabBar.isTranslucent = false
-        tabBar.barTintColor = Colors.tabBarBackground
+        tabBar.barTintColor = .tabBarBackground
     }
 }

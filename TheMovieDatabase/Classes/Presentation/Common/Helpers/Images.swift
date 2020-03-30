@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Images {
+extension UIImage {
 
     static let favoritesTabBar = #imageLiteral(resourceName: "favorite_tab_bar")
     static let favoritesBackground = #imageLiteral(resourceName: "favorites_bg")

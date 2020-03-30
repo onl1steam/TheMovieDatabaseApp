@@ -6,11 +6,9 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import XCTest
-
-import XCTest
 @testable import Alamofire
 @testable import TheMovieDatabaseAPI
+import XCTest
 
 class APIRequestAdapterTests: XCTestCase {
     
