@@ -20,7 +20,7 @@ final class FavoritesViewController: UIViewController {
     let sessionService: Session
     
     let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    let placeholderVC = FavoritesPlaceholderViewController()
+    let placeholderVC = FavoritesStubViewController()
     
     // MARK: - Initializers
     
