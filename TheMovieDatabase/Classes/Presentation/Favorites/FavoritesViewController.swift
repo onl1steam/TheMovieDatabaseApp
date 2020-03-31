@@ -19,6 +19,9 @@ final class FavoritesViewController: UIViewController {
     
     let sessionService: Session
     
+    let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let placeholderVC = FavoritesPlaceholderViewController()
+    
     // MARK: - Initializers
     
     init(sessionService: Session = ServiceLayer.shared.sessionService) {
@@ -36,19 +39,18 @@ final class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         setupColorScheme()
         setupLocalizedStrings()
-        let placeholderView = FavoritesPlaceholderView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: containerView.frame.width,
-            height: containerView.frame.height))
-        containerView.addSubview(placeholderView)
+        
+        placeholderVC.view.frame.size = containerView.bounds.size
+        addChild(placeholderVC)
+        containerView.addSubview(placeholderVC.view)
+        didMove(toParent: self)
         setupNavigationBar()
     }
     
     // MARK: - IBAction
     
     @objc func searchButtonTapped() {
-
+        
     }
     
     @objc func changeAppearance(_ sender: UIBarButtonItem) {

@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lr1-kz-fxa">
-                    <rect key="frame" x="0.0" y="82.5" width="375" height="584.5"/>
+                    <rect key="frame" x="24" y="82.5" width="327" height="584.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <accessibility key="accessibilityConfiguration" identifier="favorites_subview">
                         <bool key="isElement" value="YES"/>
@@ -38,12 +38,12 @@
             <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <constraints>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="7R1-k6-wwG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lr1-kz-fxa" secondAttribute="trailing" id="HB0-IJ-VN3"/>
+                <constraint firstItem="lr1-kz-fxa" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Cb1-rC-zQ1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lr1-kz-fxa" secondAttribute="trailing" constant="24" id="HB0-IJ-VN3"/>
                 <constraint firstItem="qTu-bb-ryu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="11" id="Ina-TP-vIL"/>
-                <constraint firstItem="lr1-kz-fxa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TH7-s1-d9Y"/>
+                <constraint firstItem="lr1-kz-fxa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="TH7-s1-d9Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qTu-bb-ryu" secondAttribute="trailing" constant="24" id="bjO-JF-zK7"/>
                 <constraint firstItem="lr1-kz-fxa" firstAttribute="top" secondItem="qTu-bb-ryu" secondAttribute="bottom" constant="33" id="j3l-Wc-zjv"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lr1-kz-fxa" secondAttribute="bottom" id="xFm-pK-sWX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="121.88905547226388"/>

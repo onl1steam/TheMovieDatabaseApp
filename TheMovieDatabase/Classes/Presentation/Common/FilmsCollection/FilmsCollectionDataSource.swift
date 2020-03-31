@@ -10,8 +10,22 @@ import UIKit
 
 class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
-    private var reuseIdentifier = "FilmsCollectionViewCell"
+    // MARK: - Public Properties
+
     var moviesData = [MovieDetails]()
+    
+    // MARK: - Private Properties
+    
+    private var reuseIdentifier = "FilmsCollectionViewCell"
+    
+    // MARK: - Initializers
+    
+    init(data: [MovieDetails]) {
+        moviesData = data
+        super.init()
+    }
+    
+    // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = moviesData.count
@@ -22,10 +36,18 @@ class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilmsCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath) as? FilmsCollectionViewCell else { fatalError("Неправильная ячейка") }
+        
         let data = moviesData[indexPath.row]
         cell.configure(data: data)
         return cell
     }
     
+    // MARK: - Public Methods
+    
+    func update(with data: [MovieDetails]) {
+        moviesData = data
+    }
 }

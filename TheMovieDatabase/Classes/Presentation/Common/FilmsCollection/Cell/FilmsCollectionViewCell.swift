@@ -9,6 +9,8 @@
 import UIKit
 
 class FilmsCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,14 +21,19 @@ class FilmsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak var runtimeImageView: UIImageView!
     
+    // MARK: - UICollectionViewCell
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupColorScheme()
     }
+    
+    // MARK: - Public Methods
     
     func configure(data: MovieDetails) {
         titleLabel.text = data.title
         
-        originalTitleLabel.text = data.originalTitle
+        originalTitleLabel.text = "\(data.originalTitle) (\(data.releaseDate))"
         
         genresLabel.text = data.genres.compactMap { $0.name }.joined(separator: ",")
         
@@ -36,6 +43,8 @@ class FilmsCollectionViewCell: UICollectionViewCell {
         
         configureRuntime(runtime: data.runtime)
     }
+    
+    // MARK: - Private Methods
     
     private func configureRuntime(runtime: Int?) {
         guard let time = runtime else {
@@ -48,12 +57,20 @@ class FilmsCollectionViewCell: UICollectionViewCell {
         runtimeImageView.isHidden = false
     }
     
-    func configureVotes(voteAverage: Double) {
+    private func configureVotes(voteAverage: Double) {
         scoreLabel.text = "\(voteAverage)"
         if voteAverage > 8.0 {
             scoreLabel.tintColor = .customGreen
         } else {
             scoreLabel.tintColor = .customLight
         }
+    }
+    
+    private func setupColorScheme() {
+        titleLabel.tintColor = .customLight
+        originalTitleLabel.tintColor = .customGray
+        genresLabel.tintColor = .customLight
+        votesLabel.tintColor = .customGray
+        runtimeLabel.tintColor = .customLight
     }
 }

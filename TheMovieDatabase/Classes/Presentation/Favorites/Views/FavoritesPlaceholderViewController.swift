@@ -1,5 +1,5 @@
 //
-//  FavoritesPlaceholderView.swift
+//  FavoritesPlaceholderViewController.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 09.03.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FavoritesPlaceholderView: UIView {
+final class FavoritesPlaceholderViewController: UIViewController {
     
     // MARK: - Public Properties
     
@@ -38,10 +38,10 @@ final class FavoritesPlaceholderView: UIView {
         return imageView
     }()
     
-    // MARK: - Initializers
+    // MARK: - UIViewController
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         addSubviews()
         setupPlaceholderLabelConstraints()
         setupNavigationButtonConstraints()
@@ -49,21 +49,17 @@ final class FavoritesPlaceholderView: UIView {
         setupAccessability()
     }
     
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Private Methods
     
     private func addSubviews() {
-        addSubview(placeholderLabel)
-        addSubview(placeholderImageView)
-        addSubview(navigationButton)
+        view.addSubview(placeholderLabel)
+        view.addSubview(placeholderImageView)
+        view.addSubview(navigationButton)
     }
     
     private func setupAccessability() {
         isAccessibilityElement = true
-        accessibilityIdentifier = "favorites_placeholder"
+        view.accessibilityIdentifier = "favorites_placeholder"
         
         placeholderLabel.isAccessibilityElement = true
         placeholderLabel.accessibilityIdentifier = "favorites_placeholder_label"
@@ -77,23 +73,23 @@ final class FavoritesPlaceholderView: UIView {
     
     private func setupPlaceholderLabelConstraints() {
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24).isActive = true
-        placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 24).isActive = true
+        placeholderLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        placeholderLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        placeholderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     private func setupNavigationButtonConstraints() {
         navigationButton.translatesAutoresizingMaskIntoConstraints = false
         navigationButton.topAnchor.constraint(equalTo: placeholderLabel.bottomAnchor, constant: 13).isActive = true
-        navigationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24).isActive = true
-        navigationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 24).isActive = true
+        navigationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        navigationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     private func setupPlaceholderImageViewConstraints() {
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
         placeholderImageView.heightAnchor.constraint(equalToConstant: 193).isActive = true
         placeholderImageView.widthAnchor.constraint(equalToConstant: 248).isActive = true
-        placeholderImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        placeholderImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        placeholderImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        placeholderImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
