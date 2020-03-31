@@ -25,7 +25,7 @@ extension UIImage {
     static let favoriteFilled = #imageLiteral(resourceName: "favorite_filled")
     static let visibilityNone = #imageLiteral(resourceName: "visibility_none")
     static let visibility = #imageLiteral(resourceName: "visibility")
-    static let clearSearchText = #imageLiteral(resourceName: "clearSearchText")
+    static let clearSearchText = #imageLiteral(resourceName: "clear_search_text")
     static let search = #imageLiteral(resourceName: "search")
     static let listButton = #imageLiteral(resourceName: "list")
     static let widgetsButton = #imageLiteral(resourceName: "widgets")

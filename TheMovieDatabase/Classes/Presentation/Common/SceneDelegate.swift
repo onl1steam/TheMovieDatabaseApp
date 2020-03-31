@@ -18,9 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
+        let navC = UINavigationController(rootViewController: SearchViewController())
         let authVC = AuthorizationViewController()
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = authVC
+        window?.rootViewController = navC
         window?.makeKeyAndVisible()
     }
 }

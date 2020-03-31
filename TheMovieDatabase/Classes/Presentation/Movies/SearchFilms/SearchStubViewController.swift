@@ -10,9 +10,9 @@ import UIKit
 
 class SearchStubViewController: UIViewController {
 
-   // MARK: - Public Properties
+   // MARK: - Private Properties
     
-    let placeholderLabel: UILabel = {
+    private let placeholderLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
@@ -22,7 +22,7 @@ class SearchStubViewController: UIViewController {
         return label
     }()
     
-    let placeholderImageView: UIImageView = {
+    private let placeholderImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .searchStub
         return imageView
@@ -65,9 +65,9 @@ class SearchStubViewController: UIViewController {
 
     private func setupPlaceholderImageViewConstraints() {
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        placeholderImageView.heightAnchor.constraint(equalToConstant: 215).isActive = true
+        placeholderImageView.heightAnchor.constraint(equalToConstant: 193).isActive = true
         placeholderImageView.widthAnchor.constraint(equalToConstant: 248).isActive = true
         placeholderImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        placeholderImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        placeholderImageView.topAnchor.constraint(equalTo: placeholderLabel.bottomAnchor, constant: 100).isActive = true
     }
 }

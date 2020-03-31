@@ -20,11 +20,23 @@ final class CustomSearchBar: UISearchBar {
         static let clearImage: UIImage = .clearSearchText
     }
     
+    // MARK: - Initializers
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Public methods
     
     func configure() {
         setImages()
         setupTextField()
+        searchTextPositionAdjustment = UIOffset(horizontal: 5, vertical: 0)
     }
     
     // MARK: - Private Methods
@@ -40,6 +52,7 @@ final class CustomSearchBar: UISearchBar {
         }
         if let textField = value(forKey: "searchField") as? UITextField {
             textField.textColor = .customLight
+            textField.tintColor = .customLight
             textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
             setupTextFieldPlaceholder(textField: textField)
             if let backgroundview = textField.subviews.first {
