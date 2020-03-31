@@ -37,6 +37,8 @@ final class CustomSearchBar: UISearchBar {
         setImages()
         setupTextField()
         searchTextPositionAdjustment = UIOffset(horizontal: 5, vertical: 0)
+        isTranslucent = true
+        setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
     }
     
     // MARK: - Private Methods
@@ -54,6 +56,7 @@ final class CustomSearchBar: UISearchBar {
             textField.textColor = .customLight
             textField.tintColor = .customLight
             textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
+            
             setupTextFieldPlaceholder(textField: textField)
             if let backgroundview = textField.subviews.first {
                 setupBackgroundView(backgroundview)

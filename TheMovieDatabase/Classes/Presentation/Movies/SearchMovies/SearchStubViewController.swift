@@ -16,7 +16,7 @@ class SearchStubViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = SearchFilmStrings.searchStubLabel
+        label.text = SearchMoviesStrings.searchStubLabel
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .customLight
         return label

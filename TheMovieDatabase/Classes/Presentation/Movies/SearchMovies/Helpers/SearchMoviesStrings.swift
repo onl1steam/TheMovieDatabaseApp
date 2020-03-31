@@ -1,5 +1,5 @@
 //
-//  SearchFilmStrings.swift
+//  SearchMoviesStrings.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 31.03.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SearchFilmStrings {
+enum SearchMoviesStrings {
     
     static let searchStubLabel = NSLocalizedString("По вашему запросу ничего не найдено :(", comment: "Search Stub")
 }

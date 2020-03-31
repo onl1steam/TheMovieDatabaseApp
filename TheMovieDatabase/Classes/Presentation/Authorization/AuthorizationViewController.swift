@@ -33,6 +33,8 @@ final class AuthorizationViewController: UIViewController {
     let authService: Authorization
     let sessionService: Session
     
+    weak var delegate: AuthorizationCoordinator?
+    
     // MARK: - Initializers
     
     init(validationService: Validation = ServiceLayer.shared.validationService,
@@ -198,7 +200,7 @@ final class AuthorizationViewController: UIViewController {
         case .success(let sessionId):
             errorLabel.isHidden = true
             sessionService.setupSessionId(sessionId: sessionId)
-            presentInFullScreen(TabBarViewController(), animated: true, completion: nil)
+            delegate?.authLogin()
         case .failure(let error):
             showError(error.localizedDescription)
         }

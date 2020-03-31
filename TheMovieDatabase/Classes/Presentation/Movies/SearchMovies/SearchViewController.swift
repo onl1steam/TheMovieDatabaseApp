@@ -18,10 +18,10 @@ class SearchViewController: UIViewController {
         return view
     }()
     
-    private let navigationBar: CustomSearchBar = {
+    private let searchBar: CustomSearchBar = {
         let rect = CGRect(x: 0, y: 0, width: 280, height: 48)
-        let navBar = CustomSearchBar(frame: rect)
-        return navBar
+        let searchBar = CustomSearchBar(frame: rect)
+        return searchBar
     }()
     
     private let searchStubVC = SearchStubViewController()
@@ -49,7 +49,7 @@ class SearchViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupBarItems() {
-        navigationItem.titleView = navigationBar
+        navigationItem.titleView = searchBar
         let listItem = UIBarButtonItem(
             image: .listButton,
             style: .plain,

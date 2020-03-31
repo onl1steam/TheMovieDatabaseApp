@@ -11,7 +11,7 @@ import UIKit
 extension UIImage {
 
     static let favoritesTabBar = #imageLiteral(resourceName: "favorite_tab_bar")
-    static let favoritesStub = #imageLiteral(resourceName: "favorites_bg")
+    static let favoritesStub = #imageLiteral(resourceName: "favorites_stub")
     
     static let accountTabBar = #imageLiteral(resourceName: "account_tab_bar")
     static let avatarPlaceholder = #imageLiteral(resourceName: "avatar")

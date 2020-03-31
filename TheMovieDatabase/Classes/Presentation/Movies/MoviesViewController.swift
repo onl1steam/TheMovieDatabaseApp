@@ -13,10 +13,15 @@ final class MoviesViewController: UIViewController {
     // MARK: - IBOutlet
     
     @IBOutlet weak var moviesBackground: UIImageView!
-    @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
     
     // MARK: - Public Properties
+    
+    let moviesSearchBar: CustomSearchBar! = {
+        let rect = CGRect(x: 0, y: 0, width: 200, height: 48)
+        let customBar = CustomSearchBar(frame: rect)
+        return customBar
+    }()
     
     let sessionService: Session
     
@@ -36,8 +41,8 @@ final class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
-        setupSearchBar()
         setupLocalizedStrings()
+        setupSearchBarConstraints()
     }
     
     // MARK: - Private Methods
@@ -52,7 +57,12 @@ final class MoviesViewController: UIViewController {
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder
     }
     
-    private func setupSearchBar() {
-        moviesSearchBar.configure()
+    private func setupSearchBarConstraints() {
+        view.addSubview(moviesSearchBar)
+        moviesSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        moviesSearchBar.topAnchor.constraint(equalTo: moviesLabel.bottomAnchor, constant: 33).isActive = true
+        moviesSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        moviesSearchBar.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        moviesSearchBar.widthAnchor.constraint(equalToConstant: 280).isActive = true
     }
 }

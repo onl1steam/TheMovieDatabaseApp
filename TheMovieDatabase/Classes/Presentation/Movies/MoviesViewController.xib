@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="moviesBackground" destination="Qod-J3-W6D" id="TwT-4Y-uNA"/>
                 <outlet property="moviesLabel" destination="14u-yW-K77" id="Io4-pI-6P2"/>
-                <outlet property="moviesSearchBar" destination="JeH-8h-yUX" id="bAV-VA-UUd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,24 +33,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Поиск фильмов" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8h-yUX" customClass="CustomSearchBar" customModule="TheMovieDatabase" customModuleProvider="target">
-                    <rect key="frame" x="24" y="239" width="280" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="HgM-i0-fGr"/>
-                    </constraints>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <constraints>
                 <constraint firstItem="14u-yW-K77" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="5ft-aP-Q5Z"/>
                 <constraint firstAttribute="trailing" secondItem="14u-yW-K77" secondAttribute="trailing" constant="116" id="F3b-mX-HX7"/>
-                <constraint firstItem="JeH-8h-yUX" firstAttribute="top" secondItem="14u-yW-K77" secondAttribute="bottom" constant="33" id="Sj0-W7-o5d"/>
                 <constraint firstItem="Qod-J3-W6D" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Wpl-Vi-Tdr"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JeH-8h-yUX" secondAttribute="trailing" constant="71" id="aSB-4K-qIX"/>
                 <constraint firstItem="14u-yW-K77" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="aw9-iZ-x4h"/>
                 <constraint firstItem="Qod-J3-W6D" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="144" id="dAu-uz-ixs"/>
-                <constraint firstItem="JeH-8h-yUX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="sdd-Ni-gl2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Qod-J3-W6D" secondAttribute="bottom" id="vDI-yq-3O2"/>
                 <constraint firstItem="Qod-J3-W6D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="zv9-EQ-Ezq"/>
             </constraints>
