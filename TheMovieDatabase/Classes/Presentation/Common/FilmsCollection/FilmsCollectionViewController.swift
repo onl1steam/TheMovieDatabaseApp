@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilmsCollectionViewController: UICollectionViewController {
+final class FilmsCollectionViewController: UICollectionViewController {
     
     // MARK: - Public Properties
     

@@ -13,7 +13,7 @@ protocol AuthorizationCoordinator: Coordinator {
     func authLogin()
 }
 
-class AuthCoordinator: AuthorizationCoordinator {
+final class AuthCoordinator: AuthorizationCoordinator {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

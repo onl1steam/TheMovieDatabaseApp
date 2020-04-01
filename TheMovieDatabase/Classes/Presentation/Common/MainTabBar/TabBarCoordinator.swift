@@ -13,7 +13,7 @@ protocol TabBarCoordinatorType: Coordinator {
     func logout()
 }
 
-class TabBarCoordinator: TabBarCoordinatorType {
+final class TabBarCoordinator: TabBarCoordinatorType {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

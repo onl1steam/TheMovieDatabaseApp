@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilmsCollectionViewCell: UICollectionViewCell {
+final class FilmsCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
 

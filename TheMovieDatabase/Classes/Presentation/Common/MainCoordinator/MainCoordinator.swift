@@ -15,7 +15,7 @@ protocol ApplicationCoordinator: Coordinator {
     func childDidFinish(_ child: Coordinator?)
 }
 
-class MainCoordinator: ApplicationCoordinator {
+final class MainCoordinator: ApplicationCoordinator {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

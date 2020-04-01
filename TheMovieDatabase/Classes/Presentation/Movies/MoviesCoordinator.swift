@@ -12,7 +12,7 @@ protocol MoviesCoordinatorType: Coordinator {
     
 }
 
-class MoviesCoordinator: MoviesCoordinatorType {
+final class MoviesCoordinator: MoviesCoordinatorType {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

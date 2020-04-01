@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol FavoritesViewControllerDelegate: class {
+    
+    func searchTapped()
+}
+
 final class FavoritesViewController: UIViewController {
     
     // MARK: - IBOutlet
@@ -29,6 +34,7 @@ final class FavoritesViewController: UIViewController {
     init(sessionService: Session = ServiceLayer.shared.sessionService) {
         self.sessionService = sessionService
         super.init(nibName: nil, bundle: nil)
+        placeholderVC.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -91,5 +97,14 @@ final class FavoritesViewController: UIViewController {
             action: #selector(searchButtonTapped))
         searchItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
+    }
+}
+
+// MARK: - FavoritesViewControllerDelegate
+
+extension FavoritesViewController: FavoritesViewControllerDelegate {
+    
+    func searchTapped() {
+        print("Search text tapped")
     }
 }

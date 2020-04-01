@@ -12,7 +12,7 @@ protocol FavoritesCoordinatorType: Coordinator {
     
 }
 
-class FavoritesCoordinator: FavoritesCoordinatorType {
+final class FavoritesCoordinator: FavoritesCoordinatorType {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

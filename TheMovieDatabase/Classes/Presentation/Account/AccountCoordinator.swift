@@ -13,7 +13,7 @@ protocol AccountCoordinatorType: Coordinator {
     func logout()
 }
 
-class AccountCoordinator: AccountCoordinatorType {
+final class AccountCoordinator: AccountCoordinatorType {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

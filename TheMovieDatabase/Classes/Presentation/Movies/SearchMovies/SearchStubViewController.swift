@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchStubViewController: UIViewController {
+final class SearchStubViewController: UIViewController {
 
    // MARK: - Private Properties
     

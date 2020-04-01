@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
+final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Public Properties
 

@@ -29,6 +29,7 @@ final class FavoritesStubViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.contentHorizontalAlignment = .left
         button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.addTarget(nil, action: #selector(searchTapped), for: .touchUpInside)
         return button
     }()
     
@@ -37,6 +38,8 @@ final class FavoritesStubViewController: UIViewController {
         imageView.image = .favoritesStub
         return imageView
     }()
+    
+    weak var delegate: FavoritesViewControllerDelegate?
     
     // MARK: - UIViewController
     
@@ -47,6 +50,12 @@ final class FavoritesStubViewController: UIViewController {
         setupNavigationButtonConstraints()
         setupPlaceholderImageViewConstraints()
         setupAccessability()
+    }
+    
+    // MARK: - IBActions
+    
+    @objc func searchTapped() {
+        delegate?.searchTapped()
     }
     
     // MARK: - Private Methods
