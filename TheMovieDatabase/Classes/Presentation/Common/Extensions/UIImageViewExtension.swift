@@ -11,8 +11,8 @@ import UIKit
 extension UIImageView {
     
     func makeRounded(cornerRadius: CGFloat) {
-        self.layer.masksToBounds = false
         self.layer.cornerRadius = cornerRadius
+        self.layer.masksToBounds = false
         self.clipsToBounds = true
     }
 }

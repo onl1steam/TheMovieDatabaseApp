@@ -26,7 +26,7 @@ final class FilmsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator = UIActivityIndicatorView(style: .white)
         configureDataSource()
         collectionView.delegate = self
         setupColorScheme()

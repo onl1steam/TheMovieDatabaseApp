@@ -15,8 +15,9 @@ protocol MoviesServiceType {
     ///
     /// - Parameters:
     ///   - query: Строка поиска фильма.
+    ///   - page: Страница поиска для пагинации.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func searchMovies(query: String, _ completion: @escaping (Result<MovieList, Error>) -> Void)
+    func searchMovies(query: String, page: Int?, _ completion: @escaping (Result<MovieList, Error>) -> Void)
     
     /// Возвращает подробную информацию о фильме.
     ///
@@ -25,7 +26,6 @@ protocol MoviesServiceType {
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
     func movieDetails(
         movieId: Int,
-        language: String?,
         _ completion: @escaping (Result<MovieDetails, Error>) -> Void)
     
     /// Возвращает подробную информацию о фильмах.
@@ -54,11 +54,11 @@ final class MoviesService: MoviesServiceType {
     
     // MARK: - MoviesServiceType
     
-    func searchMovies(query: String, _ completion: @escaping (Result<MovieList, Error>) -> Void) {
+    func searchMovies(query: String, page: Int?, _ completion: @escaping (Result<MovieList, Error>) -> Void) {
         let endpoint = SearchMovieEndpoint(
             query: query,
-            language: nil,
-            page: nil,
+            language: Locale.preferredLanguage,
+            page: page,
             includeAdult: nil,
             region: nil,
             year: nil,
@@ -76,9 +76,8 @@ final class MoviesService: MoviesServiceType {
     
     func movieDetails(
         movieId: Int,
-        language: String?,
         _ completion: @escaping (Result<MovieDetails, Error>) -> Void) {
-        let endpoint = MovieDetailsEndpoint(movieId: movieId, language: language)
+        let endpoint = MovieDetailsEndpoint(movieId: movieId, language: Locale.preferredLanguage)
         apiClient.request(endpoint) { response in
             switch response {
             case .success(let movieDetailsResponse):
@@ -95,11 +94,11 @@ final class MoviesService: MoviesServiceType {
         _ completion: @escaping (Result<[MovieDetails], Error>) -> Void) {
         
         var list = [MovieDetails]()
-        
         let group = DispatchGroup()
+
         movieList.forEach { movie in
             group.enter()
-            movieDetails(movieId: movie.id, language: "ru") { response in
+            movieDetails(movieId: movie.id) { response in
                 switch response {
                 case .success(let movieDetails):
                     list.append(movieDetails)

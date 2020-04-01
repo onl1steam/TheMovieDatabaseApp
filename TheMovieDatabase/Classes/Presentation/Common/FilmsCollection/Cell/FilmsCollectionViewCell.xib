@@ -17,8 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="305"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_example" translatesAutoresizingMaskIntoConstraints="NO" id="KBm-Zy-DZA">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KBm-Zy-DZA">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                        <color key="backgroundColor" white="0.67000000000000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="200" id="tN2-3T-pFu"/>
                         </constraints>
@@ -66,11 +67,15 @@
                             <constraint firstAttribute="height" constant="15" id="y6H-qi-Jgz"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="qvD-i5-xnL">
+                        <rect key="frame" x="65" y="90" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="71F-aa-6xR" secondAttribute="trailing" id="1zL-CU-gu4"/>
                 <constraint firstItem="71F-aa-6xR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="24B-6Z-6ph"/>
+                <constraint firstItem="qvD-i5-xnL" firstAttribute="centerY" secondItem="KBm-Zy-DZA" secondAttribute="centerY" id="3nF-W1-bcO"/>
                 <constraint firstAttribute="trailing" secondItem="KBm-Zy-DZA" secondAttribute="trailing" id="68Q-hu-EQ9"/>
                 <constraint firstItem="2zQ-S3-FAA" firstAttribute="centerY" secondItem="G3I-Qi-qCS" secondAttribute="centerY" id="8If-pV-uU1"/>
                 <constraint firstItem="KBm-Zy-DZA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="AE8-aB-wAy"/>
@@ -85,6 +90,7 @@
                 <constraint firstItem="jeK-YF-EPH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QuF-kT-Uuy"/>
                 <constraint firstItem="aIh-FJ-FRh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UJn-2K-xvB"/>
                 <constraint firstAttribute="trailing" secondItem="oZN-hU-gM8" secondAttribute="trailing" id="War-7F-2qs"/>
+                <constraint firstItem="qvD-i5-xnL" firstAttribute="centerX" secondItem="KBm-Zy-DZA" secondAttribute="centerX" id="Y8o-CN-c3L"/>
                 <constraint firstItem="71F-aa-6xR" firstAttribute="top" secondItem="oZN-hU-gM8" secondAttribute="bottom" constant="2" id="iLH-aY-KhM"/>
                 <constraint firstItem="G3I-Qi-qCS" firstAttribute="leading" secondItem="2zQ-S3-FAA" secondAttribute="trailing" constant="4" id="mLg-gn-xhm"/>
                 <constraint firstItem="v5J-Wp-FhY" firstAttribute="centerY" secondItem="2zQ-S3-FAA" secondAttribute="centerY" id="oab-P1-8wb"/>
@@ -97,6 +103,7 @@
                 <outlet property="genresLabel" destination="71F-aa-6xR" id="VCg-uh-PiT"/>
                 <outlet property="originalTitleLabel" destination="oZN-hU-gM8" id="9zu-kA-4up"/>
                 <outlet property="posterImageView" destination="KBm-Zy-DZA" id="xUd-5v-phw"/>
+                <outlet property="posterLoadingActivityIndicator" destination="qvD-i5-xnL" id="9sW-X3-pXL"/>
                 <outlet property="runtimeImageView" destination="2zQ-S3-FAA" id="73L-3Q-BjP"/>
                 <outlet property="runtimeLabel" destination="G3I-Qi-qCS" id="a8O-5z-LXH"/>
                 <outlet property="scoreLabel" destination="aIh-FJ-FRh" id="6hx-lp-SIe"/>
@@ -107,7 +114,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="poster_example" width="152" height="208"/>
         <image name="runtime" width="15.5" height="15"/>
     </resources>
 </document>

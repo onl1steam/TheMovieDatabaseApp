@@ -47,6 +47,7 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
         cell.configure(data: data)
         
         if let path = data.posterPath {
+            cell.toggleActivityIndicator()
             imageService.image(posterPath: path, width: nil) { response in
                 switch response {
                 case .success(let image):
@@ -54,6 +55,7 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
+                cell.toggleActivityIndicator()
             }
         }
         return cell

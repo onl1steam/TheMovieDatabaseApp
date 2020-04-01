@@ -75,7 +75,7 @@ final class SearchViewController: UIViewController {
     private func loadFilmList(text: String) {
         filmsCollectionVC.setCollectionData([])
         filmsCollectionVC.toggleIndicator()
-        moviesService.searchMovies(query: text) { [weak self] response in
+        moviesService.searchMovies(query: text, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
             case .success(let movieList):

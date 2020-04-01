@@ -20,12 +20,16 @@ final class FilmsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var votesLabel: UILabel!
     @IBOutlet weak var runtimeLabel: UILabel!
     @IBOutlet weak var runtimeImageView: UIImageView!
+    @IBOutlet weak var posterLoadingActivityIndicator: UIActivityIndicatorView!
     
     // MARK: - UICollectionViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupColorScheme()
+        posterLoadingActivityIndicator.isHidden = true
+        posterLoadingActivityIndicator.style = .white
+        posterLoadingActivityIndicator.tintColor = .customLight
     }
     
     // MARK: - Public Methods
@@ -45,8 +49,19 @@ final class FilmsCollectionViewCell: UICollectionViewCell {
     }
     
     func configureImage(_ image: UIImage) {
-        posterImageView.image = image
         posterImageView.makeRounded(cornerRadius: 8)
+        posterImageView.image = image
+    }
+    
+    func toggleActivityIndicator() {
+        let isHidden = posterLoadingActivityIndicator.isHidden
+        if isHidden {
+            posterLoadingActivityIndicator.isHidden = false
+            posterLoadingActivityIndicator.startAnimating()
+        } else {
+            posterLoadingActivityIndicator.isHidden = true
+            posterLoadingActivityIndicator.stopAnimating()
+        }
     }
     
     // MARK: - Private Methods

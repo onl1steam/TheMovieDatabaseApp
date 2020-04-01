@@ -71,6 +71,8 @@ final class FavoritesViewController: UIViewController {
     // MARK: - Private Methods
     
     private func loadFilmList() {
+        filmsCollectionVC.setCollectionData([])
+        filmsCollectionVC.toggleIndicator()
         sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -96,6 +98,7 @@ final class FavoritesViewController: UIViewController {
                 self.removeChild(self.placeholderVC, containerView: self.containerView)
                 self.showChild(self.filmsCollectionVC, containerView: self.containerView)
                 self.filmsCollectionVC.setCollectionData(detailsList)
+                self.filmsCollectionVC.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }

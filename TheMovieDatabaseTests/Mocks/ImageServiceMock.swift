@@ -6,8 +6,8 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import UIKit
 @testable import TheMovieDatabase
+import UIKit
 
 final class ImageServiceMock: ImageServiceType {
     
