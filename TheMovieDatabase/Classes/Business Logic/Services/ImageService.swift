@@ -6,7 +6,7 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import TheMovieDatabaseAPI
 
 protocol ImageServiceType {
@@ -16,17 +16,17 @@ protocol ImageServiceType {
     /// - Parameters:
     ///   - posterPath: Путь до изображения.
     ///   - width: Ширина изображения в формате "w500". Если не указать, по умолчанию ставится значение "original".
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответом изображение в типе Data или ошибку.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответом изображение в типе UIImage или ошибку.
     @discardableResult
-    func image(posterPath: String, width: String?, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
+    func image(posterPath: String, width: String?, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress
     
     /// Загружает аватар пользователя.
     ///
     /// - Parameters:
     ///   - avatarPath: Путь до аватара.
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответ изображение в типе Data или ошибку.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ изображение в типе UIImage или ошибку.
     @discardableResult
-    func avatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
+    func avatar(avatarPath: String, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress
 }
 
 final class ImageService: ImageServiceType {
@@ -49,14 +49,14 @@ final class ImageService: ImageServiceType {
     func image(
         posterPath: String,
         width: String?,
-        _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+        _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
         let endpoint = ImageEndpoint(width: width, imagePath: posterPath)
         let progress = imageApiClient.request(endpoint, completionHandler: completion)
         return progress
     }
     
     @discardableResult
-    func avatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+    func avatar(avatarPath: String, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
         let endpoint = AvatarEndpoint(imagePath: avatarPath)
         let progress = imageApiClient.request(endpoint, completionHandler: completion)
         return progress

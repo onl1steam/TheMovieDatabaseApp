@@ -14,7 +14,6 @@ final class FilmsCollectionViewController: UICollectionViewController {
     
     var moviesData = [MovieDetails]()
     var dataSource: FilmsCollectionDataSource?
-    
     weak var delegate: CollectionParentDelegate?
     
     // MARK: - Private Properties
@@ -25,15 +24,20 @@ final class FilmsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupColorScheme()
-        configureCell()
         configureDataSource()
         collectionView.delegate = self
+        setupColorScheme()
+        configureCell()
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = moviesData[indexPath.row]
-        delegate?.elementTapped(data: data)
+        guard let movieData = dataSource?.moviesData[indexPath.row] else { return }
+        delegate?.elementTapped(data: movieData)
+    }
+    
+    func setCollectionData(_ data: [MovieDetails]) {
+        dataSource?.update(with: data)
+        collectionView.reloadData()
     }
     
     // MARK: - Private Methods

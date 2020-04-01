@@ -46,7 +46,7 @@ final class AccountViewController: UIViewController {
         errorLabel.isHidden = true
         setupColorScheme()
         setupLocalizedStrings()
-        avatarImageView.makeRounded()
+        avatarImageView.makeRounded(cornerRadius: avatarImageView.frame.height / 2)
         loadAccountInfo()
         navigationController?.navigationBar.isHidden = true
     }
@@ -81,8 +81,7 @@ final class AccountViewController: UIViewController {
         imageService.avatar(avatarPath: hash) { [weak self] response in
             guard let self = self else { return }
             switch response {
-            case .success(let info):
-                guard let image = UIImage(data: info) else { return }
+            case .success(let image):
                 self.avatarImageView.image = image
                 self.errorLabel.isHidden = true
             case .failure(let error):

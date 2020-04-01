@@ -6,27 +6,25 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ImageCache {
     
     // MARK: - Private Properties
     
-    private let imageCache = NSCache<NSString, NSData>()
+    private let imageCache = NSCache<NSString, UIImage>()
     
     // MARK: - Public methods
     
-    func checkImageInCache(key: String) -> Data? {
+    func checkImageInCache(key: String) -> UIImage? {
         let imageKey = NSString(string: key)
-        guard let imageNSData = imageCache.object(forKey: imageKey) else { return nil }
-        let imageData = Data(imageNSData)
-        return imageData
+        guard let image = imageCache.object(forKey: imageKey) else { return nil }
+        return image
     }
     
-    func cacheImage(key: String, imageData: Data) {
-        let imageNSData = NSData(data: imageData)
+    func cacheImage(key: String, image: UIImage) {
         let imageKey = NSString(string: key)
-        imageCache.setObject(imageNSData, forKey: imageKey)
+        imageCache.setObject(image, forKey: imageKey)
     }
     
     func deleteFromCache(key: String) {

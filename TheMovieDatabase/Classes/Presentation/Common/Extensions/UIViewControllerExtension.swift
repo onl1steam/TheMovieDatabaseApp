@@ -16,4 +16,17 @@ extension UIViewController {
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: animated, completion: completion)
     }
+    
+    func showChild(_ child: UIViewController, containerView: UIView) {
+        child.view.frame.size = containerView.bounds.size
+        addChild(child)
+        containerView.addSubview(child.view)
+        didMove(toParent: self)
+    }
+    
+    func removeChild(_ child: UIViewController, containerView: UIView) {
+        child.willMove(toParent: self)
+        child.view.removeFromSuperview()
+        child.removeFromParent()
+    }
 }

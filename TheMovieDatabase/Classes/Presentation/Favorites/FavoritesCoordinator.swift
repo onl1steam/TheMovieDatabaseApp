@@ -35,6 +35,6 @@ final class FavoritesCoordinator: FavoritesCoordinatorType {
     }
     
     func showMovieDetails(data: MovieDetails) {
-           
+        print("Show movie: \(data.title)")
     }
 }

@@ -25,6 +25,7 @@ final class FavoritesViewController: UIViewController {
     // MARK: - Public Properties
     
     let sessionService: Session
+    let moviesService: MoviesServiceType
     
     let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let placeholderVC = FavoritesStubViewController()
@@ -33,10 +34,14 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - Initializers
     
-    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+    init(
+        sessionService: Session = ServiceLayer.shared.sessionService,
+        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
         self.sessionService = sessionService
+        self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
         placeholderVC.delegate = self
+        filmsCollectionVC.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -49,12 +54,8 @@ final class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         setupColorScheme()
         setupLocalizedStrings()
-        
-        placeholderVC.view.frame.size = containerView.bounds.size
-        addChild(placeholderVC)
-        containerView.addSubview(placeholderVC.view)
-        didMove(toParent: self)
         setupNavigationBar()
+        loadFilmList()
     }
     
     // MARK: - IBAction
@@ -68,6 +69,49 @@ final class FavoritesViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func loadFilmList() {
+        sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let movieList):
+                self.loadMovieDetails(movieList: movieList.results)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
+        guard !movieList.isEmpty else {
+            removeChild(filmsCollectionVC, containerView: containerView)
+            showChild(placeholderVC, containerView: containerView)
+            return
+        }
+        
+        var list = [MovieDetails]()
+        
+        let group = DispatchGroup()
+        movieList.forEach { movie in
+            group.enter()
+            moviesService.movieDetails(movieId: movie.id, language: "ru") { response in
+                switch response {
+                case .success(let movieDetails):
+                    list.append(movieDetails)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }
+            self.removeChild(self.placeholderVC, containerView: self.containerView)
+            self.showChild(self.filmsCollectionVC, containerView: self.containerView)
+            self.filmsCollectionVC.setCollectionData(list)
+        }
+    }
     
     private func setupColorScheme() {
         view.backgroundColor = .backgroundBlack

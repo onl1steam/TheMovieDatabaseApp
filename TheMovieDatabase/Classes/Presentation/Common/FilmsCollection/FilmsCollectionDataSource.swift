@@ -11,8 +11,10 @@ import UIKit
 final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Public Properties
-
+    
     var moviesData = [MovieDetails]()
+    
+    let imageService: ImageServiceType
     
     // MARK: - Private Properties
     
@@ -20,8 +22,9 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Initializers
     
-    init(data: [MovieDetails]) {
+    init(data: [MovieDetails], imageService: ImageServiceType = ServiceLayer.shared.imageService) {
         moviesData = data
+        self.imageService = imageService
         super.init()
     }
     
@@ -42,6 +45,17 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
         
         let data = moviesData[indexPath.row]
         cell.configure(data: data)
+        
+        if let path = data.posterPath {
+            imageService.image(posterPath: path, width: nil) { response in
+                switch response {
+                case .success(let image):
+                    cell.configureImage(image)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+        }
         return cell
     }
     

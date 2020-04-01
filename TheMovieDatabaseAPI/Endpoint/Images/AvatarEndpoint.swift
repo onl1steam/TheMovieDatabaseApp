@@ -6,14 +6,14 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Эндпоинт для получения аватара пользователя.
 public struct AvatarEndpoint: Endpoint {
     
     // MARK: - Types
     
-    public typealias Content = Data
+    public typealias Content = UIImage
 
     // MARK: - Public Properties
 
@@ -41,8 +41,8 @@ public struct AvatarEndpoint: Endpoint {
     
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         try EndpointDefaultMethods.checkErrors(data: from, response: response)
-        guard let data = from else { throw NetworkError.blankData }
-        return data
+        guard let data = from, let image = UIImage(data: data) else { throw NetworkError.blankData }
+        return image
     }
     
     // MARK: - Private Methods

@@ -44,6 +44,11 @@ final class FilmsCollectionViewCell: UICollectionViewCell {
         configureRuntime(runtime: data.runtime)
     }
     
+    func configureImage(_ image: UIImage) {
+        posterImageView.image = image
+        posterImageView.makeRounded(cornerRadius: 8)
+    }
+    
     // MARK: - Private Methods
     
     private func configureRuntime(runtime: Int?) {
@@ -60,9 +65,9 @@ final class FilmsCollectionViewCell: UICollectionViewCell {
     private func configureVotes(voteAverage: Double) {
         scoreLabel.text = "\(voteAverage)"
         if voteAverage > 8.0 {
-            scoreLabel.tintColor = .customGreen
+            scoreLabel.textColor = .customGreen
         } else {
-            scoreLabel.tintColor = .customLight
+            scoreLabel.textColor = .customLight
         }
     }
     

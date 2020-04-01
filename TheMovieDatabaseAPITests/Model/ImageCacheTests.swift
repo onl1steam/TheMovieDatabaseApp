@@ -19,14 +19,14 @@ class ImageCacheTests: XCTestCase {
     }
 
     func testCachingImage() {
-        let data = Data()
-        imageCache.cacheImage(key: "Foo", imageData: data)
+        let data = UIImage()
+        imageCache.cacheImage(key: "Foo", image: data)
         XCTAssertNotNil(imageCache.checkImageInCache(key: "Foo"))
     }
 
     func testDeletingImageFromCache() {
-        let data = Data()
-        imageCache.cacheImage(key: "Foo", imageData: data)
+        let data = UIImage()
+        imageCache.cacheImage(key: "Foo", image: data)
         imageCache.deleteFromCache(key: "Foo")
         XCTAssertNil(imageCache.checkImageInCache(key: "Foo"))
     }

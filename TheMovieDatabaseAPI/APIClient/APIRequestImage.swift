@@ -52,7 +52,8 @@ public final class APIRequestImage: APIClient {
             request.response(queue: .main) { [weak self] response in
                 let result = Result { () -> T.Content in
                     let content = try endpoint.content(from: response.data, response: response.response)
-                    self?.saveImageInCache(url: urlRequest.url?.absoluteString, data: response.data)
+                    let image = content as? UIImage
+                    self?.saveImageInCache(url: urlRequest.url?.absoluteString, image: image)
                     return content
                 }
                 completionHandler(result)
@@ -66,15 +67,15 @@ public final class APIRequestImage: APIClient {
     
     // MARK: - Private Methods
     
-    private func checkImageInCache(url: String?) -> Data? {
+    private func checkImageInCache(url: String?) -> UIImage? {
         guard let url = url,
-            let data = imageCache.checkImageInCache(key: url) else { return nil }
-        return data
+            let image = imageCache.checkImageInCache(key: url) else { return nil }
+        return image
     }
     
-    private func saveImageInCache(url: String?, data: Data?) {
-        guard let url = url, let data = data else { return }
-        imageCache.cacheImage(key: url, imageData: data)
+    private func saveImageInCache(url: String?, image: UIImage?) {
+        guard let url = url, let image = image else { return }
+        imageCache.cacheImage(key: url, image: image)
     }
     
 }
