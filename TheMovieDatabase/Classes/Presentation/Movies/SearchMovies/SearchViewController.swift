@@ -14,6 +14,9 @@ final class SearchViewController: UIViewController {
     
     weak var delegate: SearchCoordinator?
     
+    let moviesService: MoviesServiceType
+    let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    
     // MARK: - Private Properties
     
     private let containerView: UIView = {
@@ -30,18 +33,26 @@ final class SearchViewController: UIViewController {
     
     private let searchStubVC = SearchStubViewController()
     
+    // MARK: - Initializers
+    
+    init(moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
+        self.moviesService = moviesService
+        super.init(nibName: nil, bundle: nil)
+        filmsCollectionVC.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundBlack
+        searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         setupNavigationBar()
         setupContainerConstraints()
-        
-        addChild(searchStubVC)
-        searchStubVC.view.frame.size = containerView.bounds.size
-        containerView.addSubview(searchStubVC.view)
-        didMove(toParent: self)
     }
     
     // MARK: - IBActions
@@ -50,7 +61,51 @@ final class SearchViewController: UIViewController {
         
     }
     
+    @objc func searchTextChanged() {
+        guard let text = searchBar.searchTextField.text, text != "" else {
+            removeChild(filmsCollectionVC, containerView: containerView)
+            showChild(searchStubVC, containerView: containerView)
+            return
+        }
+        loadFilmList(text: text)
+    }
+    
     // MARK: - Private Methods
+    
+    private func loadFilmList(text: String) {
+        filmsCollectionVC.setCollectionData([])
+        filmsCollectionVC.toggleIndicator()
+        moviesService.searchMovies(query: text) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let movieList):
+                self.loadMovieDetails(movieList: movieList.results)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
+        guard !movieList.isEmpty else {
+            removeChild(filmsCollectionVC, containerView: containerView)
+            showChild(searchStubVC, containerView: containerView)
+            return
+        }
+        
+        moviesService.movieListDetails(movieList: movieList) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let detailsList):
+                self.removeChild(self.searchStubVC, containerView: self.containerView)
+                self.showChild(self.filmsCollectionVC, containerView: self.containerView)
+                self.filmsCollectionVC.setCollectionData(detailsList)
+                self.filmsCollectionVC.toggleIndicator()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
     private func setupBarItems() {
         navigationItem.titleView = searchBar

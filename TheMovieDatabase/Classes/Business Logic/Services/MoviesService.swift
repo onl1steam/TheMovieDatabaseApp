@@ -18,7 +18,7 @@ protocol MoviesServiceType {
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func searchMovies(query: String, _ completion: @escaping (Result<MovieList, Error>) -> Void)
     
-    /// Возвращает подробную информацию о фильмо.
+    /// Возвращает подробную информацию о фильме.
     ///
     /// - Parameters:
     ///   - movieId: Id фильма.
@@ -27,6 +27,15 @@ protocol MoviesServiceType {
         movieId: Int,
         language: String?,
         _ completion: @escaping (Result<MovieDetails, Error>) -> Void)
+    
+    /// Возвращает подробную информацию о фильмах.
+    ///
+    /// - Parameters:
+    ///   - movieList: массив фильмов.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MovieDetailsResponse или ошибку.
+    func movieListDetails(
+        movieList: [MovieList.MoviesResult],
+        _ completion: @escaping (Result<[MovieDetails], Error>) -> Void  )
 }
 
 final class MoviesService: MoviesServiceType {
@@ -78,6 +87,31 @@ final class MoviesService: MoviesServiceType {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    
+    func movieListDetails(
+        movieList: [MovieList.MoviesResult],
+        _ completion: @escaping (Result<[MovieDetails], Error>) -> Void) {
+        
+        var list = [MovieDetails]()
+        
+        let group = DispatchGroup()
+        movieList.forEach { movie in
+            group.enter()
+            movieDetails(movieId: movie.id, language: "ru") { response in
+                switch response {
+                case .success(let movieDetails):
+                    list.append(movieDetails)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(.success(list))
         }
     }
 }

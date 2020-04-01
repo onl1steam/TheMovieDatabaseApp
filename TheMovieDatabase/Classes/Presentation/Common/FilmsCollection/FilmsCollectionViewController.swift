@@ -16,6 +16,8 @@ final class FilmsCollectionViewController: UICollectionViewController {
     var dataSource: FilmsCollectionDataSource?
     weak var delegate: CollectionParentDelegate?
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Private Properties
     
     private let reuseIdentifier = "FilmsCollectionViewCell"
@@ -24,10 +26,12 @@ final class FilmsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         configureDataSource()
         collectionView.delegate = self
         setupColorScheme()
         configureCell()
+        setupActivityIndicator()
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -35,12 +39,36 @@ final class FilmsCollectionViewController: UICollectionViewController {
         delegate?.elementTapped(data: movieData)
     }
     
+    // MARK: - Public Methods
+    
     func setCollectionData(_ data: [MovieDetails]) {
         dataSource?.update(with: data)
         collectionView.reloadData()
     }
     
+    func toggleIndicator() {
+        let isHidden = activityIndicator.isHidden
+        if isHidden {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
+    }
+    
     // MARK: - Private Methods
+    
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.tintColor = .customLight
+        activityIndicator.isHidden = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    }
     
     private func setupColorScheme() {
         collectionView.backgroundColor = .backgroundBlack
@@ -66,7 +94,7 @@ extension FilmsCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 150, height: 310)
+        let size = CGSize(width: 150, height: 310)
+        return size
     }
 }

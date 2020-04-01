@@ -89,27 +89,16 @@ final class FavoritesViewController: UIViewController {
             return
         }
         
-        var list = [MovieDetails]()
-        
-        let group = DispatchGroup()
-        movieList.forEach { movie in
-            group.enter()
-            moviesService.movieDetails(movieId: movie.id, language: "ru") { response in
-                switch response {
-                case .success(let movieDetails):
-                    list.append(movieDetails)
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                }
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) { [weak self] in
+        moviesService.movieListDetails(movieList: movieList) { [weak self] response in
             guard let self = self else { return }
-            self.removeChild(self.placeholderVC, containerView: self.containerView)
-            self.showChild(self.filmsCollectionVC, containerView: self.containerView)
-            self.filmsCollectionVC.setCollectionData(list)
+            switch response {
+            case .success(let detailsList):
+                self.removeChild(self.placeholderVC, containerView: self.containerView)
+                self.showChild(self.filmsCollectionVC, containerView: self.containerView)
+                self.filmsCollectionVC.setCollectionData(detailsList)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
     
