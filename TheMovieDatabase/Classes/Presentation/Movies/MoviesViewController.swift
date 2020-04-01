@@ -24,6 +24,7 @@ final class MoviesViewController: UIViewController {
     }()
     
     let sessionService: Session
+    weak var delegate: MoviesCoordinatorType?
     
     // MARK: - Initializers
     
@@ -43,6 +44,7 @@ final class MoviesViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         setupSearchBarConstraints()
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Private Methods

@@ -11,6 +11,7 @@ import UIKit
 protocol ApplicationCoordinator: Coordinator {
     
     func login()
+    func logout()
     func childDidFinish(_ child: Coordinator?)
 }
 
@@ -35,6 +36,13 @@ class MainCoordinator: ApplicationCoordinator {
         tabBarCoordinator.parentCoordinator = self
         childCoordinators.append(tabBarCoordinator)
         tabBarCoordinator.start()
+    }
+    
+    func logout() {
+        let authCoordinator = AuthCoordinator(navigationController: navigationController)
+        authCoordinator.parentCoordinator = self
+        childCoordinators.append(authCoordinator)
+        authCoordinator.start()
     }
     
     func childDidFinish(_ child: Coordinator?) {

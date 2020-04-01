@@ -22,6 +22,8 @@ final class FavoritesViewController: UIViewController {
     let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let placeholderVC = FavoritesStubViewController()
     
+    weak var delegate: FavoritesCoordinatorType?
+    
     // MARK: - Initializers
     
     init(sessionService: Session = ServiceLayer.shared.sessionService) {

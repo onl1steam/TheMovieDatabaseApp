@@ -8,12 +8,17 @@
 
 import UIKit
 
-class TabBarCoordinator: Coordinator {
+protocol TabBarCoordinatorType: Coordinator {
+    
+    func logout()
+}
+
+class TabBarCoordinator: TabBarCoordinatorType {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
-    weak var parentCoordinator: Coordinator?
+    weak var parentCoordinator: ApplicationCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,6 +26,19 @@ class TabBarCoordinator: Coordinator {
     
     func start() {
         let tabBarVC = TabBarViewController()
+        tabBarVC.controllerDelegate = self
+        setupTabBarCoordinators(tabBarVC: tabBarVC)
         navigationController.pushViewController(tabBarVC, animated: true)
+    }
+    
+    func logout() {
+        parentCoordinator?.logout()
+        parentCoordinator?.childDidFinish(self)
+    }
+    
+    private func setupTabBarCoordinators(tabBarVC: TabBarViewController) {
+        tabBarVC.moviesCoordinator.parentCoordinator = self
+        tabBarVC.favoritesCoordinator.parentCoordinator = self
+        tabBarVC.accountCoordinator.parentCoordinator = self
     }
 }

@@ -23,6 +23,8 @@ final class AccountViewController: UIViewController {
     let sessionService: Session
     let imageService: ImageServiceType
     
+    weak var delegate: AccountCoordinatorType?
+    
     // MARK: - Initializers
     
     init(
@@ -46,6 +48,7 @@ final class AccountViewController: UIViewController {
         setupLocalizedStrings()
         avatarImageView.makeRounded()
         loadAccountInfo()
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Public methods
@@ -90,13 +93,16 @@ final class AccountViewController: UIViewController {
     
     func logout() {
         sessionService.deleteSession { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let isSucceed):
                 if !isSucceed {
-                    self?.showError(message: "Не удалось деавторизоваться.")
+                    self.showError(message: "Не удалось деавторизоваться.")
+                } else {
+                    self.delegate?.logout()
                 }
             case .failure(let error):
-                self?.showError(message: error.localizedDescription)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
@@ -105,7 +111,6 @@ final class AccountViewController: UIViewController {
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
         logout()
-        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
