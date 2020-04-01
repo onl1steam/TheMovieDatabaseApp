@@ -1,12 +1,12 @@
 //
 //  ImageCacheTests.swift
-//  TheMovieDatabaseAPITests
+//  TheMovieDatabaseTests
 //
-//  Created by Рыжков Артем on 25.03.2020.
+//  Created by Рыжков Артем on 01.04.2020.
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-@testable import TheMovieDatabaseAPI
+@testable import TheMovieDatabase
 import XCTest
 
 class ImageCacheTests: XCTestCase {

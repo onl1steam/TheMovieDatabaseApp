@@ -26,7 +26,6 @@ final class ServiceLayer {
     
     private let configuration: Configuration
     private let apiClient: APIClient
-    private let apiImageClient: APIClient
     
     // MARK: - Initializers
     
@@ -38,11 +37,10 @@ final class ServiceLayer {
             apiKey: NetworkConfiguration.apiKey)
         
         apiClient = APIRequest(configuration: configuration)
-        apiImageClient = APIRequestImage(configuration: configuration)
         
         authService = AuthService(apiClient: apiClient)
         sessionService = SessionService(apiClient: apiClient)
-        imageService = ImageService(imageApiClient: apiImageClient)
+        imageService = ImageService(imageApiClient: apiClient)
         moviesService = MoviesService(apiClient: apiClient)
     }
 }

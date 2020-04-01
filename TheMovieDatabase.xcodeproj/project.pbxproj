@@ -62,6 +62,8 @@
 		9272CF84243414EE0059D6F4 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF83243414EE0059D6F4 /* AccountCoordinator.swift */; };
 		9272CF862434152C0059D6F4 /* MoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF852434152C0059D6F4 /* MoviesCoordinator.swift */; };
 		9272CF882434333D0059D6F4 /* CollectionParentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF872434333D0059D6F4 /* CollectionParentDelegate.swift */; };
+		9272CF8A2434CDC70059D6F4 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF892434CDC70059D6F4 /* ImageCache.swift */; };
+		9272CF8D2434CFF50059D6F4 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF8C2434CFF50059D6F4 /* ImageCacheTests.swift */; };
 		92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6324115C7000619672 /* AppDelegate.swift */; };
 		92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6524115C7000619672 /* SceneDelegate.swift */; };
 		92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6C24115C7400619672 /* Assets.xcassets */; };
@@ -105,7 +107,6 @@
 		92E5CADE242B079C00DD587D /* AuthServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CADD242B079C00DD587D /* AuthServiceMock.swift */; };
 		92E5CAE1242B081400DD587D /* ValidationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */; };
 		92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */; };
-		92E5CAE6242B111700DD587D /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE5242B111700DD587D /* ImageCacheTests.swift */; };
 		92E5CAE8242B1ADC00DD587D /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CAE7242B1ADC00DD587D /* AuthorizationModel.swift */; };
 		92E5CB03242CF1A500DD587D /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */; };
 		92E5CB08242CF61C00DD587D /* HttpResponseStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */; };
@@ -122,10 +123,8 @@
 		92E5CB43242F9BD800DD587D /* APIRequestAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E5CB42242F9BD800DD587D /* APIRequestAdapterTests.swift */; };
 		92F64D2E241FA28000693C9B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */; };
 		92F64D30241FA61000693C9B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D2F241FA61000693C9B /* APIRequest.swift */; };
-		92F64D32241FA6E000693C9B /* APIRequestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D31241FA6E000693C9B /* APIRequestImage.swift */; };
 		92F64D34241FA90A00693C9B /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D33241FA90A00693C9B /* ImageEndpoint.swift */; };
 		92F64D37241FF04300693C9B /* AvatarEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D36241FF04300693C9B /* AvatarEndpoint.swift */; };
-		92F64D39241FF51800693C9B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D38241FF51800693C9B /* ImageCache.swift */; };
 		92F64D3E242021D300693C9B /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D3D242021D300693C9B /* ImageService.swift */; };
 		92F64D412420236800693C9B /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D402420236800693C9B /* MoviesService.swift */; };
 		92F64D6324262B1C00693C9B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F64D6224262B1C00693C9B /* Configuration.swift */; };
@@ -235,6 +234,8 @@
 		9272CF83243414EE0059D6F4 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		9272CF852434152C0059D6F4 /* MoviesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCoordinator.swift; sourceTree = "<group>"; };
 		9272CF872434333D0059D6F4 /* CollectionParentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionParentDelegate.swift; sourceTree = "<group>"; };
+		9272CF892434CDC70059D6F4 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		9272CF8C2434CFF50059D6F4 /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		92CFFF6024115C7000619672 /* TheMovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFFF6324115C7000619672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CFFF6524115C7000619672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,7 +283,6 @@
 		92E5CADD242B079C00DD587D /* AuthServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE0242B081400DD587D /* ValidationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationServiceMock.swift; sourceTree = "<group>"; };
 		92E5CAE3242B0C6D00DD587D /* RoundedButtonViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonViewTests.swift; sourceTree = "<group>"; };
-		92E5CAE5242B111700DD587D /* ImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		92E5CAE7242B1ADC00DD587D /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		92E5CB02242CF1A500DD587D /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
 		92E5CB07242CF61C00DD587D /* HttpResponseStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStub.swift; sourceTree = "<group>"; };
@@ -300,10 +300,8 @@
 		92F54314241797B10020BB4E /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F64D2D241FA28000693C9B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		92F64D2F241FA61000693C9B /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		92F64D31241FA6E000693C9B /* APIRequestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestImage.swift; sourceTree = "<group>"; };
 		92F64D33241FA90A00693C9B /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
 		92F64D36241FF04300693C9B /* AvatarEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEndpoint.swift; sourceTree = "<group>"; };
-		92F64D38241FF51800693C9B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		92F64D3D242021D300693C9B /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		92F64D402420236800693C9B /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		92F64D6224262B1C00693C9B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -445,7 +443,6 @@
 				9214AF46241E50E600796C3B /* RequestBody */,
 				9214AF45241E50DE00796C3B /* Errors */,
 				92F77AD42416CBD0007F9182 /* Responses */,
-				92F64D38241FF51800693C9B /* ImageCache.swift */,
 				92F64D6224262B1C00693C9B /* Configuration.swift */,
 				92E5CA9F2429595700DD587D /* HttpMethods.swift */,
 				92E5CB3B242D7E2700DD587D /* APIRequestAdapter.swift */,
@@ -458,7 +455,6 @@
 			children = (
 				92163E68241C3F63008F8CE5 /* APIClient.swift */,
 				92F64D2F241FA61000693C9B /* APIRequest.swift */,
-				92F64D31241FA6E000693C9B /* APIRequestImage.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -646,6 +642,14 @@
 			path = MainCoordinator;
 			sourceTree = "<group>";
 		};
+		9272CF8B2434CFEA0059D6F4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9272CF8C2434CFF50059D6F4 /* ImageCacheTests.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		92CFFF5724115C7000619672 = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +727,7 @@
 			isa = PBXGroup;
 			children = (
 				92D1120124153F900087D910 /* ServiceLayer.swift */,
+				9272CF892434CDC70059D6F4 /* ImageCache.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 		92E5CAA92429692D00DD587D /* Business Logic */ = {
 			isa = PBXGroup;
 			children = (
+				9272CF8B2434CFEA0059D6F4 /* Common */,
 				92D112352416711E0087D910 /* Services */,
 			);
 			path = "Business Logic";
@@ -939,7 +945,6 @@
 		92E5CAFB242CB31900DD587D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				92E5CAE5242B111700DD587D /* ImageCacheTests.swift */,
 				92E5CB42242F9BD800DD587D /* APIRequestAdapterTests.swift */,
 			);
 			path = Model;
@@ -1384,7 +1389,6 @@
 			files = (
 				9214AF53241E516800796C3B /* CreateLoginSessionEndpoint.swift in Sources */,
 				92F64D30241FA61000693C9B /* APIRequest.swift in Sources */,
-				92F64D32241FA6E000693C9B /* APIRequestImage.swift in Sources */,
 				9214AF63241E698200796C3B /* MoviesResponse.swift in Sources */,
 				9214AF68241E718700796C3B /* AccountDetailsEndpoint.swift in Sources */,
 				9214AF6D241EEA3300796C3B /* SearchMovieEndpoint.swift in Sources */,
@@ -1392,7 +1396,6 @@
 				92F64D37241FF04300693C9B /* AvatarEndpoint.swift in Sources */,
 				9214AF4A241E512700796C3B /* CreateLoginSessionBody.swift in Sources */,
 				9214AF59241E51F700796C3B /* SessionResponse.swift in Sources */,
-				92F64D39241FF51800693C9B /* ImageCache.swift in Sources */,
 				92163E6B241C3FCD008F8CE5 /* Endpoint.swift in Sources */,
 				9214AF55241E517800796C3B /* CreateSessionEndpoint.swift in Sources */,
 				9214AF5D241E689B00796C3B /* DeleteSessionBody.swift in Sources */,
@@ -1418,7 +1421,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92E5CAE6242B111700DD587D /* ImageCacheTests.swift in Sources */,
 				92E5CA8B2429021000DD587D /* FavoriteMoviesEndpointTests.swift in Sources */,
 				92E5CA9E2429352300DD587D /* DeleteSessionEndpointTests.swift in Sources */,
 				92E5CA9C2429351100DD587D /* CreateSessionEndpointTests.swift in Sources */,
@@ -1458,6 +1460,7 @@
 				92D1121B2415BFB10087D910 /* SessionService.swift in Sources */,
 				92F77AD72416CDCA007F9182 /* ErrorStrings.swift in Sources */,
 				92D112192415AF1F0087D910 /* AuthError.swift in Sources */,
+				9272CF8A2434CDC70059D6F4 /* ImageCache.swift in Sources */,
 				9250EBB92413FCA400AC30DB /* CustomTextField.swift in Sources */,
 				92D112162415ADD10087D910 /* User.swift in Sources */,
 				92D1120524153FF60087D910 /* AuthService.swift in Sources */,
@@ -1500,6 +1503,7 @@
 				92E5CAAC242A4CEE00DD587D /* MoviesServiceTests.swift in Sources */,
 				92E5CAD6242AF2BB00DD587D /* AuthorizationViewControllerTests.swift in Sources */,
 				92E5CABA242ACB7900DD587D /* ViewControllerTestCase.swift in Sources */,
+				9272CF8D2434CFF50059D6F4 /* ImageCacheTests.swift in Sources */,
 				92E5CABE242AD26300DD587D /* AccountViewControllerTests.swift in Sources */,
 				92E5CADE242B079C00DD587D /* AuthServiceMock.swift in Sources */,
 				92E5CAE4242B0C6D00DD587D /* RoundedButtonViewTests.swift in Sources */,

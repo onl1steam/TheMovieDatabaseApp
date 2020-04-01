@@ -6,8 +6,8 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import UIKit
 import TheMovieDatabaseAPI
+import UIKit
 
 protocol ImageServiceType {
     
@@ -36,11 +36,13 @@ final class ImageService: ImageServiceType {
     let imageBaseUrl = NetworkConfiguration.imageBaseURL
     let avatarBaseUrl = NetworkConfiguration.avatarBaseURL
     let imageApiClient: APIClient
+    let imageCache: ImageCache
     
     // MARK: - Initializers
     
-    init(imageApiClient: APIClient) {
+    init(imageApiClient: APIClient, imageCache: ImageCache = ImageCache()) {
         self.imageApiClient = imageApiClient
+        self.imageCache = imageCache
     }
     
     // MARK: - ImageServiceType
@@ -50,15 +52,41 @@ final class ImageService: ImageServiceType {
         posterPath: String,
         width: String?,
         _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
+        if let image = imageCache.checkImageInCache(key: posterPath) {
+            completion(.success(image))
+            return Progress()
+        }
         let endpoint = ImageEndpoint(width: width, imagePath: posterPath)
-        let progress = imageApiClient.request(endpoint, completionHandler: completion)
+        let progress = imageApiClient.request(endpoint) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let image):
+                self.imageCache.cacheImage(key: posterPath, image: image)
+                completion(.success(image))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
         return progress
     }
     
     @discardableResult
     func avatar(avatarPath: String, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
+        if let image = imageCache.checkImageInCache(key: avatarPath) {
+            completion(.success(image))
+            return Progress()
+        }
         let endpoint = AvatarEndpoint(imagePath: avatarPath)
-        let progress = imageApiClient.request(endpoint, completionHandler: completion)
+        let progress = imageApiClient.request(endpoint) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let image):
+                self.imageCache.cacheImage(key: avatarPath, image: image)
+                completion(.success(image))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
         return progress
     }
 }
