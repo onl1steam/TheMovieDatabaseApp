@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Делегат для связи с Child ViewController'ами
 protocol FavoritesViewControllerDelegate: class {
     
+    /// Нажатие кнопки поиска
     func searchTapped()
 }
 
@@ -106,5 +108,14 @@ extension FavoritesViewController: FavoritesViewControllerDelegate {
     
     func searchTapped() {
         print("Search text tapped")
+    }
+}
+
+// MARK: - CollectionParentDelegate
+
+extension FavoritesViewController: CollectionParentDelegate {
+    
+    func elementTapped(data: MovieDetails) {
+        delegate?.showMovieDetails(data: data)
     }
 }

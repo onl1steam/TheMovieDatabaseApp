@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol MoviesCoordinatorType: Coordinator {
+/// Координатор для экрана поиска фильмов
+protocol MoviesCoordinatorType: Coordinator, SearchCoordinator {
     
 }
 
@@ -28,5 +29,9 @@ final class MoviesCoordinator: MoviesCoordinatorType {
         moviesVC.delegate = self
         moviesVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: .moviesTabBar, tag: 0)
         navigationController.pushViewController(moviesVC, animated: true)
+    }
+    
+    func showMovieDetails(data: MovieDetails) {
+        
     }
 }

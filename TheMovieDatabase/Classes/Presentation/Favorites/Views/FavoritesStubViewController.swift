@@ -52,13 +52,11 @@ final class FavoritesStubViewController: UIViewController {
         setupAccessability()
     }
     
-    // MARK: - IBActions
+    // MARK: - Private Methods
     
-    @objc func searchTapped() {
+    @objc private func searchTapped() {
         delegate?.searchTapped()
     }
-    
-    // MARK: - Private Methods
     
     private func addSubviews() {
         view.addSubview(placeholderLabel)

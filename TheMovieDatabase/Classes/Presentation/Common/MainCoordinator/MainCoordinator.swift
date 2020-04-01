@@ -8,10 +8,16 @@
 
 import UIKit
 
+/// Координатор приложения
 protocol ApplicationCoordinator: Coordinator {
     
+    /// Авторизация в приложении
     func login()
+    
+    /// Выход из текущей сессии
     func logout()
+    
+    /// Удаление дочернего координатора из массива
     func childDidFinish(_ child: Coordinator?)
 }
 

@@ -15,6 +15,8 @@ final class FilmsCollectionViewController: UICollectionViewController {
     var moviesData = [MovieDetails]()
     var dataSource: FilmsCollectionDataSource?
     
+    weak var delegate: CollectionParentDelegate?
+    
     // MARK: - Private Properties
     
     private let reuseIdentifier = "FilmsCollectionViewCell"
@@ -30,7 +32,8 @@ final class FilmsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("CollectionView tapped")
+        let data = moviesData[indexPath.row]
+        delegate?.elementTapped(data: data)
     }
     
     // MARK: - Private Methods

@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Координатор для экрана авторизации
 protocol AuthorizationCoordinator: Coordinator {
     
+    /// Авторизация в приложении
     func authLogin()
 }
 

@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Координатор для экрана профиля
 protocol AccountCoordinatorType: Coordinator {
     
+    /// Выход из текущей сессии
     func logout()
 }
 

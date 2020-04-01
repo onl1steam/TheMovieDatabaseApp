@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Координатор для TabBar
 protocol TabBarCoordinatorType: Coordinator {
     
+    /// Выход из текущей сессии
     func logout()
 }
 

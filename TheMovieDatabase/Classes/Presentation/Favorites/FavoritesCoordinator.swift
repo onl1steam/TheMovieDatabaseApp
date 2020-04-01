@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol FavoritesCoordinatorType: Coordinator {
+/// Координатор для экрана избранных фильмов
+protocol FavoritesCoordinatorType: Coordinator, SearchCoordinator {
     
 }
 
@@ -31,5 +32,9 @@ final class FavoritesCoordinator: FavoritesCoordinatorType {
             image: .favoritesTabBar,
             tag: 1)
         navigationController.pushViewController(favoritesVC, animated: true)
+    }
+    
+    func showMovieDetails(data: MovieDetails) {
+           
     }
 }

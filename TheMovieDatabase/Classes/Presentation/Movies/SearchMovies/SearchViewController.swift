@@ -10,6 +10,10 @@ import UIKit
 
 final class SearchViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
+    weak var delegate: SearchCoordinator?
+    
     // MARK: - Private Properties
     
     private let containerView: UIView = {
@@ -73,5 +77,14 @@ final class SearchViewController: UIViewController {
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+    }
+}
+
+// MARK: - CollectionParentDelegate
+
+extension SearchViewController: CollectionParentDelegate {
+    
+    func elementTapped(data: MovieDetails) {
+        delegate?.showMovieDetails(data: data)
     }
 }
