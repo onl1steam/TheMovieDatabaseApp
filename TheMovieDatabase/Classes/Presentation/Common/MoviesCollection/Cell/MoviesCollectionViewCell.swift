@@ -1,5 +1,5 @@
 //
-//  FilmsCollectionViewCell.swift
+//  MoviesCollectionViewCell.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 30.03.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FilmsCollectionViewCell: UICollectionViewCell {
+final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
 

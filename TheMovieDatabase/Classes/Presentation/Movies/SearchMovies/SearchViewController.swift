@@ -15,7 +15,7 @@ final class SearchViewController: UIViewController {
     weak var delegate: SearchCoordinator?
     
     let moviesService: MoviesServiceType
-    let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let filmsCollectionVC = MoviesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Private Properties
     

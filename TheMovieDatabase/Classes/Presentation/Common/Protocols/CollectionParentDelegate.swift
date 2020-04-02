@@ -9,7 +9,7 @@
 import Foundation
 
 /// Делегат родительского ViewController'а для коллекции фильмов
-protocol CollectionParentDelegate: class {
+protocol CollectionParentDelegate: AnyObject {
     
     /// Обработка нажатия на элемент коллекции
     func elementTapped(data: MovieDetails)

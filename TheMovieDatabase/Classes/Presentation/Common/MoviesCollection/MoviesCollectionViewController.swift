@@ -1,5 +1,5 @@
 //
-//  FilmsCollectionViewController.swift
+//  MoviesCollectionViewController.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 30.03.2020.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-final class FilmsCollectionViewController: UICollectionViewController {
+final class MoviesCollectionViewController: UICollectionViewController {
     
     // MARK: - Public Properties
     
     var moviesData = [MovieDetails]()
-    var dataSource: FilmsCollectionDataSource?
+    var dataSource: MoviesCollectionDataSource?
     weak var delegate: CollectionParentDelegate?
     
     var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private Properties
     
-    private let reuseIdentifier = "FilmsCollectionViewCell"
+    private let reuseIdentifier = "MoviesCollectionViewCell"
     
     // MARK: - UICollectionViewController
     
@@ -30,7 +30,7 @@ final class FilmsCollectionViewController: UICollectionViewController {
         configureDataSource()
         collectionView.delegate = self
         setupColorScheme()
-        configureCell()
+        registerCell()
         setupActivityIndicator()
     }
     
@@ -76,19 +76,19 @@ final class FilmsCollectionViewController: UICollectionViewController {
     }
     
     private func configureDataSource() {
-        dataSource = FilmsCollectionDataSource(data: moviesData)
+        dataSource = MoviesCollectionDataSource(data: moviesData)
         collectionView.dataSource = dataSource
     }
     
-    private func configureCell() {
-        let nib = UINib(nibName: "FilmsCollectionViewCell", bundle: nil)
+    private func registerCell() {
+        let nib = UINib(nibName: "MoviesCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension FilmsCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension MoviesCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(
         _ collectionView: UICollectionView,

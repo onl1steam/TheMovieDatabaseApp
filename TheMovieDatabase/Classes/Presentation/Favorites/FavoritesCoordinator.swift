@@ -9,7 +9,7 @@
 import UIKit
 
 /// Координатор для экрана избранных фильмов
-protocol FavoritesCoordinatorType: Coordinator, SearchCoordinator {
+protocol FavoritesCoordinatorType: Coordinator, SearchCoordinator, MovieDetailsDelegate {
     
 }
 
@@ -35,6 +35,16 @@ final class FavoritesCoordinator: FavoritesCoordinatorType {
     }
     
     func showMovieDetails(data: MovieDetails) {
-        print("Show movie: \(data.title)")
+        let movieDetailsViewController = MovieDetailsViewController(movieDetails: data)
+        movieDetailsViewController.delegate = self
+        navigationController.pushViewController(movieDetailsViewController, animated: true)
+    }
+    
+    func arrowBackTapped() {
+        navigationController.popViewController(animated: true)
+    }
+    
+    func favoriteTapped() {
+        
     }
 }

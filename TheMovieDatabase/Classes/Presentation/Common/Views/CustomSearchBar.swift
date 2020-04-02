@@ -33,15 +33,13 @@ final class CustomSearchBar: UISearchBar {
     
     // MARK: - Public methods
     
-    func configure() {
+    private func configure() {
         setImages()
         setupTextField()
         searchTextPositionAdjustment = UIOffset(horizontal: 5, vertical: 0)
         isTranslucent = true
         setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
     }
-    
-    // MARK: - Private Methods
     
     private func setImages() {
         setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)

@@ -1,5 +1,5 @@
 //
-//  FilmsCollectionDataSource.swift
+//  MoviesCollectionDataSource.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 30.03.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
+final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Public Properties
     
@@ -18,7 +18,7 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Private Properties
     
-    private var reuseIdentifier = "FilmsCollectionViewCell"
+    private var reuseIdentifier = "MoviesCollectionViewCell"
     
     // MARK: - Initializers
     
@@ -41,7 +41,7 @@ final class FilmsCollectionDataSource: NSObject, UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: reuseIdentifier,
-            for: indexPath) as? FilmsCollectionViewCell else { fatalError("Неправильная ячейка") }
+            for: indexPath) as? MoviesCollectionViewCell else { fatalError("Неправильная ячейка") }
         
         let data = moviesData[indexPath.row]
         cell.configure(data: data)

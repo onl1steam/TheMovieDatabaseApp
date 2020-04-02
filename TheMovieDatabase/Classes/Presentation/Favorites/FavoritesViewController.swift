@@ -27,7 +27,7 @@ final class FavoritesViewController: UIViewController {
     let sessionService: Session
     let moviesService: MoviesServiceType
     
-    let filmsCollectionVC = FilmsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let filmsCollectionVC = MoviesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let placeholderVC = FavoritesStubViewController()
     
     weak var delegate: FavoritesCoordinatorType?
@@ -60,7 +60,7 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @objc func searchButtonTapped() {
+    @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
         
     }
     
@@ -132,7 +132,7 @@ final class FavoritesViewController: UIViewController {
             image: .search,
             style: .plain,
             target: nil,
-            action: #selector(searchButtonTapped))
+            action: #selector(searchButtonTapped(_:)))
         searchItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
     }
