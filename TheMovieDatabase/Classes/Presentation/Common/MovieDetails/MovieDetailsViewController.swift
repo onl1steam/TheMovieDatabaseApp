@@ -12,18 +12,18 @@ final class MovieDetailsViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var originalTitleLabel: UILabel!
-    @IBOutlet weak var genresLabel: UILabel!
-    @IBOutlet weak var runtimeDefaultLabel: UILabel!
-    @IBOutlet weak var ratesDefaultLabel: UILabel!
-    @IBOutlet weak var runtimeLabel: UILabel!
-    @IBOutlet weak var ratesLabel: UILabel!
-    @IBOutlet weak var minutesLabel: UILabel!
-    @IBOutlet weak var votesCountLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var separationView: UIView!
+    @IBOutlet private var posterImageView: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var originalTitleLabel: UILabel!
+    @IBOutlet private var genresLabel: UILabel!
+    @IBOutlet private var runtimeDefaultLabel: UILabel!
+    @IBOutlet private var ratesDefaultLabel: UILabel!
+    @IBOutlet private var runtimeLabel: UILabel!
+    @IBOutlet private var ratesLabel: UILabel!
+    @IBOutlet private var minutesLabel: UILabel!
+    @IBOutlet private var votesCountLabel: UILabel!
+    @IBOutlet private var descriptionTextView: UITextView!
+    @IBOutlet private var separationView: UIView!
     
     // MARK: - Public Properties
     
@@ -57,11 +57,11 @@ final class MovieDetailsViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @objc func arrowBackTapped(_ sender: UIBarButtonItem) {
+    @objc private func arrowBackTapped(_ sender: UIBarButtonItem) {
         delegate?.arrowBackTapped()
     }
     
-    @objc func favoriteTapped(_ sender: UIBarButtonItem) {
+    @objc private func favoriteTapped(_ sender: UIBarButtonItem) {
         delegate?.favoriteTapped()
     }
     
@@ -72,10 +72,10 @@ final class MovieDetailsViewController: UIViewController {
         titleLabel.text = movieDetails.title
         originalTitleLabel.text = movieDetails.originalTitle
         genresLabel.text = movieDetails.genres.compactMap { $0.name }.joined(separator: ",")
-        configureRuntime(movieDetails.runtime)
-        configureVotes(movieDetails.voteAverage)
+        checkRuntimeValidity(movieDetails.runtime)
+        setupVotesColor(movieDetails.voteAverage)
         votesCountLabel.text = "\(movieDetails.voteCount)"
-        configureDescription(movieDetails.overview)
+        checkDescriptionValidity(movieDetails.overview)
     }
     
     private func loadImage(path: String?) {
@@ -135,7 +135,7 @@ final class MovieDetailsViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backArrowItem]
     }
     
-    private func configureVotes(_ voteAverage: Double) {
+    private func setupVotesColor(_ voteAverage: Double) {
         ratesLabel.text = "\(voteAverage)"
         if voteAverage > 8.0 {
             ratesLabel.textColor = .customGreen
@@ -144,7 +144,7 @@ final class MovieDetailsViewController: UIViewController {
         }
     }
     
-    private func configureRuntime(_ runtime: Int?) {
+    private func checkRuntimeValidity(_ runtime: Int?) {
         guard let movieRuntime = runtime else {
             runtimeLabel.text = "-"
             return
@@ -152,7 +152,7 @@ final class MovieDetailsViewController: UIViewController {
         runtimeLabel.text = "\(movieRuntime)"
     }
     
-    private func configureDescription(_ description: String?) {
+    private func checkDescriptionValidity(_ description: String?) {
         guard let overview = description else {
             descriptionTextView.text = ""
             return

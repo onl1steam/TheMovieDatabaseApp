@@ -25,10 +25,13 @@ final class MoviesCoordinator: MoviesCoordinatorType {
     }
     
     func start() {
-        let moviesVC = MoviesViewController()
-        moviesVC.delegate = self
-        moviesVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: .moviesTabBar, tag: 0)
-        navigationController.pushViewController(moviesVC, animated: true)
+        let moviesViewController = MoviesViewController()
+        moviesViewController.delegate = self
+        moviesViewController.tabBarItem = UITabBarItem(
+            title: TabBarScreenStrings.moviesTabBar,
+            image: .moviesTabBar,
+            tag: 0)
+        navigationController.pushViewController(moviesViewController, animated: true)
     }
     
     func showMovieDetails(data: MovieDetails) {

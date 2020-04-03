@@ -12,7 +12,7 @@ final class FavoritesStubViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    let placeholderLabel: UILabel = {
+    private let placeholderLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
@@ -22,7 +22,7 @@ final class FavoritesStubViewController: UIViewController {
         return label
     }()
     
-    let navigationButton: UIButton = {
+    private let navigationButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.customPurpure, for: .normal)
         button.setTitle(FavoritesScreenStrings.searchFilmsButtonText, for: .normal)
@@ -33,7 +33,7 @@ final class FavoritesStubViewController: UIViewController {
         return button
     }()
     
-    let placeholderImageView: UIImageView = {
+    private let placeholderImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .favoritesStub
         return imageView

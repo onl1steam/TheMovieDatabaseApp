@@ -10,6 +10,7 @@ import Foundation
 
 extension Locale {
     
+    /// Возвращает язык, выбранный системой в качестве основного
     static var preferredLanguage: String? {
         let languageString = Locale.preferredLanguages.first
         return languageString

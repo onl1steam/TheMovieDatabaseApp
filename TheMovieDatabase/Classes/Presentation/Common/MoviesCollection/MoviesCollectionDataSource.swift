@@ -8,17 +8,17 @@
 
 import UIKit
 
+/// DataSource для коллекции списка фильмов
 final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
+    
+    private enum Constants {
+        static let cellError: String = "Неправильная ячейка"
+    }
     
     // MARK: - Public Properties
     
     var moviesData = [MovieDetails]()
-    
     let imageService: ImageServiceType
-    
-    // MARK: - Private Properties
-    
-    private var reuseIdentifier = "MoviesCollectionViewCell"
     
     // MARK: - Initializers
     
@@ -40,18 +40,21 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
-            for: indexPath) as? MoviesCollectionViewCell else { fatalError("Неправильная ячейка") }
+            withReuseIdentifier: MoviesCollectionViewCell().identifier,
+            for: indexPath) as? MoviesCollectionViewCell
+            else {
+                fatalError(Constants.cellError)
+        }
         
-        let data = moviesData[indexPath.row]
-        cell.configure(data: data)
+        let movie = moviesData[indexPath.row]
+        cell.configure(movie: movie)
         
-        if let path = data.posterPath {
+        if let path = movie.posterPath {
             cell.toggleActivityIndicator()
             imageService.image(posterPath: path, width: nil) { response in
                 switch response {
                 case .success(let image):
-                    cell.configureImage(image)
+                    cell.setupImage(image)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
@@ -63,7 +66,11 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Public Methods
     
-    func update(with data: [MovieDetails]) {
-        moviesData = data
+    /// Обновить список фильмов в коллекции
+    ///
+    /// - Parameters:
+    ///     - moviesDetails: список фильмов.
+    func update(with moviesDetails: [MovieDetails]) {
+        self.moviesData = moviesDetails
     }
 }

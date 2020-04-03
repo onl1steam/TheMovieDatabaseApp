@@ -15,7 +15,8 @@ final class SearchViewController: UIViewController {
     weak var delegate: SearchCoordinator?
     
     let moviesService: MoviesServiceType
-    let filmsCollectionVC = MoviesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let filmsCollectionViewController = MoviesCollectionViewController(
+        collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Private Properties
     
@@ -31,14 +32,14 @@ final class SearchViewController: UIViewController {
         return searchBar
     }()
     
-    private let searchStubVC = SearchStubViewController()
+    private let searchStubViewController = SearchStubViewController()
     
     // MARK: - Initializers
     
     init(moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
         self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
-        filmsCollectionVC.delegate = self
+        filmsCollectionViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +47,7 @@ final class SearchViewController: UIViewController {
     }
     
     // MARK: - UIViewController
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundBlack
@@ -57,14 +58,14 @@ final class SearchViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @objc func changeAppearance(_ sender: UIBarButtonItem) {
+    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
         
     }
     
-    @objc func searchTextChanged() {
+    @objc private func searchTextChanged() {
         guard let text = searchBar.searchTextField.text, text != "" else {
-            removeChild(filmsCollectionVC, containerView: containerView)
-            showChild(searchStubVC, containerView: containerView)
+            removeChild(filmsCollectionViewController, containerView: containerView)
+            addChild(searchStubViewController, containerView: containerView)
             return
         }
         loadFilmList(text: text)
@@ -73,8 +74,8 @@ final class SearchViewController: UIViewController {
     // MARK: - Private Methods
     
     private func loadFilmList(text: String) {
-        filmsCollectionVC.setCollectionData([])
-        filmsCollectionVC.toggleIndicator()
+        filmsCollectionViewController.setCollectionData([])
+        filmsCollectionViewController.toggleIndicator()
         moviesService.searchMovies(query: text, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -88,8 +89,8 @@ final class SearchViewController: UIViewController {
     
     private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
         guard !movieList.isEmpty else {
-            removeChild(filmsCollectionVC, containerView: containerView)
-            showChild(searchStubVC, containerView: containerView)
+            removeChild(filmsCollectionViewController, containerView: containerView)
+            addChild(searchStubViewController, containerView: containerView)
             return
         }
         
@@ -97,10 +98,10 @@ final class SearchViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let detailsList):
-                self.removeChild(self.searchStubVC, containerView: self.containerView)
-                self.showChild(self.filmsCollectionVC, containerView: self.containerView)
-                self.filmsCollectionVC.setCollectionData(detailsList)
-                self.filmsCollectionVC.toggleIndicator()
+                self.removeChild(self.searchStubViewController, containerView: self.containerView)
+                self.addChild(self.filmsCollectionViewController, containerView: self.containerView)
+                self.filmsCollectionViewController.setCollectionData(detailsList)
+                self.filmsCollectionViewController.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }

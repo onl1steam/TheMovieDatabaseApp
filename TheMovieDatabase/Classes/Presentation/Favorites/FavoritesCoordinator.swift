@@ -25,13 +25,13 @@ final class FavoritesCoordinator: FavoritesCoordinatorType {
     }
     
     func start() {
-        let favoritesVC = FavoritesViewController()
-        favoritesVC.delegate = self
-        favoritesVC.tabBarItem = UITabBarItem(
+        let favoritesViewController = FavoritesViewController()
+        favoritesViewController.delegate = self
+        favoritesViewController.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.favoriteTabBar,
             image: .favoritesTabBar,
             tag: 1)
-        navigationController.pushViewController(favoritesVC, animated: true)
+        navigationController.pushViewController(favoritesViewController, animated: true)
     }
     
     func showMovieDetails(data: MovieDetails) {

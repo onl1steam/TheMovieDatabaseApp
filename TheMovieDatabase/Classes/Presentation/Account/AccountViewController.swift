@@ -12,11 +12,11 @@ final class AccountViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var logoutButton: RoundedButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet private var avatarImageView: UIImageView!
+    @IBOutlet private var logoutButton: RoundedButton!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
     
     // MARK: - Public Properties
     
@@ -108,7 +108,7 @@ final class AccountViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction func logoutButtonTapped(_ sender: Any) {
+    @IBAction private func logoutButtonTapped(_ sender: Any) {
         logout()
     }
     

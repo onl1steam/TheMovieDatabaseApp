@@ -8,65 +8,65 @@
 
 import UIKit
 
+/// Ячейка в коллекции отображающей фильмы
 final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
-
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var originalTitleLabel: UILabel!
-    @IBOutlet weak var genresLabel: UILabel!
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var votesLabel: UILabel!
-    @IBOutlet weak var runtimeLabel: UILabel!
-    @IBOutlet weak var runtimeImageView: UIImageView!
-    @IBOutlet weak var posterLoadingActivityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet private var posterImageView: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var originalTitleLabel: UILabel!
+    @IBOutlet private var genresLabel: UILabel!
+    @IBOutlet private var scoreLabel: UILabel!
+    @IBOutlet private var votesLabel: UILabel!
+    @IBOutlet private var runtimeLabel: UILabel!
+    @IBOutlet private var runtimeImageView: UIImageView!
+    @IBOutlet private var posterLoadingActivityIndicator: UIActivityIndicatorView!
     
     // MARK: - UICollectionViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupColorScheme()
-        posterLoadingActivityIndicator.isHidden = true
-        posterLoadingActivityIndicator.style = .white
-        posterLoadingActivityIndicator.tintColor = .customLight
+        setupActivityIndicator()
     }
     
     // MARK: - Public Methods
     
-    func configure(data: MovieDetails) {
-        titleLabel.text = data.title
+    func configure(movie: MovieDetails) {
+        titleLabel.text = movie.title
         
-        originalTitleLabel.text = "\(data.originalTitle) (\(data.releaseDate))"
+        originalTitleLabel.text = "\(movie.originalTitle) (\(movie.releaseDate))"
         
-        genresLabel.text = data.genres.compactMap { $0.name }.joined(separator: ",")
+        genresLabel.text = movie.genres.compactMap { $0.name }.joined(separator: ",")
         
-        configureVotes(voteAverage: data.voteAverage)
+        setupVotesColor(voteAverage: movie.voteAverage)
         
-        votesLabel.text = "\(data.voteCount)"
+        votesLabel.text = "\(movie.voteCount)"
         
-        configureRuntime(runtime: data.runtime)
+        checkRuntimeValidity(runtime: movie.runtime)
     }
     
-    func configureImage(_ image: UIImage) {
+    func setupImage(_ image: UIImage) {
         posterImageView.makeRounded(cornerRadius: 8)
         posterImageView.image = image
     }
     
     func toggleActivityIndicator() {
-        let isHidden = posterLoadingActivityIndicator.isHidden
-        if isHidden {
-            posterLoadingActivityIndicator.isHidden = false
-            posterLoadingActivityIndicator.startAnimating()
-        } else {
-            posterLoadingActivityIndicator.isHidden = true
-            posterLoadingActivityIndicator.stopAnimating()
-        }
+        posterLoadingActivityIndicator.isHidden ?
+            posterLoadingActivityIndicator.startAnimating(): posterLoadingActivityIndicator.stopAnimating()
     }
     
     // MARK: - Private Methods
     
-    private func configureRuntime(runtime: Int?) {
+    private func setupActivityIndicator() {
+        posterLoadingActivityIndicator.isHidden = true
+        posterLoadingActivityIndicator.style = .white
+        posterLoadingActivityIndicator.tintColor = .customLight
+        posterLoadingActivityIndicator.hidesWhenStopped = true
+    }
+    
+    private func checkRuntimeValidity(runtime: Int?) {
         guard let time = runtime else {
             runtimeImageView.isHidden = true
             runtimeLabel.isHidden = true
@@ -77,7 +77,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         runtimeImageView.isHidden = false
     }
     
-    private func configureVotes(voteAverage: Double) {
+    private func setupVotesColor(voteAverage: Double) {
         scoreLabel.text = "\(voteAverage)"
         if voteAverage > 8.0 {
             scoreLabel.textColor = .customGreen

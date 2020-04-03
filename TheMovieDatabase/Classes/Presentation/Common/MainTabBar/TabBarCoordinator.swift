@@ -27,10 +27,10 @@ final class TabBarCoordinator: TabBarCoordinatorType {
     }
     
     func start() {
-        let tabBarVC = TabBarViewController()
-        tabBarVC.controllerDelegate = self
-        setupTabBarCoordinators(tabBarVC: tabBarVC)
-        navigationController.pushViewController(tabBarVC, animated: true)
+        let tabBarViewController = TabBarViewController()
+        tabBarViewController.controllerDelegate = self
+        setupTabBarCoordinators(tabBarViewController: tabBarViewController)
+        navigationController.pushViewController(tabBarViewController, animated: true)
     }
     
     func logout() {
@@ -38,9 +38,9 @@ final class TabBarCoordinator: TabBarCoordinatorType {
         parentCoordinator?.childDidFinish(self)
     }
     
-    private func setupTabBarCoordinators(tabBarVC: TabBarViewController) {
-        tabBarVC.moviesCoordinator.parentCoordinator = self
-        tabBarVC.favoritesCoordinator.parentCoordinator = self
-        tabBarVC.accountCoordinator.parentCoordinator = self
+    private func setupTabBarCoordinators(tabBarViewController: TabBarViewController) {
+        tabBarViewController.moviesCoordinator.parentCoordinator = self
+        tabBarViewController.favoritesCoordinator.parentCoordinator = self
+        tabBarViewController.accountCoordinator.parentCoordinator = self
     }
 }

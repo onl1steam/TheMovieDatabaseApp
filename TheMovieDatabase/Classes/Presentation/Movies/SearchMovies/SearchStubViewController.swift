@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Заглушка в случае безрезультатного поиска фильмов
 final class SearchStubViewController: UIViewController {
 
    // MARK: - Private Properties

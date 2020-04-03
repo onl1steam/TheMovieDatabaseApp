@@ -28,9 +28,9 @@ final class AuthCoordinator: AuthorizationCoordinator {
     }
     
     func start() {
-        let authVC = AuthorizationViewController()
-        authVC.delegate = self
-        navigationController.pushViewController(authVC, animated: true)
+        let authViewController = AuthorizationViewController()
+        authViewController.delegate = self
+        navigationController.pushViewController(authViewController, animated: true)
     }
     
     func authLogin() {

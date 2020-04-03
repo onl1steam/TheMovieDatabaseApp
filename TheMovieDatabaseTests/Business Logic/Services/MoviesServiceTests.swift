@@ -46,7 +46,7 @@ final class MoviesServiceTests: XCTestCase {
     func testSearchMovies() {
         let exp = expectation(description: "Загрузка изображений")
         
-        moviesService.searchMovies(query: "Звёздные войны") { response in
+        moviesService.searchMovies(query: "Звёздные войны", page: nil) { response in
             switch response {
             case .success(let movies):
                 XCTAssert(movies.totalResults > 0)
@@ -63,7 +63,7 @@ final class MoviesServiceTests: XCTestCase {
     func testSearchMoviesWithEmptyResult() {
         let exp = expectation(description: "Загрузка изображений")
         
-        moviesService.searchMovies(query: "TestTestTest") { response in
+        moviesService.searchMovies(query: "TestTestTest", page: nil) { response in
             switch response {
             case .success(let movies):
                 XCTAssert(movies.results.isEmpty)
@@ -80,7 +80,7 @@ final class MoviesServiceTests: XCTestCase {
     func testSearchMoviesWithEmptySearchField() {
         let exp = expectation(description: "Загрузка изображений")
         
-        moviesService.searchMovies(query: "") { response in
+        moviesService.searchMovies(query: "", page: nil) { response in
             switch response {
             case .success:
                 XCTFail("Запрос должен выдать ошибку")
@@ -97,7 +97,7 @@ final class MoviesServiceTests: XCTestCase {
     func testSearchForMovieDetails() {
         let exp = expectation(description: "Загрузка изображений")
         
-        moviesService.movieDetails(movieId: 1, language: "ru") { response in
+        moviesService.movieDetails(movieId: 1) { response in
             switch response {
             case .success(let movieDetails):
                 XCTAssertEqual(movieDetails.title, "Джокер")

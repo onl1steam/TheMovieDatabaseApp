@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ImageCache {
+/// Кэш для изображений
+final class ImageCache {
     
     // MARK: - Private Properties
     

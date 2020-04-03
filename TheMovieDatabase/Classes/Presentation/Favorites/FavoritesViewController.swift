@@ -9,7 +9,7 @@
 import UIKit
 
 /// Делегат для связи с Child ViewController'ами
-protocol FavoritesViewControllerDelegate: class {
+protocol FavoritesViewControllerDelegate: AnyObject {
     
     /// Нажатие кнопки поиска
     func searchTapped()
@@ -19,16 +19,17 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var favoriteLabel: UILabel!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet private var favoriteLabel: UILabel!
+    @IBOutlet private var containerView: UIView!
     
     // MARK: - Public Properties
     
     let sessionService: Session
     let moviesService: MoviesServiceType
     
-    let filmsCollectionVC = MoviesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    let placeholderVC = FavoritesStubViewController()
+    let filmsCollectionViewController = MoviesCollectionViewController(
+        collectionViewLayout: UICollectionViewFlowLayout())
+    let placeholderViewController = FavoritesStubViewController()
     
     weak var delegate: FavoritesCoordinatorType?
     
@@ -40,8 +41,8 @@ final class FavoritesViewController: UIViewController {
         self.sessionService = sessionService
         self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
-        placeholderVC.delegate = self
-        filmsCollectionVC.delegate = self
+        placeholderViewController.delegate = self
+        filmsCollectionViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -60,19 +61,19 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
+    @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
         
     }
     
-    @objc func changeAppearance(_ sender: UIBarButtonItem) {
+    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
         
     }
     
     // MARK: - Private Methods
     
     private func loadFilmList() {
-        filmsCollectionVC.setCollectionData([])
-        filmsCollectionVC.toggleIndicator()
+        filmsCollectionViewController.setCollectionData([])
+        filmsCollectionViewController.toggleIndicator()
         sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -86,8 +87,8 @@ final class FavoritesViewController: UIViewController {
     
     private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
         guard !movieList.isEmpty else {
-            removeChild(filmsCollectionVC, containerView: containerView)
-            showChild(placeholderVC, containerView: containerView)
+            removeChild(filmsCollectionViewController, containerView: containerView)
+            addChild(placeholderViewController, containerView: containerView)
             return
         }
         
@@ -95,10 +96,10 @@ final class FavoritesViewController: UIViewController {
             guard let self = self else { return }
             switch response {
             case .success(let detailsList):
-                self.removeChild(self.placeholderVC, containerView: self.containerView)
-                self.showChild(self.filmsCollectionVC, containerView: self.containerView)
-                self.filmsCollectionVC.setCollectionData(detailsList)
-                self.filmsCollectionVC.toggleIndicator()
+                self.removeChild(self.placeholderViewController, containerView: self.containerView)
+                self.addChild(self.filmsCollectionViewController, containerView: self.containerView)
+                self.filmsCollectionViewController.setCollectionData(detailsList)
+                self.filmsCollectionViewController.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }

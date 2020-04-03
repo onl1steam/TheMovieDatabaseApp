@@ -12,8 +12,8 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var moviesBackground: UIImageView!
-    @IBOutlet weak var moviesLabel: UILabel!
+    @IBOutlet private var moviesBackground: UIImageView!
+    @IBOutlet private var moviesLabel: UILabel!
     
     // MARK: - Public Properties
     

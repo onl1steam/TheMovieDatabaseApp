@@ -26,10 +26,10 @@ final class FavoritesViewControllerTests: ViewControllerTestCase {
     // MARK: - Tests
     
     func testPlaceholderAtStart() {
-        let placeholderVC = viewController.placeholderVC
-        XCTAssertEqual(placeholderVC.placeholderLabel.text, "Вы не добавили ни одного фильма")
-        XCTAssertNotNil(placeholderVC.placeholderImageView.image)
-        XCTAssertEqual(placeholderVC.navigationButton.titleLabel?.text, "Найти любимые фильмы")
+        let placeholderViewController = viewController.placeholderViewController
+        XCTAssertEqual(placeholderViewController.placeholderLabel.text, "Вы не добавили ни одного фильма")
+        XCTAssertNotNil(placeholderViewController.placeholderImageView.image)
+        XCTAssertEqual(placeholderViewController.navigationButton.titleLabel?.text, "Найти любимые фильмы")
     }
 
     func testLabelAtStart() {

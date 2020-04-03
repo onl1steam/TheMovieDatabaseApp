@@ -27,13 +27,13 @@ final class AccountCoordinator: AccountCoordinatorType {
     }
     
     func start() {
-        let accountVC = AccountViewController()
-        accountVC.delegate = self
-        accountVC.tabBarItem = UITabBarItem(
+        let accountViewController = AccountViewController()
+        accountViewController.delegate = self
+        accountViewController.tabBarItem = UITabBarItem(
             title: TabBarScreenStrings.accountTabBar,
             image: .accountTabBar,
             tag: 2)
-        navigationController.pushViewController(accountVC, animated: true)
+        navigationController.pushViewController(accountViewController, animated: true)
     }
     
     func logout() {

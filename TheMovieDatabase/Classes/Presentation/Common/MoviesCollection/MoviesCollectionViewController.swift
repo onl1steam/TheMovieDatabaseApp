@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// ViewController коллекции, отображающей список фильмов
 final class MoviesCollectionViewController: UICollectionViewController {
     
     // MARK: - Public Properties
@@ -18,20 +19,16 @@ final class MoviesCollectionViewController: UICollectionViewController {
     
     var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: - Private Properties
-    
-    private let reuseIdentifier = "MoviesCollectionViewCell"
-    
     // MARK: - UICollectionViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator = UIActivityIndicatorView(style: .white)
+        setupActivityIndicator()
+        setupActivityIndicatorConstraints()
         configureDataSource()
         collectionView.delegate = self
         setupColorScheme()
         registerCell()
-        setupActivityIndicator()
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -47,22 +44,20 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     func toggleIndicator() {
-        let isHidden = activityIndicator.isHidden
-        if isHidden {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.isHidden = true
-            activityIndicator.stopAnimating()
-        }
+        activityIndicator.isHidden ? activityIndicator.startAnimating(): activityIndicator.stopAnimating()
     }
     
     // MARK: - Private Methods
     
     private func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
+        activityIndicator = UIActivityIndicatorView(style: .white)
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.tintColor = .customLight
         activityIndicator.isHidden = true
+    }
+    
+    private func setupActivityIndicatorConstraints() {
+        view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -81,8 +76,9 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     private func registerCell() {
-        let nib = UINib(nibName: "MoviesCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        let identifier = MoviesCollectionViewCell().identifier
+        let nib = UINib(nibName: identifier, bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: identifier)
     }
 }
 
@@ -90,11 +86,16 @@ final class MoviesCollectionViewController: UICollectionViewController {
 
 extension MoviesCollectionViewController: UICollectionViewDelegateFlowLayout {
     
+    private enum CellSize {
+        static let width: CGFloat = 150
+        static let height: CGFloat = 310
+    }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: 150, height: 310)
+        let size = CGSize(width: CellSize.width, height: CellSize.height)
         return size
     }
 }

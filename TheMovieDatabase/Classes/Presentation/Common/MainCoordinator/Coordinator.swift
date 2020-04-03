@@ -9,7 +9,7 @@
 import UIKit
 
 /// Координатор приложения
-protocol Coordinator: class {
+protocol Coordinator: AnyObject {
     
     /// Дочерние координаторы
     var childCoordinators: [Coordinator] { get set }
@@ -22,7 +22,7 @@ protocol Coordinator: class {
 }
 
 /// Отображение детальной информации о фильме
-protocol SearchCoordinator: class {
+protocol SearchCoordinator: AnyObject {
     
     /// Показывает экран детальной информации о фильме
     ///
