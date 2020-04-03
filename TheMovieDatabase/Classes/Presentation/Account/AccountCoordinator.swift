@@ -17,14 +17,20 @@ protocol AccountCoordinatorType: Coordinator {
 
 final class AccountCoordinator: AccountCoordinatorType {
     
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
     
     weak var parentCoordinator: TabBarCoordinatorType?
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
+    // MARK: - Coordinator
+    
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
     
     func start() {
         let accountViewController = AccountViewController()
@@ -35,6 +41,8 @@ final class AccountCoordinator: AccountCoordinatorType {
             tag: 2)
         navigationController.pushViewController(accountViewController, animated: true)
     }
+    
+    // MARK: - AccountCoordinatorType
     
     func logout() {
         parentCoordinator?.logout()

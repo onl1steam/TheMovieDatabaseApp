@@ -13,7 +13,7 @@ final class SearchStubViewController: UIViewController {
 
    // MARK: - Private Properties
     
-    private let placeholderLabel: UILabel = {
+    private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
@@ -23,7 +23,7 @@ final class SearchStubViewController: UIViewController {
         return label
     }()
     
-    private let placeholderImageView: UIImageView = {
+    private lazy var placeholderImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .searchStub
         return imageView

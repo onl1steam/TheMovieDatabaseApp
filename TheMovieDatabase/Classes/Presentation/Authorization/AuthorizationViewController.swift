@@ -22,18 +22,20 @@ final class AuthorizationViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    private let visibilityButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        button.setBackgroundImage(.visibility, for: .normal)
-        button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
     let validationService: Validation
     let authService: Authorization
     let sessionService: Session
     
     weak var delegate: AuthorizationCoordinator?
+    
+    // MARK: - Private Properties
+    
+    private lazy var visibilityButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        button.setBackgroundImage(.visibility, for: .normal)
+        button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - Initializers
     

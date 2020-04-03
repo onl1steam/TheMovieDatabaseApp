@@ -69,6 +69,7 @@
 		9272CF94243614770059D6F4 /* MovieDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9272CF92243614770059D6F4 /* MovieDetailsViewController.xib */; };
 		9272CF9724363FEF0059D6F4 /* MovieDetailsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF9624363FEF0059D6F4 /* MovieDetailsDelegate.swift */; };
 		9272CF9924378C510059D6F4 /* UICollectionViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF9824378C510059D6F4 /* UICollectionViewCellExtension.swift */; };
+		9272CF9B2437B4ED0059D6F4 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CF9A2437B4ED0059D6F4 /* UINavigationBarExtension.swift */; };
 		92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6324115C7000619672 /* AppDelegate.swift */; };
 		92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6524115C7000619672 /* SceneDelegate.swift */; };
 		92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6C24115C7400619672 /* Assets.xcassets */; };
@@ -246,6 +247,7 @@
 		9272CF92243614770059D6F4 /* MovieDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailsViewController.xib; sourceTree = "<group>"; };
 		9272CF9624363FEF0059D6F4 /* MovieDetailsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsDelegate.swift; sourceTree = "<group>"; };
 		9272CF9824378C510059D6F4 /* UICollectionViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCellExtension.swift; sourceTree = "<group>"; };
+		9272CF9A2437B4ED0059D6F4 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 		92CFFF6024115C7000619672 /* TheMovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFFF6324115C7000619672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CFFF6524115C7000619672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				92D11238241683090087D910 /* UIViewControllerExtension.swift */,
 				9272CF8E243513590059D6F4 /* LocaleExtension.swift */,
 				9272CF9824378C510059D6F4 /* UICollectionViewCellExtension.swift */,
+				9272CF9A2437B4ED0059D6F4 /* UINavigationBarExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1525,6 +1528,7 @@
 				9272CF9924378C510059D6F4 /* UICollectionViewCellExtension.swift in Sources */,
 				92F77AD92416CDD7007F9182 /* TabBarScreenStrings.swift in Sources */,
 				92D11226241665FA0087D910 /* FavoritesStubViewController.swift in Sources */,
+				9272CF9B2437B4ED0059D6F4 /* UINavigationBarExtension.swift in Sources */,
 				92D1120224153F900087D910 /* ServiceLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

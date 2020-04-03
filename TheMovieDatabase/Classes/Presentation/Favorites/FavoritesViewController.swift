@@ -57,6 +57,7 @@ final class FavoritesViewController: UIViewController {
         setupLocalizedStrings()
         setupNavigationBar()
         loadFilmList()
+        navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBAction
@@ -153,6 +154,6 @@ extension FavoritesViewController: FavoritesViewControllerDelegate {
 extension FavoritesViewController: CollectionParentDelegate {
     
     func elementTapped(data: MovieDetails) {
-        delegate?.showMovieDetails(data: data)
+        delegate?.showMovieDetails(movieData: data)
     }
 }

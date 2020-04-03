@@ -17,21 +17,29 @@ protocol AuthorizationCoordinator: Coordinator {
 
 final class AuthCoordinator: AuthorizationCoordinator {
     
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
     
     weak var parentCoordinator: ApplicationCoordinator?
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         navigationController.navigationBar.isHidden = true
         self.navigationController = navigationController
     }
     
+    // MARK: - Coordinator
+    
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
+    
     func start() {
         let authViewController = AuthorizationViewController()
         authViewController.delegate = self
         navigationController.pushViewController(authViewController, animated: true)
     }
+    
+    // MARK: - AuthorizationCoordinator
     
     func authLogin() {
         parentCoordinator?.childDidFinish(self)

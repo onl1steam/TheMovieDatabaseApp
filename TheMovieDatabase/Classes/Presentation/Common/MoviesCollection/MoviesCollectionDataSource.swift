@@ -50,6 +50,7 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
         cell.configure(movie: movie)
         
         if let path = movie.posterPath {
+            cell.setPlaceholderImage()
             cell.toggleActivityIndicator()
             imageService.image(posterPath: path, width: nil) { response in
                 switch response {

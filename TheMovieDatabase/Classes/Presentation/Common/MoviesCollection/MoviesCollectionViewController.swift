@@ -26,7 +26,7 @@ final class MoviesCollectionViewController: UICollectionViewController {
         setupActivityIndicator()
         setupActivityIndicatorConstraints()
         configureDataSource()
-        collectionView.delegate = self
+        setupCollectionView()
         setupColorScheme()
         registerCell()
     }
@@ -48,6 +48,11 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
+    }
     
     private func setupActivityIndicator() {
         activityIndicator = UIActivityIndicatorView(style: .white)

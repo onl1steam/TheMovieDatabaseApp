@@ -53,6 +53,7 @@ final class MovieDetailsViewController: UIViewController {
         setupImageView()
         setupNavigationBar()
         fill(with: movieDetails)
+        navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBActions

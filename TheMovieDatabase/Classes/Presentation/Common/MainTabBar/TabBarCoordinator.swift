@@ -17,14 +17,20 @@ protocol TabBarCoordinatorType: Coordinator {
 
 final class TabBarCoordinator: TabBarCoordinatorType {
     
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
     
     weak var parentCoordinator: ApplicationCoordinator?
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
+    // MARK: - Coordinator
+    
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
     
     func start() {
         let tabBarViewController = TabBarViewController()
@@ -33,10 +39,14 @@ final class TabBarCoordinator: TabBarCoordinatorType {
         navigationController.pushViewController(tabBarViewController, animated: true)
     }
     
+    // MARK: - TabBarCoordinatorType
+    
     func logout() {
         parentCoordinator?.logout()
         parentCoordinator?.childDidFinish(self)
     }
+    
+    // MARK: - Private Methods
     
     private func setupTabBarCoordinators(tabBarViewController: TabBarViewController) {
         tabBarViewController.moviesCoordinator.parentCoordinator = self

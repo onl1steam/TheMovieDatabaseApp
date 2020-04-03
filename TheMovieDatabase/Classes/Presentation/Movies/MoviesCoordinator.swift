@@ -9,21 +9,25 @@
 import UIKit
 
 /// Координатор для экрана поиска фильмов
-protocol MoviesCoordinatorType: Coordinator, SearchCoordinator {
-    
-}
+protocol MoviesCoordinatorType: Coordinator, SearchCoordinator, MovieDetailsDelegate {}
 
 final class MoviesCoordinator: MoviesCoordinatorType {
     
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
     
     weak var parentCoordinator: TabBarCoordinatorType?
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
+    // MARK: - Coordinator
+    
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
+
     func start() {
         let moviesViewController = MoviesViewController()
         moviesViewController.delegate = self
@@ -34,7 +38,21 @@ final class MoviesCoordinator: MoviesCoordinatorType {
         navigationController.pushViewController(moviesViewController, animated: true)
     }
     
-    func showMovieDetails(data: MovieDetails) {
+    // MARK: - SearchCoordinator
+    
+    func showMovieDetails(movieData: MovieDetails) {
+        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData)
+        movieDetailsViewController.delegate = self
+        navigationController.pushViewController(movieDetailsViewController, animated: true)
+    }
+    
+    // MARK: - MovieDetailsDelegate
+    
+    func arrowBackTapped() {
+        navigationController.popViewController(animated: true)
+    }
+    
+    func favoriteTapped() {
         
     }
 }

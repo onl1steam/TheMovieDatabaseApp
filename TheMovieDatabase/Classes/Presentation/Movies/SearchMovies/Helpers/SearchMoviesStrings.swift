@@ -10,5 +10,5 @@ import Foundation
 
 enum SearchMoviesStrings {
     
-    static let searchStubLabel = NSLocalizedString("По вашему запросу ничего не найдено :(", comment: "Search Stub")
+    static let searchStubLabel = NSLocalizedString("По вашему запросу ничего\nне найдено :(", comment: "Search Stub")
 }

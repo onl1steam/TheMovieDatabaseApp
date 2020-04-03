@@ -15,18 +15,18 @@ final class SearchViewController: UIViewController {
     weak var delegate: SearchCoordinator?
     
     let moviesService: MoviesServiceType
-    let filmsCollectionViewController = MoviesCollectionViewController(
+    let moviesCollectionViewController = MoviesCollectionViewController(
         collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Private Properties
     
-    private let containerView: UIView = {
+    private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
     
-    private let searchBar: CustomSearchBar = {
+    private lazy var searchBar: CustomSearchBar = {
         let rect = CGRect(x: 0, y: 0, width: 280, height: 48)
         let searchBar = CustomSearchBar(frame: rect)
         return searchBar
@@ -39,7 +39,7 @@ final class SearchViewController: UIViewController {
     init(moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
         self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
-        filmsCollectionViewController.delegate = self
+        moviesCollectionViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -54,6 +54,7 @@ final class SearchViewController: UIViewController {
         searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         setupNavigationBar()
         setupContainerConstraints()
+        navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBActions
@@ -64,7 +65,7 @@ final class SearchViewController: UIViewController {
     
     @objc private func searchTextChanged() {
         guard let text = searchBar.searchTextField.text, text != "" else {
-            removeChild(filmsCollectionViewController, containerView: containerView)
+            removeChild(moviesCollectionViewController, containerView: containerView)
             addChild(searchStubViewController, containerView: containerView)
             return
         }
@@ -74,8 +75,8 @@ final class SearchViewController: UIViewController {
     // MARK: - Private Methods
     
     private func loadFilmList(text: String) {
-        filmsCollectionViewController.setCollectionData([])
-        filmsCollectionViewController.toggleIndicator()
+        moviesCollectionViewController.setCollectionData([])
+        moviesCollectionViewController.toggleIndicator()
         moviesService.searchMovies(query: text, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -89,7 +90,7 @@ final class SearchViewController: UIViewController {
     
     private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
         guard !movieList.isEmpty else {
-            removeChild(filmsCollectionViewController, containerView: containerView)
+            removeChild(moviesCollectionViewController, containerView: containerView)
             addChild(searchStubViewController, containerView: containerView)
             return
         }
@@ -99,9 +100,9 @@ final class SearchViewController: UIViewController {
             switch response {
             case .success(let detailsList):
                 self.removeChild(self.searchStubViewController, containerView: self.containerView)
-                self.addChild(self.filmsCollectionViewController, containerView: self.containerView)
-                self.filmsCollectionViewController.setCollectionData(detailsList)
-                self.filmsCollectionViewController.toggleIndicator()
+                self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
+                self.moviesCollectionViewController.setCollectionData(detailsList)
+                self.moviesCollectionViewController.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -141,6 +142,6 @@ final class SearchViewController: UIViewController {
 extension SearchViewController: CollectionParentDelegate {
     
     func elementTapped(data: MovieDetails) {
-        delegate?.showMovieDetails(data: data)
+        delegate?.showMovieDetails(movieData: data)
     }
 }

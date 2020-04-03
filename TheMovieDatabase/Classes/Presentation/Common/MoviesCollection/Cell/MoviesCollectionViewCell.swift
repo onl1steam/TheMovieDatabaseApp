@@ -48,8 +48,11 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     func setupImage(_ image: UIImage) {
-        posterImageView.makeRounded(cornerRadius: 8)
         posterImageView.image = image
+    }
+    
+    func setPlaceholderImage() {
+        posterImageView.image = nil
     }
     
     func toggleActivityIndicator() {
@@ -72,7 +75,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
             runtimeLabel.isHidden = true
             return
         }
-        runtimeLabel.text = "\(time)мин"
+        runtimeLabel.text = "\(time) мин"
         runtimeLabel.isHidden = false
         runtimeImageView.isHidden = false
     }

@@ -23,12 +23,16 @@ protocol ApplicationCoordinator: Coordinator {
 
 final class MainCoordinator: ApplicationCoordinator {
     
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+
+    // MARK: - Coordinator
+    
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
     
     func start() {
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
@@ -36,6 +40,8 @@ final class MainCoordinator: ApplicationCoordinator {
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
+    
+    // MARK: - ApplicationCoordinator
     
     func login() {
         let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)

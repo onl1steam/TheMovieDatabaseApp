@@ -17,14 +17,16 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    let moviesSearchBar: CustomSearchBar! = {
+    let sessionService: Session
+    weak var delegate: MoviesCoordinatorType?
+    
+    // MARK: - Private Properties
+    
+    private lazy var moviesSearchBar: CustomSearchBar! = {
         let rect = CGRect(x: 0, y: 0, width: 200, height: 48)
         let customBar = CustomSearchBar(frame: rect)
         return customBar
     }()
-    
-    let sessionService: Session
-    weak var delegate: MoviesCoordinatorType?
     
     // MARK: - Initializers
     

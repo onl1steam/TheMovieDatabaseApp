@@ -28,5 +28,5 @@ protocol SearchCoordinator: AnyObject {
     ///
     /// - Parameters:
     ///   - data: Данные из ячейки в CollectionView на которую нажали.
-    func showMovieDetails(data: MovieDetails)
+    func showMovieDetails(movieData: MovieDetails)
 }
