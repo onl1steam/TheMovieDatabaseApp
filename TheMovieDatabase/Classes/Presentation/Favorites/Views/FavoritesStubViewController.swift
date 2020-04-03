@@ -52,11 +52,13 @@ final class FavoritesStubViewController: UIViewController {
         setupAccessability()
     }
     
-    // MARK: - Private Methods
+    // MARK: - IBActions
     
     @objc private func searchTapped() {
         delegate?.searchTapped()
     }
+    
+    // MARK: - Private Methods
     
     private func addSubviews() {
         view.addSubview(placeholderLabel)
@@ -79,24 +81,15 @@ final class FavoritesStubViewController: UIViewController {
     }
     
     private func setupPlaceholderLabelConstraints() {
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        placeholderLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        placeholderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        navigationButton.constraintStringMainView(sideMargin: 0, topMargin: 0, parentView: view)
     }
     
     private func setupNavigationButtonConstraints() {
-        navigationButton.translatesAutoresizingMaskIntoConstraints = false
-        navigationButton.topAnchor.constraint(equalTo: placeholderLabel.bottomAnchor, constant: 13).isActive = true
-        navigationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        navigationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        navigationButton.constraintStringView(sideMargin: 0, topMargin: 13, parentView: view, topView: placeholderLabel)
     }
     
     private func setupPlaceholderImageViewConstraints() {
-        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        placeholderImageView.heightAnchor.constraint(equalToConstant: 193).isActive = true
-        placeholderImageView.widthAnchor.constraint(equalToConstant: 248).isActive = true
-        placeholderImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        placeholderImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        placeholderImageView.constraintMiddle(parentView: view)
+        placeholderImageView.constraintRectangle(width: 248, height: 193)
     }
 }

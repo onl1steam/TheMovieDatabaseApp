@@ -63,10 +63,9 @@ final class MoviesViewController: UIViewController {
     
     private func setupSearchBarConstraints() {
         view.addSubview(moviesSearchBar)
-        moviesSearchBar.translatesAutoresizingMaskIntoConstraints = false
-        moviesSearchBar.topAnchor.constraint(equalTo: moviesLabel.bottomAnchor, constant: 33).isActive = true
-        moviesSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        moviesSearchBar.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        moviesSearchBar.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        moviesSearchBar.constraintRectangle(width: 280, height: 48)
+        let topConstraint = moviesSearchBar.topAnchor.constraint(equalTo: moviesLabel.bottomAnchor, constant: 33)
+        let leadingConstraint = moviesSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24)
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint])
     }
 }

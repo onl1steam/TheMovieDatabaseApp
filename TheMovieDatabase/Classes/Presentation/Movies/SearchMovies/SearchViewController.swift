@@ -129,11 +129,12 @@ final class SearchViewController: UIViewController {
     
     private func setupContainerConstraints() {
         view.addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        containerView.constraintContainer(
+            sideMargin: 24,
+            topMargin: 40,
+            bottomMargin: 0,
+            parentView: view,
+            topView: view)
     }
 }
 

@@ -10,8 +10,8 @@ import UIKit
 
 /// Заглушка в случае безрезультатного поиска фильмов
 final class SearchStubViewController: UIViewController {
-
-   // MARK: - Private Properties
+    
+    // MARK: - Private Properties
     
     private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
@@ -58,17 +58,15 @@ final class SearchStubViewController: UIViewController {
     }
     
     private func setupPlaceholderLabelConstraints() {
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 17).isActive = true
-        placeholderLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        placeholderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        placeholderLabel.constraintStringView(sideMargin: 0, topMargin: 17, parentView: view, topView: view)
     }
-
+    
     private func setupPlaceholderImageViewConstraints() {
-        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        placeholderImageView.heightAnchor.constraint(equalToConstant: 193).isActive = true
-        placeholderImageView.widthAnchor.constraint(equalToConstant: 248).isActive = true
-        placeholderImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        placeholderImageView.topAnchor.constraint(equalTo: placeholderLabel.bottomAnchor, constant: 100).isActive = true
+        placeholderImageView.constraintRectangle(width: 248, height: 193)
+        let centerXConstraint = placeholderImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        let topConstraint = placeholderImageView.topAnchor.constraint(
+            equalTo: placeholderLabel.bottomAnchor,
+            constant: 100)
+        NSLayoutConstraint.activate([centerXConstraint, topConstraint])
     }
 }

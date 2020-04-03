@@ -63,11 +63,8 @@ final class MoviesCollectionViewController: UICollectionViewController {
     
     private func setupActivityIndicatorConstraints() {
         view.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.constraintMiddle(parentView: view)
+        activityIndicator.constraintRectangle(width: 20, height: 20)
     }
     
     private func setupColorScheme() {
