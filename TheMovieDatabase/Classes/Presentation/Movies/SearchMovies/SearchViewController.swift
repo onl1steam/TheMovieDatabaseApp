@@ -69,12 +69,12 @@ final class SearchViewController: UIViewController {
             addChild(searchStubViewController, containerView: containerView)
             return
         }
-        loadFilmList(text: text)
+        loadMovieList(text: text)
     }
     
     // MARK: - Private Methods
     
-    private func loadFilmList(text: String) {
+    private func loadMovieList(text: String) {
         moviesCollectionViewController.setCollectionData([])
         moviesCollectionViewController.toggleIndicator()
         moviesService.searchMovies(query: text, page: nil) { [weak self] response in

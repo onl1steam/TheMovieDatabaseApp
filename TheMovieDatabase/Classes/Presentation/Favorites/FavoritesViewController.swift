@@ -27,7 +27,7 @@ final class FavoritesViewController: UIViewController {
     let sessionService: Session
     let moviesService: MoviesServiceType
     
-    let filmsCollectionViewController = MoviesCollectionViewController(
+    let moviesCollectionViewController = MoviesCollectionViewController(
         collectionViewLayout: UICollectionViewFlowLayout())
     let placeholderViewController = FavoritesStubViewController()
     
@@ -42,7 +42,7 @@ final class FavoritesViewController: UIViewController {
         self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
         placeholderViewController.delegate = self
-        filmsCollectionViewController.delegate = self
+        moviesCollectionViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +56,7 @@ final class FavoritesViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         setupNavigationBar()
-        loadFilmList()
+        loadMovieList()
         navigationController?.navigationBar.removeBottomLine()
     }
     
@@ -72,9 +72,9 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func loadFilmList() {
-        filmsCollectionViewController.setCollectionData([])
-        filmsCollectionViewController.toggleIndicator()
+    private func loadMovieList() {
+        moviesCollectionViewController.setCollectionData([])
+        moviesCollectionViewController.toggleIndicator()
         sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -88,7 +88,7 @@ final class FavoritesViewController: UIViewController {
     
     private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
         guard !movieList.isEmpty else {
-            removeChild(filmsCollectionViewController, containerView: containerView)
+            removeChild(moviesCollectionViewController, containerView: containerView)
             addChild(placeholderViewController, containerView: containerView)
             return
         }
@@ -98,9 +98,9 @@ final class FavoritesViewController: UIViewController {
             switch response {
             case .success(let detailsList):
                 self.removeChild(self.placeholderViewController, containerView: self.containerView)
-                self.addChild(self.filmsCollectionViewController, containerView: self.containerView)
-                self.filmsCollectionViewController.setCollectionData(detailsList)
-                self.filmsCollectionViewController.toggleIndicator()
+                self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
+                self.moviesCollectionViewController.setCollectionData(detailsList)
+                self.moviesCollectionViewController.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -145,7 +145,7 @@ final class FavoritesViewController: UIViewController {
 extension FavoritesViewController: FavoritesViewControllerDelegate {
     
     func searchTapped() {
-        print("Search text tapped")
+        
     }
 }
 

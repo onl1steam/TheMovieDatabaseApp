@@ -46,7 +46,7 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
                 fatalError(Constants.cellError)
         }
         
-        let movie = moviesData[indexPath.row]
+        guard let movie = moviesData[safeIndex: indexPath.row] else { return cell }
         cell.configure(movie: movie)
         
         if let path = movie.posterPath {
