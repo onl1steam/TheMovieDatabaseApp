@@ -1,5 +1,5 @@
 //
-//  UIViewExtension.swift
+//  UIViewConstraintExtension.swift
 //  TheMovieDatabase
 //
 //  Created by Рыжков Артем on 03.04.2020.

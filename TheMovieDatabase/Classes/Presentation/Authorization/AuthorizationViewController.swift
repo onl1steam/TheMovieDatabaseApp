@@ -10,6 +10,15 @@ import UIKit
 
 final class AuthorizationViewController: UIViewController {
     
+    // MARK: - Types
+    
+    private enum ConstraintConstants {
+        static let loginButtonBottomConstraint: CGFloat = 27
+        static let loginButtonBottomMargin: CGFloat = 5
+        static let welcomeLabelTopConstraint: CGFloat = 91
+        static let welcomeLabelTopConstraintWithKeyboard: CGFloat = 30
+    }
+    
     // MARK: - IBOutlet
     
     @IBOutlet private var loginTextField: CustomTextField!
@@ -19,6 +28,8 @@ final class AuthorizationViewController: UIViewController {
     @IBOutlet private var authInfoLabel: UILabel!
     @IBOutlet private var loginButton: RoundedButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var loginButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var welcomeLabelTopConstraint: NSLayoutConstraint!
     
     // MARK: - Public Properties
     
@@ -63,6 +74,7 @@ final class AuthorizationViewController: UIViewController {
         setupActivityIndicator()
         setupLoginTextField()
         setupPasswordTextField()
+        setupNotifications()
     }
     
     // MARK: - Public methods
@@ -104,7 +116,7 @@ final class AuthorizationViewController: UIViewController {
             loginButton.isEnabled = true
         }
     }
-
+    
     func showError(_ error: String) {
         errorLabel.text = error
         errorLabel.isHidden = false
@@ -123,7 +135,8 @@ final class AuthorizationViewController: UIViewController {
         }
     }
     
-    @IBAction private func loginButtonTapped(_ sender: Any) {
+    @IBAction private func loginButtonTapped(_ sender: UIButton) {
+        Animations.zoomInOut(on: sender)
         toggleIndicator()
         authorizeWithData(login: loginTextField.text!, password: passwordTextField.text!)
     }
@@ -199,6 +212,42 @@ final class AuthorizationViewController: UIViewController {
             delegate?.authLogin()
         case .failure(let error):
             showError(error.localizedDescription)
+        }
+    }
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            Animations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+                guard let self = self else { return }
+                self.welcomeLabelTopConstraint.constant =
+                    ConstraintConstants.welcomeLabelTopConstraintWithKeyboard
+                self.loginButtonBottomConstraint.constant =
+                    keyboardHeight + ConstraintConstants.loginButtonBottomMargin
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        Animations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.loginButtonBottomConstraint.constant = ConstraintConstants.loginButtonBottomConstraint
+            self.welcomeLabelTopConstraint.constant = ConstraintConstants.welcomeLabelTopConstraint
         }
     }
 }

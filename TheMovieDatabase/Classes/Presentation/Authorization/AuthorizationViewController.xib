@@ -14,10 +14,12 @@
                 <outlet property="authInfoLabel" destination="X44-5a-iSa" id="DzP-FA-iev"/>
                 <outlet property="errorLabel" destination="Gic-Ru-lLF" id="spo-zY-OFm"/>
                 <outlet property="loginButton" destination="vf3-uc-das" id="GUf-6Z-uqV"/>
+                <outlet property="loginButtonBottomConstraint" destination="sZY-zV-X4E" id="9CN-HV-k4c"/>
                 <outlet property="loginTextField" destination="8PD-68-11f" id="wKx-Y7-Yzt"/>
                 <outlet property="passwordTextField" destination="EPi-ES-yo3" id="WO9-9e-4nb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="welcomeLabel" destination="8bo-OS-RWo" id="5b0-YP-1e9"/>
+                <outlet property="welcomeLabelTopConstraint" destination="G5s-lm-2CB" id="PtN-nK-sRt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -55,7 +57,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="loginButtonTapped:" destination="-1" eventType="touchUpInside" id="2DF-fg-paM"/>
+                        <action selector="loginButtonTapped:" destination="-1" eventType="touchUpInside" id="M6W-xq-RpQ"/>
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8PD-68-11f" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
