@@ -211,7 +211,16 @@ final class AuthorizationViewController: UIViewController {
             sessionService.setupSessionId(sessionId: sessionId)
             delegate?.authLogin()
         case .failure(let error):
+            shakeTextField()
             showError(error.localizedDescription)
+        }
+    }
+    
+    private func shakeTextField() {
+        if loginTextField.isFirstResponder {
+            Animations.shakeAnimation(on: loginTextField)
+        } else if passwordTextField.isFirstResponder {
+            Animations.shakeAnimation(on: passwordTextField)
         }
     }
     
