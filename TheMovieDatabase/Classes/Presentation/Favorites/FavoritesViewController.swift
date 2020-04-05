@@ -33,6 +33,10 @@ final class FavoritesViewController: UIViewController {
     
     weak var delegate: FavoritesCoordinatorType?
     
+    // MARK: - Private Properties
+    
+    private var collectionPresentation: CollectionPresentation = .verticalCell
+    
     // MARK: - Initializers
     
     init(
@@ -63,11 +67,17 @@ final class FavoritesViewController: UIViewController {
     // MARK: - IBAction
     
     @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
-        
+    
     }
     
     @objc private func changeAppearance(_ sender: UIBarButtonItem) {
-        
+        switch collectionPresentation {
+        case .horizontalCell:
+            collectionPresentation = .verticalCell
+        case .verticalCell:
+            collectionPresentation = .horizontalCell
+        }
+        moviesCollectionViewController.updateCellPresentation(presentation: collectionPresentation)
     }
     
     // MARK: - Private Methods

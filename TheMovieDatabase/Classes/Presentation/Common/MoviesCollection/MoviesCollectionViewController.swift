@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum CollectionPresentation: String {
+    
+    case verticalCell = "MoviesCollectionViewVericalCell"
+    case horizontalCell = "MoviesCollectionViewHorizontalCell"
+}
+
 /// ViewController коллекции, отображающей список фильмов
 final class MoviesCollectionViewController: UICollectionViewController {
     
@@ -18,6 +24,10 @@ final class MoviesCollectionViewController: UICollectionViewController {
     weak var delegate: CollectionParentDelegate?
     
     var activityIndicator: UIActivityIndicatorView!
+    
+    // MARK: - Private Properties
+    
+    private var cellIdentifier: CollectionPresentation = .verticalCell
     
     // MARK: - UICollectionViewController
     
@@ -32,7 +42,7 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieData = dataSource?.moviesData[indexPath.row] else { return }
+        guard let movieData = dataSource?.moviesData[safeIndex: indexPath.row] else { return }
         delegate?.elementTapped(data: movieData)
     }
     
@@ -45,6 +55,13 @@ final class MoviesCollectionViewController: UICollectionViewController {
     
     func toggleIndicator() {
         activityIndicator.isHidden ? activityIndicator.startAnimating(): activityIndicator.stopAnimating()
+    }
+    
+    func updateCellPresentation(presentation: CollectionPresentation) {
+        cellIdentifier = presentation
+        dataSource?.updateCellPresentation(presentation: presentation)
+        registerCell()
+        Animations.collectionViewAnimation(collectionView: collectionView)
     }
     
     // MARK: - Private Methods
@@ -78,9 +95,14 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     private func registerCell() {
-        let identifier = MoviesCollectionViewCell().identifier
-        let nib = UINib(nibName: identifier, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: identifier)
+        let nibVertical = UINib(nibName: CollectionPresentation.verticalCell.rawValue, bundle: nil)
+        let nibHorizontal = UINib(nibName: CollectionPresentation.horizontalCell.rawValue, bundle: nil)
+        collectionView.register(
+            nibHorizontal,
+            forCellWithReuseIdentifier: CollectionPresentation.horizontalCell.rawValue)
+        collectionView.register(
+            nibVertical,
+            forCellWithReuseIdentifier: CollectionPresentation.verticalCell.rawValue)
     }
 }
 
@@ -89,15 +111,24 @@ final class MoviesCollectionViewController: UICollectionViewController {
 extension MoviesCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     private enum CellSize {
-        static let width: CGFloat = 150
-        static let height: CGFloat = 310
+        static let verticalCellWidth: CGFloat = 150
+        static let verticalCellHeight: CGFloat = 310
+        static let horizontalCellWidth: CGFloat = 328
+        static let horizontalCellHeight: CGFloat = 96
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: CellSize.width, height: CellSize.height)
+        
+        var size = CGSize()
+        switch cellIdentifier {
+        case .horizontalCell:
+            size = CGSize(width: CellSize.horizontalCellWidth, height: CellSize.horizontalCellHeight)
+        case .verticalCell:
+            size = CGSize(width: CellSize.verticalCellWidth, height: CellSize.verticalCellHeight)
+        }
         return size
     }
 }

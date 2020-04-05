@@ -20,6 +20,10 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
     var moviesData = [MovieDetails]()
     let imageService: ImageServiceType
     
+    // MARK: - Private Properties
+    
+    private var cellPresentation: CollectionPresentation = .verticalCell
+    
     // MARK: - Initializers
     
     init(data: [MovieDetails], imageService: ImageServiceType = ServiceLayer.shared.imageService) {
@@ -40,7 +44,7 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: MoviesCollectionViewCell().identifier,
+            withReuseIdentifier: cellPresentation.rawValue,
             for: indexPath) as? MoviesCollectionViewCell
             else {
                 fatalError(Constants.cellError)
@@ -73,5 +77,9 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
     ///     - moviesDetails: список фильмов.
     func update(with moviesDetails: [MovieDetails]) {
         self.moviesData = moviesDetails
+    }
+    
+    func updateCellPresentation(presentation: CollectionPresentation) {
+        cellPresentation = presentation
     }
 }

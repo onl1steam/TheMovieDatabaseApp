@@ -19,7 +19,7 @@ final class Animations {
     
     enum ShakeAnimationConstants {
         static let duration: CFTimeInterval = 0.07
-        static let repeatCount: Float = 4
+        static let repeatCount: Float = 3
         static let autoreverses: Bool = true
         static let shakingMargin: CGFloat = 10
     }
@@ -46,6 +46,17 @@ final class Animations {
         UIView.animate(withDuration: duration) {
             view.layoutIfNeeded()
         }
+    }
+    
+    static func collectionViewAnimation(collectionView: UICollectionView) {
+        UIView.transition(
+            with: collectionView,
+            duration: 0.4,
+            options: .transitionCrossDissolve,
+            animations: {
+                collectionView.reloadData()
+            },
+            completion: nil)
     }
     
     private static func zoomIn(on view: UIView, completion: @escaping ((Bool) -> Void) ) {

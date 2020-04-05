@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hb3-iD-gpD" customClass="MoviesCollectionViewCell" customModule="TheMovieDatabase" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="F7A-A0-y8Q">
+                <rect key="frame" x="0.0" y="0.0" width="328" height="96"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IrG-Fr-jnP">
+                        <rect key="frame" x="0.0" y="0.0" width="64" height="96"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="uzw-fQ-GDS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удивительное приключение доктора Дулитла" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuN-0U-TTw">
+                        <rect key="frame" x="80" y="4" width="248" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dolittle (2020)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-Er-ZBi">
+                        <rect key="frame" x="80" y="28.5" width="248" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="фэнтези, боевик, комедия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPn-A4-J32">
+                        <rect key="frame" x="80" y="48.5" width="248" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bau-JQ-xdl">
+                        <rect key="frame" x="80" y="68.5" width="21" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4832" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3Y-bG-7Sv">
+                        <rect key="frame" x="106" y="71" width="31" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="runtime" translatesAutoresizingMaskIntoConstraints="NO" id="Pry-Cc-h9u">
+                        <rect key="frame" x="156" y="70.5" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Nh9-qF-LRS"/>
+                            <constraint firstAttribute="width" constant="16" id="luP-7f-hZ5"/>
+                        </constraints>
+                    </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-3r-ThJ">
+                        <rect key="frame" x="22" y="38" width="20" height="20"/>
+                    </activityIndicatorView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="91 мин" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSl-EA-mkf">
+                        <rect key="frame" x="177" y="71" width="41" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Pry-Cc-h9u" firstAttribute="centerY" secondItem="Bau-JQ-xdl" secondAttribute="centerY" id="5Qm-iP-AUu"/>
+                    <constraint firstAttribute="trailing" secondItem="vuN-0U-TTw" secondAttribute="trailing" id="ALT-Bj-3Cb"/>
+                    <constraint firstItem="j3Y-bG-7Sv" firstAttribute="leading" secondItem="Bau-JQ-xdl" secondAttribute="trailing" constant="5" id="I1Q-mk-k6V"/>
+                    <constraint firstItem="IrG-Fr-jnP" firstAttribute="top" secondItem="F7A-A0-y8Q" secondAttribute="top" id="JwX-4z-9zx"/>
+                    <constraint firstItem="Bau-JQ-xdl" firstAttribute="leading" secondItem="IrG-Fr-jnP" secondAttribute="trailing" constant="16" id="JyQ-en-p38"/>
+                    <constraint firstAttribute="bottom" secondItem="IrG-Fr-jnP" secondAttribute="bottom" id="Kmt-RQ-Vxk"/>
+                    <constraint firstItem="IrG-Fr-jnP" firstAttribute="leading" secondItem="F7A-A0-y8Q" secondAttribute="leading" id="PiA-Pg-Cgw"/>
+                    <constraint firstAttribute="trailing" secondItem="xPn-A4-J32" secondAttribute="trailing" id="UfP-5T-Uor"/>
+                    <constraint firstItem="TSl-EA-mkf" firstAttribute="centerY" secondItem="Pry-Cc-h9u" secondAttribute="centerY" id="V57-Sn-Uw7"/>
+                    <constraint firstItem="Pry-Cc-h9u" firstAttribute="leading" secondItem="j3Y-bG-7Sv" secondAttribute="trailing" constant="19" id="Vjx-fs-0At"/>
+                    <constraint firstAttribute="trailing" secondItem="xzO-Er-ZBi" secondAttribute="trailing" id="dm1-Fp-jUk"/>
+                    <constraint firstItem="Bau-JQ-xdl" firstAttribute="top" secondItem="xPn-A4-J32" secondAttribute="bottom" constant="5" id="eBS-ZB-26F"/>
+                    <constraint firstItem="xzO-Er-ZBi" firstAttribute="leading" secondItem="IrG-Fr-jnP" secondAttribute="trailing" constant="16" id="eij-o1-zmT"/>
+                    <constraint firstItem="xPn-A4-J32" firstAttribute="leading" secondItem="IrG-Fr-jnP" secondAttribute="trailing" constant="16" id="hO3-JV-bii"/>
+                    <constraint firstItem="Sab-3r-ThJ" firstAttribute="centerX" secondItem="IrG-Fr-jnP" secondAttribute="centerX" id="lVy-pG-ml8"/>
+                    <constraint firstItem="xzO-Er-ZBi" firstAttribute="top" secondItem="vuN-0U-TTw" secondAttribute="bottom" constant="5" id="s63-ts-PJJ"/>
+                    <constraint firstItem="Sab-3r-ThJ" firstAttribute="centerY" secondItem="IrG-Fr-jnP" secondAttribute="centerY" id="tCV-NL-UTK"/>
+                    <constraint firstItem="j3Y-bG-7Sv" firstAttribute="centerY" secondItem="Bau-JQ-xdl" secondAttribute="centerY" id="tyk-vS-bRN"/>
+                    <constraint firstItem="vuN-0U-TTw" firstAttribute="top" secondItem="F7A-A0-y8Q" secondAttribute="top" constant="4" id="voj-oc-QNK"/>
+                    <constraint firstItem="TSl-EA-mkf" firstAttribute="leading" secondItem="Pry-Cc-h9u" secondAttribute="trailing" constant="5" id="wwz-J3-CyL"/>
+                    <constraint firstItem="xPn-A4-J32" firstAttribute="top" secondItem="xzO-Er-ZBi" secondAttribute="bottom" constant="5" id="yYG-QR-nVX"/>
+                    <constraint firstItem="vuN-0U-TTw" firstAttribute="leading" secondItem="IrG-Fr-jnP" secondAttribute="trailing" constant="16" id="zzE-UZ-4wS"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="572" height="229"/>
+            <connections>
+                <outlet property="genresLabel" destination="xPn-A4-J32" id="IOj-3o-mlo"/>
+                <outlet property="originalTitleLabel" destination="xzO-Er-ZBi" id="fhr-FH-wer"/>
+                <outlet property="posterImageView" destination="IrG-Fr-jnP" id="jxb-ns-cBH"/>
+                <outlet property="posterLoadingActivityIndicator" destination="Sab-3r-ThJ" id="HJJ-AA-xyk"/>
+                <outlet property="runtimeImageView" destination="Pry-Cc-h9u" id="apK-hn-BT1"/>
+                <outlet property="runtimeLabel" destination="TSl-EA-mkf" id="CUs-AY-RiK"/>
+                <outlet property="scoreLabel" destination="Bau-JQ-xdl" id="mnI-nT-fB8"/>
+                <outlet property="titleLabel" destination="vuN-0U-TTw" id="8tW-2s-baC"/>
+                <outlet property="votesLabel" destination="j3Y-bG-7Sv" id="8n3-qh-6HT"/>
+            </connections>
+            <point key="canvasLocation" x="-371.01449275362324" y="76.339285714285708"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="runtime" width="15.5" height="15"/>
+    </resources>
+</document>

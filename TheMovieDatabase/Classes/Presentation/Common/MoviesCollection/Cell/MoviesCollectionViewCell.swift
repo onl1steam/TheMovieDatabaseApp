@@ -35,20 +35,16 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     
     func configure(movie: MovieDetails) {
         titleLabel.text = movie.title
-        
         originalTitleLabel.text = "\(movie.originalTitle) (\(movie.releaseDate))"
-        
         genresLabel.text = movie.genres.compactMap { $0.name }.joined(separator: ",")
-        
         setupVotesColor(voteAverage: movie.voteAverage)
-        
         votesLabel.text = "\(movie.voteCount)"
-        
         checkRuntimeValidity(runtime: movie.runtime)
     }
     
     func setupImage(_ image: UIImage) {
         posterImageView.image = image
+        posterImageView.makeRounded(cornerRadius: 8.0)
     }
     
     func setPlaceholderImage() {
