@@ -46,6 +46,11 @@ final class MoviesViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         setupSearchBarConstraints()
+        moviesSearchBar.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -67,5 +72,14 @@ final class MoviesViewController: UIViewController {
         let topConstraint = moviesSearchBar.topAnchor.constraint(equalTo: moviesLabel.bottomAnchor, constant: 33)
         let leadingConstraint = moviesSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24)
         NSLayoutConstraint.activate([topConstraint, leadingConstraint])
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension MoviesViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        delegate?.searchBarTapped()
     }
 }

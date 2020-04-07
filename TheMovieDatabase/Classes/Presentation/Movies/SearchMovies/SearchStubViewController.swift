@@ -58,7 +58,7 @@ final class SearchStubViewController: UIViewController {
     }
     
     private func setupPlaceholderLabelConstraints() {
-        placeholderLabel.constraintStringView(sideMargin: 0, topMargin: 17, parentView: view, topView: view)
+        placeholderLabel.constraintStringView(sideMargin: 0, topMargin: 17, parentView: view)
     }
     
     private func setupPlaceholderImageViewConstraints() {

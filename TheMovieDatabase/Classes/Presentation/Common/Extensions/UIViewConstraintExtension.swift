@@ -22,7 +22,7 @@ extension UIView {
         NSLayoutConstraint.activate([heightConstraint, widthConstraint])
     }
     
-    /// Устанавливает констрейнты контейнера, прибитого к View по бокам с отступом и снизу.
+    /// Устанавливает констрейнты контейнера, прибитого к View по бокам с отступом, снизу и сверху.
     ///
     /// - Parameters:
     ///     - sideMargin: Отступы по бокам.
@@ -34,13 +34,12 @@ extension UIView {
         sideMargin: CGFloat,
         topMargin: CGFloat,
         bottomMargin: CGFloat,
-        parentView: UIView,
-        topView: UIView) {
+        parentView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         let leadingConstraint = leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: sideMargin)
         let trailingConstraint = trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -sideMargin)
         let bottomConstraint = bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: bottomMargin)
-        let topConstraint = topAnchor.constraint(equalTo: topView.bottomAnchor, constant: topMargin)
+        let topConstraint = topAnchor.constraint(equalTo: parentView.topAnchor, constant: topMargin)
         NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, bottomConstraint, topConstraint])
     }
     
@@ -62,11 +61,25 @@ extension UIView {
     ///     - topMargin: Отступ сверху.
     ///     - parentView: View, на котором располагается объект.
     ///     - topView: View, от которого нужен отступ сверху.
-    func constraintStringView(sideMargin: CGFloat, topMargin: CGFloat, parentView: UIView, topView: UIView) {
+    func constraintStringViewWithTopView(sideMargin: CGFloat, topMargin: CGFloat, parentView: UIView, topView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         let leadingConstraint = leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: sideMargin)
         let trailingConstraint = trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -sideMargin)
         let topConstraint = topAnchor.constraint(equalTo: topView.bottomAnchor, constant: topMargin)
+        NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint])
+    }
+    
+    /// Устанавливает объект в виде строки/кнопки-строки
+    ///
+    /// - Parameters:
+    ///     - sideMargin: Отступы по бокам.
+    ///     - topMargin: Отступ сверху.
+    ///     - parentView: View, на котором располагается объект.
+    func constraintStringView(sideMargin: CGFloat, topMargin: CGFloat, parentView: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        let leadingConstraint = leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: sideMargin)
+        let trailingConstraint = trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -sideMargin)
+        let topConstraint = topAnchor.constraint(equalTo: parentView.topAnchor, constant: topMargin)
         NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint])
     }
     

@@ -33,6 +33,7 @@ final class SearchViewController: UIViewController {
     }()
     
     private let searchStubViewController = SearchStubViewController()
+    private var collectionPresentation: CollectionPresentation = .verticalCell
     
     // MARK: - Initializers
     
@@ -50,9 +51,9 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         view.backgroundColor = .backgroundBlack
         searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
-        setupNavigationBar()
         setupContainerConstraints()
         navigationController?.navigationBar.removeBottomLine()
     }
@@ -60,7 +61,13 @@ final class SearchViewController: UIViewController {
     // MARK: - IBActions
     
     @objc private func changeAppearance(_ sender: UIBarButtonItem) {
-        
+        switch collectionPresentation {
+        case .horizontalCell:
+            collectionPresentation = .verticalCell
+        case .verticalCell:
+            collectionPresentation = .horizontalCell
+        }
+        moviesCollectionViewController.updateCellPresentation(presentation: collectionPresentation)
     }
     
     @objc private func searchTextChanged() {
@@ -118,9 +125,11 @@ final class SearchViewController: UIViewController {
             action: #selector(changeAppearance(_:)))
         listItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem]
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.view.backgroundColor = .backgroundBlack
         navigationController?.navigationBar.barTintColor = .backgroundBlack
@@ -133,8 +142,7 @@ final class SearchViewController: UIViewController {
             sideMargin: 24,
             topMargin: 40,
             bottomMargin: 0,
-            parentView: view,
-            topView: view)
+            parentView: view)
     }
 }
 

@@ -85,7 +85,11 @@ final class FavoritesStubViewController: UIViewController {
     }
     
     private func setupNavigationButtonConstraints() {
-        navigationButton.constraintStringView(sideMargin: 0, topMargin: 13, parentView: view, topView: placeholderLabel)
+        navigationButton.constraintStringViewWithTopView(
+            sideMargin: 0,
+            topMargin: 13,
+            parentView: view,
+            topView: placeholderLabel)
     }
     
     private func setupPlaceholderImageViewConstraints() {
