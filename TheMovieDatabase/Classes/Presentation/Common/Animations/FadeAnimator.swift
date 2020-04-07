@@ -34,18 +34,21 @@ final class FadeAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             container.insertSubview(toView, belowSubview: fromView)
         }
         
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-            if self.presenting {
-                toView.alpha = 1.0
-            } else {
-                fromView.alpha = 0.0
-            }
-        }) { _ in
-            let success = !transitionContext.transitionWasCancelled
-            if !success {
-                toView.removeFromSuperview()
-            }
-            transitionContext.completeTransition(success)
-        }
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
+            animations: {
+                if self.presenting {
+                    toView.alpha = 1.0
+                } else {
+                    fromView.alpha = 0.0
+                }
+            },
+            completion: { _ in
+                let success = !transitionContext.transitionWasCancelled
+                if !success {
+                    toView.removeFromSuperview()
+                }
+                transitionContext.completeTransition(success)
+            })
     }
 }

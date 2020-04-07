@@ -31,4 +31,5 @@ extension UIImage {
     static let widgetsButton = #imageLiteral(resourceName: "widgets")
     static let arrowBack = #imageLiteral(resourceName: "arrow_back")
     static let runtime = #imageLiteral(resourceName: "runtime")
+    static let backspace = #imageLiteral(resourceName: "backspace")
 }

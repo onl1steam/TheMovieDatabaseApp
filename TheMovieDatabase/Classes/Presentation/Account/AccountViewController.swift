@@ -14,6 +14,7 @@ final class AccountViewController: UIViewController {
     
     @IBOutlet private var avatarImageView: UIImageView!
     @IBOutlet private var logoutButton: RoundedButton!
+    @IBOutlet private var toPinCodeButton: RoundedButton!
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var emailLabel: UILabel!
     @IBOutlet private var errorLabel: UILabel!
@@ -49,6 +50,11 @@ final class AccountViewController: UIViewController {
         avatarImageView.makeRounded(cornerRadius: avatarImageView.frame.height / 2)
         loadAccountInfo()
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Public methods
@@ -112,12 +118,18 @@ final class AccountViewController: UIViewController {
         logout()
     }
     
+    @IBAction func toPinCodeTapped(_ sender: Any) {
+        navigationController?.pushViewController(CreatePinCodeViewController(), animated: true)
+    }
+    
     // MARK: - Private Methods
     
     private func setupColorScheme() {
         view.backgroundColor = .backgroundBlack
         nameLabel.tintColor = .customLight
         emailLabel.tintColor = .customGray
+        toPinCodeButton.backgroundColor = .accountButtonBackground
+        toPinCodeButton.tintColor = .customPurpure
         logoutButton.backgroundColor = .accountButtonBackground
         logoutButton.tintColor = .customPurpure
         errorLabel.tintColor = .customRed
