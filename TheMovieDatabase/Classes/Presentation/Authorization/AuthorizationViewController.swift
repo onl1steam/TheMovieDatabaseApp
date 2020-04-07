@@ -136,7 +136,7 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction private func loginButtonTapped(_ sender: UIButton) {
-        Animations.zoomInOut(on: sender)
+        ViewAnimations.zoomInOut(on: sender)
         toggleIndicator()
         authorizeWithData(login: loginTextField.text!, password: passwordTextField.text!)
     }
@@ -218,9 +218,9 @@ final class AuthorizationViewController: UIViewController {
     
     private func shakeTextField() {
         if loginTextField.isFirstResponder {
-            Animations.shakeAnimation(on: loginTextField)
+            ViewAnimations.shakeAnimation(on: loginTextField)
         } else if passwordTextField.isFirstResponder {
-            Animations.shakeAnimation(on: passwordTextField)
+            ViewAnimations.shakeAnimation(on: passwordTextField)
         }
     }
     
@@ -242,7 +242,7 @@ final class AuthorizationViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            Animations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+            ViewAnimations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
                 guard let self = self else { return }
                 self.welcomeLabelTopConstraint.constant =
                     ConstraintConstants.welcomeLabelTopConstraintWithKeyboard
@@ -253,7 +253,7 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        Animations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+        ViewAnimations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
             guard let self = self else { return }
             self.loginButtonBottomConstraint.constant = ConstraintConstants.loginButtonBottomConstraint
             self.welcomeLabelTopConstraint.constant = ConstraintConstants.welcomeLabelTopConstraint

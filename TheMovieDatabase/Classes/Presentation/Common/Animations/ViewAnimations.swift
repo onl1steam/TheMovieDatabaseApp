@@ -8,16 +8,16 @@
 
 import UIKit
 
-final class Animations {
+final class ViewAnimations {
     
-    enum SizeAnimationConstants {
+    private enum SizeAnimationConstants {
         static var duration: TimeInterval = 0.2
         static var delay: TimeInterval = 0
         static var transformScale: CGFloat = 1.1
         static var initialScale: CGFloat = 1
     }
     
-    enum ShakeAnimationConstants {
+    private enum ShakeAnimationConstants {
         static let duration: CFTimeInterval = 0.07
         static let repeatCount: Float = 3
         static let autoreverses: Bool = true
@@ -46,17 +46,6 @@ final class Animations {
         UIView.animate(withDuration: duration) {
             view.layoutIfNeeded()
         }
-    }
-    
-    static func collectionViewAnimation(collectionView: UICollectionView) {
-        UIView.transition(
-            with: collectionView,
-            duration: 0.4,
-            options: .transitionCrossDissolve,
-            animations: {
-                collectionView.reloadData()
-            },
-            completion: nil)
     }
     
     private static func zoomIn(on view: UIView, completion: @escaping ((Bool) -> Void) ) {

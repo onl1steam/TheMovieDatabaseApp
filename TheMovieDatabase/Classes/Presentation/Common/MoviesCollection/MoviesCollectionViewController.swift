@@ -61,7 +61,7 @@ final class MoviesCollectionViewController: UICollectionViewController {
         cellIdentifier = presentation
         dataSource?.updateCellPresentation(presentation: presentation)
         registerCell()
-        Animations.collectionViewAnimation(collectionView: collectionView)
+        CollectionViewAnimations.collectionViewAnimation(collectionView: collectionView)
     }
     
     // MARK: - Private Methods
