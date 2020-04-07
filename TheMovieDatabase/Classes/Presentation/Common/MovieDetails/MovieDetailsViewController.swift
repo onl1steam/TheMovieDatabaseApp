@@ -29,12 +29,16 @@ final class MovieDetailsViewController: UIViewController {
     
     let movieDetails: MovieDetails
     let imageService: ImageServiceType
+    let sessionService: Session
     
     weak var delegate: MovieDetailsDelegate?
     
     // MARK: - Initializers
     
-    init(movieDetails: MovieDetails, imageService: ImageServiceType = ServiceLayer.shared.imageService) {
+    init(movieDetails: MovieDetails,
+         imageService: ImageServiceType = ServiceLayer.shared.imageService,
+         sessionService: Session = ServiceLayer.shared.sessionService) {
+        self.sessionService = sessionService
         self.movieDetails = movieDetails
         self.imageService = imageService
         super.init(nibName: nil, bundle: nil)
@@ -63,7 +67,18 @@ final class MovieDetailsViewController: UIViewController {
     }
     
     @objc private func favoriteTapped(_ sender: UIBarButtonItem) {
-        delegate?.favoriteTapped()
+        sessionService.markAsFavorite(
+        mediaType: "movie",
+        mediaId: movieDetails.id,
+        favorite: true) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success:
+                self.delegate?.favoriteTapped()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - Private Methods

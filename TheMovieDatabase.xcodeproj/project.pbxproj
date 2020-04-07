@@ -76,6 +76,8 @@
 		92A478CD243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A478CC243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib */; };
 		92A478D3243A5FEB00D43324 /* FadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D2243A5FEB00D43324 /* FadeAnimator.swift */; };
 		92A478D5243A602C00D43324 /* CollectionViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D4243A602C00D43324 /* CollectionViewAnimations.swift */; };
+		92A478D7243C0C0500D43324 /* MarkFavoriteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D6243C0C0500D43324 /* MarkFavoriteEndpoint.swift */; };
+		92A478DA243C0E5600D43324 /* MarkFavoriteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D9243C0E5600D43324 /* MarkFavoriteBody.swift */; };
 		92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6324115C7000619672 /* AppDelegate.swift */; };
 		92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6524115C7000619672 /* SceneDelegate.swift */; };
 		92CFFF6D24115C7400619672 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFFF6C24115C7400619672 /* Assets.xcassets */; };
@@ -260,6 +262,8 @@
 		92A478CC243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesCollectionViewHorizontalCell.xib; sourceTree = "<group>"; };
 		92A478D2243A5FEB00D43324 /* FadeAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeAnimator.swift; sourceTree = "<group>"; };
 		92A478D4243A602C00D43324 /* CollectionViewAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewAnimations.swift; sourceTree = "<group>"; };
+		92A478D6243C0C0500D43324 /* MarkFavoriteEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavoriteEndpoint.swift; sourceTree = "<group>"; };
+		92A478D9243C0E5600D43324 /* MarkFavoriteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavoriteBody.swift; sourceTree = "<group>"; };
 		92CFFF6024115C7000619672 /* TheMovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFFF6324115C7000619672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CFFF6524115C7000619672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 				9214AF49241E512700796C3B /* CreateLoginSessionBody.swift */,
 				9214AF4C241E513A00796C3B /* CreateSessionBody.swift */,
 				9214AF5C241E689B00796C3B /* DeleteSessionBody.swift */,
+				92A478D9243C0E5600D43324 /* MarkFavoriteBody.swift */,
 			);
 			path = RequestBody;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				9214AF6A241EE20A00796C3B /* FavoriteMoviesEndpoint.swift */,
 				9214AF6C241EEA3300796C3B /* SearchMovieEndpoint.swift */,
 				9214AF6E241EEC8600796C3B /* MovieDetailsEndpoint.swift */,
+				92A478D6243C0C0500D43324 /* MarkFavoriteEndpoint.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -1454,6 +1460,7 @@
 				9214AF63241E698200796C3B /* MoviesResponse.swift in Sources */,
 				9214AF68241E718700796C3B /* AccountDetailsEndpoint.swift in Sources */,
 				9214AF6D241EEA3300796C3B /* SearchMovieEndpoint.swift in Sources */,
+				92A478D7243C0C0500D43324 /* MarkFavoriteEndpoint.swift in Sources */,
 				9214AF4D241E513A00796C3B /* CreateSessionBody.swift in Sources */,
 				92F64D37241FF04300693C9B /* AvatarEndpoint.swift in Sources */,
 				9214AF4A241E512700796C3B /* CreateLoginSessionBody.swift in Sources */,
@@ -1470,6 +1477,7 @@
 				9214AF61241E696B00796C3B /* AccountResponse.swift in Sources */,
 				92F64D6324262B1C00693C9B /* Configuration.swift in Sources */,
 				9214AF6F241EEC8600796C3B /* MovieDetailsEndpoint.swift in Sources */,
+				92A478DA243C0E5600D43324 /* MarkFavoriteBody.swift in Sources */,
 				9214AF5F241E695300796C3B /* DeleteSessionResponse.swift in Sources */,
 				92F64D34241FA90A00693C9B /* ImageEndpoint.swift in Sources */,
 				9214AF57241E51E300796C3B /* AuthResponse.swift in Sources */,

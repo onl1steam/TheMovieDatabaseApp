@@ -38,12 +38,28 @@ protocol Session {
     /// Возвращает список избранных фильмов пользователя.
     ///
     /// - Parameters:
+    ///   - language: Язык на котором следует прислать ответ.
+    ///   - sortBy: Сортировка списка фильмов.
+    ///   - page: Страница списка для пагинации.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
     func favoriteMovies(
         language: String?,
         sortBy: String?,
         page: Int?,
         _ completion: @escaping (Result<MovieList, Error>) -> Void)
+    
+    /// Возвращает список избранных фильмов пользователя.
+    ///
+    /// - Parameters:
+    ///   - mediaType: Тип контента. Принимаются tv, movie.
+    ///   - mediaId: id фильма.
+    ///   - favorite: флаг удаления или добавления в избранное.
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
+    func markAsFavorite(
+    mediaType: String,
+    mediaId: Int,
+    favorite: Bool,
+    _ completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class SessionService: Session {
@@ -118,6 +134,32 @@ final class SessionService: Session {
             case .success(let moviesResponse):
                 let moviesList = MovieList(moviesResponse: moviesResponse)
                 completion(.success(moviesList))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func markAsFavorite(
+        mediaType: String,
+        mediaId: Int,
+        favorite: Bool,
+        _ completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        guard let sessionId = sessionId else {
+            completion(.failure(AuthError.noSessionId))
+            return
+        }
+        let endpoint = MarkFavoriteEndpoint(
+            sessionId: sessionId,
+            accountId: accountId,
+            mediaType: mediaType,
+            mediaId: mediaId,
+            favorite: favorite)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success:
+                completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }
