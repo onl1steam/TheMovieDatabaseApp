@@ -48,8 +48,18 @@ final class MoviesCollectionViewController: UICollectionViewController {
     
     // MARK: - Public Methods
     
-    func setCollectionData(_ data: [MovieDetails]) {
-        dataSource?.update(with: data)
+    func filterMovies(searchString: String?) {
+        guard let searchText = searchString, searchText != "" else {
+            setCollectionData(moviesData)
+            return
+        }
+        let movies = moviesData.filter { $0.title.contains(searchText) }
+        updateMoviesData(movies)
+    }
+    
+    func setCollectionData(_ moviesData: [MovieDetails]) {
+        self.moviesData = moviesData
+        dataSource?.update(with: moviesData)
         collectionView.reloadData()
     }
     
@@ -65,6 +75,11 @@ final class MoviesCollectionViewController: UICollectionViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func updateMoviesData(_ moviesData: [MovieDetails]) {
+        dataSource?.update(with: moviesData)
+        collectionView.reloadData()
+    }
     
     private func setupCollectionView() {
         collectionView.delegate = self

@@ -20,6 +20,7 @@ final class AuthCoordinator: AuthorizationCoordinator {
     // MARK: - Public Properties
     
     weak var parentCoordinator: ApplicationCoordinator?
+    let authViewController = AuthorizationViewController()
     
     // MARK: - Initializers
     
@@ -34,7 +35,6 @@ final class AuthCoordinator: AuthorizationCoordinator {
     var navigationController: UINavigationController
     
     func start() {
-        let authViewController = AuthorizationViewController()
         authViewController.delegate = self
         navigationController.pushViewController(authViewController, animated: true)
     }

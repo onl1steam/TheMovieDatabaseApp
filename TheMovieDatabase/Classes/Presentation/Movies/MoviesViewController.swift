@@ -79,7 +79,8 @@ final class MoviesViewController: UIViewController {
 
 extension MoviesViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         delegate?.searchBarTapped()
+        searchBar.endEditing(false)
     }
 }

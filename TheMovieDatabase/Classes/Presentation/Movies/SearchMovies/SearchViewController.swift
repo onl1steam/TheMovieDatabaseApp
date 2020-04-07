@@ -32,6 +32,13 @@ final class SearchViewController: UIViewController {
         return searchBar
     }()
     
+    private lazy var appearanceButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.listButton, for: .normal)
+        button.tintColor = .customLight
+        return button
+    }()
+    
     private let searchStubViewController = SearchStubViewController()
     private var collectionPresentation: CollectionPresentation = .verticalCell
     
@@ -54,17 +61,20 @@ final class SearchViewController: UIViewController {
         setupNavigationBar()
         view.backgroundColor = .backgroundBlack
         searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        appearanceButton.addTarget(self, action: #selector(changeAppearance(_:)), for: .touchUpInside)
         setupContainerConstraints()
         navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBActions
     
-    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
+    @objc private func changeAppearance(_ sender: UIButton) {
         switch collectionPresentation {
         case .horizontalCell:
+            sender.setImage(.listButton, for: .normal)
             collectionPresentation = .verticalCell
         case .verticalCell:
+            sender.setImage(.widgetsButton, for: .normal)
             collectionPresentation = .horizontalCell
         }
         moviesCollectionViewController.updateCellPresentation(presentation: collectionPresentation)
@@ -118,12 +128,8 @@ final class SearchViewController: UIViewController {
     
     private func setupBarItems() {
         navigationItem.titleView = searchBar
-        let listItem = UIBarButtonItem(
-            image: .listButton,
-            style: .plain,
-            target: self,
-            action: #selector(changeAppearance(_:)))
-        listItem.tintColor = .customLight
+        
+        let listItem = UIBarButtonItem(customView: appearanceButton)
         self.navigationItem.rightBarButtonItems =  [listItem]
         self.navigationItem.setHidesBackButton(true, animated: true)
     }

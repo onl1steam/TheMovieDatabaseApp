@@ -67,6 +67,7 @@ final class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         activityIndicator.hidesWhenStopped = true
         setupColorScheme()
         setupLocalizedStrings()
@@ -258,5 +259,16 @@ final class AuthorizationViewController: UIViewController {
             self.loginButtonBottomConstraint.constant = ConstraintConstants.loginButtonBottomConstraint
             self.welcomeLabelTopConstraint.constant = ConstraintConstants.welcomeLabelTopConstraint
         }
+    }
+}
+
+extension AuthorizationViewController: UINavigationControllerDelegate {
+    
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return FadeAnimator(presenting: true)
     }
 }

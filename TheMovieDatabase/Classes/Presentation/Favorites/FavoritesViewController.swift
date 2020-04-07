@@ -37,6 +37,20 @@ final class FavoritesViewController: UIViewController {
     
     private var collectionPresentation: CollectionPresentation = .verticalCell
     
+    private lazy var appearanceButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.listButton, for: .normal)
+        button.tintColor = .customLight
+        return button
+    }()
+    
+    private lazy var searchBar: CustomSearchBar = {
+        let rect = CGRect(x: 0, y: 0, width: 280, height: 48)
+        let searchBar = CustomSearchBar(frame: rect)
+        searchBar.alpha = 0
+        return searchBar
+    }()
+    
     // MARK: - Initializers
     
     init(
@@ -57,6 +71,8 @@ final class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        appearanceButton.addTarget(self, action: #selector(changeAppearance(_:)), for: .touchUpInside)
         setupColorScheme()
         setupLocalizedStrings()
         setupNavigationBar()
@@ -66,15 +82,28 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
-    
+    @objc private func searchTextChanged() {
+        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
     }
     
-    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
+    @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
+        searchBar.endEditing(false)
+        UIView.animate(withDuration: 0.5) {
+            if self.searchBar.alpha == 0 {
+                self.searchBar.alpha = 1
+            } else {
+                self.searchBar.alpha = 0
+            }
+        }
+    }
+    
+    @objc private func changeAppearance(_ sender: UIButton) {
         switch collectionPresentation {
         case .horizontalCell:
+            sender.setImage(.listButton, for: .normal)
             collectionPresentation = .verticalCell
         case .verticalCell:
+            sender.setImage(.widgetsButton, for: .normal)
             collectionPresentation = .horizontalCell
         }
         moviesCollectionViewController.updateCellPresentation(presentation: collectionPresentation)
@@ -134,16 +163,12 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func setupBarItems() {
-        let listItem = UIBarButtonItem(
-            image: .listButton,
-            style: .plain,
-            target: self,
-            action: #selector(changeAppearance(_:)))
-        listItem.tintColor = .customLight
+        navigationItem.titleView = searchBar
+        let listItem = UIBarButtonItem(customView: appearanceButton)
         let searchItem = UIBarButtonItem(
             image: .search,
             style: .plain,
-            target: nil,
+            target: self,
             action: #selector(searchButtonTapped(_:)))
         searchItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]

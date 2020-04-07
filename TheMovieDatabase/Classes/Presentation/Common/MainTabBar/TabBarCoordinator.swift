@@ -20,6 +20,7 @@ final class TabBarCoordinator: TabBarCoordinatorType {
     // MARK: - Public Properties
     
     weak var parentCoordinator: ApplicationCoordinator?
+    let tabBarViewController = TabBarViewController()
     
     // MARK: - Initializers
     
@@ -33,7 +34,6 @@ final class TabBarCoordinator: TabBarCoordinatorType {
     var navigationController: UINavigationController
     
     func start() {
-        let tabBarViewController = TabBarViewController()
         tabBarViewController.controllerDelegate = self
         setupTabBarCoordinators(tabBarViewController: tabBarViewController)
         navigationController.pushViewController(tabBarViewController, animated: true)
@@ -44,6 +44,12 @@ final class TabBarCoordinator: TabBarCoordinatorType {
     func logout() {
         parentCoordinator?.logout()
         parentCoordinator?.childDidFinish(self)
+    }
+    
+    // MARK: - Public Methods
+    
+    func setupTransitionDelegate(_ delegate: UIViewControllerTransitioningDelegate) {
+        tabBarViewController.transitioningDelegate = delegate
     }
     
     // MARK: - Private Methods
