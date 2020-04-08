@@ -53,7 +53,7 @@ final class MoviesCoordinator: MoviesCoordinatorType {
     // MARK: - SearchCoordinator
     
     func showMovieDetails(movieData: MovieDetails) {
-        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData)
+        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData, isFavorite: false)
         movieDetailsViewController.delegate = self
         navigationController.pushViewController(movieDetailsViewController, animated: true)
     }

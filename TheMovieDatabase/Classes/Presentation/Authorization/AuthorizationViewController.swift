@@ -269,6 +269,7 @@ extension AuthorizationViewController: UINavigationControllerDelegate {
         animationControllerFor operation: UINavigationController.Operation,
         from fromVC: UIViewController,
         to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return FadeAnimator(presenting: true)
+        let animator = FadeAnimator(presenting: true)
+        return animator
     }
 }
