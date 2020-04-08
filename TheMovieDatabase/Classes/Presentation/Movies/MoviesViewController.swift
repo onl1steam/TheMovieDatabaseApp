@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Начальный экран поиска фильмов
 final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet

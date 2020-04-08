@@ -8,13 +8,18 @@
 
 import UIKit
 
+/// Экран создания пин-кода
 final class CreatePinCodeViewController: UIViewController {
     
-    @IBOutlet var infoLabel: UILabel!
-    @IBOutlet var pinView: PinView!
+    // MARK: - IBOutlets
     
-    @IBOutlet var pinButtons: [UIButton]!
-    @IBOutlet var removeNumberButton: UIButton!
+    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var pinView: PinView!
+    
+    @IBOutlet private var pinButtons: [UIButton]!
+    @IBOutlet private var removeNumberButton: UIButton!
+    
+    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,17 +29,21 @@ final class CreatePinCodeViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    @objc func arrowBackTapped(_ sender: UIBarButtonItem) {
+    // MARK: - IBActions
+    
+    @objc private func arrowBackTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func enterNumber(_ sender: UIButton) {
+    @IBAction private func enterNumber(_ sender: UIButton) {
         pinView.fillCircle()
     }
     
-    @IBAction func removeNumber(_ sender: UIButton) {
+    @IBAction private func removeNumber(_ sender: UIButton) {
         pinView.unfillCircle()
     }
+    
+    // MARK: - Private Methods
     
     private func setupColorScheme() {
         view.backgroundColor = .backgroundBlack

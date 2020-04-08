@@ -243,7 +243,7 @@ final class AuthorizationViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            ViewAnimations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+            ViewAnimations.animateConstraintChange(view: view, duration: 0.5) { [weak self] in
                 guard let self = self else { return }
                 self.welcomeLabelTopConstraint.constant =
                     ConstraintConstants.welcomeLabelTopConstraintWithKeyboard
@@ -254,13 +254,15 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        ViewAnimations.viewAnimateWithDelay(view: view, duration: 0.5) { [weak self] in
+        ViewAnimations.animateConstraintChange(view: view, duration: 0.5) { [weak self] in
             guard let self = self else { return }
             self.loginButtonBottomConstraint.constant = ConstraintConstants.loginButtonBottomConstraint
             self.welcomeLabelTopConstraint.constant = ConstraintConstants.welcomeLabelTopConstraint
         }
     }
 }
+
+// MARK: - UINavigationControllerDelegate
 
 extension AuthorizationViewController: UINavigationControllerDelegate {
     

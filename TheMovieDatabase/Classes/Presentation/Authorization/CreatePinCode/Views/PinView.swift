@@ -8,9 +8,14 @@
 
 import UIKit
 
+/// View с точками индикации ввода пин-кода
 final class PinView: UIView {
     
+    // MARK: - Public Methods
+    
     var circles = [CAShapeLayer]()
+    
+    // MARK: - Private Methods
     
     private var activeCircleNumber: Int = 0 {
         didSet(value) {
@@ -22,12 +27,16 @@ final class PinView: UIView {
         }
     }
     
+    // MARK: - UIView
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .clear
         appendCircles()
         drawCircles()
     }
+    
+    // MARK: - Public Methods
     
     func fillCircle() {
         guard let circle = circles[safeIndex: activeCircleNumber] else { return }
@@ -40,6 +49,8 @@ final class PinView: UIView {
         guard let circle = circles[safeIndex: activeCircleNumber] else { return }
         circle.fillColor = UIColor.darkBlue.cgColor
     }
+    
+    // MARK: - Private Methods
     
     private func appendCircles() {
         var xCoord: CGFloat = 0

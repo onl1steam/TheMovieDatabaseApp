@@ -8,13 +8,20 @@
 
 import UIKit
 
+/// Анимация перехода экранов с исчезанием экрана
 final class FadeAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
+    // MARK: - Public Properties
+    
     let presenting: Bool
+    
+    // MARK: - Initializers
     
     init(presenting: Bool) {
         self.presenting = presenting
     }
+    
+    // MARK: - UIViewControllerAnimatedTransitioning
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         let duration: TimeInterval = 0.5

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Экран поиска фильмов
 final class SearchViewController: UIViewController {
     
     // MARK: - Public Properties

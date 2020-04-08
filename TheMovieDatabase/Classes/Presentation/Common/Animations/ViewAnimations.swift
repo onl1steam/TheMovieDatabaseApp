@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Анимации для различных View
 final class ViewAnimations {
     
     private enum SizeAnimationConstants {
@@ -24,6 +25,10 @@ final class ViewAnimations {
         static let shakingMargin: CGFloat = 10
     }
     
+    /// Анимация дрожания View
+    ///
+    /// - Parameters:
+    ///     - view: View, на котором применяется анимация
     static func shakeAnimation(on view: UIView) {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = ShakeAnimationConstants.duration
@@ -35,13 +40,23 @@ final class ViewAnimations {
         view.layer.add(animation, forKey: "position")
     }
     
+    /// Анимация увеличения и обратного уменьшения View
+    ///
+    /// - Parameters:
+    ///     - view: View, на котором применяется анимация
     static func zoomInOut(on view: UIView) {
         zoomIn(on: view) { _ in
             zoomOut(on: view)
         }
     }
     
-    static func viewAnimateWithDelay(view: UIView, duration: CFTimeInterval, completion: (() -> Void)) {
+    /// Анимированно изменяет View после добавления констрейтов
+    ///
+    /// - Parameters:
+    ///     - view: View, на котором применяется анимация
+    ///     - duration: длительность анимации
+    ///     - completion: замыкание, которое нужно выполнить перед обновлением View
+    static func animateConstraintChange(view: UIView, duration: CFTimeInterval, completion: (() -> Void)) {
         completion()
         UIView.animate(withDuration: duration) {
             view.layoutIfNeeded()
