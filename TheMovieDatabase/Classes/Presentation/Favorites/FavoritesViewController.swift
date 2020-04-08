@@ -71,7 +71,7 @@ final class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        searchBar.delegate = self
         appearanceButton.addTarget(self, action: #selector(changeAppearance(_:)), for: .touchUpInside)
         setupColorScheme()
         setupLocalizedStrings()
@@ -81,10 +81,6 @@ final class FavoritesViewController: UIViewController {
     }
     
     // MARK: - IBAction
-    
-    @objc private func searchTextChanged() {
-        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
-    }
     
     @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
         searchBar.endEditing(false)
@@ -190,5 +186,14 @@ extension FavoritesViewController: CollectionParentDelegate {
     
     func elementTapped(data: MovieDetails) {
         delegate?.showMovieDetails(movieData: data)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension FavoritesViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
     }
 }

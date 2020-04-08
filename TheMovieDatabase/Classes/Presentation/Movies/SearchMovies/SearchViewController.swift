@@ -61,7 +61,7 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = .backgroundBlack
-        searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        searchBar.delegate = self
         appearanceButton.addTarget(self, action: #selector(changeAppearance(_:)), for: .touchUpInside)
         setupContainerConstraints()
         navigationController?.navigationBar.removeBottomLine()
@@ -82,7 +82,7 @@ final class SearchViewController: UIViewController {
     }
     
     @objc private func searchTextChanged() {
-        guard let text = searchBar.searchTextField.text, text != "" else {
+        guard let text = searchBar.text, text != "" else {
             removeChild(moviesCollectionViewController, containerView: containerView)
             addChild(searchStubViewController, containerView: containerView)
             return
@@ -159,5 +159,14 @@ extension SearchViewController: CollectionParentDelegate {
     
     func elementTapped(data: MovieDetails) {
         delegate?.showMovieDetails(movieData: data)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
     }
 }
