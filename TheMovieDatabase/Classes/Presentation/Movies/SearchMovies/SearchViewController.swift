@@ -167,6 +167,20 @@ extension SearchViewController: CollectionParentDelegate {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
+        NSObject.cancelPreviousPerformRequests(
+            withTarget: self,
+            selector: #selector(self.reload(_:)),
+            object: searchBar)
+        perform(#selector(self.reload(_:)), with: searchBar, afterDelay: 0.5)
+    }
+
+    @objc func reload(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, text != "" else {
+            removeChild(moviesCollectionViewController, containerView: containerView)
+            addChild(searchStubViewController, containerView: containerView)
+            return
+        }
+        
+        loadMovieList(text: text)
     }
 }
