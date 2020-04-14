@@ -8,8 +8,13 @@
 
 import RealmSwift
 
-public class RLMMoviePoster: Object {
+public class RLMMoviePoster: RealmEntry {
     
     @objc public dynamic var posterPath = ""
     @objc public dynamic var image = Data()
+    
+    public override class func primaryKey() -> String? {
+        let primaryKey = "posterPath"
+        return primaryKey
+    }
 }

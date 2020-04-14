@@ -87,6 +87,8 @@
 		928B2B7C2445EB6500ED230E /* CDMovieDetailsTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B7B2445EB6500ED230E /* CDMovieDetailsTranslator.swift */; };
 		928B2B7E2445EB7200ED230E /* CDGenresTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B7D2445EB7200ED230E /* CDGenresTranslator.swift */; };
 		928B2B802445EB8000ED230E /* CDMoviePosterTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B7F2445EB8000ED230E /* CDMoviePosterTranslator.swift */; };
+		928B2B842446611100ED230E /* RealmDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B832446611100ED230E /* RealmDatabase.swift */; };
+		928B2B862446809700ED230E /* RealmEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B852446809700ED230E /* RealmEntry.swift */; };
 		92A478C424387C1E00D43324 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478C324387C1E00D43324 /* ArrayExtension.swift */; };
 		92A478C92438DF2300D43324 /* ViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478C82438DF2300D43324 /* ViewAnimations.swift */; };
 		92A478CD243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A478CC243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib */; };
@@ -314,6 +316,8 @@
 		928B2B7B2445EB6500ED230E /* CDMovieDetailsTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMovieDetailsTranslator.swift; sourceTree = "<group>"; };
 		928B2B7D2445EB7200ED230E /* CDGenresTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDGenresTranslator.swift; sourceTree = "<group>"; };
 		928B2B7F2445EB8000ED230E /* CDMoviePosterTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMoviePosterTranslator.swift; sourceTree = "<group>"; };
+		928B2B832446611100ED230E /* RealmDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabase.swift; sourceTree = "<group>"; };
+		928B2B852446809700ED230E /* RealmEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmEntry.swift; sourceTree = "<group>"; };
 		92A478C324387C1E00D43324 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		92A478C82438DF2300D43324 /* ViewAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimations.swift; sourceTree = "<group>"; };
 		92A478CC243A395E00D43324 /* MoviesCollectionViewHorizontalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesCollectionViewHorizontalCell.xib; sourceTree = "<group>"; };
@@ -705,6 +709,7 @@
 		92718B05244379260001D786 /* TheMovieDatabasePersistence */ = {
 			isa = PBXGroup;
 			children = (
+				928B2B81244660F300ED230E /* Database */,
 				928B2B45244524CC00ED230E /* Model */,
 				92718B06244379260001D786 /* TheMovieDatabasePersistence.h */,
 				92718B07244379260001D786 /* Info.plist */,
@@ -841,6 +846,23 @@
 				928B2B7F2445EB8000ED230E /* CDMoviePosterTranslator.swift */,
 			);
 			path = CoreDataTranslator;
+			sourceTree = "<group>";
+		};
+		928B2B81244660F300ED230E /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				928B2B822446610400ED230E /* RealmDatabase */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		928B2B822446610400ED230E /* RealmDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				928B2B852446809700ED230E /* RealmEntry.swift */,
+				928B2B832446611100ED230E /* RealmDatabase.swift */,
+			);
+			path = RealmDatabase;
 			sourceTree = "<group>";
 		};
 		92A478C72438DED900D43324 /* Animations */ = {
@@ -1742,7 +1764,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928B2B862446809700ED230E /* RealmEntry.swift in Sources */,
 				928B2B5124452A9700ED230E /* CDGenres.swift in Sources */,
+				928B2B842446611100ED230E /* RealmDatabase.swift in Sources */,
 				928B2B47244524E500ED230E /* RLMMovieDetails.swift in Sources */,
 				928B2B5324452BBC00ED230E /* CDMoviePoster.swift in Sources */,
 				928B2B5524452C2F00ED230E /* RLMMoviePoster.swift in Sources */,

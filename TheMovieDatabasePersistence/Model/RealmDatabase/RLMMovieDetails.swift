@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-public class RLMMovieDetails: Object {
+public class RLMMovieDetails: RealmEntry {
     
     @objc public dynamic var id: Int = 0
     @objc public dynamic var originalTitle: String = ""
@@ -21,4 +21,9 @@ public class RLMMovieDetails: Object {
     @objc public dynamic var voteCount: Int = 0
     
     public var genres = List<RLMGenres>()
+    
+    public override class func primaryKey() -> String? {
+        let primaryKey = "id"
+        return primaryKey
+    }
 }
