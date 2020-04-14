@@ -9,8 +9,8 @@
 import CoreData
 
 @objc(CDMoviePoster)
-class CDMoviePoster: NSManagedObject {
+public class CDMoviePoster: NSManagedObject {
     
-    @NSManaged var posterPath: Int
-    @NSManaged var image: Data
+    @NSManaged public var posterPath: String
+    @NSManaged public var image: Data
 }

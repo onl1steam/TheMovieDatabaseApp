@@ -8,17 +8,17 @@
 
 import RealmSwift
 
-class RLMMovieDetails: Object {
+public class RLMMovieDetails: Object {
     
-    @objc dynamic var id: Int = 0
-    @objc dynamic var originalTitle: String = ""
-    @objc dynamic var overview: String?
-    @objc dynamic var posterPath: String?
-    @objc dynamic var releaseDate: String = ""
-    dynamic var runtime = RealmOptional<Int>()
-    @objc dynamic var title: String = ""
-    @objc dynamic var voteAverage: Double = 0
-    @objc dynamic var voteCount: Int = 0
+    @objc public dynamic var id: Int = 0
+    @objc public dynamic var originalTitle: String = ""
+    @objc public dynamic var overview: String?
+    @objc public dynamic var posterPath: String?
+    @objc public dynamic var releaseDate: String = ""
+    public dynamic var runtime = RealmOptional<Int>()
+    @objc public dynamic var title: String = ""
+    @objc public dynamic var voteAverage: Double = 0
+    @objc public dynamic var voteCount: Int = 0
     
-    var genres = List<RLMGenres>()
+    public var genres = List<RLMGenres>()
 }

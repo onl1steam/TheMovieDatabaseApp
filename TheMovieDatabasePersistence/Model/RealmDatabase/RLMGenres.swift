@@ -8,8 +8,8 @@
 
 import RealmSwift
 
-class RLMGenres: Object {
+public class RLMGenres: Object {
     
-    @objc dynamic var id: Int = 0
-    @objc dynamic var name: String = ""
+    @objc public dynamic var id: Int = 0
+    @objc public dynamic var name: String = ""
 }

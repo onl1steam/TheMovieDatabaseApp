@@ -9,8 +9,8 @@
 import CoreData
 
 @objc(CDGenres)
-class CDGenres: NSManagedObject {
+public class CDGenres: NSManagedObject {
     
-    @NSManaged var id: Int
-    @NSManaged var name: String
+    @NSManaged public var id: Int
+    @NSManaged public var name: String
 }

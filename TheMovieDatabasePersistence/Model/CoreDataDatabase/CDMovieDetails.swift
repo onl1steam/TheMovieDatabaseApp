@@ -9,16 +9,16 @@
 import CoreData
 
 @objc(CDMovieDetails)
-class CDMovieDetails: NSManagedObject {
+public class CDMovieDetails: NSManagedObject {
     
-    @NSManaged var id: Int
-    @NSManaged var originalTitle: String
-    @NSManaged var overview: String?
-    @NSManaged var posterPath: String?
-    @NSManaged var releaseDate: String
-    @NSManaged var runtime: Int
-    @NSManaged var title: String
-    @NSManaged var voteAverage: Double
-    @NSManaged var voteCount: Int
-    @NSManaged var genres: [CDGenres]
+    @NSManaged public var id: Int
+    @NSManaged public var originalTitle: String
+    @NSManaged public var overview: String?
+    @NSManaged public var posterPath: String?
+    @NSManaged public var releaseDate: String
+    @NSManaged public var runtime: Int
+    @NSManaged public var title: String
+    @NSManaged public var voteAverage: Double
+    @NSManaged public var voteCount: Int
+    @NSManaged public var genres: [CDGenres]
 }

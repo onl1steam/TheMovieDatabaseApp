@@ -8,8 +8,8 @@
 
 import RealmSwift
 
-class RLMMoviePoster: Object {
+public class RLMMoviePoster: Object {
     
-    @objc dynamic var posterPath = ""
-    @objc dynamic var image = Data()
+    @objc public dynamic var posterPath = ""
+    @objc public dynamic var image = Data()
 }
