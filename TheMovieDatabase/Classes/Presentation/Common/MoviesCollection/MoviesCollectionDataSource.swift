@@ -55,7 +55,7 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
         
         if let path = movie.posterPath {
             cell.setPlaceholderImage()
-            cell.toggleActivityIndicator()
+            cell.toggleActivityIndicator(true)
             imageService.image(posterPath: path, width: nil) { response in
                 switch response {
                 case .success(let image):
@@ -63,7 +63,7 @@ final class MoviesCollectionDataSource: NSObject, UICollectionViewDataSource {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
-                cell.toggleActivityIndicator()
+                cell.toggleActivityIndicator(false)
             }
         }
         return cell

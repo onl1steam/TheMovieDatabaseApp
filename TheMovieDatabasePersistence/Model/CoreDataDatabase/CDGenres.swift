@@ -9,8 +9,10 @@
 import CoreData
 
 @objc(CDGenres)
-public class CDGenres: NSManagedObject {
+public class CDGenres: CoreDataEntry {
     
     @NSManaged public var id: Int
     @NSManaged public var name: String
+    
+    @NSManaged override public var entryId: String
 }

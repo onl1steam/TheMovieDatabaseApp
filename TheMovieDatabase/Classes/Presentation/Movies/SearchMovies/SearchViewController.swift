@@ -94,7 +94,7 @@ final class SearchViewController: UIViewController {
     
     private func loadMovieList(text: String) {
         moviesCollectionViewController.setCollectionData([])
-        moviesCollectionViewController.toggleIndicator()
+        moviesCollectionViewController.toggleIndicator(true)
         moviesService.searchMovies(query: text, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -120,10 +120,10 @@ final class SearchViewController: UIViewController {
                 self.removeChild(self.searchStubViewController, containerView: self.containerView)
                 self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
                 self.moviesCollectionViewController.setCollectionData(detailsList)
-                self.moviesCollectionViewController.toggleIndicator()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
+            self.moviesCollectionViewController.toggleIndicator(false)
         }
     }
     

@@ -13,8 +13,8 @@ class CDMovieDetailsTranslator {
     
     let genresTranslator: CDGenresTranslator = CDGenresTranslator()
     
-    func fill(_ entry: inout CDMovieDetails, fromEntity: MovieDetails) {
-        let movieDetails = CDMovieDetails()
+    func fill(_ entry: inout CoreDataMovieDetails, fromEntity: MovieDetails) {
+        var movieDetails = CoreDataMovieDetails()
         movieDetails.id = fromEntity.id
         movieDetails.originalTitle = fromEntity.originalTitle
         movieDetails.overview = fromEntity.overview
@@ -25,7 +25,7 @@ class CDMovieDetailsTranslator {
         movieDetails.voteAverage = fromEntity.voteAverage
         movieDetails.voteCount = fromEntity.voteCount
         
-        var cdGenres = [CDGenres]()
+        var cdGenres = [CoreDataGenres]()
         genresTranslator.fill(&cdGenres, fromEntities: fromEntity.genres)
         movieDetails.genres.append(contentsOf: cdGenres)
         

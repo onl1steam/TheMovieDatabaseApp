@@ -11,8 +11,8 @@ import TheMovieDatabasePersistence
 
 class CDGenresTranslator {
     
-    func fill(_ entry: inout CDGenres, fromEntity: MovieDetails.Genre) {
-        let cdGenre = CDGenres()
+    func fill(_ entry: inout CoreDataGenres, fromEntity: MovieDetails.Genre) {
+        var cdGenre = CoreDataGenres()
         
         cdGenre.id = fromEntity.id
         cdGenre.name = fromEntity.name
@@ -24,11 +24,11 @@ class CDGenresTranslator {
         entity = MovieDetails.Genre(id: fromEntry.id, name: fromEntry.name)
     }
     
-    func fill(_ entries: inout [CDGenres], fromEntities: [MovieDetails.Genre]) {
-        var movieGenres = [CDGenres]()
+    func fill(_ entries: inout [CoreDataGenres], fromEntities: [MovieDetails.Genre]) {
+        var movieGenres = [CoreDataGenres]()
         
         fromEntities.forEach { genre in
-            let entry = CDGenres()
+            var entry = CoreDataGenres()
             entry.id = genre.id
             entry.name = genre.name
             movieGenres.append(entry)

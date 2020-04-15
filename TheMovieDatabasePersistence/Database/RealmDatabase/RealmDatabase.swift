@@ -9,31 +9,31 @@
 import Foundation
 import RealmSwift
 
-public class RealmDatabase<DBModel: RealmEntry> {
+public class RealmDatabase<Model: RealmEntry> {
     
     public init() {}
     
-    public func persist(_ entries: [DBModel]) throws {
+    public func persist(_ entries: [Model]) throws {
         let realm = try Realm()
         try autoreleasepool {
             realm.beginWrite()
             
             entries.forEach {
-                realm.create(DBModel.self, value: $0, update: .all)
+                realm.create(Model.self, value: $0, update: .all)
             }
             
             try realm.commitWrite()
         }
     }
     
-    public func read() throws -> [DBModel] {
-        var movieDetails = [DBModel]()
+    public func read() throws -> [Model] {
+        var movieDetails = [Model]()
         let results = try readFromRealm()
         movieDetails.append(contentsOf: results)
         return movieDetails
     }
     
-    public func erase(_ entries: [DBModel]) throws {
+    public func erase(_ entries: [Model]) throws {
         let realm = try Realm()
         try autoreleasepool {
             realm.beginWrite()
@@ -56,9 +56,9 @@ public class RealmDatabase<DBModel: RealmEntry> {
         }
     }
     
-    private func readFromRealm() throws -> Results<DBModel> {
+    private func readFromRealm() throws -> Results<Model> {
         let realm = try Realm()
-        let results = realm.objects(DBModel.self)
+        let results = realm.objects(Model.self)
         return results
     }
 }

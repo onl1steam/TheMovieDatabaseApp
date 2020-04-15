@@ -9,7 +9,7 @@
 import CoreData
 
 @objc(CDMovieDetails)
-public class CDMovieDetails: NSManagedObject {
+public class CDMovieDetails: CoreDataEntry {
     
     @NSManaged public var id: Int
     @NSManaged public var originalTitle: String
@@ -21,4 +21,6 @@ public class CDMovieDetails: NSManagedObject {
     @NSManaged public var voteAverage: Double
     @NSManaged public var voteCount: Int
     @NSManaged public var genres: [CDGenres]
+    
+    @NSManaged public override var entryId: String
 }

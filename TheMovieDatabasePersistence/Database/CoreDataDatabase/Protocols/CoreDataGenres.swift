@@ -1,5 +1,5 @@
 //
-//  Entry.swift
+//  CoreDataGenres.swift
 //  TheMovieDatabasePersistence
 //
 //  Created by Рыжков Артем on 15.04.2020.
@@ -7,6 +7,14 @@
 //
 
 import Foundation
-import RealmSwift
 
-public class RealmEntry: Object {}
+public struct CoreDataGenres {
+    
+    public init() {
+        id = 0
+        name = ""
+    }
+    
+    public var id: Int
+    public var name: String
+}
