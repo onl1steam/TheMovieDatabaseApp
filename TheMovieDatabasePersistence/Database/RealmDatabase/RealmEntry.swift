@@ -9,4 +9,5 @@
 import Foundation
 import RealmSwift
 
+/// Родительский класс для объектов Realm
 public class RealmEntry: Object {}

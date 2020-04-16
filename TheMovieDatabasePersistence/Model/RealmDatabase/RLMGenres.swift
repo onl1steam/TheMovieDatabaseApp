@@ -8,6 +8,7 @@
 
 import RealmSwift
 
+/// Модель Realm для информации о жанрах
 public class RLMGenres: RealmEntry {
     
     @objc public dynamic var id: Int = 0

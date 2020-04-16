@@ -9,10 +9,15 @@
 import Foundation
 import RealmSwift
 
+/// База данных Realm
 public class RealmDatabase<Model: RealmEntry> {
     
     public init() {}
     
+    /// Сохраняет массив данных типа Model в базу данных
+    ///
+    /// - Parameters:
+    ///     - entries: Массив данных.
     public func persist(_ entries: [Model]) throws {
         let realm = try Realm()
         try autoreleasepool {
@@ -26,6 +31,7 @@ public class RealmDatabase<Model: RealmEntry> {
         }
     }
     
+    /// Загружает из базы данных массив данных типа Model
     public func read() throws -> [Model] {
         var movieDetails = [Model]()
         let results = try readFromRealm()
@@ -33,6 +39,10 @@ public class RealmDatabase<Model: RealmEntry> {
         return movieDetails
     }
     
+    /// Удаляет из базы данных записи модели Model
+    ///
+    /// - Parameters:
+    ///     - entries: Массив данных, которые надо удалить.
     public func erase(_ entries: [Model]) throws {
         let realm = try Realm()
         try autoreleasepool {
@@ -44,13 +54,14 @@ public class RealmDatabase<Model: RealmEntry> {
         }
     }
     
+    /// Удаляет из базы данных все записи модели Model
     public func erase() throws {
         let realm = try Realm()
-        let movieDetails = try readFromRealm()
+        let modelData = try readFromRealm()
         try autoreleasepool {
             realm.beginWrite()
             
-            realm.delete(movieDetails)
+            realm.delete(modelData)
             
             try realm.commitWrite()
         }

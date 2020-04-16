@@ -8,6 +8,7 @@
 
 import RealmSwift
 
+/// Модель Realm информации о фильмах
 public class RLMMovieDetails: RealmEntry {
     
     @objc public dynamic var id: Int = 0
