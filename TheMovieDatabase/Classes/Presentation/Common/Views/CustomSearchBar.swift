@@ -50,9 +50,12 @@ final class CustomSearchBar: UISearchBar {
         if #available(iOS 13.0, *) {
             searchTextField.backgroundColor = CustomSearchBarConstants.backgroundColor
         }
+        
         if let textField = value(forKey: "searchField") as? UITextField {
             textField.textColor = .customLight
             textField.tintColor = .customLight
+            textField.backgroundColor = CustomSearchBarConstants.backgroundColor
+            textField.keyboardAppearance = .dark
             textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
             
             setupTextFieldPlaceholder(textField: textField)

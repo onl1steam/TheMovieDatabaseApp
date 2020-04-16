@@ -26,6 +26,7 @@ final class FavoritesViewController: UIViewController {
     
     let sessionService: Session
     let moviesService: MoviesServiceType
+    let databaseService: DatabaseServiceType
     
     let moviesCollectionViewController = MoviesCollectionViewController(
         collectionViewLayout: UICollectionViewFlowLayout())
@@ -55,9 +56,11 @@ final class FavoritesViewController: UIViewController {
     
     init(
         sessionService: Session = ServiceLayer.shared.sessionService,
-        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
+        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService,
+        databaseService: DatabaseServiceType = ServiceLayer.shared.databaseService) {
         self.sessionService = sessionService
         self.moviesService = moviesService
+        self.databaseService = databaseService
         super.init(nibName: nil, bundle: nil)
         placeholderViewController.delegate = self
         moviesCollectionViewController.delegate = self
@@ -76,8 +79,7 @@ final class FavoritesViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         setupNavigationBar()
-//        fetchMovies()
-        loadMovieList()
+        fetchMovies()
         navigationController?.navigationBar.removeBottomLine()
     }
     
@@ -109,16 +111,14 @@ final class FavoritesViewController: UIViewController {
     // MARK: - Private Methods
     
     private func saveMovies(_ movieDetails: [MovieDetails]) {
-        let service = DatabaseService()
-        service.saveMoviesToCD(movieDetails)
+        databaseService.saveMovieDetails(movieDetails)
     }
     
     private func fetchMovies() {
         self.removeChild(self.placeholderViewController, containerView: self.containerView)
         self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
         
-        let service = DatabaseService()
-        let movieDetails = service.readMoviesFromCD()
+        let movieDetails = databaseService.fetchMovieDetails()
         moviesCollectionViewController.setCollectionData(movieDetails)
         loadMovieList()
     }

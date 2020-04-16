@@ -9,7 +9,23 @@
 import Foundation
 import TheMovieDatabasePersistence
 
-final class DatabaseService {
+/// Сервис, загружающий данные из БД
+protocol DatabaseServiceType {
+    
+    /// Сохраняет список фильмов в БД
+    ///
+    /// - Parameters:
+    ///     - entities: Список фильмов, которые необходимо сохранить.
+    func saveMovieDetails(_ entities: [MovieDetails])
+    
+    /// Загружает список фильмов из БД
+    func fetchMovieDetails() -> [MovieDetails]
+}
+
+/// Сервис, загружающий данные из БД
+final class DatabaseService: DatabaseServiceType {
+    
+    // MARK: - Private Properties
     
     private var details = MovieDetails(
         genres: [],
@@ -23,39 +39,20 @@ final class DatabaseService {
         voteAverage: 0,
         voteCount: 0)
     
-    func saveMoviesToCD(_ entities: [MovieDetails]) {
-        let translator = CDMovieDetailsTranslator()
-        var cdMovieDetails = [CoreDataMovieDetails]()
-        
-        entities.forEach { entity in
-            var details = CoreDataMovieDetails()
-            translator.fill(&details, fromEntity: entity)
-            cdMovieDetails.append(details)
-        }
-        
-        let creator = CDMovieDetailsCreator(entities: cdMovieDetails)
-
-        let cdDatabase = CoreDataDatabase<CDMovieDetails>(creator: creator)
-        try? cdDatabase.persist()
+    // MARK: - DatabaseServiceType
+    
+    func saveMovieDetails(_ entities: [MovieDetails]) {
+        saveMoviesToRealm(entities)
     }
     
-    func readMoviesFromCD() -> [MovieDetails] {
-        let cdDatabase = CoreDataDatabase<CDMovieDetails>(creator: nil)
-        let transalor = CDMovieDetailsTranslator()
-        var movieDetails = [MovieDetails]()
-        
-        if let entries = try? cdDatabase.read() {
-            entries.forEach { entry in
-                transalor.fill(&details, fromEntry: entry)
-                movieDetails.append(details)
-            }
-            return movieDetails
-        } else {
-            return []
-        }
+    func fetchMovieDetails() -> [MovieDetails] {
+        let movies = readMoviesFromRealm()
+        return movies
     }
     
-    func saveMoviesToRealm(_ entities: [MovieDetails]) {
+    // MARK: - Private Methods
+    
+    private func saveMoviesToRealm(_ entities: [MovieDetails]) {
         let transalor = RLMMovieDetailsTranslator()
         var cdDetails = [RLMMovieDetails]()
         
@@ -69,7 +66,7 @@ final class DatabaseService {
         try? realmDB.persist(cdDetails)
     }
     
-    func readMoviesFromRealm() -> [MovieDetails] {
+    private func readMoviesFromRealm() -> [MovieDetails] {
         let realmDB = RealmDatabase<RLMMovieDetails>()
         let transalor = RLMMovieDetailsTranslator()
         var movieDetails = [MovieDetails]()
