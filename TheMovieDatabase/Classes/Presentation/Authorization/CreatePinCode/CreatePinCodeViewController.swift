@@ -12,7 +12,7 @@ import UIKit
 final class CreatePinCodeViewController: UIViewController {
     
     @IBOutlet private var pinCodeView: UIView!
-    let pinCodeViewController = PinCodeViewController()
+    private let pinCodeViewController = PinCodeViewController()
     
     // MARK: - UIViewController
     
