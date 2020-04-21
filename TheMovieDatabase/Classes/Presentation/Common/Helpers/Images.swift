@@ -21,6 +21,8 @@ extension UIImage {
     
     static let searchStub = #imageLiteral(resourceName: "search_stub")
     
+    static let faceId = #imageLiteral(resourceName: "face_id")
+    
     static let favorite = #imageLiteral(resourceName: "favorite")
     static let favoriteFilled = #imageLiteral(resourceName: "favorite_filled")
     static let visibilityNone = #imageLiteral(resourceName: "visibility_none")

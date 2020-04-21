@@ -14,6 +14,12 @@ final class PinView: UIView {
     // MARK: - Public Methods
     
     var circles = [CAShapeLayer]()
+    var radius: CGFloat = 8 {
+        didSet {
+            removeCircles()
+            appendCircles()
+        }
+    }
     
     // MARK: - Private Methods
     
@@ -33,7 +39,6 @@ final class PinView: UIView {
         super.awakeFromNib()
         backgroundColor = .clear
         appendCircles()
-        drawCircles()
     }
     
     // MARK: - Public Methods
@@ -50,12 +55,18 @@ final class PinView: UIView {
         circle.fillColor = UIColor.darkBlue.cgColor
     }
     
+    func removeCircles() {
+        circles.forEach { circle in
+            circle.removeFromSuperlayer()
+        }
+        circles.removeAll()
+    }
+    
     // MARK: - Private Methods
     
     private func appendCircles() {
-        var xCoord: CGFloat = 0
+        var xCoord: CGFloat = frame.width / 2 - radius * 7 / 2
         let yCoord: CGFloat = 0
-        let radius: CGFloat = 8
         
         for _ in 0...3 {
             let rect = CGRect(x: xCoord, y: yCoord, width: radius, height: radius)
@@ -65,9 +76,10 @@ final class PinView: UIView {
             layer.path = dotPath.cgPath
             layer.fillColor = UIColor.darkBlue.cgColor
             
-            xCoord += 16
+            xCoord += radius * 2
             circles.append(layer)
         }
+        drawCircles()
     }
     
     private func drawCircles() {

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PinCodeViewController" customModule="TheMovieDatabase" customModuleProvider="target">
+            <connections>
+                <outlet property="errorLabel" destination="g3W-lf-ZNX" id="e8c-B9-SRB"/>
+                <outlet property="exitButton" destination="GdR-BA-IOc" id="Fki-nQ-Xka"/>
+                <outlet property="infoLabel" destination="IS0-Ea-8Td" id="5qF-VR-xDi"/>
+                <outlet property="pinView" destination="tjT-ci-h51" id="FGK-Q3-Gho"/>
+                <outlet property="removeNumberButton" destination="jlk-K2-2hx" id="kcc-FH-1Dg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="pinButtons" destination="oaS-64-CK3" collectionClass="NSMutableArray" id="CRk-YB-DqO"/>
+                <outletCollection property="pinButtons" destination="B9Y-az-jdz" collectionClass="NSMutableArray" id="Lc0-N6-LQe"/>
+                <outletCollection property="pinButtons" destination="5GX-q8-5Ck" collectionClass="NSMutableArray" id="pfB-uq-MTe"/>
+                <outletCollection property="pinButtons" destination="7qD-ov-nPh" collectionClass="NSMutableArray" id="CRh-AG-10w"/>
+                <outletCollection property="pinButtons" destination="v42-F2-0ch" collectionClass="NSMutableArray" id="aMZ-fT-W1b"/>
+                <outletCollection property="pinButtons" destination="YIr-e8-EI8" collectionClass="NSMutableArray" id="aAU-uo-TRd"/>
+                <outletCollection property="pinButtons" destination="KsP-hI-Ofq" collectionClass="NSMutableArray" id="9Ue-f7-eME"/>
+                <outletCollection property="pinButtons" destination="wha-V0-vLO" collectionClass="NSMutableArray" id="W7x-dJ-2CX"/>
+                <outletCollection property="pinButtons" destination="T79-gP-BNF" collectionClass="NSMutableArray" id="MjU-Kx-5qX"/>
+                <outletCollection property="pinButtons" destination="A7e-f9-siO" collectionClass="NSMutableArray" id="gTa-pe-IS5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Придумайте пин-код  для быстрого входа" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS0-Ea-8Td">
+                    <rect key="frame" x="24" y="0.0" width="327" height="57.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjT-ci-h51" customClass="PinView" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="37.5" y="82.5" width="300" height="16"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="1ZN-dK-wA7"/>
+                        <constraint firstAttribute="width" constant="300" id="Z4e-uS-p4N"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="alJ-qe-B4n">
+                    <rect key="frame" x="75.5" y="344" width="224" height="273"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-kr-43D">
+                            <rect key="frame" x="22" y="0.0" width="202" height="51"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaS-64-CK3">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="1">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="FW7-L8-eMz"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9Y-az-jdz">
+                                    <rect key="frame" x="86" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="2">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="SLV-87-MpS"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GX-q8-5Ck">
+                                    <rect key="frame" x="172" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="3">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="1gV-81-nTM"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="KZ8-u4-QP4">
+                            <rect key="frame" x="22" y="74" width="202" height="51"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qD-ov-nPh">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="4">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="Zdh-kU-Fqr"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v42-F2-0ch">
+                                    <rect key="frame" x="86" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="5">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="1ch-Ba-gcO"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIr-e8-EI8">
+                                    <rect key="frame" x="172" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="6">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="Xra-vU-TjL"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="Y3L-hg-cXI">
+                            <rect key="frame" x="22" y="148" width="202" height="51"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsP-hI-Ofq">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="7">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="87b-uH-Eb4"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wha-V0-vLO">
+                                    <rect key="frame" x="86" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="8">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="XSs-aP-4Sj"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T79-gP-BNF">
+                                    <rect key="frame" x="172" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="9">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="S1f-SW-h5z"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="OMD-Ns-jDP">
+                            <rect key="frame" x="0.0" y="222" width="224" height="51"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-BA-IOc">
+                                    <rect key="frame" x="0.0" y="10.5" width="46" height="30"/>
+                                    <state key="normal" title="Выйти"/>
+                                    <connections>
+                                        <action selector="exitFromPinCodeScreen:" destination="-1" eventType="touchUpInside" id="6qu-4W-ymw"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-f9-siO">
+                                    <rect key="frame" x="108" y="0.0" width="30" height="51"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                    <state key="normal" title="0">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="enterNumber:" destination="-1" eventType="touchUpInside" id="FzD-OP-436"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlk-K2-2hx">
+                                    <rect key="frame" x="200" y="13.5" width="24" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="24" id="iIt-lJ-LXw"/>
+                                        <constraint firstAttribute="height" constant="24" id="v0k-hl-jhJ"/>
+                                    </constraints>
+                                    <state key="normal" image="backspace">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="adjustFontSizeToWidth" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="removeNumber:" destination="-1" eventType="touchUpInside" id="seE-5a-jdP"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ошибка" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3W-lf-ZNX">
+                    <rect key="frame" x="24" y="134.5" width="327" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.96077142540000005" green="0.098561831050000007" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="tjT-ci-h51" firstAttribute="top" secondItem="IS0-Ea-8Td" secondAttribute="bottom" constant="25" id="ELd-gX-8Q9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="g3W-lf-ZNX" secondAttribute="trailing" constant="24" id="K2R-2P-8Rn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IS0-Ea-8Td" secondAttribute="trailing" constant="24" id="LNZ-sa-OYC"/>
+                <constraint firstItem="g3W-lf-ZNX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="MeA-lb-ZMz"/>
+                <constraint firstItem="IS0-Ea-8Td" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Oq0-JH-GHb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="alJ-qe-B4n" secondAttribute="bottom" constant="50" id="U0w-6M-g6q"/>
+                <constraint firstItem="IS0-Ea-8Td" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="aNY-UB-BxE"/>
+                <constraint firstItem="tjT-ci-h51" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bzV-A1-hJU"/>
+                <constraint firstItem="g3W-lf-ZNX" firstAttribute="top" secondItem="tjT-ci-h51" secondAttribute="bottom" constant="36" id="dAf-ma-kUn"/>
+                <constraint firstItem="alJ-qe-B4n" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="l32-LS-D8q"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="115"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backspace" width="24" height="24"/>
+    </resources>
+</document>
