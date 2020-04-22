@@ -8,12 +8,19 @@
 
 import UIKit
 
+/// Обработка нажатий на клавиши клавиатуры пин-кода
 protocol PinCodeParentAuthorization: AnyObject {
     
+    /// Пин-код был введен
+    ///
+    /// - Parameters:
+    ///     - pinCode: Введенный пин-код
     func pinCodeEntered(pinCode: String)
     
+    /// Вход по Face ID
     func loginWithFaceId()
     
+    /// Выход с экрана ввода пин-кода
     func exitFromPinCodeScreen()
 }
 
@@ -61,6 +68,7 @@ class PinCodeViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction private func enterNumber(_ sender: UIButton) {
+        errorLabel.isHidden = true
         pinView.fillCircle()
         guard let text = sender.titleLabel?.text else { return }
         pinCode += text
@@ -77,6 +85,22 @@ class PinCodeViewController: UIViewController {
     
     @IBAction private func exitFromPinCodeScreen(_ sender: UIButton) {
         delegate?.exitFromPinCodeScreen()
+    }
+    
+    // MARK: - Public Methods
+    
+    func showError(errorString: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = errorString
+        pinView.changeCirclesColor(state: .error)
+        ViewAnimations.shakeAnimation(on: pinView)
+    }
+    
+    func removePinCode() {
+        if !pinCode.isEmpty {
+            pinView.removePinCode()
+            pinCode.removeAll()
+        }
     }
     
     // MARK: - Private Methods

@@ -50,15 +50,9 @@ class PinCodeAuthorizationViewController: UIViewController {
 
 extension PinCodeAuthorizationViewController: PinCodeParentAuthorization {
     
-    func pinCodeEntered(pinCode: String) {
-        
-    }
+    func pinCodeEntered(pinCode: String) {}
     
-    func loginWithFaceId() {
-        
-    }
+    func loginWithFaceId() {}
     
-    func exitFromPinCodeScreen() {
-        
-    }
+    func exitFromPinCodeScreen() {}
 }

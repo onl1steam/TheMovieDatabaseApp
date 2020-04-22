@@ -11,9 +11,10 @@ import UIKit
 /// View с точками индикации ввода пин-кода
 final class PinView: UIView {
     
-    // MARK: - Public Methods
+    // MARK: - Public Properties
     
     var circles = [CAShapeLayer]()
+    
     var radius: CGFloat = 8 {
         didSet {
             removeCircles()
@@ -21,13 +22,19 @@ final class PinView: UIView {
         }
     }
     
-    // MARK: - Private Methods
+    enum State {
+        case error
+        case `default`
+    }
+    
+    // MARK: - Private Properties
     
     private var activeCircleNumber: Int = 0 {
-        didSet(value) {
-            if value > 3 {
+        didSet {
+            if activeCircleNumber > 3 {
                 activeCircleNumber = 3
-            } else if value < 0 {
+            }
+            if activeCircleNumber < 0 {
                 activeCircleNumber = 0
             }
         }
@@ -43,7 +50,25 @@ final class PinView: UIView {
     
     // MARK: - Public Methods
     
+    func changeCirclesColor(state: State) {
+        var color = UIColor()
+        switch state {
+        case .default:
+            color = UIColor.customPurpure
+        case .error:
+            color = UIColor.customRed
+        }
+        circles.forEach { circle in
+            circle.fillColor = color.cgColor
+        }
+    }
+    
+    func removePinCode() {
+        activeCircleNumber = 0
+    }
+    
     func fillCircle() {
+        checkIsPinCodeStartedEnter()
         guard let circle = circles[safeIndex: activeCircleNumber] else { return }
         circle.fillColor = UIColor.customPurpure.cgColor
         activeCircleNumber += 1
@@ -63,6 +88,14 @@ final class PinView: UIView {
     }
     
     // MARK: - Private Methods
+    
+    private func checkIsPinCodeStartedEnter() {
+        if activeCircleNumber == 0 {
+            circles.forEach { circle in
+                circle.fillColor = UIColor.darkBlue.cgColor
+            }
+        }
+    }
     
     private func appendCircles() {
         var xCoord: CGFloat = frame.width / 2 - radius * 7 / 2
