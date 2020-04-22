@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PinCodeParentViewController: AnyObject {
+protocol PinCodeParentAuthorization: AnyObject {
     
     func pinCodeEntered(pinCode: String)
     
@@ -30,19 +30,32 @@ class PinCodeViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    weak var delegate: PinCodeParentViewController?
+    weak var delegate: PinCodeParentAuthorization?
     
     // MARK: - Private Properties
     
     private var pinCode: String = ""
+    private let infoString: String
     
+    // MARK: - Initializers
+    
+    init(infoString: String) {
+        self.infoString = infoString
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
+        infoLabel.text = infoString
         exitButton.isHidden = true
+        errorLabel.isHidden = true
     }
     
     // MARK: - IBActions
@@ -57,6 +70,7 @@ class PinCodeViewController: UIViewController {
     }
     
     @IBAction private func removeNumber(_ sender: UIButton) {
+        guard !pinCode.isEmpty else { return }
         pinView.unfillCircle()
         pinCode.removeLast()
     }

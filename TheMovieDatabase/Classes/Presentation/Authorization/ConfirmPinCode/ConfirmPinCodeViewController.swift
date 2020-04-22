@@ -1,15 +1,15 @@
 //
-//  CreatePinCodeViewController.swift
+//  ConfirmPinCodeViewController.swift
 //  TheMovieDatabase
 //
-//  Created by Рыжков Артем on 07.04.2020.
+//  Created by Рыжков Артем on 22.04.2020.
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
 import UIKit
 
-/// Экран создания пин-кода
-final class CreatePinCodeViewController: UIViewController {
+/// Экран подтверждения создания пин-кода
+final class ConfirmPinCodeViewController: UIViewController {
     
     // MARK: - Public Properties
     
@@ -17,7 +17,20 @@ final class CreatePinCodeViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let pinCodeViewController = PinCodeViewController(infoString: "Придумайте пин-код\nдля быстрого входа")
+    private let pinCodeViewController = PinCodeViewController(infoString: "Повторите\nваш пин-код")
+    
+    private let enteredPinCode: String
+    
+    // MARK: - Initializers
+    
+    init(enteredPinCode: String) {
+        self.enteredPinCode = enteredPinCode
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - UIViewController
     
@@ -78,12 +91,19 @@ final class CreatePinCodeViewController: UIViewController {
             constant: 55)
         NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, bottomConstraint, topConstraint])
     }
+    
+    private func addPinCodeToDB() {
+        
+    }
 }
 
-extension CreatePinCodeViewController: PinCodeParentAuthorization {
+// MARK: - PinCodeParentViewController
+
+extension ConfirmPinCodeViewController: PinCodeParentAuthorization {
     
     func pinCodeEntered(pinCode: String) {
-        delegate?.confirmPinCode(enteredPinCode: pinCode)
+        addPinCodeToDB()
+        delegate?.loginWithPinCode()
     }
     
     func loginWithFaceId() {}

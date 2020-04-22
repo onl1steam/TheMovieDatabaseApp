@@ -79,6 +79,7 @@
 		927A9718244DFE4200AB5A22 /* PinCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 927A9716244DFE4200AB5A22 /* PinCodeViewController.xib */; };
 		927A971E244E820300AB5A22 /* PinCodeAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A971C244E820300AB5A22 /* PinCodeAuthorizationViewController.swift */; };
 		927A971F244E820300AB5A22 /* PinCodeAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 927A971D244E820300AB5A22 /* PinCodeAuthorizationViewController.xib */; };
+		927A9722244FC8E300AB5A22 /* ConfirmPinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A9721244FC8E300AB5A22 /* ConfirmPinCodeViewController.swift */; };
 		928B2B47244524E500ED230E /* RLMMovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B46244524E500ED230E /* RLMMovieDetails.swift */; };
 		928B2B492445270300ED230E /* RLMGenres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B482445270300ED230E /* RLMGenres.swift */; };
 		928B2B732445C7B800ED230E /* RLMMovieDetailsTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B2B722445C7B800ED230E /* RLMMovieDetailsTranslator.swift */; };
@@ -95,7 +96,6 @@
 		92A478D7243C0C0500D43324 /* MarkFavoriteEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D6243C0C0500D43324 /* MarkFavoriteEndpoint.swift */; };
 		92A478DA243C0E5600D43324 /* MarkFavoriteBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A478D9243C0E5600D43324 /* MarkFavoriteBody.swift */; };
 		92A47904243CAD0B00D43324 /* CreatePinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A47902243CAD0B00D43324 /* CreatePinCodeViewController.swift */; };
-		92A47905243CAD0B00D43324 /* CreatePinCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A47903243CAD0B00D43324 /* CreatePinCodeViewController.xib */; };
 		92A47908243CB33E00D43324 /* PinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A47907243CB33E00D43324 /* PinView.swift */; };
 		92CFFF6424115C7000619672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6324115C7000619672 /* AppDelegate.swift */; };
 		92CFFF6624115C7000619672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFFF6524115C7000619672 /* SceneDelegate.swift */; };
@@ -306,6 +306,7 @@
 		927A9716244DFE4200AB5A22 /* PinCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeViewController.xib; sourceTree = "<group>"; };
 		927A971C244E820300AB5A22 /* PinCodeAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeAuthorizationViewController.swift; sourceTree = "<group>"; };
 		927A971D244E820300AB5A22 /* PinCodeAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeAuthorizationViewController.xib; sourceTree = "<group>"; };
+		927A9721244FC8E300AB5A22 /* ConfirmPinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinCodeViewController.swift; sourceTree = "<group>"; };
 		928B2B46244524E500ED230E /* RLMMovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMMovieDetails.swift; sourceTree = "<group>"; };
 		928B2B482445270300ED230E /* RLMGenres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMGenres.swift; sourceTree = "<group>"; };
 		928B2B722445C7B800ED230E /* RLMMovieDetailsTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMMovieDetailsTranslator.swift; sourceTree = "<group>"; };
@@ -322,7 +323,6 @@
 		92A478D6243C0C0500D43324 /* MarkFavoriteEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavoriteEndpoint.swift; sourceTree = "<group>"; };
 		92A478D9243C0E5600D43324 /* MarkFavoriteBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavoriteBody.swift; sourceTree = "<group>"; };
 		92A47902243CAD0B00D43324 /* CreatePinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinCodeViewController.swift; sourceTree = "<group>"; };
-		92A47903243CAD0B00D43324 /* CreatePinCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatePinCodeViewController.xib; sourceTree = "<group>"; };
 		92A47907243CB33E00D43324 /* PinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinView.swift; sourceTree = "<group>"; };
 		92CFFF6024115C7000619672 /* TheMovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFFF6324115C7000619672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -633,6 +633,7 @@
 				9250EBBC2414459A00AC30DB /* Views */,
 				927A9719244E70EF00AB5A22 /* PinCode */,
 				927A971B244E81DA00AB5A22 /* PinCodeAuthorization */,
+				927A9720244FC8BF00AB5A22 /* ConfirmPinCode */,
 				92A47901243CAC3300D43324 /* CreatePinCode */,
 				9250EBAA2413DE2D00AC30DB /* AuthorizationViewController.swift */,
 				9250EBAB2413DE2D00AC30DB /* AuthorizationViewController.xib */,
@@ -815,6 +816,14 @@
 			path = PinCodeAuthorization;
 			sourceTree = "<group>";
 		};
+		927A9720244FC8BF00AB5A22 /* ConfirmPinCode */ = {
+			isa = PBXGroup;
+			children = (
+				927A9721244FC8E300AB5A22 /* ConfirmPinCodeViewController.swift */,
+			);
+			path = ConfirmPinCode;
+			sourceTree = "<group>";
+		};
 		928B2B442445244400ED230E /* RealmDatabase */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,7 +889,6 @@
 			isa = PBXGroup;
 			children = (
 				92A47902243CAD0B00D43324 /* CreatePinCodeViewController.swift */,
-				92A47903243CAD0B00D43324 /* CreatePinCodeViewController.xib */,
 			);
 			path = CreatePinCode;
 			sourceTree = "<group>";
@@ -1537,7 +1545,6 @@
 				927A9718244DFE4200AB5A22 /* PinCodeViewController.xib in Resources */,
 				9272CF94243614770059D6F4 /* MovieDetailsViewController.xib in Resources */,
 				9272CF69243242950059D6F4 /* MoviesCollectionViewVericalCell.xib in Resources */,
-				92A47905243CAD0B00D43324 /* CreatePinCodeViewController.xib in Resources */,
 				9250EBAD2413DE2D00AC30DB /* AuthorizationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1831,6 +1838,7 @@
 				92A47908243CB33E00D43324 /* PinView.swift in Sources */,
 				92E5CAC8242ADAB800DD587D /* MovieList.swift in Sources */,
 				92D11239241683090087D910 /* UIViewControllerExtension.swift in Sources */,
+				927A9722244FC8E300AB5A22 /* ConfirmPinCodeViewController.swift in Sources */,
 				92F64D412420236800693C9B /* MoviesService.swift in Sources */,
 				9272CF8224340F850059D6F4 /* FavoritesCoordinator.swift in Sources */,
 				9272CF9924378C510059D6F4 /* UICollectionViewCellExtension.swift in Sources */,
