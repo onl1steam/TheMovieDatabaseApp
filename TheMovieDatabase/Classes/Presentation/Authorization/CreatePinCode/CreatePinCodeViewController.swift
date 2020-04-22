@@ -17,7 +17,9 @@ final class CreatePinCodeViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let pinCodeViewController = PinCodeViewController(infoString: "Придумайте пин-код\nдля быстрого входа")
+    private let pinCodeViewController = PinCodeViewController(
+        infoString: "Придумайте пин-код\nдля быстрого входа",
+        keyboardState: .creation)
     
     // MARK: - UIViewController
     

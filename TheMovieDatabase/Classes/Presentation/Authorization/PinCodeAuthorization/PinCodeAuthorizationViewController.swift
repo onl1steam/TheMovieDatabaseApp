@@ -20,7 +20,9 @@ class PinCodeAuthorizationViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let pinCodeViewController = PinCodeViewController(infoString: "Doroy")
+    private let pinCodeViewController = PinCodeViewController(
+        infoString: "Виталий Белов",
+        keyboardState: .authorization)
     
     // MARK: - UIViewController
     
@@ -50,7 +52,9 @@ class PinCodeAuthorizationViewController: UIViewController {
 
 extension PinCodeAuthorizationViewController: PinCodeParentAuthorization {
     
-    func pinCodeEntered(pinCode: String) {}
+    func pinCodeEntered(pinCode: String) {
+        delegate?.enterApp()
+    }
     
     func loginWithFaceId() {}
     

@@ -31,8 +31,8 @@ final class PinView: UIView {
     
     private var activeCircleNumber: Int = 0 {
         didSet {
-            if activeCircleNumber > 3 {
-                activeCircleNumber = 3
+            if activeCircleNumber >= 4 {
+                activeCircleNumber = 4
             }
             if activeCircleNumber < 0 {
                 activeCircleNumber = 0

@@ -17,7 +17,9 @@ final class ConfirmPinCodeViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let pinCodeViewController = PinCodeViewController(infoString: "Повторите\nваш пин-код")
+    private let pinCodeViewController = PinCodeViewController(
+        infoString: "Повторите\nваш пин-код",
+        keyboardState: .creation)
     
     private let enteredPinCode: String
     

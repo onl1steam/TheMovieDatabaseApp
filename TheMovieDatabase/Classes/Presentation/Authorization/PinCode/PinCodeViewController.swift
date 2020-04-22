@@ -26,6 +26,13 @@ protocol PinCodeParentAuthorization: AnyObject {
 
 class PinCodeViewController: UIViewController {
     
+    // MARK: - Types
+    
+    enum KeyboardState {
+        case authorization
+        case creation
+    }
+    
     // MARK: - IBOutlts
     
     @IBOutlet private var infoLabel: UILabel!
@@ -43,10 +50,12 @@ class PinCodeViewController: UIViewController {
     
     private var pinCode: String = ""
     private let infoString: String
+    private let keyboardState: KeyboardState
     
     // MARK: - Initializers
     
-    init(infoString: String) {
+    init(infoString: String, keyboardState: KeyboardState) {
+        self.keyboardState = keyboardState
         self.infoString = infoString
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,9 +68,10 @@ class PinCodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupColorScheme()
-        infoLabel.text = infoString
         exitButton.isHidden = true
+        setupColorScheme()
+        configureButtons()
+        infoLabel.text = infoString
         errorLabel.isHidden = true
     }
     
@@ -72,6 +82,7 @@ class PinCodeViewController: UIViewController {
         pinView.fillCircle()
         guard let text = sender.titleLabel?.text else { return }
         pinCode += text
+        configureButtons()
         if pinCode.count == 4 {
             delegate?.pinCodeEntered(pinCode: pinCode)
         }
@@ -81,6 +92,7 @@ class PinCodeViewController: UIViewController {
         guard !pinCode.isEmpty else { return }
         pinView.unfillCircle()
         pinCode.removeLast()
+        configureButtons()
     }
     
     @IBAction private func exitFromPinCodeScreen(_ sender: UIButton) {
@@ -101,11 +113,24 @@ class PinCodeViewController: UIViewController {
             pinView.removePinCode()
             pinCode.removeAll()
         }
+        configureButtons()
     }
     
     // MARK: - Private Methods
     
+    private func configureButtons() {
+        guard keyboardState == .authorization else { return }
+        if pinCode.isEmpty {
+            removeNumberButton.setImage(.faceId, for: .normal)
+            exitButton.isHidden = false
+        } else {
+            removeNumberButton.setImage(.backspace, for: .normal)
+            exitButton.isHidden = true
+        }
+    }
+    
     private func setupColorScheme() {
+        exitButton.tintColor = .customGray
         view.backgroundColor = .backgroundBlack
         infoLabel.textColor = .customLight
         errorLabel.textColor = .customRed
