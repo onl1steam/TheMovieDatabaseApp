@@ -11,17 +11,30 @@ import UIKit
 /// View с точками индикации ввода пин-кода
 final class PinView: UIView {
     
-    // MARK: - Public Methods
+    // MARK: - Public Properties
     
     var circles = [CAShapeLayer]()
     
-    // MARK: - Private Methods
+    var radius: CGFloat = 8 {
+        didSet {
+            removeCircles()
+            appendCircles()
+        }
+    }
+    
+    enum State {
+        case error
+        case `default`
+    }
+    
+    // MARK: - Private Properties
     
     private var activeCircleNumber: Int = 0 {
-        didSet(value) {
-            if value > 3 {
-                activeCircleNumber = 3
-            } else if value < 0 {
+        didSet {
+            if activeCircleNumber >= 4 {
+                activeCircleNumber = 4
+            }
+            if activeCircleNumber < 0 {
                 activeCircleNumber = 0
             }
         }
@@ -33,12 +46,29 @@ final class PinView: UIView {
         super.awakeFromNib()
         backgroundColor = .clear
         appendCircles()
-        drawCircles()
     }
     
     // MARK: - Public Methods
     
+    func changeCirclesColor(state: State) {
+        var color = UIColor()
+        switch state {
+        case .default:
+            color = UIColor.customPurpure
+        case .error:
+            color = UIColor.customRed
+        }
+        circles.forEach { circle in
+            circle.fillColor = color.cgColor
+        }
+    }
+    
+    func removePinCode() {
+        activeCircleNumber = 0
+    }
+    
     func fillCircle() {
+        checkIsPinCodeStartedEnter()
         guard let circle = circles[safeIndex: activeCircleNumber] else { return }
         circle.fillColor = UIColor.customPurpure.cgColor
         activeCircleNumber += 1
@@ -50,12 +80,26 @@ final class PinView: UIView {
         circle.fillColor = UIColor.darkBlue.cgColor
     }
     
+    func removeCircles() {
+        circles.forEach { circle in
+            circle.removeFromSuperlayer()
+        }
+        circles.removeAll()
+    }
+    
     // MARK: - Private Methods
     
+    private func checkIsPinCodeStartedEnter() {
+        if activeCircleNumber == 0 {
+            circles.forEach { circle in
+                circle.fillColor = UIColor.darkBlue.cgColor
+            }
+        }
+    }
+    
     private func appendCircles() {
-        var xCoord: CGFloat = 0
+        var xCoord: CGFloat = frame.width / 2 - radius * 7 / 2
         let yCoord: CGFloat = 0
-        let radius: CGFloat = 8
         
         for _ in 0...3 {
             let rect = CGRect(x: xCoord, y: yCoord, width: radius, height: radius)
@@ -65,9 +109,10 @@ final class PinView: UIView {
             layer.path = dotPath.cgPath
             layer.fillColor = UIColor.darkBlue.cgColor
             
-            xCoord += 16
+            xCoord += radius * 2
             circles.append(layer)
         }
+        drawCircles()
     }
     
     private func drawCircles() {

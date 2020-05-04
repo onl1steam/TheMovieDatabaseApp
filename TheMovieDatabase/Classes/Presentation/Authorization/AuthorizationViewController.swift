@@ -210,6 +210,8 @@ final class AuthorizationViewController: UIViewController {
         case .success(let sessionId):
             errorLabel.isHidden = true
             sessionService.setupSessionId(sessionId: sessionId)
+            loginTextField.text = nil
+            passwordTextField.text = nil
             delegate?.authLogin()
         case .failure(let error):
             shakeTextField()
