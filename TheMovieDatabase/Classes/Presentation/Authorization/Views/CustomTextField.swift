@@ -47,6 +47,7 @@ final class CustomTextField: UITextField {
         super.layoutSubviews()
         layer.cornerRadius = CustomTextFieldConstraints.cornerRadius
         layer.borderWidth = CustomTextFieldConstraints.borderWidth
+        keyboardAppearance = .dark
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

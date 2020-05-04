@@ -20,6 +20,7 @@ final class ServiceLayer {
     let sessionService: Session
     let imageService: ImageServiceType
     let moviesService: MoviesServiceType
+    let databaseService: DatabaseServiceType = DatabaseService()
     let validationService: Validation = ValidationService()
     
     // MARK: - Private Properties

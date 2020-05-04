@@ -51,15 +51,13 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         posterImageView.image = nil
     }
     
-    func toggleActivityIndicator() {
-        posterLoadingActivityIndicator.isHidden ?
-            posterLoadingActivityIndicator.startAnimating(): posterLoadingActivityIndicator.stopAnimating()
+    func toggleActivityIndicator(_ isHidden: Bool) {
+        isHidden ? posterLoadingActivityIndicator.startAnimating(): posterLoadingActivityIndicator.stopAnimating()
     }
     
     // MARK: - Private Methods
     
     private func setupActivityIndicator() {
-        posterLoadingActivityIndicator.isHidden = true
         posterLoadingActivityIndicator.style = .white
         posterLoadingActivityIndicator.tintColor = .customLight
         posterLoadingActivityIndicator.hidesWhenStopped = true

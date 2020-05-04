@@ -7,7 +7,8 @@
 //
 
 import Foundation
-@testable import TheMovieDatabaseAPI
+import TheMovieDatabaseAPI
+import TheMovieDatabasePersistence
 
 struct MovieDetails {
     

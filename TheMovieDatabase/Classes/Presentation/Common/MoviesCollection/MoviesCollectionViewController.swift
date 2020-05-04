@@ -63,8 +63,8 @@ final class MoviesCollectionViewController: UICollectionViewController {
         collectionView.reloadData()
     }
     
-    func toggleIndicator() {
-        activityIndicator.isHidden ? activityIndicator.startAnimating(): activityIndicator.stopAnimating()
+    func toggleIndicator(_ isHidden: Bool) {
+        isHidden ? activityIndicator.startAnimating(): activityIndicator.stopAnimating()
     }
     
     func updateCellPresentation(presentation: CollectionPresentation) {
@@ -90,7 +90,6 @@ final class MoviesCollectionViewController: UICollectionViewController {
         activityIndicator = UIActivityIndicatorView(style: .white)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.tintColor = .customLight
-        activityIndicator.isHidden = true
     }
     
     private func setupActivityIndicatorConstraints() {

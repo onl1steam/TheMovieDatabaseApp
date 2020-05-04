@@ -1,0 +1,13 @@
+//
+//  Entry.swift
+//  TheMovieDatabasePersistence
+//
+//  Created by Рыжков Артем on 15.04.2020.
+//  Copyright © 2020 Рыжков Артем. All rights reserved.
+//
+
+import Foundation
+import RealmSwift
+
+/// Родительский класс для объектов Realm
+public class RealmEntry: Object {}

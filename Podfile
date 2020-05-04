@@ -24,3 +24,11 @@ target 'TheMovieDatabaseAPI' do
   end
 end
 
+target 'TheMovieDatabasePersistence' do
+  use_frameworks!
+
+  pod 'RealmSwift'
+
+end
+
+

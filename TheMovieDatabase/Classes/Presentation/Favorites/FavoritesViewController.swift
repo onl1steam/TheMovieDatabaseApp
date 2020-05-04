@@ -26,6 +26,7 @@ final class FavoritesViewController: UIViewController {
     
     let sessionService: Session
     let moviesService: MoviesServiceType
+    let databaseService: DatabaseServiceType
     
     let moviesCollectionViewController = MoviesCollectionViewController(
         collectionViewLayout: UICollectionViewFlowLayout())
@@ -55,9 +56,11 @@ final class FavoritesViewController: UIViewController {
     
     init(
         sessionService: Session = ServiceLayer.shared.sessionService,
-        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
+        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService,
+        databaseService: DatabaseServiceType = ServiceLayer.shared.databaseService) {
         self.sessionService = sessionService
         self.moviesService = moviesService
+        self.databaseService = databaseService
         super.init(nibName: nil, bundle: nil)
         placeholderViewController.delegate = self
         moviesCollectionViewController.delegate = self
@@ -76,7 +79,7 @@ final class FavoritesViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         setupNavigationBar()
-        loadMovieList()
+        fetchMovies()
         navigationController?.navigationBar.removeBottomLine()
     }
     
@@ -107,9 +110,23 @@ final class FavoritesViewController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func saveMovies(_ movieDetails: [MovieDetails]) {
+        databaseService.saveMovieDetails(movieDetails)
+    }
+    
+    private func fetchMovies() {
+        self.removeChild(self.placeholderViewController, containerView: self.containerView)
+        self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
+        
+        let movieDetails = databaseService.fetchMovieDetails()
+        moviesCollectionViewController.setCollectionData(movieDetails)
+        loadMovieList()
+    }
+    
     private func loadMovieList() {
-        moviesCollectionViewController.setCollectionData([])
-        moviesCollectionViewController.toggleIndicator()
+        self.removeChild(self.placeholderViewController, containerView: self.containerView)
+        self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
+        moviesCollectionViewController.toggleIndicator(true)
         sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
             guard let self = self else { return }
             switch response {
@@ -135,10 +152,11 @@ final class FavoritesViewController: UIViewController {
                 self.removeChild(self.placeholderViewController, containerView: self.containerView)
                 self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
                 self.moviesCollectionViewController.setCollectionData(detailsList)
-                self.moviesCollectionViewController.toggleIndicator()
+                self.saveMovies(detailsList)
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
+            self.moviesCollectionViewController.toggleIndicator(false)
         }
     }
     
