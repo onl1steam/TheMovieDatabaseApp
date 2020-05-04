@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Экран поиска фильмов
 final class SearchViewController: UIViewController {
     
     // MARK: - Public Properties
@@ -32,7 +33,15 @@ final class SearchViewController: UIViewController {
         return searchBar
     }()
     
+    private lazy var appearanceButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.listButton, for: .normal)
+        button.tintColor = .customLight
+        return button
+    }()
+    
     private let searchStubViewController = SearchStubViewController()
+    private var collectionPresentation: CollectionPresentation = .verticalCell
     
     // MARK: - Initializers
     
@@ -50,21 +59,30 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .backgroundBlack
-        searchBar.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         setupNavigationBar()
+        view.backgroundColor = .backgroundBlack
+        searchBar.delegate = self
+        appearanceButton.addTarget(self, action: #selector(changeAppearance(_:)), for: .touchUpInside)
         setupContainerConstraints()
         navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBActions
     
-    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
-        
+    @objc private func changeAppearance(_ sender: UIButton) {
+        switch collectionPresentation {
+        case .horizontalCell:
+            sender.setImage(.listButton, for: .normal)
+            collectionPresentation = .verticalCell
+        case .verticalCell:
+            sender.setImage(.widgetsButton, for: .normal)
+            collectionPresentation = .horizontalCell
+        }
+        moviesCollectionViewController.updateCellPresentation(presentation: collectionPresentation)
     }
     
     @objc private func searchTextChanged() {
-        guard let text = searchBar.searchTextField.text, text != "" else {
+        guard let text = searchBar.text, text != "" else {
             removeChild(moviesCollectionViewController, containerView: containerView)
             addChild(searchStubViewController, containerView: containerView)
             return
@@ -111,16 +129,14 @@ final class SearchViewController: UIViewController {
     
     private func setupBarItems() {
         navigationItem.titleView = searchBar
-        let listItem = UIBarButtonItem(
-            image: .listButton,
-            style: .plain,
-            target: self,
-            action: #selector(changeAppearance(_:)))
-        listItem.tintColor = .customLight
+        
+        let listItem = UIBarButtonItem(customView: appearanceButton)
         self.navigationItem.rightBarButtonItems =  [listItem]
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     private func setupNavigationBar() {
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.view.backgroundColor = .backgroundBlack
         navigationController?.navigationBar.barTintColor = .backgroundBlack
@@ -133,8 +149,7 @@ final class SearchViewController: UIViewController {
             sideMargin: 24,
             topMargin: 40,
             bottomMargin: 0,
-            parentView: view,
-            topView: view)
+            parentView: view)
     }
 }
 
@@ -144,5 +159,14 @@ extension SearchViewController: CollectionParentDelegate {
     
     func elementTapped(data: MovieDetails) {
         delegate?.showMovieDetails(movieData: data)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        moviesCollectionViewController.filterMovies(searchString: searchBar.text)
     }
 }

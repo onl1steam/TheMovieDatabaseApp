@@ -41,7 +41,7 @@ final class FavoritesCoordinator: FavoritesCoordinatorType {
     // MARK: - SearchCoordinator
     
     func showMovieDetails(movieData: MovieDetails) {
-        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData)
+        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData, isFavorite: true)
         movieDetailsViewController.delegate = self
         navigationController.pushViewController(movieDetailsViewController, animated: true)
     }

@@ -15,6 +15,7 @@
                 <outlet property="errorLabel" destination="e0v-zs-a2M" id="WTl-mi-FB8"/>
                 <outlet property="logoutButton" destination="gXE-af-Tvs" id="L6d-7K-CQJ"/>
                 <outlet property="nameLabel" destination="8mT-NG-1YK" id="g2R-Tm-KpE"/>
+                <outlet property="toPinCodeButton" destination="z20-J9-86e" id="K4x-Zs-b8N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -72,6 +73,24 @@
                     <color key="textColor" red="0.96077142540000005" green="0.098561831050000007" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z20-J9-86e" customClass="RoundedButton" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="24" y="511" width="327" height="56"/>
+                    <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="icW-WN-iwQ"/>
+                    </constraints>
+                    <state key="normal" title="Экран пин кода">
+                        <color key="titleColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="toPinCodeTapped:" destination="-1" eventType="touchUpInside" id="eqe-FB-Opu"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <accessibility key="accessibilityConfiguration">
@@ -81,7 +100,9 @@
                 <constraint firstItem="8mT-NG-1YK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2Hi-UY-FxK"/>
                 <constraint firstItem="8mT-NG-1YK" firstAttribute="top" secondItem="Ljt-nO-9e5" secondAttribute="bottom" constant="27" id="5cV-nd-0eK"/>
                 <constraint firstItem="gXE-af-Tvs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9Lq-HH-uxK"/>
+                <constraint firstItem="gXE-af-Tvs" firstAttribute="top" secondItem="z20-J9-86e" secondAttribute="bottom" constant="20" id="9yn-bS-iYO"/>
                 <constraint firstItem="e0v-zs-a2M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Cui-3u-7gP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="z20-J9-86e" secondAttribute="trailing" constant="24" id="Igw-v4-eNb"/>
                 <constraint firstItem="e0v-zs-a2M" firstAttribute="top" secondItem="jcs-c5-CJg" secondAttribute="bottom" constant="50" id="TZq-0o-0Xc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e0v-zs-a2M" secondAttribute="trailing" constant="24" id="Zjd-YO-bSV"/>
                 <constraint firstItem="jcs-c5-CJg" firstAttribute="top" secondItem="8mT-NG-1YK" secondAttribute="bottom" constant="9" id="acG-mN-4Kd"/>
@@ -90,6 +111,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gXE-af-Tvs" secondAttribute="bottom" constant="24" id="cqE-nU-slH"/>
                 <constraint firstItem="Ljt-nO-9e5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="124" id="rFL-LJ-cJG"/>
                 <constraint firstItem="jcs-c5-CJg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sdn-Ug-JVm"/>
+                <constraint firstItem="z20-J9-86e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="wDa-OH-xrd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="121.88905547226388"/>

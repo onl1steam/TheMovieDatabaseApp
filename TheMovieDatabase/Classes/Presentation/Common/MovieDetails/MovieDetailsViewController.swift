@@ -29,14 +29,31 @@ final class MovieDetailsViewController: UIViewController {
     
     let movieDetails: MovieDetails
     let imageService: ImageServiceType
+    let sessionService: Session
     
     weak var delegate: MovieDetailsDelegate?
     
+    // MARK: - Private Properties
+    
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.favorite, for: .normal)
+        button.tintColor = .customLight
+        return button
+    }()
+    
+    private var isFavorite: Bool
+    
     // MARK: - Initializers
     
-    init(movieDetails: MovieDetails, imageService: ImageServiceType = ServiceLayer.shared.imageService) {
+    init(movieDetails: MovieDetails,
+         imageService: ImageServiceType = ServiceLayer.shared.imageService,
+         sessionService: Session = ServiceLayer.shared.sessionService,
+         isFavorite: Bool) {
+        self.sessionService = sessionService
         self.movieDetails = movieDetails
         self.imageService = imageService
+        self.isFavorite = isFavorite
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,12 +65,14 @@ final class MovieDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupFavoriteButton()
         posterImageView.makeRounded(cornerRadius: 8)
         setupColorScheme()
         setupImageView()
         setupNavigationBar()
         fill(with: movieDetails)
         navigationController?.navigationBar.removeBottomLine()
+        favoriteButton.addTarget(self, action: #selector(favoriteTapped(_:)), for: .touchUpInside)
     }
     
     // MARK: - IBActions
@@ -62,11 +81,34 @@ final class MovieDetailsViewController: UIViewController {
         delegate?.arrowBackTapped()
     }
     
-    @objc private func favoriteTapped(_ sender: UIBarButtonItem) {
-        delegate?.favoriteTapped()
+    @objc private func favoriteTapped(_ sender: UIButton) {
+        isFavorite.toggle()
+        
+        setupFavoriteButton()
+        
+        sessionService.markAsFavorite(
+            mediaType: "movie",
+            mediaId: movieDetails.id,
+            favorite: isFavorite) { [weak self] response in
+                guard let self = self else { return }
+                switch response {
+                case .success:
+                    self.delegate?.favoriteTapped()
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+        }
     }
     
     // MARK: - Private Methods
+    
+    private func setupFavoriteButton() {
+        if isFavorite {
+            favoriteButton.setImage(.favoriteFilled, for: .normal)
+        } else {
+            favoriteButton.setImage(.favorite, for: .normal)
+        }
+    }
     
     private func fill(with movieDetails: MovieDetails) {
         loadImage(path: movieDetails.posterPath)
@@ -125,12 +167,7 @@ final class MovieDetailsViewController: UIViewController {
             style: .plain,
             target: self,
             action: #selector(arrowBackTapped(_:)))
-        let favoriteItem = UIBarButtonItem(
-            image: .favorite,
-            style: .plain,
-            target: self,
-            action: #selector(favoriteTapped(_:)))
-        favoriteItem.tintColor = .customLight
+        let favoriteItem = UIBarButtonItem(customView: favoriteButton)
         backArrowItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems = [favoriteItem]
         self.navigationItem.leftBarButtonItems = [backArrowItem]

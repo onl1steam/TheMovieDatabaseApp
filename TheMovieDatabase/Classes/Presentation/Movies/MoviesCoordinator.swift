@@ -9,7 +9,11 @@
 import UIKit
 
 /// Координатор для экрана поиска фильмов
-protocol MoviesCoordinatorType: Coordinator, SearchCoordinator, MovieDetailsDelegate {}
+protocol MoviesCoordinatorType: Coordinator, SearchCoordinator, MovieDetailsDelegate {
+    
+    /// Обрабатывает нажатие на searchBar
+    func searchBarTapped()
+}
 
 final class MoviesCoordinator: MoviesCoordinatorType {
     
@@ -38,10 +42,18 @@ final class MoviesCoordinator: MoviesCoordinatorType {
         navigationController.pushViewController(moviesViewController, animated: true)
     }
     
+    // MARK: - MoviesCoordinatorType
+    
+    func searchBarTapped() {
+        let searchViewController = SearchViewController()
+        searchViewController.delegate = self
+        navigationController.pushViewController(searchViewController, animated: true)
+    }
+    
     // MARK: - SearchCoordinator
     
     func showMovieDetails(movieData: MovieDetails) {
-        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData)
+        let movieDetailsViewController = MovieDetailsViewController(movieDetails: movieData, isFavorite: false)
         movieDetailsViewController.delegate = self
         navigationController.pushViewController(movieDetailsViewController, animated: true)
     }
