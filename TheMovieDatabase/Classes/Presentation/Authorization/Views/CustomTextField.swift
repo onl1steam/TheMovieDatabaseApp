@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {
     
     // MARK: - Types
     

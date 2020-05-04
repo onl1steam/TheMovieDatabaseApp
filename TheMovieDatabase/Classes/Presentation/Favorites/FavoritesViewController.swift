@@ -8,12 +8,27 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
     @IBOutlet weak var favoriteLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
+    
+    // MARK: - Public Properties
+    
+    let sessionService: Session
+    
+    // MARK: - Initializers
+    
+    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+        self.sessionService = sessionService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
     
     // MARK: - UIViewController
     
@@ -33,7 +48,7 @@ class FavoritesViewController: UIViewController {
     // MARK: - IBAction
     
     @objc func searchButtonTapped() {
-        
+
     }
     
     @objc func changeAppearance(_ sender: UIBarButtonItem) {

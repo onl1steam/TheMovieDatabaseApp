@@ -8,12 +8,27 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
     @IBOutlet weak var moviesSearchBar: CustomSearchBar!
     @IBOutlet weak var moviesLabel: UILabel!
+    
+    // MARK: - Public Properties
+    
+    let sessionService: Session
+    
+    // MARK: - Initializers
+    
+    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+        self.sessionService = sessionService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
     
     // MARK: - UIViewController
     
@@ -30,7 +45,7 @@ class MoviesViewController: UIViewController {
         view.backgroundColor = Colors.backgroundBlack
         moviesLabel.tintColor = Colors.light
     }
-
+    
     private func setupLocalizedStrings() {
         moviesLabel.text = MoviesScreenStrings.moviesLabel
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder

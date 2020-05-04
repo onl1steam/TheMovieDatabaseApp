@@ -42,7 +42,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lr1-kz-fxa" secondAttribute="bottom" id="xFm-pK-sWX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="122"/>
+            <point key="canvasLocation" x="138.40000000000001" y="121.88905547226388"/>
         </view>
     </objects>
 </document>

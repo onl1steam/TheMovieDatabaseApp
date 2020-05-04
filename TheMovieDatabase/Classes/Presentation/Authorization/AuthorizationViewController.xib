@@ -117,7 +117,7 @@
                 <constraint firstItem="vf3-uc-das" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="23" id="thl-n5-77K"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="131"/>
+            <point key="canvasLocation" x="-18" y="112"/>
         </view>
     </objects>
 </document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+final class AccountViewController: UIViewController {
     
     // MARK: - IBOutlet
     
@@ -16,14 +16,19 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var logoutButton: RoundedButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     
     // MARK: - Public Properties
     
     let sessionService: Session
+    let imageService: ImageServiceType
     
     // MARK: - Initializers
     
-    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+    init(
+        sessionService: Session = ServiceLayer.shared.sessionService,
+        imageService: ImageServiceType = ServiceLayer.shared.imageService) {
+        self.imageService = imageService
         self.sessionService = sessionService
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,6 +44,8 @@ class AccountViewController: UIViewController {
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
+        loadAccountInfo()
+        errorLabel.isHidden = true
     }
     
     // MARK: - IBAction
@@ -50,15 +57,52 @@ class AccountViewController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func loadAccountInfo() {
+        
+        sessionService.getAccountInfo { [weak self] response in
+            guard let self = self else { return }
+            var avatarHash: String?
+            switch response {
+            case .success(let info):
+                self.nameLabel.text = info.username
+                self.emailLabel.text = info.name
+                avatarHash = info.avatar.gravatar.hash
+                self.sessionService.setupAccountId(accountId: info.id)
+            case .failure(let error):
+                self.showError(message: error.localizedDescription)
+            }
+            guard let hash = avatarHash else { return }
+            self.imageService.getAvatar(avatarPath: hash) { [weak self] response in
+                guard let self = self else { return }
+                switch response {
+                case .success(let info):
+                    guard let image = UIImage(data: info) else { return }
+                    self.avatarImageView.image = image
+                    self.errorLabel.isHidden = true
+                case .failure(let error):
+                    self.showError(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    
     private func setupColorScheme() {
         view.backgroundColor = Colors.backgroundBlack
         nameLabel.tintColor = Colors.light
         emailLabel.tintColor = Colors.gray
         logoutButton.backgroundColor = Colors.accountButtonBackground
         logoutButton.tintColor = Colors.purpure
+        errorLabel.tintColor = Colors.red
     }
     
     private func setupLocalizedStrings() {
         logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
+    }
+    
+    private func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
     }
 }

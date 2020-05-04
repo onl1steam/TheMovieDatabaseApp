@@ -32,7 +32,7 @@ protocol AuthorizationViewModelType: class {
     func setupDelegate(delegate: AuthorizationViewModelDelegate)
 }
 
-class AuthorizationViewModel {
+final class AuthorizationViewModel {
     
     // MARK: - Private Properties
 
@@ -51,7 +51,7 @@ class AuthorizationViewModel {
     
     // MARK: - Private Methods
     
-    private func validateResponse(_ response: Result<String, AuthError>) {
+    private func validateResponse(_ response: Result<String, Error>) {
         guard let delegate = delegate else { return }
         switch response {
         case .success(let sessionId):

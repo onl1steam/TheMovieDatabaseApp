@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="avatarImageView" destination="Ljt-nO-9e5" id="YaY-Lh-4OY"/>
                 <outlet property="emailLabel" destination="jcs-c5-CJg" id="K7j-3y-62v"/>
+                <outlet property="errorLabel" destination="e0v-zs-a2M" id="WTl-mi-FB8"/>
                 <outlet property="logoutButton" destination="gXE-af-Tvs" id="L6d-7K-CQJ"/>
                 <outlet property="nameLabel" destination="8mT-NG-1YK" id="g2R-Tm-KpE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,8 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VitaliyBelov420@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcs-c5-CJg">
-                    <rect key="frame" x="86.5" y="327" width="202" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcs-c5-CJg">
+                    <rect key="frame" x="187.5" y="288" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -53,10 +54,16 @@
                         <action selector="logoutButtonTapped:" destination="-1" eventType="touchUpInside" id="uMY-QD-5eP"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виталий Белов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mT-NG-1YK">
-                    <rect key="frame" x="79" y="279" width="217" height="39"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mT-NG-1YK">
+                    <rect key="frame" x="187.5" y="279" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0v-zs-a2M">
+                    <rect key="frame" x="24" y="338" width="327" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.96077142540000005" green="0.098561831050000007" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -65,6 +72,9 @@
                 <constraint firstItem="8mT-NG-1YK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2Hi-UY-FxK"/>
                 <constraint firstItem="8mT-NG-1YK" firstAttribute="top" secondItem="Ljt-nO-9e5" secondAttribute="bottom" constant="27" id="5cV-nd-0eK"/>
                 <constraint firstItem="gXE-af-Tvs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="9Lq-HH-uxK"/>
+                <constraint firstItem="e0v-zs-a2M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Cui-3u-7gP"/>
+                <constraint firstItem="e0v-zs-a2M" firstAttribute="top" secondItem="jcs-c5-CJg" secondAttribute="bottom" constant="50" id="TZq-0o-0Xc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e0v-zs-a2M" secondAttribute="trailing" constant="24" id="Zjd-YO-bSV"/>
                 <constraint firstItem="jcs-c5-CJg" firstAttribute="top" secondItem="8mT-NG-1YK" secondAttribute="bottom" constant="9" id="acG-mN-4Kd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gXE-af-Tvs" secondAttribute="trailing" constant="24" id="b0D-bw-bFK"/>
                 <constraint firstItem="Ljt-nO-9e5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bvG-Xe-cem"/>

@@ -7,17 +7,40 @@
 //
 
 import Foundation
+import TheMovieDatabaseAPI
 
-class ServiceLayer {
+/// Предоставляет все сервисы слоя бизнес логики.
+final class ServiceLayer {
     
     // MARK: - Public Properties
     
     static let shared = ServiceLayer()
+
+    let configuration: Configuration
     
-    let authService: Authorization = AuthService()
-    let sessionService: Session = SessionService()
+    let apiRequest: APIClient
+    let apiRequestImage: APIClient
+    
+    let authService: Authorization
+    let sessionService: Session
+    let imageService: ImageServiceType
+    let moviesService: MoviesServiceType
     
     // MARK: - Initializers
     
-    private init() {}
+    private init() {
+        configuration = Configuration(
+            baseURL: NetworkConfiguration.baseURL,
+            basePosterURL: NetworkConfiguration.imageBaseURL,
+            baseAvatarURL: NetworkConfiguration.avatarBaseURL,
+            apiKey: NetworkConfiguration.apiKey)
+        
+        apiRequest = APIRequest(configuration: configuration)
+        apiRequestImage = APIRequestImage(configuration: configuration)
+        
+        authService = AuthService(apiClient: apiRequest)
+        sessionService = SessionService(apiClient: apiRequest)
+        imageService = ImageService(imageApiClient: apiRequestImage)
+        moviesService = MoviesService(apiClient: apiRequest)
+    }
 }
