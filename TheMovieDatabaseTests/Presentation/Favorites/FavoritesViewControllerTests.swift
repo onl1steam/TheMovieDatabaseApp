@@ -14,7 +14,6 @@ final class FavoritesViewControllerTests: ViewControllerTestCase {
     // MARK: - Public Properties
 
     var viewController: FavoritesViewController { rootViewController as! FavoritesViewController }
-    var placeholderView: FavoritesPlaceholderView? { subview(with: "favorites_placeholder") }
     
     // MARK: - setUp
     
@@ -27,9 +26,10 @@ final class FavoritesViewControllerTests: ViewControllerTestCase {
     // MARK: - Tests
     
     func testPlaceholderAtStart() {
-        XCTAssertEqual(placeholderView?.placeholderLabel.text, "Вы не добавили ни одного фильма")
-        XCTAssertNotNil(placeholderView?.placeholderImageView.image)
-        XCTAssertEqual(placeholderView?.navigationButton.titleLabel?.text, "Найти любимые фильмы")
+        let placeholderViewController = viewController.placeholderViewController
+        XCTAssertEqual(placeholderViewController.placeholderLabel.text, "Вы не добавили ни одного фильма")
+        XCTAssertNotNil(placeholderViewController.placeholderImageView.image)
+        XCTAssertEqual(placeholderViewController.navigationButton.titleLabel?.text, "Найти любимые фильмы")
     }
 
     func testLabelAtStart() {

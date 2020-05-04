@@ -39,7 +39,11 @@ class AvatarEndpointTests: XCTestCase {
         
         let endpoint = AvatarEndpoint(imagePath: "")
         
-        XCTAssertNoThrow(try endpoint.content(from: data, response: response), "Парсинг данных")
+        XCTAssertThrowsError(
+            try endpoint.content(from: data, response: response),
+            "Парсинг пустого изображения") { error in
+                XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
     }
     
     func testParseContentWithError() throws {

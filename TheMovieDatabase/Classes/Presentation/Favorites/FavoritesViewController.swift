@@ -8,22 +8,41 @@
 
 import UIKit
 
+/// Делегат для связи с Child ViewController'ами
+protocol FavoritesViewControllerDelegate: AnyObject {
+    
+    /// Нажатие кнопки поиска
+    func searchTapped()
+}
+
 final class FavoritesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var favoriteLabel: UILabel!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet private var favoriteLabel: UILabel!
+    @IBOutlet private var containerView: UIView!
     
     // MARK: - Public Properties
     
     let sessionService: Session
+    let moviesService: MoviesServiceType
+    
+    let moviesCollectionViewController = MoviesCollectionViewController(
+        collectionViewLayout: UICollectionViewFlowLayout())
+    let placeholderViewController = FavoritesStubViewController()
+    
+    weak var delegate: FavoritesCoordinatorType?
     
     // MARK: - Initializers
     
-    init(sessionService: Session = ServiceLayer.shared.sessionService) {
+    init(
+        sessionService: Session = ServiceLayer.shared.sessionService,
+        moviesService: MoviesServiceType = ServiceLayer.shared.moviesService) {
         self.sessionService = sessionService
+        self.moviesService = moviesService
         super.init(nibName: nil, bundle: nil)
+        placeholderViewController.delegate = self
+        moviesCollectionViewController.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -36,30 +55,61 @@ final class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         setupColorScheme()
         setupLocalizedStrings()
-        let placeholderView = FavoritesPlaceholderView(frame: CGRect(
-            x: 0,
-            y: 0,
-            width: containerView.frame.width,
-            height: containerView.frame.height))
-        containerView.addSubview(placeholderView)
         setupNavigationBar()
+        loadMovieList()
+        navigationController?.navigationBar.removeBottomLine()
     }
     
     // MARK: - IBAction
     
-    @objc func searchButtonTapped() {
-
+    @objc private func searchButtonTapped(_ sender: UIBarButtonItem) {
+        
     }
     
-    @objc func changeAppearance(_ sender: UIBarButtonItem) {
+    @objc private func changeAppearance(_ sender: UIBarButtonItem) {
         
     }
     
     // MARK: - Private Methods
     
+    private func loadMovieList() {
+        moviesCollectionViewController.setCollectionData([])
+        moviesCollectionViewController.toggleIndicator()
+        sessionService.favoriteMovies(language: "ru", sortBy: nil, page: nil) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let movieList):
+                self.loadMovieDetails(movieList: movieList.results)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func loadMovieDetails(movieList: [MovieList.MoviesResult]) {
+        guard !movieList.isEmpty else {
+            removeChild(moviesCollectionViewController, containerView: containerView)
+            addChild(placeholderViewController, containerView: containerView)
+            return
+        }
+        
+        moviesService.movieListDetails(movieList: movieList) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let detailsList):
+                self.removeChild(self.placeholderViewController, containerView: self.containerView)
+                self.addChild(self.moviesCollectionViewController, containerView: self.containerView)
+                self.moviesCollectionViewController.setCollectionData(detailsList)
+                self.moviesCollectionViewController.toggleIndicator()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        favoriteLabel.tintColor = Colors.light
+        view.backgroundColor = .backgroundBlack
+        favoriteLabel.tintColor = .customLight
     }
     
     private func setupLocalizedStrings() {
@@ -68,24 +118,42 @@ final class FavoritesViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.view.backgroundColor = Colors.backgroundBlack
-        navigationController?.navigationBar.barTintColor = Colors.backgroundBlack
+        navigationController?.view.backgroundColor = .backgroundBlack
+        navigationController?.navigationBar.barTintColor = .backgroundBlack
         setupBarItems()
     }
     
     private func setupBarItems() {
         let listItem = UIBarButtonItem(
-            image: Images.listButton,
+            image: .listButton,
             style: .plain,
             target: self,
             action: #selector(changeAppearance(_:)))
-        listItem.tintColor = Colors.light
+        listItem.tintColor = .customLight
         let searchItem = UIBarButtonItem(
-            image: Images.search,
+            image: .search,
             style: .plain,
             target: nil,
-            action: #selector(searchButtonTapped))
-        searchItem.tintColor = Colors.light
+            action: #selector(searchButtonTapped(_:)))
+        searchItem.tintColor = .customLight
         self.navigationItem.rightBarButtonItems =  [listItem, searchItem]
+    }
+}
+
+// MARK: - FavoritesViewControllerDelegate
+
+extension FavoritesViewController: FavoritesViewControllerDelegate {
+    
+    func searchTapped() {
+        
+    }
+}
+
+// MARK: - CollectionParentDelegate
+
+extension FavoritesViewController: CollectionParentDelegate {
+    
+    func elementTapped(data: MovieDetails) {
+        delegate?.showMovieDetails(movieData: data)
     }
 }

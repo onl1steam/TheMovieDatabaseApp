@@ -19,7 +19,7 @@ final class ImageEndpointTests: XCTestCase {
     
     func testMakeRequestWithEmptyFields() throws {
         let endpoint = ImageEndpoint(width: nil, imagePath: posterPath)
-
+        
         let request = try endpoint.makeRequest()
         
         XCTAssertEqual(request.url?.absoluteString, "t/p/original\(posterPath)")
@@ -39,7 +39,11 @@ final class ImageEndpointTests: XCTestCase {
         
         let endpoint = ImageEndpoint(width: "", imagePath: "")
         
-        XCTAssertNoThrow(try endpoint.content(from: data, response: response), "Парсинг данных")
+        XCTAssertThrowsError(
+            try endpoint.content(from: data, response: response),
+            "Парсинг пустого изображения") { error in
+                XCTAssertEqual(error.localizedDescription, NetworkError.blankData.localizedDescription)
+        }
     }
     
     func testParseContentWithError() {
@@ -49,9 +53,9 @@ final class ImageEndpointTests: XCTestCase {
         let endpoint = ImageEndpoint(width: "", imagePath: "")
         
         XCTAssertThrowsError(
-            try endpoint.content(from: data, response: response)) { error in
-                
-                XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
+        try endpoint.content(from: data, response: response)) { error in
+            
+            XCTAssertEqual(error.localizedDescription, NetworkError.notFound.localizedDescription)
         }
     }
     

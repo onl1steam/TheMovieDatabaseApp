@@ -12,16 +12,18 @@ final class AccountViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var logoutButton: RoundedButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet private var avatarImageView: UIImageView!
+    @IBOutlet private var logoutButton: RoundedButton!
+    @IBOutlet private var nameLabel: UILabel!
+    @IBOutlet private var emailLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
     
     // MARK: - Public Properties
     
     let sessionService: Session
     let imageService: ImageServiceType
+    
+    weak var delegate: AccountCoordinatorType?
     
     // MARK: - Initializers
     
@@ -44,8 +46,9 @@ final class AccountViewController: UIViewController {
         errorLabel.isHidden = true
         setupColorScheme()
         setupLocalizedStrings()
-        avatarImageView.makeRounded()
+        avatarImageView.makeRounded(cornerRadius: avatarImageView.frame.height / 2)
         loadAccountInfo()
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Public methods
@@ -78,8 +81,7 @@ final class AccountViewController: UIViewController {
         imageService.avatar(avatarPath: hash) { [weak self] response in
             guard let self = self else { return }
             switch response {
-            case .success(let info):
-                guard let image = UIImage(data: info) else { return }
+            case .success(let image):
                 self.avatarImageView.image = image
                 self.errorLabel.isHidden = true
             case .failure(let error):
@@ -90,33 +92,35 @@ final class AccountViewController: UIViewController {
     
     func logout() {
         sessionService.deleteSession { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let isSucceed):
                 if !isSucceed {
-                    self?.showError(message: "Не удалось деавторизоваться.")
+                    self.showError(message: "Не удалось деавторизоваться.")
+                } else {
+                    self.delegate?.logout()
                 }
             case .failure(let error):
-                self?.showError(message: error.localizedDescription)
+                self.showError(message: error.localizedDescription)
             }
         }
     }
     
     // MARK: - IBAction
     
-    @IBAction func logoutButtonTapped(_ sender: Any) {
+    @IBAction private func logoutButtonTapped(_ sender: Any) {
         logout()
-        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        nameLabel.tintColor = Colors.light
-        emailLabel.tintColor = Colors.gray
-        logoutButton.backgroundColor = Colors.accountButtonBackground
-        logoutButton.tintColor = Colors.purpure
-        errorLabel.tintColor = Colors.red
+        view.backgroundColor = .backgroundBlack
+        nameLabel.tintColor = .customLight
+        emailLabel.tintColor = .customGray
+        logoutButton.backgroundColor = .accountButtonBackground
+        logoutButton.tintColor = .customPurpure
+        errorLabel.tintColor = .customRed
     }
     
     private func setupLocalizedStrings() {

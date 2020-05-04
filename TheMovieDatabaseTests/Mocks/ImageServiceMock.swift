@@ -6,26 +6,26 @@
 //  Copyright © 2020 Рыжков Артем. All rights reserved.
 //
 
-import Foundation
 @testable import TheMovieDatabase
+import UIKit
 
 final class ImageServiceMock: ImageServiceType {
     
     func image(
         posterPath: String,
         width: String?,
-        _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+        _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
         
-        let data = Data()
+        let data = UIImage()
         completion(.success(data))
         return Progress()
     }
     
     func avatar(
         avatarPath: String,
-        _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+        _ completion: @escaping (Result<UIImage, Error>) -> Void) -> Progress {
         
-        let data = Data()
+        let data = UIImage()
         completion(.success(data))
         return Progress()
     }

@@ -10,9 +10,13 @@ import UIKit
 
 extension UIImageView {
     
-    func makeRounded() {
+    /// Сделать скругление по углам для изображения.
+    ///
+    /// - Parameters:
+    ///     - cornerRadius: Радиус закругления.
+    func makeRounded(cornerRadius: CGFloat) {
+        self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = false
-        self.layer.cornerRadius = self.frame.height / 2
         self.clipsToBounds = true
     }
 }

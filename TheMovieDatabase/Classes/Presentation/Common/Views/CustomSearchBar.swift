@@ -13,21 +13,33 @@ final class CustomSearchBar: UISearchBar {
     // MARK: - Types
     
     private enum CustomSearchBarConstants {
-        static let backgroundColor = Colors.tabBarBackground
+        static let backgroundColor: UIColor = .tabBarBackground
         static let cornerRadius: CGFloat = 8
         static let fontSize: CGFloat = 16
-        static let searchImage = Images.search
-        static let clearImage = Images.clearSearchText
+        static let searchImage: UIImage = .search
+        static let clearImage: UIImage = .clearSearchText
+    }
+    
+    // MARK: - Initializers
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Public methods
     
-    func configure() {
+    private func configure() {
         setImages()
         setupTextField()
+        searchTextPositionAdjustment = UIOffset(horizontal: 5, vertical: 0)
+        isTranslucent = true
+        setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
     }
-    
-    // MARK: - Private Methods
     
     private func setImages() {
         setImage(CustomSearchBarConstants.searchImage, for: .search, state: .normal)
@@ -39,8 +51,10 @@ final class CustomSearchBar: UISearchBar {
             searchTextField.backgroundColor = CustomSearchBarConstants.backgroundColor
         }
         if let textField = value(forKey: "searchField") as? UITextField {
-            textField.textColor = Colors.light
+            textField.textColor = .customLight
+            textField.tintColor = .customLight
             textField.font = textField.font?.withSize(CustomSearchBarConstants.fontSize)
+            
             setupTextFieldPlaceholder(textField: textField)
             if let backgroundview = textField.subviews.first {
                 setupBackgroundView(backgroundview)
@@ -50,7 +64,7 @@ final class CustomSearchBar: UISearchBar {
     
     private func setupTextFieldPlaceholder(textField: UITextField) {
         let textFieldPlaceholder = textField.value(forKey: "placeholderLabel") as? UILabel
-        textFieldPlaceholder?.textColor = Colors.placeholderText
+        textFieldPlaceholder?.textColor = .placeholderText
     }
     
     private func setupBackgroundView(_ view: UIView) {

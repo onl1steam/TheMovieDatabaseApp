@@ -10,11 +10,20 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
     
+    // MARK: - Public Properties
+    
+    let moviesCoordinator = MoviesCoordinator(navigationController: UINavigationController())
+    let favoritesCoordinator = FavoritesCoordinator(navigationController: UINavigationController())
+    let accountCoordinator = AccountCoordinator(navigationController: UINavigationController())
+    
+    weak var controllerDelegate: TabBarCoordinatorType?
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
+        startCoordinators([moviesCoordinator, favoritesCoordinator, accountCoordinator])
         setupViewControllers()
         setupTabBar()
         setupAccessability()
@@ -27,6 +36,10 @@ final class TabBarViewController: UITabBarController {
         tabBar.accessibilityIdentifier = "tabBar"
     }
     
+    private func startCoordinators(_ coordinators: [Coordinator]) {
+        coordinators.forEach { $0.start() }
+    }
+    
     private func setupTabBar() {
         let fontSize: CGFloat = 12
         let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
@@ -34,29 +47,17 @@ final class TabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let filmsVC = MoviesViewController()
-        filmsVC.tabBarItem = UITabBarItem(title: TabBarScreenStrings.moviesTabBar, image: Images.moviesTabBar, tag: 0)
-        
-        let favoritesVC = UINavigationController(rootViewController: FavoritesViewController())
-        favoritesVC.tabBarItem = UITabBarItem(
-            title: TabBarScreenStrings.favoriteTabBar,
-            image: Images.favoritesTabBar,
-            tag: 1)
-        
-        let accountVC = AccountViewController()
-        accountVC.tabBarItem = UITabBarItem(
-            title: TabBarScreenStrings.accountTabBar,
-            image: Images.accountTabBar,
-            tag: 2)
-        
-        let tabBarList = [filmsVC, favoritesVC, accountVC]
+        let tabBarList = [
+            moviesCoordinator.navigationController,
+            favoritesCoordinator.navigationController,
+            accountCoordinator.navigationController]
         viewControllers = tabBarList
     }
     
     private func setupColorScheme() {
-        tabBar.tintColor = Colors.orange
-        tabBar.unselectedItemTintColor = Colors.light
+        tabBar.tintColor = .customOrange
+        tabBar.unselectedItemTintColor = .customLight
         tabBar.isTranslucent = false
-        tabBar.barTintColor = Colors.tabBarBackground
+        tabBar.barTintColor = .tabBarBackground
     }
 }

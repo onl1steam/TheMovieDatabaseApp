@@ -8,10 +8,10 @@
 
 import UIKit
 
-enum Images {
+extension UIImage {
 
     static let favoritesTabBar = #imageLiteral(resourceName: "favorite_tab_bar")
-    static let favoritesBackground = #imageLiteral(resourceName: "favorites_bg")
+    static let favoritesStub = #imageLiteral(resourceName: "favorites_stub")
     
     static let accountTabBar = #imageLiteral(resourceName: "account_tab_bar")
     static let avatarPlaceholder = #imageLiteral(resourceName: "avatar")
@@ -19,13 +19,16 @@ enum Images {
     static let moviesTabBar = #imageLiteral(resourceName: "movie_tab_bar")
     static let moviesBackground = #imageLiteral(resourceName: "movies_bg")
     
+    static let searchStub = #imageLiteral(resourceName: "search_stub")
+    
     static let favorite = #imageLiteral(resourceName: "favorite")
     static let favoriteFilled = #imageLiteral(resourceName: "favorite_filled")
     static let visibilityNone = #imageLiteral(resourceName: "visibility_none")
     static let visibility = #imageLiteral(resourceName: "visibility")
-    static let clearSearchText = #imageLiteral(resourceName: "clearSearchText")
+    static let clearSearchText = #imageLiteral(resourceName: "clear_search_text")
     static let search = #imageLiteral(resourceName: "search")
     static let listButton = #imageLiteral(resourceName: "list")
     static let widgetsButton = #imageLiteral(resourceName: "widgets")
     static let arrowBack = #imageLiteral(resourceName: "arrow_back")
+    static let runtime = #imageLiteral(resourceName: "runtime")
 }

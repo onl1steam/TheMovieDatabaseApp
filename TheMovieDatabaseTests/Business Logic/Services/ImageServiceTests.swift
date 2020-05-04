@@ -15,14 +15,14 @@ final class ImageServiceTests: XCTestCase {
     // MARK: - Public Properties
     
     var imageService: ImageServiceType!
-    var response: Data!
+    var response: UIImage!
     var apiClient: MockAPIClient!
     
     // MARK: - setUp
     
     override func setUp() {
         super.setUp()
-        response = Data()
+        response = UIImage()
         apiClient = MockAPIClient()
         imageService = ImageService(imageApiClient: apiClient)
     }
@@ -34,8 +34,8 @@ final class ImageServiceTests: XCTestCase {
         
         imageService.avatar(avatarPath: "fd1768eb661e05f867255daf52f80413") { response in
             switch response {
-            case .success(let data):
-                XCTAssertNotNil(data)
+            case .success(let image):
+                XCTAssertNotNil(image)
             case .failure(let error):
                 XCTFail("Ошибка: \(error.localizedDescription)")
             }

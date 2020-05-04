@@ -77,6 +77,7 @@ final class CustomTextField: UITextField {
         attributedPlaceholder = NSAttributedString(
             string: text,
             attributes: [NSAttributedString.Key.foregroundColor: color])
+        tintColor = .customLight
     }
     
     func setupBorderColor(_ color: UIColor) {

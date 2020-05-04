@@ -12,13 +12,21 @@ final class MoviesViewController: UIViewController {
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var moviesBackground: UIImageView!
-    @IBOutlet weak var moviesSearchBar: CustomSearchBar!
-    @IBOutlet weak var moviesLabel: UILabel!
+    @IBOutlet private var moviesBackground: UIImageView!
+    @IBOutlet private var moviesLabel: UILabel!
     
     // MARK: - Public Properties
     
     let sessionService: Session
+    weak var delegate: MoviesCoordinatorType?
+    
+    // MARK: - Private Properties
+    
+    private lazy var moviesSearchBar: CustomSearchBar! = {
+        let rect = CGRect(x: 0, y: 0, width: 200, height: 48)
+        let customBar = CustomSearchBar(frame: rect)
+        return customBar
+    }()
     
     // MARK: - Initializers
     
@@ -36,15 +44,16 @@ final class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
-        setupSearchBar()
         setupLocalizedStrings()
+        setupSearchBarConstraints()
+        navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Private Methods
     
     private func setupColorScheme() {
-        view.backgroundColor = Colors.backgroundBlack
-        moviesLabel.tintColor = Colors.light
+        view.backgroundColor = .backgroundBlack
+        moviesLabel.tintColor = .customLight
     }
     
     private func setupLocalizedStrings() {
@@ -52,7 +61,11 @@ final class MoviesViewController: UIViewController {
         moviesSearchBar.placeholder = MoviesScreenStrings.searchBarPlaceholder
     }
     
-    private func setupSearchBar() {
-        moviesSearchBar.configure()
+    private func setupSearchBarConstraints() {
+        view.addSubview(moviesSearchBar)
+        moviesSearchBar.constraintRectangle(width: 280, height: 48)
+        let topConstraint = moviesSearchBar.topAnchor.constraint(equalTo: moviesLabel.bottomAnchor, constant: 33)
+        let leadingConstraint = moviesSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24)
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint])
     }
 }
