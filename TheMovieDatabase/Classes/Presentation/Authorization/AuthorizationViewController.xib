@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthorizationViewController" customModule="TheMovieDatabase" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="gFZ-to-Rsp" id="Ldi-iR-Rp9"/>
+                <outlet property="authInfoLabel" destination="X44-5a-iSa" id="DzP-FA-iev"/>
+                <outlet property="errorLabel" destination="Gic-Ru-lLF" id="spo-zY-OFm"/>
+                <outlet property="loginButton" destination="vf3-uc-das" id="GUf-6Z-uqV"/>
+                <outlet property="loginTextField" destination="8PD-68-11f" id="wKx-Y7-Yzt"/>
+                <outlet property="passwordTextField" destination="EPi-ES-yo3" id="WO9-9e-4nb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="welcomeLabel" destination="8bo-OS-RWo" id="5b0-YP-1e9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добро пожаловать!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bo-OS-RWo">
+                    <rect key="frame" x="24" y="91" width="327" height="39"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Укажите логин и пароль, которые  вы использовали для входа" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X44-5a-iSa">
+                    <rect key="frame" x="24" y="155" width="327" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-uc-das" customClass="RoundedButton" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="23" y="584" width="328" height="56"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="7M7-SK-kIc"/>
+                    </constraints>
+                    <state key="normal" title="Войти">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="loginButtonTapped:" destination="-1" eventType="touchUpInside" id="2DF-fg-paM"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8PD-68-11f" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="24" y="228" width="327" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="cnl-6D-7B7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="loginEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="dtY-Mk-lD7"/>
+                        <action selector="loginEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="a4v-Ex-SoY"/>
+                        <action selector="loginTextFieldChanged:" destination="-1" eventType="editingChanged" id="ux1-XZ-im3"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPi-ES-yo3" customClass="CustomTextField" customModule="TheMovieDatabase" customModuleProvider="target">
+                    <rect key="frame" x="24" y="300" width="327" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="qGV-ZQ-MJq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="passwordEditingDidBegin:" destination="-1" eventType="editingDidBegin" id="wlK-0B-QQp"/>
+                        <action selector="passwordEditingDidEnd:" destination="-1" eventType="editingDidEnd" id="I8I-e4-sbu"/>
+                        <action selector="passwordTextFieldChanged:" destination="-1" eventType="editingChanged" id="dAU-ov-hUe"/>
+                    </connections>
+                </textField>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Строка Ошибки" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-Ru-lLF">
+                    <rect key="frame" x="24" y="372" width="327" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gFZ-to-Rsp">
+                    <rect key="frame" x="177.5" y="411.5" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vf3-uc-das" secondAttribute="trailing" constant="24" id="307-jr-1QP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8PD-68-11f" secondAttribute="trailing" constant="24" id="3SY-dP-ecD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EPi-ES-yo3" secondAttribute="trailing" constant="24" id="3qT-B5-oDf"/>
+                <constraint firstItem="8bo-OS-RWo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="4m1-Qj-7qD"/>
+                <constraint firstItem="Gic-Ru-lLF" firstAttribute="top" secondItem="EPi-ES-yo3" secondAttribute="bottom" constant="24" id="6cx-Qr-FZm"/>
+                <constraint firstItem="8PD-68-11f" firstAttribute="top" secondItem="X44-5a-iSa" secondAttribute="bottom" constant="32" id="8De-7i-cTA"/>
+                <constraint firstItem="Gic-Ru-lLF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="E53-aA-Qdy"/>
+                <constraint firstItem="EPi-ES-yo3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ei3-H8-zf5"/>
+                <constraint firstItem="8bo-OS-RWo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="91" id="G5s-lm-2CB"/>
+                <constraint firstItem="X44-5a-iSa" firstAttribute="top" secondItem="8bo-OS-RWo" secondAttribute="bottom" constant="25" id="H6t-Xn-Ciq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X44-5a-iSa" secondAttribute="trailing" constant="24" id="MZE-oO-dIy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gic-Ru-lLF" secondAttribute="trailing" constant="24" id="NCp-bo-Wlh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8bo-OS-RWo" secondAttribute="trailing" constant="24" id="ZpB-5C-5ln"/>
+                <constraint firstItem="gFZ-to-Rsp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b6f-Rn-UWe"/>
+                <constraint firstItem="X44-5a-iSa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cgw-i3-U1e"/>
+                <constraint firstItem="EPi-ES-yo3" firstAttribute="top" secondItem="8PD-68-11f" secondAttribute="bottom" constant="24" id="fKh-F7-fyE"/>
+                <constraint firstItem="gFZ-to-Rsp" firstAttribute="top" secondItem="Gic-Ru-lLF" secondAttribute="bottom" constant="20" id="kNe-W8-5ta"/>
+                <constraint firstItem="8PD-68-11f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="q6n-l1-ngQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vf3-uc-das" secondAttribute="bottom" constant="27" id="sZY-zV-X4E"/>
+                <constraint firstItem="vf3-uc-das" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="23" id="thl-n5-77K"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="131"/>
+        </view>
+    </objects>
+</document>
