@@ -41,25 +41,23 @@ final class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorLabel.isHidden = true
         setupColorScheme()
         setupLocalizedStrings()
         avatarImageView.makeRounded()
         loadAccountInfo()
-        errorLabel.isHidden = true
     }
     
-    // MARK: - IBAction
+    // MARK: - Public methods
     
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        sessionService.deleteSession()
-        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
+    func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
     }
     
-    // MARK: - Private Methods
-    
-    private func loadAccountInfo() {
+    func loadAccountInfo() {
         
-        sessionService.getAccountInfo { [weak self] response in
+        sessionService.accountInfo { [weak self] response in
             guard let self = self else { return }
             var avatarHash: String?
             switch response {
@@ -72,18 +70,42 @@ final class AccountViewController: UIViewController {
                 self.showError(message: error.localizedDescription)
             }
             guard let hash = avatarHash else { return }
-            self.imageService.getAvatar(avatarPath: hash) { [weak self] response in
-                guard let self = self else { return }
-                switch response {
-                case .success(let info):
-                    guard let image = UIImage(data: info) else { return }
-                    self.avatarImageView.image = image
-                    self.errorLabel.isHidden = true
-                case .failure(let error):
-                    self.showError(message: error.localizedDescription)
-                }
+            self.loadAvatar(hash: hash)
+        }
+    }
+    
+    func loadAvatar(hash: String) {
+        imageService.avatar(avatarPath: hash) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let info):
+                guard let image = UIImage(data: info) else { return }
+                self.avatarImageView.image = image
+                self.errorLabel.isHidden = true
+            case .failure(let error):
+                self.showError(message: error.localizedDescription)
             }
         }
+    }
+    
+    func logout() {
+        sessionService.deleteSession { [weak self] response in
+            switch response {
+            case .success(let isSucceed):
+                if !isSucceed {
+                    self?.showError(message: "Не удалось деавторизоваться.")
+                }
+            case .failure(let error):
+                self?.showError(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - IBAction
+    
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        logout()
+        presentInFullScreen(AuthorizationViewController(), animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -99,10 +121,5 @@ final class AccountViewController: UIViewController {
     
     private func setupLocalizedStrings() {
         logoutButton.setTitle(AccountScreenStrings.logoutButtonText, for: .normal)
-    }
-    
-    private func showError(message: String) {
-        errorLabel.text = message
-        errorLabel.isHidden = false
     }
 }

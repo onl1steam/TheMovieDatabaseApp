@@ -13,7 +13,9 @@ import TheMovieDatabaseAPI
 protocol Session {
     
     /// Удаляет текущую сессию пользователя.
-    func deleteSession()
+    /// - Parameters:
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
+    func deleteSession(_ completion: @escaping (Result<Bool, Error>) -> Void)
     
     /// Устанавливает id текущей сессии.
     ///
@@ -30,14 +32,18 @@ protocol Session {
     /// Возвращает информацию об аккаунте.
     ///
     /// - Parameters:
-    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountResponse или ошибку.
-    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void)
+    ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа AccountDetails или ошибку.
+    func accountInfo(_ completion: @escaping (Result<AccountDetails, Error>) -> Void)
     
     /// Возвращает список избранных фильмов пользователя.
     ///
     /// - Parameters:
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ типа MoviesResponse или ошибку.
-    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void)
+    func favoriteMovies(
+        language: String?,
+        sortBy: String?,
+        page: Int?,
+        _ completion: @escaping (Result<MovieList, Error>) -> Void)
 }
 
 final class SessionService: Session {
@@ -61,29 +67,42 @@ final class SessionService: Session {
     
     // MARK: - Session
     
-    func deleteSession() {
+    func deleteSession(_ completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let deleteSessionEndpoint = DeleteSessionEndpoint(sessionId: sessionId)
         apiClient.request(deleteSessionEndpoint) { [weak self] response in
             guard let self = self else { return }
             switch response {
-            case .success(let isSucceed):
-                print(isSucceed)
+            case .success(let deleteSessionResponse):
+                completion(.success(deleteSessionResponse.success))
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
             self.sessionId = nil
             self.accountId = nil
         }
     }
     
-    func getAccountInfo(_ completion: @escaping (Result<AccountResponse, Error>) -> Void) {
+    func accountInfo(_ completion: @escaping (Result<AccountDetails, Error>) -> Void) {
         guard let sessionId = sessionId else { return }
         let endpoint = AccountDetailsEndpoint(sessionId: sessionId)
-        apiClient.request(endpoint, completionHandler: completion)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let details):
+                let accountDetails = AccountDetails(accountResponse: details)
+                completion(.success(accountDetails))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
-    func getFavorites(_ completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    func favoriteMovies(
+        language: String?,
+        sortBy: String?,
+        page: Int?,
+        _ completion: @escaping (Result<MovieList, Error>) -> Void) {
+        
         guard let sessionId = sessionId else {
             completion(.failure(AuthError.noSessionId))
             return
@@ -91,10 +110,18 @@ final class SessionService: Session {
         let endpoint = FavoriteMoviesEndpoint(
             sessionId: sessionId,
             accountId: accountId,
-            language: nil,
-            sortBy: nil,
-            page: nil)
-        apiClient.request(endpoint, completionHandler: completion)
+            language: language,
+            sortBy: sortBy,
+            page: page)
+        apiClient.request(endpoint) { response in
+            switch response {
+            case .success(let moviesResponse):
+                let moviesList = MovieList(moviesResponse: moviesResponse)
+                completion(.success(moviesList))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func setupAccountId(accountId: Int) {

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Эндпоинт для получения детальной информации о фильме.
-public class MovieDetailsEndpoint: Endpoint {
+public struct MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Types
 
@@ -19,8 +19,6 @@ public class MovieDetailsEndpoint: Endpoint {
     
     let movieId: Int
     let language: String?
-    
-    public var configuration: Configuration?
     
     // MARK: - Initializers
     
@@ -32,16 +30,16 @@ public class MovieDetailsEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        urlComponents.queryItems = makeQueryItems()
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
-        let request = URLRequest(url: resultURL)
+        var request = URLRequest(url: resultURL)
+        request.httpMethod = HttpMethods.GET.rawValue
         return request
     }
     
@@ -53,14 +51,11 @@ public class MovieDetailsEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
+    private func makeQueryItems() -> [URLQueryItem] {
         var queryItems = [URLQueryItem]()
-        let apiKeyQuery = URLQueryItem(name: "api_key", value: apiKey)
         if let lang = language {
-            let langQuery = URLQueryItem(name: "language", value: lang)
-            queryItems.append(langQuery)
+            queryItems.append(URLQueryItem(name: "language", value: lang))
         }
-        queryItems.append(apiKeyQuery)
         return queryItems
     }
     

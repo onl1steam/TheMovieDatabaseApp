@@ -10,6 +10,6 @@ import Foundation
 
 public struct SessionResponse: Decodable {
     
-    let sessionId: String
-    let success: Bool
+    public let sessionId: String
+    public let success: Bool
 }

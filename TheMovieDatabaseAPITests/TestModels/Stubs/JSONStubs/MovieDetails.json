@@ -1,0 +1,68 @@
+{
+  "adult": false,
+  "backdrop_path": "/koE7aMeR2ATivI18mCbscLsI0Nm.jpg",
+  "belongs_to_collection": {
+    "id": 10,
+    "name": "Звёздные войны (Коллекция)",
+    "poster_path": "/wRBGET9QNCOQJY55yAA1ZyF6cCb.jpg",
+    "backdrop_path": "/d8duYyyC9J5T825Hg7grmaabfxQ.jpg"
+  },
+  "budget": 32350000,
+  "genres": [
+    {
+      "id": 12,
+      "name": "приключения"
+    },
+    {
+      "id": 28,
+      "name": "боевик"
+    },
+    {
+      "id": 878,
+      "name": "фантастика"
+    }
+  ],
+  "homepage": "http://www.starwars.com/films/star-wars-episode-vi-return-of-the-jedi",
+  "id": 1892,
+  "imdb_id": "tt0086190",
+  "original_language": "en",
+  "original_title": "Return of the Jedi",
+  "overview": "В заключительном шестом эпизоде «Звездных войн» Дарт Вейдер создает вторую «Звезду Смерти». Он объединяет все силы зла, чтобы с помощью этого смертоносного оружия нанести последний сокрушительный удар по повстанцам и их союзникам. Люк Скайуокер вместе с принцессой Лейей и верными дроидами R2D2 и C-3PO отправляется спасать своего друга Хана Соло, который попал в плен к отвратительному Джаббе Хатту — могущественному повелителю преступников.",
+  "popularity": 27.524,
+  "poster_path": "/91bG08Mpa4T7YWFMjsiNi2Fh6jc.jpg",
+  "production_companies": [
+    {
+      "id": 1,
+      "logo_path": "/o86DbpburjxrqAzEDhXZcyE8pDb.png",
+      "name": "Lucasfilm",
+      "origin_country": "US"
+    },
+    {
+      "id": 25,
+      "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
+      "name": "20th Century Fox",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1983-05-25",
+  "revenue": 572700000,
+  "runtime": 134,
+  "spoken_languages": [
+    {
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "",
+  "title": "Звёздные войны: Эпизод VI – Возвращение Джедая",
+  "video": false,
+  "vote_average": 8,
+  "vote_count": 9209
+}

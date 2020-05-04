@@ -10,7 +10,7 @@ import Foundation
 
 public struct AuthResponse: Decodable {
     
-    let success: Bool
-    let expiresAt: String
-    let requestToken: String
+    public let success: Bool
+    public let expiresAt: String
+    public let requestToken: String
 }

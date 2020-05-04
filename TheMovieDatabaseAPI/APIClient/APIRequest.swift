@@ -15,12 +15,12 @@ public final class APIRequest: APIClient {
     // MARK: - Public Properties
     
     let session = Session(configuration: .ephemeral)
-    let configuration: Configuration
+    let requestAdapter: APIRequestAdapter
     
     // MARK: - Initializers
     
     public init(configuration: Configuration) {
-        self.configuration = configuration
+        self.requestAdapter = APIRequestAdapter(configuration: configuration)
     }
     
     // MARK: - APIClient
@@ -30,11 +30,19 @@ public final class APIRequest: APIClient {
         _ endpoint: T,
         completionHandler: @escaping (Result<T.Content, Error>) -> Void) -> Progress where T: Endpoint {
         do {
-            var customEndpoint = endpoint
-            customEndpoint.configuration = configuration
-            let urlRequest = try customEndpoint.makeRequest()
+            let urlRequest = try endpoint.makeRequest()
             
-            let request = session.request(urlRequest)
+            var resultUrlRequest = urlRequest
+            requestAdapter.adapt(urlRequest, for: session) { response in
+                switch response {
+                case .success(let request):
+                    resultUrlRequest = request
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+            }
+            
+            let request = session.request(resultUrlRequest)
             request.response(queue: .main) { response in
                 let result = Result { () -> T.Content in
                     let content = try endpoint.content(from: response.data, response: response.response)

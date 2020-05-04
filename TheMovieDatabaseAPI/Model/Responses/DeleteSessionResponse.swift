@@ -10,5 +10,5 @@ import Foundation
 
 public struct DeleteSessionResponse: Decodable {
     
-    let success: Bool
+    public let success: Bool
 }

@@ -26,7 +26,7 @@ protocol ImageServiceType {
     ///   - avatarPath: Путь до аватара.
     ///   - completion: Вызывается после выполнения функции. Возвращает ответ изображение в типе Data или ошибку.
     @discardableResult
-    func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
+    func avatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress
 }
 
 final class ImageService: ImageServiceType {
@@ -56,7 +56,7 @@ final class ImageService: ImageServiceType {
     }
     
     @discardableResult
-    func getAvatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
+    func avatar(avatarPath: String, _ completion: @escaping (Result<Data, Error>) -> Void) -> Progress {
         let endpoint = AvatarEndpoint(imagePath: avatarPath)
         let progress = imageApiClient.request(endpoint, completionHandler: completion)
         return progress

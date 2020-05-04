@@ -8,37 +8,6 @@
 
 import UIKit
 
-/// Делегат для ViewModel экрана авторизации.
-protocol AuthorizationViewModelDelegate: class {
-    
-    /// Скрыть строку ошибки.
-    func hideErrorLabel()
-    
-    /// Показать на экране авторизации ошибку.
-    ///
-    /// - Parameters:
-    ///   - error: Строка, описывающую ошибку.
-    func showError(_ error: String)
-    
-    /// Переходит на следующий экран.
-    ///
-    /// - Parameters:
-    ///   - vc: Экран, на который необходимо перейти.
-    func presentViewController(_ vc: UIViewController)
-    
-    /// Переключает состояние кнопки логина.
-    func toggleLoginButton()
-    
-    /// Передает состояние заполненности полей в ViewController
-    ///
-    /// - Parameters:
-    ///   - isBlank: Заполнены ли поля авторизации.
-    func toggleTextFieldState(isBlank: Bool)
-    
-    /// Переключить индикатор загрузки.
-    func toggleIndicator()
-}
-
 final class AuthorizationViewController: UIViewController {
     
     // MARK: - IBOutlet
@@ -59,16 +28,19 @@ final class AuthorizationViewController: UIViewController {
         button.addTarget(self, action: #selector(visibilityButtonTapped), for: .touchUpInside)
         return button
     }()
-
-    // MARK: - Private Properties
     
-    private let authViewModel: AuthorizationViewModelType
-    private var isTextFieldsBlank = true
+    let validationService: Validation
+    let authService: Authorization
+    let sessionService: Session
     
     // MARK: - Initializers
     
-    init(authViewModel: AuthorizationViewModelType = AuthorizationViewModel()) {
-        self.authViewModel = authViewModel
+    init(validationService: Validation = ServiceLayer.shared.validationService,
+         authService: Authorization = ServiceLayer.shared.authService,
+         sessionService: Session = ServiceLayer.shared.sessionService) {
+        self.validationService = validationService
+        self.authService = authService
+        self.sessionService = sessionService
         super.init(nibName: "AuthorizationViewController", bundle: nil)
     }
     
@@ -81,12 +53,63 @@ final class AuthorizationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupColorScheme()
-        authViewModel.setupDelegate(delegate: self)
         setupLocalizedStrings()
-        toggleLoginButton()
+        toggleLoginButton(isTextFieldsBlank: true)
         setupActivityIndicator()
         setupLoginTextField()
         setupPasswordTextField()
+    }
+    
+    // MARK: - Public methods
+    
+    func checkTextFieldsState(loginText: String?, passwordText: String?) {
+        let user = User(login: loginText, password: passwordText)
+        validationService.validateUserInput(user: user) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success:
+                self.toggleLoginButton(isTextFieldsBlank: false)
+            case .failure:
+                self.toggleLoginButton(isTextFieldsBlank: true)
+            }
+        }
+    }
+    
+    func authorizeWithData(login: String, password: String) {
+        let userData = User(login: login, password: password)
+        authService.authorizeWithUser(user: userData) { [weak self] response in
+            guard let self = self else { return }
+            self.validateResponse(response)
+            self.toggleIndicator()
+        }
+    }
+    
+    func toggleIndicator() {
+        let isHidden = activityIndicator.isHidden
+        if isHidden {
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+        } else {
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    func toggleLoginButton(isTextFieldsBlank: Bool) {
+        if isTextFieldsBlank {
+            loginButton.backgroundColor = Colors.disabledButtonBackground
+            loginButton.setTitleColor(Colors.disabledButtonText, for: .normal)
+            loginButton.isEnabled = false
+        } else {
+            loginButton.backgroundColor = Colors.orange
+            loginButton.setTitleColor(Colors.light, for: .normal)
+            loginButton.isEnabled = true
+        }
+    }
+
+    func showError(_ error: String) {
+        errorLabel.text = error
+        errorLabel.isHidden = false
     }
     
     // MARK: - IBAction
@@ -104,7 +127,7 @@ final class AuthorizationViewController: UIViewController {
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         toggleIndicator()
-        authViewModel.authorizeWithData(login: loginTextField.text!, password: passwordTextField.text!)
+        authorizeWithData(login: loginTextField.text!, password: passwordTextField.text!)
     }
     
     @IBAction func loginEditingDidBegin(_ sender: CustomTextField) {
@@ -112,7 +135,7 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func loginTextFieldChanged(_ sender: CustomTextField) {
-        authViewModel.checkTextFieldsState(loginText: loginTextField.text, passwordText: passwordTextField.text)
+        checkTextFieldsState(loginText: loginTextField.text, passwordText: passwordTextField.text)
     }
     
     @IBAction func loginEditingDidEnd(_ sender: CustomTextField) {
@@ -124,7 +147,7 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @IBAction func passwordTextFieldChanged(_ sender: CustomTextField) {
-        authViewModel.checkTextFieldsState(loginText: loginTextField.text, passwordText: passwordTextField.text)
+        checkTextFieldsState(loginText: loginTextField.text, passwordText: passwordTextField.text)
     }
     
     @IBAction func passwordEditingDidEnd(_ sender: CustomTextField) {
@@ -169,49 +192,15 @@ final class AuthorizationViewController: UIViewController {
         passwordTextField.setupPlaceholderColor(Colors.gray)
         passwordTextField.setupBorderColor(Colors.darkBlue)
     }
-}
-
-// MARK: - ViewModelDelegate
-
-extension AuthorizationViewController: AuthorizationViewModelDelegate {
     
-    func toggleIndicator() {
-        let isHidden = activityIndicator.isHidden
-        if isHidden {
-            activityIndicator.startAnimating()
-            activityIndicator.isHidden = false
-        } else {
-            activityIndicator.isHidden = true
-            activityIndicator.stopAnimating()
+    private func validateResponse(_ response: Result<String, Error>) {
+        switch response {
+        case .success(let sessionId):
+            errorLabel.isHidden = true
+            sessionService.setupSessionId(sessionId: sessionId)
+            presentInFullScreen(TabBarViewController(), animated: true, completion: nil)
+        case .failure(let error):
+            showError(error.localizedDescription)
         }
-    }
-    
-    func toggleLoginButton() {
-        if isTextFieldsBlank {
-            loginButton.backgroundColor = Colors.disabledButtonBackground
-            loginButton.setTitleColor(Colors.disabledButtonText, for: .normal)
-            loginButton.isEnabled = false
-        } else {
-            loginButton.backgroundColor = Colors.orange
-            loginButton.setTitleColor(Colors.light, for: .normal)
-            loginButton.isEnabled = true
-        }
-    }
-    
-    func toggleTextFieldState(isBlank: Bool) {
-        isTextFieldsBlank = isBlank
-    }
-    
-    func hideErrorLabel() {
-        errorLabel.isHidden = true
-    }
-    
-    func showError(_ error: String) {
-        errorLabel.text = error
-        errorLabel.isHidden = false
-    }
-    
-    func presentViewController(_ vc: UIViewController) {
-        presentInFullScreen(vc, animated: true, completion: nil)
     }
 }

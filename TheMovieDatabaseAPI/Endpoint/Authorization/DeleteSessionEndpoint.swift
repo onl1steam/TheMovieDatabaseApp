@@ -9,17 +9,15 @@
 import Foundation
 
 /// Эндпоинт для удаления сессии.
-public class DeleteSessionEndpoint: Endpoint {
+public struct DeleteSessionEndpoint: Endpoint {
     
     // MARK: - Types
     
-    public typealias Content = Bool
+    public typealias Content = DeleteSessionResponse
     
     // MARK: - Public Properties
     
     let sessionId: String
-    
-    public var configuration: Configuration?
 
     // MARK: - Initializers
     
@@ -30,21 +28,19 @@ public class DeleteSessionEndpoint: Endpoint {
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
-    
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
         var request = URLRequest(url: resultURL)
-        request.httpMethod = "DELETE"
-        request.allHTTPHeaderFields = ["content-type": "application/json"]
-        
         let encodableData = DeleteSessionBody(sessionId: sessionId)
         let data = try EndpointDefaultMethods.encodeBody(data: encodableData)
+        
+        request.httpMethod = HttpMethods.DELETE.rawValue
+        request.allHTTPHeaderFields = ["content-type": "application/json"]
         request.httpBody = data
         return request
     }
@@ -52,17 +48,10 @@ public class DeleteSessionEndpoint: Endpoint {
     public func content(from: Data?, response: URLResponse?) throws -> Content {
         try EndpointDefaultMethods.checkErrors(data: from, response: response)
         let data = try EndpointDefaultMethods.parseDecodable(data: from, decodableType: DeleteSessionResponse.self)
-        return data.success
+        return data
     }
     
     // MARK: - Private Methods
-    
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
-        return queryItems
-    }
     
     private func makeURLPath(baseURL: URL) -> URL {
         var url = baseURL

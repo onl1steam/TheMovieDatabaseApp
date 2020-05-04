@@ -26,7 +26,4 @@ public protocol Endpoint {
     ///   - response: Ответ на зарос типа URLResponse.
     /// - Returns: Данные типа Content.
     func content(from: Data?, response: URLResponse?) throws -> Content
-    
-    /// Настройки подключения к базе данных фильмов.
-    var configuration: Configuration? { get set }
 }

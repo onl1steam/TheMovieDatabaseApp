@@ -19,8 +19,6 @@ public struct AccountDetailsEndpoint: Endpoint {
     
     let sessionId: String
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(sessionId: String) {
@@ -30,16 +28,16 @@ public struct AccountDetailsEndpoint: Endpoint {
     // MARK: - Endpoint
     
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        var urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseURL)
-        let queryItems = makeQueryItems(apiKey: configuration.apiKey)
+        let urlPath = makeURLPath(baseURL: componentsUrl)
+        urlComponents.path = urlPath.absoluteString
+        urlComponents.queryItems = makeQueryItems()
+        guard let resultURL = urlComponents.url else { throw NetworkError.badURL }
         
-        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.queryItems = queryItems
-        
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
-        let request = URLRequest(url: resultURL)
+        var request = URLRequest(url: resultURL)
+        request.httpMethod = HttpMethods.GET.rawValue
         return request
     }
     
@@ -51,12 +49,9 @@ public struct AccountDetailsEndpoint: Endpoint {
     
     // MARK: - Private Methods
     
-    private func makeQueryItems(apiKey: String) -> [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "session_id", value: sessionId)
-        ]
-        return queryItems
+    private func makeQueryItems() -> [URLQueryItem] {
+        let query = [URLQueryItem(name: "session_id", value: sessionId)]
+        return query
     }
     
     private func makeURLPath(baseURL: URL) -> URL {

@@ -19,8 +19,6 @@ public struct AvatarEndpoint: Endpoint {
 
     let imagePath: String
     
-    public var configuration: Configuration?
-    
     // MARK: - Initializers
     
     public init(imagePath: String) {
@@ -30,13 +28,14 @@ public struct AvatarEndpoint: Endpoint {
     // MARK: - Endpoint
  
     public func makeRequest() throws -> URLRequest {
-        guard let configuration = configuration else { throw NetworkError.noConfiguration }
+        let urlComponents = URLComponents()
+        guard let componentsUrl = urlComponents.url else { throw NetworkError.badURL }
         
-        let url = makeURLPath(baseURL: configuration.baseAvatarURL)
-        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let resultURL = makeURLPath(baseURL: componentsUrl)
         
-        guard let resultURL = urlComponents?.url else { throw NetworkError.badURL }
-        let request = URLRequest(url: resultURL)
+        var request = URLRequest(url: resultURL)
+        request.httpMethod = HttpMethods.GET.rawValue
+        
         return request
     }
     

@@ -15,16 +15,18 @@ final class ServiceLayer {
     // MARK: - Public Properties
     
     static let shared = ServiceLayer()
-
-    let configuration: Configuration
-    
-    let apiRequest: APIClient
-    let apiRequestImage: APIClient
     
     let authService: Authorization
     let sessionService: Session
     let imageService: ImageServiceType
     let moviesService: MoviesServiceType
+    let validationService: Validation = ValidationService()
+    
+    // MARK: - Private Properties
+    
+    private let configuration: Configuration
+    private let apiClient: APIClient
+    private let apiImageClient: APIClient
     
     // MARK: - Initializers
     
@@ -35,12 +37,12 @@ final class ServiceLayer {
             baseAvatarURL: NetworkConfiguration.avatarBaseURL,
             apiKey: NetworkConfiguration.apiKey)
         
-        apiRequest = APIRequest(configuration: configuration)
-        apiRequestImage = APIRequestImage(configuration: configuration)
+        apiClient = APIRequest(configuration: configuration)
+        apiImageClient = APIRequestImage(configuration: configuration)
         
-        authService = AuthService(apiClient: apiRequest)
-        sessionService = SessionService(apiClient: apiRequest)
-        imageService = ImageService(imageApiClient: apiRequestImage)
-        moviesService = MoviesService(apiClient: apiRequest)
+        authService = AuthService(apiClient: apiClient)
+        sessionService = SessionService(apiClient: apiClient)
+        imageService = ImageService(imageApiClient: apiImageClient)
+        moviesService = MoviesService(apiClient: apiClient)
     }
 }
